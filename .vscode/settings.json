@@ -1,0 +1,31 @@
+{
+  // Biome owns both linting and formatting here; no ESLint or Prettier
+  // config exists on purpose.
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit"
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.rulers": [100],
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+
+  "[markdown]": {
+    "editor.defaultFormatter": null,
+    "editor.tabSize": 2
+  },
+
+  "typescript.tsdk": "node_modules/typescript/lib",
+
+  "files.exclude": {
+    "**/dist": true,
+    "**/node_modules": true
+  },
+  "files.watcherExclude": {
+    "**/dist/**": true,
+    "**/node_modules/**": true
+  }
+}

@@ -1,0 +1,69 @@
+@import (reference) '../../styles/tokens.less';
+
+.block {
+  border: 1px solid @color-border;
+  border-radius: @radius-md;
+  background: @color-code-bg;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: @space-2;
+  padding: 6px 8px 6px 14px;
+  border-bottom: 1px solid @color-border;
+  font-size: 0.8rem;
+  color: @color-text-faint;
+}
+
+.title {
+  font-family: @font-mono;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pre {
+  margin: 0;
+  padding: 14px 16px;
+  overflow-x: auto;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: @color-text;
+}
+
+.line {
+  white-space: pre;
+}
+
+.key {
+  color: @color-accent-text;
+}
+
+.string {
+  color: #1a8a5a;
+}
+
+.comment {
+  color: @color-text-faint;
+  font-style: italic;
+}
+
+.darkString() {
+  .string {
+    color: #6ee7a8;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) {
+    .darkString();
+  }
+}
+
+:global(:root[data-theme='dark']) {
+  .darkString();
+}

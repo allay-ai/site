@@ -1,0 +1,29 @@
+@import (reference) '../../styles/tokens.less';
+
+.shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  outline: none;
+}
+
+.skip {
+  position: absolute;
+  left: @gutter;
+  top: -100px;
+  z-index: 50;
+  padding: 10px 16px;
+  border-radius: @radius-sm;
+  background: var(--button-bg);
+  color: @color-on-accent;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:focus {
+    top: 12px;
+  }
+}

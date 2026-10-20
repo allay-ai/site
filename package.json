@@ -1,0 +1,45 @@
+{
+  "name": "allay-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@12.14.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "content": "node tools/content.mjs",
+    "dev": "node tools/content.mjs --if-missing && vite",
+    "build": "node tools/content.mjs && tsc && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node tools/prerender.mjs",
+    "preview": "vite preview",
+    "test": "node --test worker/",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "worker:dev": "npx --yes wrangler@4.151.3 dev",
+    "deploy": "npx --yes wrangler@4.151.3 deploy",
+    "og": "npx --yes playwright@1.64.1 screenshot --channel chrome --viewport-size \"1200, 630\" tools/og.html public/og-image.png",
+    "icons": "npx --yes playwright@1.64.1 screenshot --channel chrome --viewport-size \"64, 64\" tools/icons.html public/favicon.png && npx --yes playwright@1.64.1 screenshot --channel chrome --viewport-size \"180, 180\" tools/icons.html public/apple-touch-icon.png"
+  },
+  "dependencies": {
+    "@fontsource-variable/jetbrains-mono": "5.3.0",
+    "@fontsource-variable/onest": "5.3.1",
+    "@fontsource-variable/pixelify-sans": "5.3.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-router-dom": "7.18.4"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "github-slugger": "2.0.0",
+    "less": "4.9.1",
+    "marked": "18.1.1",
+    "prismjs": "1.30.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.4"
+  }
+}

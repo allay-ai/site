@@ -1,0 +1,50 @@
+// Every color is a CSS variable from global.less, so one stylesheet serves both
+// themes. These names are what components use; never write a color literal in a
+// component's stylesheet.
+@color-bg: var(--color-bg);
+@color-bg-elevated: var(--color-bg-elevated);
+@color-panel: var(--color-panel);
+@color-panel-alt: var(--color-panel-alt);
+@color-border: var(--color-border);
+@color-border-strong: var(--color-border-strong);
+
+@color-text: var(--color-text);
+@color-text-muted: var(--color-text-muted);
+@color-text-faint: var(--color-text-faint);
+
+@color-accent: var(--color-accent);
+@color-accent-text: var(--color-accent-text);
+@color-accent-soft: var(--color-accent-soft);
+@color-on-accent: var(--color-on-accent);
+@color-violet: var(--color-violet);
+@color-star: var(--color-star);
+@color-mark: var(--color-mark);
+@color-code-bg: var(--color-code-bg);
+
+@font-body: 'Onest Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+@font-display: @font-body;
+@font-mono: 'JetBrains Mono Variable', 'SFMono-Regular', Consolas, monospace;
+@font-pixel: 'Pixelify Sans Variable', @font-mono;
+
+@radius-sm: 8px;
+@radius-md: 12px;
+@radius-lg: 20px;
+@radius-xl: 28px;
+
+@space-1: 4px;
+@space-2: 8px;
+@space-3: 16px;
+@space-4: 24px;
+@space-5: 40px;
+@space-6: 64px;
+@space-7: 104px;
+
+@content-width: 1160px;
+@gutter: 16px;
+
+@shadow-panel: var(--shadow-panel);
+
+// Breakpoints, smallest first. Layouts are written for a 360 px phone and grow.
+@screen-sm: ~'(min-width: 600px)';
+@screen-md: ~'(min-width: 860px)';
+@screen-lg: ~'(min-width: 1100px)';

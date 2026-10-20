@@ -1,0 +1,25 @@
+@import (reference) '../../styles/tokens.less';
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  color: @color-text-muted;
+  font-size: 0.8rem;
+  cursor: pointer;
+
+  &:hover {
+    color: @color-text;
+    border-color: @color-border;
+    background: @color-panel;
+  }
+}
+
+.icon {
+  width: 15px;
+  height: 15px;
+}

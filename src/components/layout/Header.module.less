@@ -1,0 +1,172 @@
+@import (reference) '../../styles/tokens.less';
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, @color-bg 82%, transparent);
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  border-bottom: 1px solid color-mix(in srgb, @color-border 70%, transparent);
+}
+
+.bar {
+  position: relative;
+  max-width: @content-width;
+  margin: 0 auto;
+  padding: 0 @gutter;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: @space-3;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: @color-text;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  margin-right: auto;
+}
+
+.mark {
+  width: 34px;
+  height: 34px;
+  display: block;
+}
+
+.nav {
+  // On a phone the links fold into a panel under the bar.
+  display: none;
+  position: absolute;
+  top: 64px;
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  padding: @space-2 @gutter @space-3;
+  background: @color-bg-elevated;
+  border-bottom: 1px solid @color-border;
+  box-shadow: @shadow-panel;
+}
+
+.navOpen {
+  display: flex;
+}
+
+.link {
+  color: @color-text-muted;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 12px 4px;
+  border-radius: @radius-sm;
+
+  &:hover {
+    color: @color-text;
+  }
+}
+
+.linkActive {
+  color: @color-text;
+}
+
+.languages {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  margin-top: @space-2;
+  align-self: flex-start;
+  border: 1px solid @color-border;
+  border-radius: 999px;
+}
+
+.language {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: @color-text-faint;
+  text-decoration: none;
+
+  &:hover {
+    color: @color-text;
+  }
+}
+
+.languageActive {
+  background: @color-accent-soft;
+  color: @color-accent-text;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: @space-2;
+}
+
+.github {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  color: @color-text-muted;
+
+  &:hover {
+    color: @color-text;
+  }
+}
+
+.githubIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.menuButton {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid @color-border;
+  border-radius: 999px;
+  background: @color-panel;
+  cursor: pointer;
+}
+
+.menuIcon {
+  width: 20px;
+  height: 20px;
+}
+
+@media @screen-md {
+  .nav {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: 2px;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    margin-right: @space-2;
+  }
+
+  .link {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+  }
+
+  .languages {
+    margin: 0 0 0 @space-2;
+    align-self: center;
+  }
+
+  .menuButton {
+    display: none;
+  }
+}
