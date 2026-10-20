@@ -1,0 +1,310 @@
+@import (reference) '../styles/tokens.less';
+
+.page {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: @space-4 @gutter @space-6;
+  display: grid;
+  gap: @space-4;
+
+  @media @screen-md {
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: @space-5;
+    padding-top: @space-5;
+  }
+
+  @media @screen-lg {
+    grid-template-columns: 250px minmax(0, 1fr) 220px;
+  }
+}
+
+.side {
+  min-width: 0;
+
+  @media @screen-md {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    max-height: calc(100vh - 96px);
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+}
+
+.menuButton {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid @color-border;
+  border-radius: @radius-md;
+  background: @color-panel;
+  font-weight: 600;
+  cursor: pointer;
+
+  @media @screen-md {
+    display: none;
+  }
+}
+
+.nav {
+  display: none;
+  margin-top: @space-3;
+
+  @media @screen-md {
+    display: block;
+    margin-top: 0;
+  }
+}
+
+.navOpen {
+  display: block;
+}
+
+.article {
+  min-width: 0;
+  max-width: 820px;
+}
+
+.crumbs {
+  margin: 0 0 @space-2;
+  font-size: 0.9rem;
+  color: @color-text-faint;
+
+  a {
+    color: @color-text-muted;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.title {
+  font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
+  margin-bottom: @space-4;
+}
+
+.toc {
+  display: none;
+  font-size: 0.9rem;
+
+  @media @screen-lg {
+    display: block;
+    position: sticky;
+    top: 80px;
+    align-self: start;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-left: 1px solid @color-border;
+  }
+
+  li a {
+    display: block;
+    padding: 4px 0 4px 14px;
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    color: @color-text-muted;
+    text-decoration: none;
+
+    &:hover {
+      color: @color-text;
+      border-left-color: @color-accent;
+    }
+  }
+}
+
+.tocTitle {
+  margin: 0 0 @space-2;
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: @color-text-faint;
+}
+
+.footer {
+  margin-top: @space-5;
+  padding-top: @space-3;
+  border-top: 1px solid @color-border;
+  font-size: 0.92rem;
+}
+
+.source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: @space-2;
+  font-weight: 600;
+}
+
+.sourceIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.wikiFooter p {
+  margin: 0;
+  color: @color-text-faint;
+}
+
+// The wiki's HTML arrives from the build, so its elements are styled through
+// :global under the one module class that wraps them.
+.prose {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  overflow-wrap: break-word;
+
+  :global {
+    h2,
+    h3,
+    h4 {
+      position: relative;
+      margin-top: 2em;
+      scroll-margin-top: 88px;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      padding-bottom: 0.3em;
+      border-bottom: 1px solid @color-border;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+    }
+
+    h4 {
+      font-size: 1.05rem;
+    }
+
+    .anchor {
+      position: absolute;
+      left: -0.9em;
+      padding-right: 0.2em;
+      color: @color-text-faint;
+      text-decoration: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+
+    h2:hover .anchor,
+    h3:hover .anchor,
+    h4:hover .anchor,
+    .anchor:focus-visible {
+      opacity: 1;
+    }
+
+    p,
+    ul,
+    ol {
+      color: @color-text-muted;
+      margin: 0 0 1em;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.4em;
+    }
+
+    li + li {
+      margin-top: 0.3em;
+    }
+
+    li > ul,
+    li > ol,
+    li > pre {
+      margin-top: 0.4em;
+    }
+
+    strong {
+      color: @color-text;
+    }
+
+    blockquote {
+      margin: 0 0 1em;
+      padding: 0.6em 1em;
+      border-left: 3px solid @color-accent;
+      background: @color-accent-soft;
+      border-radius: 0 @radius-sm @radius-sm 0;
+
+      p:last-child {
+        margin: 0;
+      }
+    }
+
+    pre {
+      margin: 0 0 1.2em;
+      padding: 14px 16px;
+      overflow-x: auto;
+      border: 1px solid @color-border;
+      border-radius: @radius-md;
+      background: @color-code-bg;
+      font-size: 0.86rem;
+      line-height: 1.6;
+    }
+
+    pre code {
+      font-size: inherit;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+      margin: 0 0 1.2em;
+      border: 1px solid @color-border;
+      border-radius: @radius-md;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+
+    th,
+    td {
+      padding: 9px 12px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid @color-border;
+    }
+
+    th {
+      background: @color-panel-alt;
+      color: @color-text;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    td {
+      color: @color-text-muted;
+      min-width: 9em;
+    }
+
+    td:first-child {
+      min-width: 0;
+    }
+
+    td:first-child code {
+      white-space: nowrap;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: @radius-md;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid @color-border;
+      margin: 2em 0;
+    }
+  }
+}

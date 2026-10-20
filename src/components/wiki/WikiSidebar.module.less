@@ -1,0 +1,81 @@
+@import (reference) '../../styles/tokens.less';
+
+.sidebar {
+  font-size: 0.94rem;
+}
+
+.filter {
+  display: block;
+  margin-bottom: @space-3;
+}
+
+.input {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid @color-border;
+  border-radius: @radius-sm;
+  background: @color-panel;
+  color: @color-text;
+  font: inherit;
+
+  &::placeholder {
+    color: @color-text-faint;
+  }
+}
+
+.book + .book {
+  margin-top: @space-4;
+}
+
+.bookTitle {
+  display: block;
+  padding: 6px 10px;
+  border-radius: @radius-sm;
+  font-weight: 700;
+  color: @color-text;
+  text-decoration: none;
+
+  &:hover {
+    background: @color-panel-alt;
+  }
+}
+
+.group {
+  margin-top: @space-2;
+}
+
+.groupTitle {
+  margin: @space-2 0 4px;
+  padding: 0 10px;
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: @color-text-faint;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: block;
+  padding: 5px 10px;
+  border-radius: @radius-sm;
+  color: @color-text-muted;
+  text-decoration: none;
+
+  &:hover {
+    color: @color-text;
+    background: @color-panel-alt;
+  }
+}
+
+.active {
+  color: @color-accent-text;
+  background: @color-accent-soft;
+  font-weight: 600;
+}
