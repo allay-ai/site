@@ -1,0 +1,142 @@
+@import (reference) '../../styles/tokens.less';
+
+.page {
+  max-width: @content-width;
+  margin: 0 auto;
+  padding: @space-5 @gutter @space-6;
+}
+
+.header {
+  max-width: 760px;
+  margin-bottom: @space-5;
+}
+
+.title {
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+}
+
+.updated {
+  color: @color-text-faint;
+  font-size: 0.92rem;
+}
+
+.intro p {
+  font-size: 1.05rem;
+}
+
+.layout {
+  display: grid;
+  gap: @space-5;
+
+  @media @screen-lg {
+    grid-template-columns: 260px minmax(0, 1fr);
+  }
+}
+
+.toc {
+  align-self: start;
+  padding: @space-3 @space-4;
+  border: 1px solid @color-border;
+  border-radius: @radius-md;
+  background: @color-bg-elevated;
+  font-size: 0.92rem;
+
+  @media @screen-lg {
+    position: sticky;
+    top: 88px;
+  }
+
+  ol {
+    margin: 0;
+    padding-left: 1.3em;
+    color: @color-text-faint;
+  }
+
+  li + li {
+    margin-top: 4px;
+  }
+
+  a {
+    color: @color-text-muted;
+    text-decoration: none;
+
+    &:hover {
+      color: @color-text;
+      text-decoration: underline;
+    }
+  }
+}
+
+.tocTitle {
+  margin: 0 0 @space-2;
+  font-weight: 650;
+  color: @color-text;
+}
+
+.body {
+  min-width: 0;
+  max-width: 760px;
+
+  section + section {
+    margin-top: @space-5;
+  }
+
+  h2 {
+    font-size: 1.45rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    margin-top: @space-4;
+  }
+
+  ul,
+  ol {
+    color: @color-text-muted;
+    padding-left: 1.3em;
+  }
+
+  li + li {
+    margin-top: 6px;
+  }
+
+  strong {
+    color: @color-text;
+  }
+}
+
+.fill {
+  padding: 0 4px;
+  border-radius: 4px;
+  background: @color-mark;
+  color: @color-text;
+  font-family: @font-mono;
+  font-size: 0.9em;
+  overflow-wrap: anywhere;
+}
+
+:global(.table-scroll) {
+  overflow-x: auto;
+  margin: 0 0 @space-3;
+}
+
+.body table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 520px;
+  font-size: 0.93rem;
+
+  th,
+  td {
+    text-align: left;
+    vertical-align: top;
+    padding: 10px 12px 10px 0;
+    border-bottom: 1px solid @color-border;
+    color: @color-text-muted;
+  }
+
+  th {
+    color: @color-text;
+    font-weight: 650;
+  }
+}
