@@ -1,0 +1,2 @@
+# Copy to .dev.vars to point `pnpm worker:dev` at a backend on this machine.
+ORIGIN=http://127.0.0.1:3000

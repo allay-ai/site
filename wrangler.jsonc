@@ -1,0 +1,33 @@
+{
+  // dist/ served from Cloudflare's edge, with this Worker in front of the
+  // backend's paths only. The name is the one the allay.chat route points at.
+  "$schema": "https://unpkg.com/wrangler@4.151.3/config-schema.json",
+  "name": "allay-site",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // Only these paths run the script, which passes them to the backend. Every
+    // page and asset is answered straight from dist/ without it, with the
+    // headers in public/_headers.
+    "run_worker_first": ["/api/*", "/admin", "/admin/*"],
+    // Every page is a prerendered dist/<path>/index.html, served at <path>/;
+    // /privacy redirects to /privacy/. Anything else gets the prerendered
+    // 404.html with a real 404 status.
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  // A route, not a custom domain: allay.chat keeps its DNS record, and the
+  // Worker answers for every path on it.
+  "routes": [{ "pattern": "allay.chat/*", "zone_name": "allay.chat" }],
+  "workers_dev": false,
+  "vars": {
+    // The backend: a hostname of the zone that leads to the Cloudflare Tunnel.
+    // No Worker route may cover it, or requests would loop back here.
+    "ORIGIN": "https://origin.allay.chat"
+  }
+  // No "observability": Workers Logs would keep request details of /api/* and
+  // /admin, which the privacy policy says we don't. Turn it on for a while to
+  // debug, and say so in src/pages/PrivacyPage.tsx if it stays.
+}
