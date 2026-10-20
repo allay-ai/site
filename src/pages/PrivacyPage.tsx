@@ -55,6 +55,11 @@ const sections: LegalSection[] = [
               </td>
             </tr>
             <tr>
+              <td>A player’s agreement to Allay’s notice: which version, and when</td>
+              <td>To show the player agreed before Allay answered</td>
+              <td>Until the player withdraws it or their data is erased</td>
+            </tr>
+            <tr>
               <td>Statistics of each answer, numbers only, under a pseudonym</td>
               <td>Billing, limits, finding faults</td>
               <td>{retention.runsDays} days; daily totals without any player kept</td>
@@ -143,6 +148,13 @@ const sections: LegalSection[] = [
             player, which Allay saves when it learns something useful and says so. They stay until
             the player deletes them with <code>/allay forget</code> or asks us to, and go by
             themselves {retention.memoryDays} days after the player’s last question.
+          </li>
+          <li>
+            <strong>The agreement.</strong> Since Allay 6.1 the plugin shows each player a short
+            notice before their first question: what it sends, where we keep it, and that AI
+            providers write the answers. Allay answers only once the player agrees. We keep which
+            version of the notice they agreed to and when, for the server’s operator, until the
+            player withdraws it with <code>/allay privacy withdraw</code> or their data is erased.
           </li>
           <li>
             <strong>Statistics.</strong> One record per answer with numbers only: when, the model,
@@ -268,6 +280,10 @@ const sections: LegalSection[] = [
           <li>
             <code>/allay privacy</code> says what Allay keeps about them on that server, and{' '}
             <code>/allay privacy erase</code> erases all of it (Allay 6.0 and newer).
+          </li>
+          <li>
+            <code>/allay privacy withdraw</code> takes back their agreement to Allay’s notice, and
+            Allay stops answering them (Allay 6.1 and newer).
           </li>
           <li>
             <code>/allay memory</code> lists what Allay remembers, and <code>/allay forget</code>{' '}
