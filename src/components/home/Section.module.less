@@ -1,0 +1,43 @@
+@import (reference) '../../styles/tokens.less';
+
+.section {
+  padding: @space-6 @gutter;
+
+  @media @screen-md {
+    padding: @space-7 @gutter;
+  }
+}
+
+.tinted {
+  background: @color-bg-elevated;
+  border-block: 1px solid @color-border;
+}
+
+.inner {
+  max-width: @content-width;
+  margin: 0 auto;
+}
+
+.header {
+  max-width: 720px;
+  margin-bottom: @space-5;
+}
+
+.kicker {
+  margin: 0 0 @space-2;
+  font-size: 0.82rem;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: @color-accent-text;
+}
+
+.title {
+  font-size: clamp(1.9rem, 1.2rem + 2.6vw, 2.9rem);
+  margin-bottom: @space-3;
+}
+
+.lead {
+  font-size: 1.1rem;
+  margin: 0;
+}

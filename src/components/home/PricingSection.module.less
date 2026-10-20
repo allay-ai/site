@@ -1,0 +1,188 @@
+@import (reference) '../../styles/tokens.less';
+
+.cards {
+  display: grid;
+  gap: @space-3;
+  align-items: start;
+
+  @media @screen-lg {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: @space-4;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: @space-4;
+  border: 1px solid @color-border;
+  border-radius: @radius-xl;
+  background: @color-panel;
+  box-shadow: @shadow-panel;
+}
+
+.featured {
+  border: 2px solid @color-accent;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, @color-accent-soft, transparent 70%),
+    @color-panel;
+
+  @media @screen-lg {
+    padding: @space-5 @space-4;
+  }
+}
+
+.name {
+  font-size: 1.3rem;
+  margin-bottom: @space-2;
+}
+
+.price {
+  margin: 0 0 4px;
+  font-size: 2.2rem;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  color: @color-text;
+}
+
+.tagline {
+  margin-bottom: @space-3;
+}
+
+.points {
+  margin: 0 0 @space-3;
+  padding: 0;
+  list-style: none;
+  color: @color-text-muted;
+  font-size: 0.95rem;
+
+  li {
+    position: relative;
+    padding-left: 22px;
+  }
+
+  li + li {
+    margin-top: 8px;
+  }
+
+  li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.55em;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: @color-accent;
+    transform: rotate(45deg);
+  }
+}
+
+.link {
+  margin-top: auto;
+  font-weight: 600;
+}
+
+.plans {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 @space-4;
+  padding: 0;
+  list-style: none;
+}
+
+.plan {
+  padding: 12px 16px;
+  border: 1px solid @color-border;
+  border-radius: @radius-md;
+  background: @color-bg-elevated;
+}
+
+.planHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: @space-2;
+}
+
+.planName {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 750;
+  font-size: 1.25rem;
+  white-space: nowrap;
+}
+
+.star {
+  width: 18px;
+  height: 18px;
+  color: @color-star;
+}
+
+.planDetail {
+  margin: 4px 0 0;
+  font-size: 0.92rem;
+}
+
+.steps {
+  margin: 0 0 @space-4;
+  padding-left: 1.3em;
+  color: @color-text-muted;
+  font-size: 0.95rem;
+
+  li + li {
+    margin-top: 6px;
+  }
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-top: auto;
+  border-radius: 999px;
+  background: var(--button-bg);
+  color: @color-on-accent;
+  font-weight: 650;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--button-bg-hover);
+  }
+}
+
+.how {
+  margin-top: @space-5;
+  padding: @space-4;
+  border: 1px dashed @color-border-strong;
+  border-radius: @radius-lg;
+
+  @media @screen-md {
+    padding: @space-4 @space-5;
+  }
+}
+
+.howTitle {
+  font-size: 1.2rem;
+}
+
+.howList {
+  margin: 0;
+  padding-left: 1.2em;
+  color: @color-text-muted;
+  display: grid;
+  gap: 8px;
+
+  @media @screen-md {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: @space-5;
+  }
+}

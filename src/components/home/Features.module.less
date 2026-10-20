@@ -1,0 +1,60 @@
+@import (reference) '../../styles/tokens.less';
+
+.grid {
+  display: grid;
+  gap: @space-3;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @media @screen-sm {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media @screen-lg {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  position: relative;
+  padding: @space-4;
+  border: 1px solid @color-border;
+  border-radius: @radius-lg;
+  background: @color-panel;
+  box-shadow: @shadow-panel;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+
+  &:hover {
+    border-color: @color-border-strong;
+    transform: translateY(-2px);
+  }
+}
+
+.icon {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: @space-3;
+  border-radius: @radius-md;
+  background: @color-accent-soft;
+  color: @color-accent-text;
+}
+
+.svg {
+  width: 24px;
+  height: 24px;
+}
+
+.title {
+  font-size: 1.15rem;
+  margin-bottom: @space-2;
+}
+
+.body {
+  margin: 0;
+  font-size: 0.97rem;
+}

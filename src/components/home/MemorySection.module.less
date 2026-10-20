@@ -1,0 +1,98 @@
+@import (reference) '../../styles/tokens.less';
+
+.cards {
+  display: grid;
+  gap: @space-3;
+  margin: 0 0 @space-5;
+  padding: 0;
+  list-style: none;
+  counter-reset: memory;
+
+  @media @screen-md {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  counter-increment: memory;
+  padding: @space-4;
+  border-radius: @radius-lg;
+  border: 1px solid @color-border;
+  background: linear-gradient(160deg, @color-accent-soft, transparent 60%), @color-panel;
+
+  &::before {
+    content: counter(memory, decimal-leading-zero);
+    display: block;
+    margin-bottom: @space-2;
+    font-family: @font-mono;
+    font-size: 0.85rem;
+    color: @color-accent-text;
+  }
+}
+
+.title {
+  font-size: 1.15rem;
+  margin-bottom: @space-2;
+}
+
+.body {
+  margin: 0;
+}
+
+.languages {
+  display: grid;
+  gap: @space-4;
+  align-items: center;
+  padding: @space-4;
+  border-radius: @radius-xl;
+  border: 1px solid @color-border;
+  background:
+    radial-gradient(ellipse 60% 80% at 100% 0%, var(--glow-b), transparent 70%),
+    @color-bg-elevated;
+
+  @media @screen-md {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    padding: @space-5;
+  }
+}
+
+.languagesText {
+  min-width: 0;
+}
+
+.kicker {
+  margin: 0 0 @space-2;
+  font-size: 0.82rem;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: @color-accent-text;
+}
+
+.languagesTitle {
+  font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem);
+}
+
+.note {
+  font-size: 0.95rem;
+  margin: 0;
+  color: @color-text-faint;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid @color-border-strong;
+  background: @color-panel;
+  font-weight: 600;
+  font-size: 1.05rem;
+}

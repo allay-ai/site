@@ -1,0 +1,55 @@
+@import (reference) '../../styles/tokens.less';
+
+.list {
+  max-width: 860px;
+  border-top: 1px solid @color-border;
+}
+
+.item {
+  border-bottom: 1px solid @color-border;
+
+  &[open] .question::after {
+    transform: rotate(45deg);
+  }
+}
+
+.question {
+  position: relative;
+  display: block;
+  padding: 20px 44px 20px 0;
+  font-weight: 650;
+  font-size: 1.08rem;
+  cursor: pointer;
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::after {
+    content: '+';
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    margin-top: -16px;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: @color-accent-soft;
+    color: @color-accent-text;
+    font-size: 1.3rem;
+    font-weight: 500;
+    transition: transform 0.2s;
+  }
+
+  &:hover {
+    color: @color-accent-text;
+  }
+}
+
+.answer {
+  margin: 0 0 20px;
+  max-width: 70ch;
+}

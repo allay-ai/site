@@ -1,0 +1,273 @@
+@import (reference) '../../styles/tokens.less';
+
+// Minecraft's own chat colors (&7, &8, &3, &b, &f, &a, &6). The game screen
+// looks the same in both themes, as the game does.
+@mc-gray: #aaaaaa;
+@mc-dark-gray: #9a9a9a;
+@mc-dark-aqua: #00aaaa;
+@mc-aqua: #55ffff;
+@mc-white: #ffffff;
+@mc-green: #55ff55;
+@mc-gold: #ffaa00;
+
+.figure {
+  margin: 0;
+  min-width: 0;
+}
+
+.screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 360px;
+  padding: 18px 14px 12px;
+  border-radius: @radius-lg;
+  overflow: hidden;
+  font-family: @font-pixel;
+  font-size: 14px;
+  line-height: 1.45;
+  color: @mc-white;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 30px 80px -30px rgba(10, 40, 90, 0.55);
+  background: linear-gradient(180deg, #78a7ff 0%, #a9c9ff 52%, #d7e7ff 100%);
+
+  @media @screen-sm {
+    font-size: 15px;
+    padding: 22px 20px 14px;
+    min-height: 400px;
+  }
+}
+
+.scenery {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.sun {
+  position: absolute;
+  top: 26px;
+  right: 34px;
+  width: 44px;
+  height: 44px;
+  background: #fff7c2;
+  box-shadow: 0 0 40px 10px rgba(255, 240, 170, 0.6);
+}
+
+// Blocky hills: a stepped silhouette, the way the game draws terrain far off.
+.hills {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 70px;
+  height: 120px;
+  background: #5b8f4a;
+  clip-path: polygon(
+    0 60%,
+    8% 60%,
+    8% 45%,
+    18% 45%,
+    18% 30%,
+    30% 30%,
+    30% 50%,
+    42% 50%,
+    42% 38%,
+    55% 38%,
+    55% 20%,
+    66% 20%,
+    66% 42%,
+    78% 42%,
+    78% 55%,
+    90% 55%,
+    90% 35%,
+    100% 35%,
+    100% 100%,
+    0 100%
+  );
+  opacity: 0.85;
+}
+
+.ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 76px;
+  background: linear-gradient(180deg, #4f7d3f 0 10px, #7a5a3a 10px 100%);
+}
+
+.chat {
+  position: relative;
+  list-style: none;
+  margin: auto 0 0;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  // Darker than the game's 50%, for contrast over a bright sky.
+  background: rgba(0, 0, 0, 0.62);
+  max-width: 100%;
+}
+
+.line {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  opacity: 0;
+  animation: appear 0.35s ease-out forwards;
+}
+
+.step1 {
+  animation-delay: 1.5s;
+}
+
+.step2 {
+  animation-delay: 2.3s;
+}
+
+.step3 {
+  animation-delay: 3.1s;
+}
+
+.step4 {
+  animation-delay: 3.6s;
+}
+
+.gray {
+  color: @mc-gray;
+}
+
+.dark {
+  color: @mc-dark-gray;
+}
+
+.aquaDark {
+  color: @mc-dark-aqua;
+}
+
+.aqua {
+  color: @mc-aqua;
+}
+
+.white {
+  color: @mc-white;
+}
+
+.button {
+  color: @mc-green;
+  margin-right: 10px;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.status {
+  position: relative;
+  margin: 12px 0 6px;
+  text-align: center;
+  color: @mc-gold;
+  font-size: 0.86em;
+  overflow-wrap: anywhere;
+  opacity: 0;
+  animation: appear 0.3s ease-out 1s forwards;
+}
+
+.hotbar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+
+.slot,
+.slotActive {
+  width: 22px;
+  height: 22px;
+  background: rgba(30, 30, 30, 0.55);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.45) inset;
+
+  @media @screen-sm {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.slotActive {
+  box-shadow:
+    0 0 0 2px #fff inset,
+    0 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.input {
+  position: relative;
+  margin: 0;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.55);
+  color: @mc-white;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.typed {
+  display: inline-block;
+  vertical-align: bottom;
+  max-width: calc(100% - 12px);
+  overflow: hidden;
+  text-overflow: clip;
+  clip-path: inset(0 100% 0 0);
+  animation: type 1s steps(28, end) 0.2s forwards;
+}
+
+.caret {
+  display: inline-block;
+  width: 8px;
+  height: 2px;
+  margin-left: 2px;
+  background: @mc-white;
+  vertical-align: baseline;
+  animation: blink 1s steps(1) infinite;
+}
+
+.caption {
+  margin-top: @space-2;
+  font-size: 0.85rem;
+  color: @color-text-faint;
+  text-align: center;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes type {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line,
+  .status,
+  .typed,
+  .caret {
+    animation: none;
+    opacity: 1;
+    clip-path: none;
+    transform: none;
+  }
+}
