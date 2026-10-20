@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Fill, LegalPage, type LegalSection } from '../components/legal/LegalPage.tsx'
+import { LegalPage, type LegalSection } from '../components/legal/LegalPage.tsx'
 import { retention } from '../data/plans.ts'
 
 // What the hosted backend stores comes from allay-ai/server: the wiki's
@@ -14,8 +14,9 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          The controller for allay.chat is <Fill>OWNER NAME</Fill>, <Fill>ADDRESS</Fill>. You can
-          reach us at <Fill>CONTACT EMAIL</Fill> about anything on this page.
+          The controller for allay.chat is Pavel Erokhin Viktorovich, in Spain. You can reach us at
+          <a href="mailto:personal@mairwunnx.com">personal@mairwunnx.com</a> about anything on this
+          page.
         </p>
         <p>
           “Allay” here means the hosted backend at allay.chat, this website, and the Telegram bot
@@ -66,9 +67,7 @@ const sections: LegalSection[] = [
             <tr>
               <td>Licenses, payments, and the payer’s Telegram user id</td>
               <td>Subscriptions, refunds, accounting</td>
-              <td>
-                While the license exists, then as tax law requires (<Fill>RETENTION PERIOD</Fill>)
-              </td>
+              <td>While the license exists, then as Spanish law requires (six years)</td>
             </tr>
             <tr>
               <td>Visits to this website</td>
@@ -195,7 +194,7 @@ const sections: LegalSection[] = [
         <p>
           We need this to provide the subscription (Art. 6(1)(b) GDPR) and keep payment records as
           tax law requires (Art. 6(1)(c) GDPR). License data stays while the license exists; payment
-          records stay for <Fill>RETENTION PERIOD</Fill> after the payment.
+          records stay for six years after the payment, as the Spanish Commercial Code requires.
         </p>
         <h3>Your own key</h3>
         <p>
@@ -261,7 +260,8 @@ const sections: LegalSection[] = [
           You may ask us what we hold about you, have it corrected or deleted, restrict its use,
           receive it in a portable form, and object to processing based on legitimate interests
           (Art. 15–21 GDPR). You may also complain to a data protection authority, for example where
-          you live, or to ours: <Fill>SUPERVISORY AUTHORITY</Fill>.
+          you live, or to ours: the Agencia Española de Protección de Datos (
+          <a href="https://www.aepd.es">aepd.es</a>).
         </p>
         <p>Players can do the most common things themselves in the game:</p>
         <ul>
@@ -283,10 +283,10 @@ const sections: LegalSection[] = [
         </p>
         <p>
           For anything else, such as a copy of everything we keep about you, write to{' '}
-          <Fill>CONTACT EMAIL</Fill> with your Minecraft name or UUID, or your Telegram user id. We
-          may ask you to prove the account is yours. On erasure, your memories, sessions, agents’
-          threads, and the traces of your questions go, and your statistics lose even their
-          pseudonym.
+          <a href="mailto:personal@mairwunnx.com">personal@mairwunnx.com</a> with your Minecraft
+          name or UUID, or your Telegram user id. We may ask you to prove the account is yours. On
+          erasure, your memories, sessions, agents’ threads, and the traces of your questions go,
+          and your statistics lose even their pseudonym.
         </p>
       </>
     ),

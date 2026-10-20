@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Fill, LegalPage, type LegalSection } from '../components/legal/LegalPage.tsx'
+import { LegalPage, type LegalSection } from '../components/legal/LegalPage.tsx'
 import { byokLimits, plans } from '../data/plans.ts'
 import { links } from '../data/site.ts'
 import { count, usd } from '../i18n/format.ts'
@@ -22,10 +22,10 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          allay.chat is run by <Fill>OWNER NAME</Fill>, <Fill>ADDRESS</Fill>, reachable at{' '}
-          <Fill>CONTACT EMAIL</Fill> (“we”). These terms cover the hosted Allay backend at
-          allay.chat and the payment bot @AllayChatBot (“the service”), used through the Allay
-          plugin on a Minecraft server.
+          allay.chat is run by Pavel Erokhin Viktorovich, in Spain, reachable at{' '}
+          <a href="mailto:personal@mairwunnx.com">personal@mairwunnx.com</a> (“we”). These terms
+          cover the hosted Allay backend at allay.chat and the payment bot @AllayChatBot (“the
+          service”), used through the Allay plugin on a Minecraft server.
         </p>
         <p>
           The plugin and Allay Server are open-source software under the MIT license. Running them
@@ -140,10 +140,10 @@ const sections: LegalSection[] = [
         <p>
           <strong>Right of withdrawal.</strong> If you’re a consumer in the European Union, you may
           withdraw from a purchase within 14 days without giving a reason. Write to{' '}
-          <Fill>CONTACT EMAIL</Fill> or to @AllayChatBot with the date of the payment. Because the
-          service starts at once at your request, a withdrawal returns the Stars minus the share of
-          the period’s limit already used. Refunds go back to the Telegram account that paid, as
-          Stars.
+          <a href="mailto:personal@mairwunnx.com">personal@mairwunnx.com</a> or to @AllayChatBot
+          with the date of the payment. Because the service starts at once at your request, a
+          withdrawal returns the Stars minus the share of the period’s limit already used. Refunds
+          go back to the Telegram account that paid, as Stars.
         </p>
         <p>
           Outside the withdrawal period, we refund a period we couldn’t serve because of our own
@@ -249,12 +249,12 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          The law of <Fill>COUNTRY</Fill> applies. If you’re a consumer, the protections of the law
-          where you live stay with you.
+          The law of Spain applies. If you’re a consumer, the protections of the law where you live
+          stay with you.
         </p>
         <p>
           We neither must nor will take part in dispute resolution before a consumer arbitration
-          board. <Fill>ADJUST IF YOUR COUNTRY REQUIRES OTHERWISE</Fill>
+          board.
         </p>
       </>
     ),
