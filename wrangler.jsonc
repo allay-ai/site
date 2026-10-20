@@ -18,8 +18,11 @@
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   },
-  // A route, not a custom domain: allay.chat keeps its DNS record, and the
-  // Worker answers for every path on it.
+  // A route, not a custom domain: allay.chat keeps its DNS record. The zone also
+  // has routes without a Worker for allay.chat/api/* and allay.chat/admin*
+  // (MairwunNx/infrastructure, cloudflare.toml), so the backend's paths go
+  // straight to the tunnel with the visitor's own address and never reach this
+  // Worker. The proxy in worker/ only matters if those routes are ever removed.
   "routes": [{ "pattern": "allay.chat/*", "zone_name": "allay.chat" }],
   "workers_dev": false,
   "vars": {
