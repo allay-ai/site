@@ -12,7 +12,7 @@
     "dev": "node tools/content.mjs --if-missing && vite",
     "build": "node tools/content.mjs && tsc && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node tools/prerender.mjs",
     "preview": "vite preview",
-    "test": "node --test worker/",
+    "test": "node --test worker/*.test.ts",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
