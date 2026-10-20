@@ -1,0 +1,90 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  # Another repository's workflow can ask for a rebuild, such as one that runs
+  # on its wiki's `gollum` event (see CLAUDE.md, “The wiki”).
+  repository_dispatch:
+    types: [wiki-changed]
+  # Pushes to a wiki start no workflow here, so the wiki is checked every hour.
+  # The run stops after a few seconds when neither wiki moved.
+  schedule:
+    - cron: '17 * * * *'
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  wiki:
+    # Decides whether a scheduled run has anything to do: it compares the wikis'
+    # newest commits with the ones the live site was built from.
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.compare.outputs.changed }}
+    steps:
+      - id: compare
+        run: |
+          live=$(curl -fsS https://allay.chat/wiki-version.json || echo '{}')
+          changed=false
+          for repo in allay-ai/server allay-ai/minecraft; do
+            head=$(git ls-remote "https://github.com/$repo.wiki.git" HEAD | cut -f1)
+            built=$(echo "$live" | jq -r --arg repo "$repo" '.[$repo] // ""')
+            echo "$repo: wiki $head, live $built"
+            if [ "$head" != "$built" ]; then changed=true; fi
+          done
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: wiki
+    # Runs for everything but a scheduled run whose wikis haven't moved.
+    if: always() && (github.event_name != 'schedule' || needs.wiki.outputs.changed == 'true')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # Corepack goes first on purpose. setup-node caches by default and reads
+      # packageManager from package.json to decide how, so it fails on “Unable to
+      # locate executable file: pnpm” if pnpm is enabled after it.
+      - name: Enable pnpm via Corepack
+        run: corepack enable
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test the Worker
+        run: pnpm test
+
+      # Fetches both wikis and the newest releases, then builds and prerenders.
+      - name: Build
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: pnpm build
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist
+
+      # What ships is what this job built and checked; Cloudflare builds
+      # nothing. wrangler runs through npx, not cloudflare/wrangler-action: the
+      # action installs wrangler with pnpm, which refuses the build scripts of
+      # esbuild and workerd that wrangler needs.
+      - name: Deploy to Cloudflare
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4.151.3 deploy
