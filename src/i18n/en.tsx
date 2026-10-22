@@ -541,12 +541,17 @@ export const en: Copy = {
           'Not yet. GitHub releases are the one source for now, and itzg/minecraft-server can fetch the jar from there.',
       },
       {
-        question: 'I used MCBuddy. What changes?',
+        question: 'Do players have to agree first?',
+        answer:
+          'On allay.chat, yes. Before a first question, Allay shows each player what it sends and keeps, asks their age, and waits for a yes. Until then, nothing about them reaches the backend, and Allay doesn’t answer them.',
+      },
+      {
+        question: 'Is my key or license safe?',
         answer: (
           <>
-            Allay was MCBuddy until 4.0.0. The plugin moves your old folder, settings, and
-            translations over by itself on the first start. See{' '}
-            <Link to="/wiki/plugin/coming-from-mcbuddy/">Coming from MCBuddy</Link>.
+            Neither ever reaches a log or the chat, and <code>/allay status</code> shows a key
+            masked. The license lives in <code>license.key</code>, apart from{' '}
+            <code>config.yml</code>, so you can share your config when asking for help.
           </>
         ),
       },
