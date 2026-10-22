@@ -10,7 +10,6 @@ export const links = {
   server: 'https://github.com/allay-ai/server',
   serverReleases: 'https://github.com/allay-ai/server/releases',
   serverImage: 'https://github.com/allay-ai/server/pkgs/container/server',
-  protocol: 'https://github.com/allay-ai/server/blob/master/docs/protocol-v2.md',
   organization: 'https://github.com/allay-ai',
   bot: 'https://t.me/AllayChatBot',
   openRouter: 'https://openrouter.ai',

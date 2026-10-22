@@ -32,7 +32,6 @@ export const en: Copy = {
       terms: 'Terms of service',
       serverWiki: 'Server wiki',
       pluginWiki: 'Plugin wiki',
-      protocol: 'Protocol v2',
       releases: 'Releases',
       madeBy: (
         <>

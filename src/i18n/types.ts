@@ -55,7 +55,6 @@ export type Copy = {
       terms: string
       serverWiki: string
       pluginWiki: string
-      protocol: string
       releases: string
       madeBy: ReactNode
       notMojang: string

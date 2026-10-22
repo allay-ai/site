@@ -38,7 +38,6 @@ export const ru: Copy = {
       terms: 'Условия использования (англ.)',
       serverWiki: 'Вики сервера (англ.)',
       pluginWiki: 'Вики плагина (англ.)',
-      protocol: 'Протокол v2',
       releases: 'Релизы',
       madeBy: (
         <>

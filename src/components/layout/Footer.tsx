@@ -32,7 +32,6 @@ export function Footer({ locale }: { locale: Locale }) {
             <h2 className={styles.heading}>{ui.footer.docs}</h2>
             <Link to="/wiki/plugin/">{ui.footer.pluginWiki}</Link>
             <Link to="/wiki/">{ui.footer.serverWiki}</Link>
-            <a href={links.protocol}>{ui.footer.protocol}</a>
           </div>
           <div className={styles.column}>
             <h2 className={styles.heading}>{ui.footer.code}</h2>
