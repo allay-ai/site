@@ -15,8 +15,23 @@ export type IconName =
   | 'brain'
   | 'shield'
   | 'calc'
+  | 'hammer'
+  | 'cube'
+  | 'bulb'
+  | 'sprout'
+  | 'flag'
+  | 'chat'
+  | 'terminal'
+  | 'chart'
+  | 'key'
 
-export type Feature = { icon: IconName; title: string; body: ReactNode }
+export type Feature = {
+  icon: IconName
+  title: string
+  body: ReactNode
+  /** A killer feature's example question, shown as the player would type it. */
+  ask?: string
+}
 
 export type ChatLine =
   | { kind: 'tool'; label: string; result: string }
@@ -75,7 +90,15 @@ export type Copy = {
     status: string
     lines: ChatLine[]
   }
-  features: { kicker: string; title: string; lead: string; items: Feature[] }
+  features: {
+    kicker: string
+    title: string
+    lead: string
+    killerTitle: string
+    killer: Feature[]
+    otherTitle: string
+    other: Feature[]
+  }
   ask: {
     kicker: string
     title: string
