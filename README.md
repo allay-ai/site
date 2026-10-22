@@ -16,7 +16,7 @@ pnpm dev
 
 ## What's inside
 
-- **The front page** at `/`, in English, and at `/ru/` in Russian. Every text sits in `src/i18n/`, one file per language.
+- **The front page** at `/`, in English, at `/ru/` in Russian, and at `/es/` in Spanish. Every text sits in `src/i18n/`, one file per language.
 - **The wiki** at `/wiki/` (allay-ai/server's) and `/wiki/plugin/` (allay-ai/minecraft's), rendered from the GitHub wikis at build time.
 - **Legal pages** at `/privacy/` and `/terms/`, English only. They carry `[[OWNER NAME]]`, `[[ADDRESS]]`, `[[CONTACT EMAIL]]`, and a few more fields to fill in before they bind anyone.
 - **The Worker** in `worker/`. It runs only for `/api/*`, `/admin`, and `/admin/*`, and streams them to the backend unchanged.

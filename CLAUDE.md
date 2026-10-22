@@ -6,13 +6,13 @@ The source of allay.chat: the front page of Allay (the AI helper for Minecraft s
 
 - Reply in Russian, address the owner as «вы». Quotes «ёлочки», nested „лапки“, an em dash with spaces « — ».
 - Code, comments, and commit messages are in English. Commits are short imperative one-liners, one change each: “Render wiki tables in their own scroll box”.
-- Text on the site follows the owner's typography. English: curly quotes “…”, apostrophes ’, an em dash without spaces. Russian: «ёлочки», « — », «вы» in lower case. Plain active sentences; no “seamless”, “robust”, “leverage”.
+- Text on the site follows the owner's typography. English: curly quotes “…”, apostrophes ’, an em dash without spaces. Russian: «ёлочки», « — », «вы» in lower case. Spanish: «comillas», “inglesas” inside them, «tú», numbers grouped only from five digits (2000, 10 000). Plain active sentences; no “seamless”, “robust”, “leverage”.
 
 ## How it fits together
 
 | Path | What it does |
 |---|---|
-| `src/i18n/` | Every text of the front page and the header and footer: `en.tsx`, `ru.tsx`, the `Copy` type that keeps them complete, and `locales.ts` |
+| `src/i18n/` | Every text of the front page and the header and footer: `en.tsx`, `ru.tsx`, `es.tsx`, the `Copy` type that keeps them complete, and `locales.ts` |
 | `src/data/pages.ts` | Every route's head: title, description, canonical, hreflang, and the sitemap's list |
 | `src/data/plans.ts` | Prices, budgets, BYOK limits, and retention: copies of the backend's defaults |
 | `src/data/site.ts` | Every outside address, and the stores (Modrinth, Hangar) once they exist |
