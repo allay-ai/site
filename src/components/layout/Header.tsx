@@ -31,7 +31,7 @@ export function Header({ locale }: { locale: Locale }) {
       <div className={styles.bar}>
         <Link to={home} className={styles.brand}>
           <Logo className={styles.mark} />
-          <span className={styles.name}>Allay</span>
+          <span className={styles.name}>Allay AI</span>
         </Link>
 
         <nav
