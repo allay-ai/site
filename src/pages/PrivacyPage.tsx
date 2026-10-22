@@ -214,9 +214,11 @@ const sections: LegalSection[] = [
           <li>
             <strong>Statistics.</strong> One record per answer with numbers only: when, the model,
             tokens, cost, duration, which tools ran and whether they worked, the error code if any.
-            The player appears as a pseudonym, a keyed hash of their UUID that can’t be turned back
-            without our key. Records go after {retention.runsDays} days; daily totals with no player
-            in them stay.
+            The player appears as a pseudonym: a keyed hash of the server’s license and their UUID,
+            so the same player has a different pseudonym on every server. This is pseudonymised
+            data, not anonymous: with our key, and with the UUID, which is public, a record can be
+            linked back to the player. Records go after {retention.runsDays} days; daily totals with
+            no player in them stay.
           </li>
           <li>
             <strong>Traces.</strong> A record of how an answer was made: the prompts, the model’s
@@ -504,7 +506,10 @@ const sections: LegalSection[] = [
           Secrets saved in the admin panel are encrypted the same way; license secrets and admin
           sessions are stored only as hashes, and admin passwords with Argon2id.
         </li>
-        <li>Statistics use pseudonyms; traces are kept for {retention.traceDays} days only.</li>
+        <li>
+          Statistics are pseudonymised, with a different pseudonym per server; traces are kept for{' '}
+          {retention.traceDays} days.
+        </li>
         <li>
           Only our own staff have admin accounts. Only the operator of allay.chat may decrypt a
           conversation, one answer at a time, and every such look is logged.
