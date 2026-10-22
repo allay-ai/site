@@ -126,10 +126,6 @@ const sections: LegalSection[] = [
           legitimate interest in a working, secure website (Art. 6(1)(f) GDPR). We don’t keep
           request logs for the pages ourselves.
         </p>
-        <p>
-          The wiki pages show pictures from the Allay wikis on GitHub. When a page has one, your
-          browser loads it from raw.githubusercontent.com, which sees your IP address.
-        </p>
       </>
     ),
   },
@@ -344,6 +340,12 @@ const sections: LegalSection[] = [
           <li>
             <strong>Perplexity AI, Inc.</strong>, USA: when Allay searches the web, it receives the
             search query Allay wrote, not the conversation.
+          </li>
+          <li>
+            <strong>mc-heads.net</strong>: draws players’ faces for our admin panel. Our backend,
+            not your browser, asks it for a face by the player’s UUID (or by name on servers without
+            Mojang accounts) and keeps the picture for 6 hours. Players with full privacy on aren’t
+            looked up.
           </li>
           <li>
             <strong>Telegram</strong>: runs @AllayChatBot and Telegram Stars. Telegram processes

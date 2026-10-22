@@ -20,7 +20,7 @@
 // preview a wiki change before pushing it.
 
 import { execFileSync } from 'node:child_process'
-import { existsSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync } from 'node:fs'
 import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import GithubSlugger from 'github-slugger'
@@ -31,6 +31,8 @@ import loadLanguages from 'prismjs/components/index.js'
 const root = fileURLToPath(new URL('..', import.meta.url))
 const cacheDir = `${root}.content/`
 const outDir = `${root}src/generated/`
+// Pictures from the wikis, served from the site itself so no visitor's browser asks GitHub.
+const mediaDir = `${root}public/wiki-media/`
 const args = new Set(process.argv.slice(2))
 
 /** The books, in the order the wiki's sidebar shows them. */
@@ -224,10 +226,23 @@ function renderMarkdown(markdown, book, pagesByBook, problems, from) {
     return `<a href="${escapeHtml(target)}"${titleAttr}${rel}>${inner}</a>`
   }
   renderer.image = ({ href, title, text }) => {
-    // Pictures in a wiki live next to its pages; GitHub serves them raw.
-    const src = /^https:\/\//i.test(href)
-      ? href
-      : `https://raw.githubusercontent.com/wiki/${book.repo}/${href.replace(/^\.?\//, '')}`
+    // Pictures in a wiki live next to its pages: copy them into public/wiki-media/, so the
+    // site serves them and the privacy policy's “no images from other companies” holds.
+    // A picture from another host becomes a plain link instead.
+    if (/^[a-z]+:/i.test(href)) {
+      problems.push(`${from}: a picture from another host shows as a link: ${href}`)
+      return `<a href="${escapeHtml(href)}" rel="noopener">${escapeHtml(text || href)}</a>`
+    }
+    const relative = decodeURIComponent(href.split(/[?#]/)[0]).replace(/^\.?\//, '')
+    const source = `${book.dir}${relative}`
+    if (relative.split('/').includes('..') || !existsSync(source)) {
+      problems.push(`${from}: no picture ${href} in the wiki`)
+      return escapeHtml(text)
+    }
+    const target = `${mediaDir}${book.id}/${relative}`
+    mkdirSync(target.slice(0, target.lastIndexOf('/')), { recursive: true })
+    copyFileSync(source, target)
+    const src = `/wiki-media/${book.id}/${relative.split('/').map(encodeURIComponent).join('/')}`
     const titleAttr = title ? ` title="${escapeHtml(title)}"` : ''
     return `<img src="${escapeHtml(src)}" alt="${escapeHtml(text)}"${titleAttr} loading="lazy" />`
   }
@@ -254,6 +269,7 @@ function renderMarkdown(markdown, book, pagesByBook, problems, from) {
 
 async function readBook(book) {
   const { dir, sha } = fetchBook(book)
+  book.dir = dir
   const files = (await readdir(dir)).filter((file) => file.endsWith('.md'))
   const read = async (file) => (await readFile(`${dir}${file}`, 'utf8')).replace(/\r\n/g, '\n')
   const sidebar = files.includes('_Sidebar.md') ? parseSidebar(await read('_Sidebar.md')) : []
@@ -303,6 +319,7 @@ if (pagesByBook.get('server').has(pluginSegment)) {
 
 const problems = []
 await rm(`${outDir}wiki`, { recursive: true, force: true })
+await rm(mediaDir, { recursive: true, force: true })
 await mkdir(`${outDir}wiki/pages`, { recursive: true })
 
 const index = { books: [] }
