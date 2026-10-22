@@ -1,5 +1,22 @@
 @import (reference) './tokens.less';
 
+// Minecraft's own font, as minecraft.mairwunnx.com draws it: built from the
+// game's font bitmaps, every pixel a square, bold drawn as the game draws it.
+// Its pixels stay whole at sizes in multiples of 4 px on 2× screens.
+@font-face {
+  font-family: 'Minecraft';
+  src: url('../assets/fonts/minecraft.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Minecraft';
+  src: url('../assets/fonts/minecraft-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
 // The palette for both themes. The page follows the system unless the visitor
 // picked one with the toggle (public/theme.js sets data-theme before paint).
 .light-theme() {

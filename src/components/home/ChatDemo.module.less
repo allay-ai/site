@@ -24,8 +24,9 @@
   border-radius: @radius-lg;
   overflow: hidden;
   font-family: @font-pixel;
-  font-size: 14px;
-  line-height: 1.45;
+  // Multiples of 4 px keep the font's pixels whole.
+  font-size: 12px;
+  line-height: 1.5;
   color: @mc-white;
   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
   box-shadow:
@@ -34,7 +35,8 @@
   background: linear-gradient(180deg, #78a7ff 0%, #a9c9ff 52%, #d7e7ff 100%);
 
   @media @screen-sm {
-    font-size: 15px;
+    font-size: 16px;
+    line-height: 1.375;
     padding: 22px 20px 14px;
     min-height: 400px;
   }
@@ -167,7 +169,7 @@
   margin: 12px 0 6px;
   text-align: center;
   color: @mc-gold;
-  font-size: 0.86em;
+  font-size: 12px;
   overflow-wrap: anywhere;
   opacity: 0;
   animation: appear 0.3s ease-out 1s forwards;

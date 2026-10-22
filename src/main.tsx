@@ -1,6 +1,5 @@
 import '@fontsource-variable/onest'
 import '@fontsource-variable/jetbrains-mono'
-import '@fontsource-variable/pixelify-sans'
 import './styles/global.less'
 import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
