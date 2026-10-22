@@ -3,7 +3,7 @@
 .cards {
   display: grid;
   gap: @space-3;
-  align-items: start;
+  align-items: stretch;
 
   @media @screen-lg {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr);
@@ -27,10 +27,8 @@
   background:
     radial-gradient(ellipse 80% 50% at 50% 0%, @color-accent-soft, transparent 70%),
     @color-panel;
-
-  @media @screen-lg {
-    padding: @space-5 @space-4;
-  }
+  // The thicker border would push the content 1px lower than its neighbors'.
+  padding: calc(@space-4 - 1px);
 }
 
 .name {
@@ -39,7 +37,12 @@
 }
 
 .price {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 1.2em;
   margin: 0 0 4px;
+  line-height: 1.2;
   font-size: 2.2rem;
   font-weight: 750;
   letter-spacing: -0.03em;
@@ -79,9 +82,35 @@
   }
 }
 
-.link {
-  margin-top: auto;
+.from {
+  font-size: 1.1rem;
   font-weight: 600;
+  letter-spacing: 0;
+  color: @color-text-muted;
+}
+
+.priceStar {
+  width: 0.8em;
+  height: 0.8em;
+  color: @color-star;
+}
+
+// Every card ends in a button on one line with its neighbors'.
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-top: auto;
+  border: 1px solid @color-border-strong;
+  border-radius: 999px;
+  color: @color-text;
+  font-weight: 650;
+  text-decoration: none;
+
+  &:hover {
+    border-color: @color-accent;
+  }
 }
 
 .plans {

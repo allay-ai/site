@@ -37,6 +37,12 @@ export function PricingSection({ copy, locale }: { copy: Copy; locale: Locale })
           <h3 id="plan-hosted" className={styles.name}>
             {pricing.hosted.name}
           </h3>
+          <p className={styles.price}>
+            <span className={styles.from}>{pricing.hosted.from}</span>
+            {count(Math.min(...plans.map((plan) => plan.stars)), locale)}
+            <StarIcon className={styles.priceStar} />
+            <span className="visually-hidden">Telegram Stars</span>
+          </p>
           <p className={styles.tagline}>{pricing.hosted.tagline}</p>
           <ul className={styles.plans}>
             {plans.map((plan) => (

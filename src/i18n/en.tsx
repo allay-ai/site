@@ -301,6 +301,7 @@ export const en: Copy = {
     },
     hosted: {
       name: 'Subscription',
+      from: 'from',
       tagline: 'Our key and our models, paid in Telegram Stars.',
       plans: { week: 'Week', month: 'Month', year: 'Year' },
       period: '{days} days',

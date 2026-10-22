@@ -118,6 +118,8 @@ export type Copy = {
     byok: { name: string; price: string; tagline: string; points: ReactNode[] }
     hosted: {
       name: string
+      /** Before the cheapest plan's price in Stars. */
+      from: string
       tagline: string
       plans: Record<PlanId, string>
       /** With {days}. */

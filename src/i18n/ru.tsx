@@ -306,6 +306,7 @@ export const ru: Copy = {
     },
     hosted: {
       name: 'Подписка',
+      from: 'от',
       tagline: 'Наш ключ и наши модели, оплата в Telegram Stars.',
       plans: { week: 'Неделя', month: 'Месяц', year: 'Год' },
       period: '{days} дней',
