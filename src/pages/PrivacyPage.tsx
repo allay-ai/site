@@ -465,7 +465,8 @@ const sections: LegalSection[] = [
         </li>
         <li>
           The database takes no connections from the internet, except ours with a client
-          certificate, and the backend reaches it with an account limited to its own data.
+          certificate. The backend connects with its own database account, which reaches only
+          Allay’s database, never with the administrator account.
         </li>
         <li>
           Secrets saved in the admin panel are encrypted the same way; license secrets and admin
