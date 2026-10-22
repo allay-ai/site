@@ -128,6 +128,8 @@ export type Copy = {
       budget: string
       /** With {budget}. */
       budgetMonthly: string
+      /** The plan sold on request, outside Telegram Stars. */
+      infinity: { name: string; price: string; detail: string }
       steps: ReactNode[]
       cta: string
     }

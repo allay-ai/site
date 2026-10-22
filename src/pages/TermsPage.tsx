@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import { LegalPage, type LegalSection } from '../components/legal/LegalPage.tsx'
-import { byokLimits, plans } from '../data/plans.ts'
+import { byokLimits, infinity, plans } from '../data/plans.ts'
 import { links } from '../data/site.ts'
-import { count, usd } from '../i18n/format.ts'
+import { count, usd, usdWhole } from '../i18n/format.ts'
 
 // Prices, budgets, and limits come from src/data/plans.ts, which mirrors the
 // backend's defaults. The [[…]] fields are the owner's to fill in, and the whole
@@ -95,6 +95,12 @@ const sections: LegalSection[] = [
           </table>
         </div>
         <p>
+          <strong>Infinity</strong>, on request: {usdWhole(infinity.priceUsd, 'en')} for{' '}
+          {infinity.days} days with {usdWhole(infinity.budget, 'en')} of model costs for the whole
+          period. One Telegram invoice can’t hold that much, so we agree the payment with you by
+          email or in @AllayChatBot and switch the plan on for your license once it arrives.
+        </p>
+        <p>
           The price the bot shows when you pay is the one that applies. A change of prices never
           touches a period you already paid for.
         </p>
@@ -134,8 +140,8 @@ const sections: LegalSection[] = [
       <>
         <p>
           A monthly plan renews every 30 days through Telegram until you stop it in @AllayChatBot or
-          in Telegram. The week and year plans don’t renew. A subscription you cancel runs until the
-          end of the period you paid for.
+          in Telegram. The week, year, and Infinity plans don’t renew. A subscription you cancel
+          runs until the end of the period you paid for.
         </p>
         <p>
           <strong>Right of withdrawal.</strong> If you’re a consumer in the European Union, you may

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { byokLimits, retention } from '../data/plans.ts'
+import { byokLimits, infinity, retention } from '../data/plans.ts'
 import { links } from '../data/site.ts'
-import { count } from './format.ts'
+import { count, usdWhole } from './format.ts'
 import type { Copy } from './types.ts'
 
 export const en: Copy = {
@@ -170,11 +170,11 @@ export const en: Copy = {
     items: [
       {
         title: 'A conversation with context',
-        body: `Each player’s session keeps whole exchanges, tool results included, for ${retention.sessionHours} hours after the last question. “And how many were in that chest?” needs no second look.`,
+        body: `Each player’s session keeps whole exchanges, tool results included, for ${retention.sessionDays} days after the last question. “And how many were in that chest?” needs no second look.`,
       },
       {
         title: 'Facts that last',
-        body: `Up to ${retention.memoryFacts} short facts per player: where the base is, what they’re building, how they like answers. Allay saves them itself and says so.`,
+        body: `Up to ${retention.memoryFacts} short facts and places per player: where the base is, what they’re building, how they like answers. Allay saves them itself, says so, and keeps them encrypted.`,
       },
       {
         title: 'The player decides',
@@ -317,6 +317,11 @@ export const en: Copy = {
         </>,
       ],
       cta: 'Open @AllayChatBot',
+      infinity: {
+        name: 'Infinity',
+        price: `${usdWhole(infinity.priceUsd, 'en')} a year, on request`,
+        detail: `${infinity.days} days, ${usdWhole(infinity.budget, 'en')} of model costs. Too big for one Telegram invoice: write to @AllayChatBot or personal@mairwunnx.com.`,
+      },
     },
     self: {
       name: 'Self-hosted',
@@ -393,10 +398,11 @@ export const en: Copy = {
         question: 'What does allay.chat keep about players?',
         answer: (
           <>
-            A session for {retention.sessionHours} hours after the last question, up to{' '}
-            {retention.memoryFacts} facts until the player erases them or stops asking for a year,
-            numbers-only statistics under a pseudonym for {retention.runsDays} days, and full traces
-            of a tenth of runs for {retention.traceDays} days. The{' '}
+            A session for {retention.sessionDays} days after the last question; up to{' '}
+            {retention.memoryFacts} facts and places, deaths, and settings until the player erases
+            them or stops asking for a year; numbers-only statistics under a pseudonym for{' '}
+            {retention.runsDays} days; and traces of answers for {retention.traceDays} days, to find
+            faults. Everything a player said is encrypted at rest. The{' '}
             <Link to="/privacy/">privacy policy</Link> has the details. In the game,{' '}
             <code>/allay privacy</code> shows a player the same and erases it on request.
           </>

@@ -62,6 +62,13 @@ export function PricingSection({ copy, locale }: { copy: Copy; locale: Locale })
                 </p>
               </li>
             ))}
+            <li className={styles.plan}>
+              <div className={styles.planHead}>
+                <span className={styles.planName}>{pricing.hosted.infinity.name}</span>
+                <span className={styles.onRequest}>{pricing.hosted.infinity.price}</span>
+              </div>
+              <p className={styles.planDetail}>{pricing.hosted.infinity.detail}</p>
+            </li>
           </ul>
           <ol className={styles.steps}>
             {pricing.hosted.steps.map((step, index) => (

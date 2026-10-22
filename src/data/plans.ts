@@ -23,19 +23,33 @@ export const plans: Plan[] = [
   { id: 'year', stars: 10_000, days: 365, budget: 6, refillsMonthly: true, renews: false },
 ]
 
+/**
+ * Infinity, mostly for servers we host ourselves: PLAN_INFINITY_* in the backend.
+ * Not sold in Stars, since one Telegram invoice holds at most 10 000 Stars; an
+ * owner grants it in the admin panel after a payment agreed by email or Telegram.
+ */
+export const infinity = { priceUsd: 1990, days: 366, budget: 1000 } as const
+
 /** What a server with its own key may ask of allay.chat. */
 export const byokLimits = { perMinute: 20, perDay: 2000, concurrent: 4 } as const
 
-/** How long the backend keeps what it stores about players (the wiki's “Memory and traces”). */
+/**
+ * How long the backend keeps what it stores (the wiki's “Memory and traces”), as
+ * of Allay Server 6.9: CHAT_TTL_SECONDS, TRACE_DAYS, MEMORY_MAX, and the TTL indexes.
+ */
 export const retention = {
-  sessionHours: 24,
+  sessionDays: 30,
   publicThreadHours: 2,
   agentThreadHours: 2,
-  memoryFacts: 30,
-  /** Since Allay Server 6.0, facts go this long after the player's last question. */
+  /** Facts and saved places together, per player (MEMORY_MAX). */
+  memoryFacts: 200,
+  /** Memories and places, deaths, and settings go this long after the player's last question. */
   memoryDays: 365,
-  runsDays: 400,
-  traceDays: 7,
-  /** The share of runs a hosted backend traces (TRACE_SAMPLE). */
-  traceShare: 0.1,
+  /** Statistics of each answer, the players directory, servers, and consents. */
+  runsDays: 730,
+  auditDays: 730,
+  traceDays: 30,
+  exportHours: 24,
+  /** The backend's POLICY_REVISION: a consent to an older notice is asked again. */
+  policyRevision: '2026-10-23',
 } as const

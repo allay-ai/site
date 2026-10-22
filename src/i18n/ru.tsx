@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { byokLimits, retention } from '../data/plans.ts'
+import { byokLimits, infinity, retention } from '../data/plans.ts'
 import { links } from '../data/site.ts'
-import { count } from './format.ts'
+import { count, usdWhole } from './format.ts'
 import type { Copy } from './types.ts'
 
 export const ru: Copy = {
@@ -176,11 +176,11 @@ export const ru: Copy = {
     items: [
       {
         title: 'Разговор с контекстом',
-        body: `Сессия игрока хранит обмены целиком, вместе с результатами инструментов, ${retention.sessionHours} часа после последнего вопроса. «А сколько было в том сундуке?» не требует второго взгляда.`,
+        body: `Сессия игрока хранит обмены целиком, вместе с результатами инструментов, ${retention.sessionDays} дней после последнего вопроса. «А сколько было в том сундуке?» не требует второго взгляда.`,
       },
       {
         title: 'Факты надолго',
-        body: `До ${retention.memoryFacts} коротких фактов на игрока: где база, что он строит, какие ответы любит. Allay сохраняет их сам и говорит об этом.`,
+        body: `До ${retention.memoryFacts} коротких фактов и мест на игрока: где база, что он строит, какие ответы любит. Allay сохраняет их сам, говорит об этом и хранит в зашифрованном виде.`,
       },
       {
         title: 'Решает игрок',
@@ -322,6 +322,11 @@ export const ru: Copy = {
         </>,
       ],
       cta: 'Открыть @AllayChatBot',
+      infinity: {
+        name: 'Infinity',
+        price: `${usdWhole(infinity.priceUsd, 'ru')} в год, по запросу`,
+        detail: `${infinity.days} дней, ${usdWhole(infinity.budget, 'ru')} на стоимость модели. Больше, чем вмещает один счёт в Telegram: напишите в @AllayChatBot или на personal@mairwunnx.com.`,
+      },
     },
     self: {
       name: 'Свой бэкенд',
@@ -398,10 +403,11 @@ export const ru: Copy = {
         question: 'Что allay.chat хранит об игроках?',
         answer: (
           <>
-            Сессию — {retention.sessionHours} часа после последнего вопроса, до{' '}
-            {retention.memoryFacts} фактов — пока игрок их не сотрёт или год не задаёт вопросов,
-            обезличенную статистику из одних чисел — {retention.runsDays} дней, а полные трассы
-            десятой части запросов — {retention.traceDays} дней. Подробности — в{' '}
+            Сессию — {retention.sessionDays} дней после последнего вопроса; до{' '}
+            {retention.memoryFacts} фактов и мест, смерти и настройки — пока игрок их не сотрёт или
+            год не задаёт вопросов; обезличенную статистику из одних чисел — {retention.runsDays}{' '}
+            дней; трассы ответов — {retention.traceDays} дней, чтобы находить ошибки. Всё, что
+            сказал игрок, хранится зашифрованным. Подробности — в{' '}
             <Link to="/privacy/">политике конфиденциальности</Link> (на английском). В игре{' '}
             <code>/allay privacy</code> показывает игроку то же самое и стирает всё по его просьбе.
           </>
