@@ -61,7 +61,8 @@ const sections: LegalSection[] = [
             </tr>
             <tr>
               <td>
-                A player’s agreement to Allay’s notice: which version, a hash of its text, and when
+                A player’s agreement to Allay’s notice: which version, a hash of its text, their age
+                group, and when
               </td>
               <td>To show the player agreed before Allay answered</td>
               <td>
@@ -188,15 +189,16 @@ const sections: LegalSection[] = [
             player’s last question.
           </li>
           <li>
-            <strong>The agreement.</strong> The plugin shows each player a short notice before their
-            first question: what it sends, where we keep it, and that AI providers write the
-            answers. Allay answers only once the player agrees. We keep which version of the notice
-            they agreed to, a SHA-256 hash of its text and of this policy’s revision, and when,
-            plus, for players in the United States, their answer to the age question (see
-            “Children”). When either changes, the player sees what changed and is asked again before
-            Allay answers. The agreement stays until the player withdraws it with{' '}
-            <code>/allay privacy withdraw</code>, until their data is erased, or{' '}
-            {retention.runsDays} days after their last question.
+            <strong>The agreement.</strong> Before their first question, the plugin asks each
+            player’s age (see “Children”) and shows a short notice: what it sends, where we keep it,
+            and that AI providers write the answers. Allay answers only once the player agrees. On
+            allay.chat neither the notice nor the age question can be switched off, and the backend
+            itself refuses questions from a player without a current agreement. We keep which
+            version of the notice they agreed to, a SHA-256 hash of its text and of this policy’s
+            revision, the age group they picked, and when. When the notice or this policy changes,
+            the player sees what changed and is asked again before Allay answers. The agreement
+            stays until the player withdraws it with <code>/allay privacy withdraw</code>, until
+            their data is erased, or {retention.runsDays} days after their last question.
           </li>
           <li>
             <strong>The name.</strong> The player’s name, UUID, and operator status on each server,
@@ -443,23 +445,25 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          Allay isn’t directed at children under 13. Many Minecraft players are young, so it
-          collects the same little from everyone and asks no one for an email, a real name, or a
-          birthday.
+          Allay isn’t directed at children under 13. Many Minecraft players are young, so the law
+          sets an age below which a player can’t agree alone: 13 under the US Children’s Online
+          Privacy Protection Act (COPPA), 14 in Spain (Art. 7 LOPDGDD), and between 13 and 16 in the
+          other countries of the EU and the EEA (Art. 8 GDPR).
         </p>
         <p>
-          <strong>Players in the United States (COPPA).</strong> When a player’s connection comes
-          from the United States, the plugin asks them once, before their first question, whether
-          they were born on or before the date 13 years ago, with Yes and No buttons. The plugin
-          tells the country from the connection with a database on the game server; the address
-          never reaches us. On “No”, Allay doesn’t answer them and we keep nothing about them. On
-          “Yes”, we keep the answer with their agreement to Allay’s notice.
+          So before their first question, the plugin asks every player once how old they are: under
+          13, 13, 14–15, 16–17, or 18 and over. The question says why it’s asked and suggests no
+          answer. The game server picks the age that applies from the country of the player’s
+          connection, with a database on the game server, so the address never reaches us: 13 in the
+          United States, 14 in Spain, the national age elsewhere in the EU and the EEA, 16 when the
+          country is unknown, and 13 everywhere else.
         </p>
         <p>
-          <strong>Players in the European Union.</strong> Where a player is under the age at which
-          their country lets them agree alone (between 13 and 16), the server operator who connects
-          Allay to their server is responsible for what their law requires, such as a parent’s
-          consent.
+          A player below that age gets no answers from Allay, and nothing about them reaches us or
+          any AI provider. So that the question isn’t simply repeated until another answer comes,
+          the game server keeps a sealed note of that answer for a year, on the game server only. A
+          player at or above the age goes on to the notice, and we keep the age group they picked
+          with their agreement.
         </p>
         <p>
           Paying for a subscription takes an adult, or a young person with a parent’s permission
