@@ -292,9 +292,11 @@ const sections: LegalSection[] = [
             need for your own assessments and for consulting an authority.
           </li>
           <li>
-            Breaches: we tell you without undue delay after we learn of a breach that touches your
-            players’ data, at the latest within 48 hours, with what we know then and the rest as we
-            learn it.
+            Breaches: when a breach touches your players’ data, we tell you without undue delay and
+            at the latest within 48 hours after we learn of it: what happened, which data, what we
+            did about it, and whom to contact, with the rest as we learn it. We write to the
+            Telegram account that claimed your license, through @AllayChatBot; for a license nobody
+            claimed, to the email you gave us, if any.
           </li>
         </ul>
         <h3>When you stop</h3>
