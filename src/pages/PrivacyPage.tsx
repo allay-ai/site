@@ -14,7 +14,7 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          The controller for allay.chat is Pavel Erokhin Viktorovich, in Spain. You can reach us at
+          The controller for allay.chat is Pavel Erokhin Viktorovich, in Spain. You can reach us at{' '}
           <a href="mailto:personal@mairwunnx.com">personal@mairwunnx.com</a> about anything on this
           page. As Spanish law requires (Art. 10 LSSI), the controller’s tax id and postal address
           are shown at the bottom of every page to visitors from Spain, and we give them to anyone
