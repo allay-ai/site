@@ -306,8 +306,16 @@ const sections: LegalSection[] = [
           </li>
           <li>
             <strong>Cloudflare, Inc.</strong>, USA: the website, DNS, protection from attacks, and
-            the encrypted tunnel to our server. Requests to allay.chat pass through it. Cloudflare
-            R2 also stores our backups, encrypted before they leave our server.
+            the encrypted tunnel to our server. Requests to allay.chat pass through it.
+          </li>
+          <li>
+            <strong>Cloudflare R2</strong>, Cloudflare’s storage, in Western Europe: our backups,
+            encrypted before they leave our server. Cloudflare keeps them as a processor under its
+            own guarantees: its{' '}
+            <a href="https://www.cloudflare.com/cloudflare-customer-dpa/">
+              data processing addendum
+            </a>{' '}
+            and <a href="https://www.cloudflare.com/privacypolicy/">privacy policy</a>.
           </li>
           <li>
             <strong>OpenRouter, Inc.</strong>, USA: forwards each answer’s context (the question,
@@ -327,7 +335,8 @@ const sections: LegalSection[] = [
         <p>
           Some of them are in the USA. Transfers rely on the EU–U.S. Data Privacy Framework where
           the company is certified, and on the European Commission’s standard contractual clauses
-          otherwise (Art. 45 and 46 GDPR).
+          otherwise (Art. 45 and 46 GDPR). Each of them answers for its own part under its own
+          guarantees; on our side we follow the GDPR and the other rules this page names.
         </p>
       </>
     ),
@@ -451,8 +460,8 @@ const sections: LegalSection[] = [
           holds apart from the database, so a copy of the database alone reveals nothing.
         </li>
         <li>
-          Backups are encrypted with AES-256 by restic before they leave our server, and kept up to
-          12 months.
+          Backups are encrypted with AES-256 by restic before they leave our server, stored with
+          Cloudflare R2 in Western Europe, and kept up to 12 months.
         </li>
         <li>
           The database takes no connections from the internet, except ours with a client
