@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- The link preview card, 1200×630. `pnpm og` screenshots it into
      public/og-image.png; edit this file, never the PNG. Fonts come from
-     node_modules, so run `pnpm install` first. -->
+     node_modules and src/assets/fonts, so run `pnpm install` first. -->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,9 +12,9 @@
         font-weight: 100 900;
       }
       @font-face {
-        font-family: 'Pixelify';
-        src: url('../node_modules/@fontsource-variable/pixelify-sans/files/pixelify-sans-latin-wght-normal.woff2') format('woff2');
-        font-weight: 400 700;
+        font-family: 'Minecraft';
+        src: url('../src/assets/fonts/minecraft.woff2') format('woff2');
+        font-weight: 400;
       }
       html,
       body {
@@ -59,8 +59,8 @@
       p {
         position: absolute;
         left: 80px;
-        top: 420px;
-        width: 560px;
+        top: 400px;
+        width: 580px;
         margin: 0;
         font-size: 30px;
         line-height: 1.35;
@@ -76,15 +76,16 @@
       }
       .chat {
         position: absolute;
-        right: 70px;
-        top: 160px;
-        width: 400px;
+        right: 64px;
+        top: 150px;
+        width: 440px;
         padding: 20px 22px;
         background: rgba(0, 0, 0, 0.55);
         border: 2px solid rgba(255, 255, 255, 0.08);
         border-radius: 18px;
-        font-family: 'Pixelify', monospace;
-        font-size: 24px;
+        font-family: 'Minecraft', monospace;
+        /* Multiples of 4 px keep the font's pixels whole. */
+        font-size: 20px;
         line-height: 1.45;
         color: #fff;
       }
