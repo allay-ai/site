@@ -218,7 +218,7 @@ export const en: Copy = {
       },
       {
         title: 'Private by default',
-        body: 'The admin panel never shows what anyone asked or what Allay answered, in any role. Keys and licenses never reach a log.',
+        body: 'What players say is stored encrypted, and the admin panel shows numbers, not conversations. Only an owner can open one answer, with a reason, and every look is logged. Keys and licenses never reach a log.',
       },
     ],
   },
