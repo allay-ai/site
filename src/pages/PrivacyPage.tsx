@@ -243,8 +243,10 @@ const sections: LegalSection[] = [
           {retention.auditDays} days. We don’t read conversations for any other reason.
         </p>
         <p>
-          AI providers may keep a prompt in their cache for a short time under their own terms, so
-          the next step of the same answer comes faster.
+          AI providers may keep a request for a limited time under their own terms, for example in a
+          cache so the next step of the same answer comes faster, or to detect abuse. We route
+          requests only to providers that don’t collect them for training (see “Who else processes
+          data”).
         </p>
         <h3>Why</h3>
         <p>
@@ -328,10 +330,11 @@ const sections: LegalSection[] = [
             and <a href="https://www.cloudflare.com/privacypolicy/">privacy policy</a>.
           </li>
           <li>
-            <strong>OpenRouter, Inc.</strong>, USA: forwards each answer’s context (the question,
-            the session, tool results, and remembered facts) to the AI model that writes the answer,
-            and to the model that summarizes long sessions. Which company runs the model depends on
-            the model in use.
+            <strong>OpenRouter, Inc.</strong>, USA: every question on allay.chat goes through it. It
+            forwards each answer’s context (the question, the session, tool results, and remembered
+            facts) to the company that runs the AI model, and so does the model that summarizes long
+            sessions. We tell OpenRouter to route our requests only to providers that don’t collect
+            the data for training. Which company runs the model depends on the model in use.
           </li>
           <li>
             <strong>Perplexity AI, Inc.</strong>, USA: when Allay searches the web, it receives the
@@ -343,8 +346,9 @@ const sections: LegalSection[] = [
           </li>
         </ul>
         <p>
-          Some of them are in the USA. Transfers rely on the EU–U.S. Data Privacy Framework where
-          the company is certified, and on the European Commission’s standard contractual clauses
+          OpenRouter, Perplexity, and Cloudflare are in the USA, and every question on allay.chat
+          reaches OpenRouter there. Transfers rely on the EU–U.S. Data Privacy Framework where the
+          company is certified, and on the European Commission’s standard contractual clauses
           otherwise (Art. 45 and 46 GDPR). Each of them answers for its own part under its own
           guarantees; on our side we follow the GDPR and the other rules this page names.
         </p>
