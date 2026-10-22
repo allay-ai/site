@@ -36,7 +36,7 @@ React 19 и TypeScript, маршруты на `react-router-dom`, стили н�
 | `pnpm test` | Тесты Worker на встроенном тест-раннере Node |
 | `pnpm content` | Заново скачивает вики без сборки |
 | `pnpm worker:dev` | Собранный сайт и Worker на `http://localhost:8787` — так, как их запускает Cloudflare |
-| `pnpm og`, `pnpm icons` | Перерисовывают превью ссылки и PNG-иконки из `tools/og.html` и `tools/icons.html` |
+| `pnpm og`, `pnpm icons` | Перерисовывают превью ссылки из `tools/og.html`, а PNG-иконки и логотип — из `public/icon-512.png` (копия `media/icon-512.png` из allay-ai/.github; нужен ImageMagick) |
 
 ## Вики
 

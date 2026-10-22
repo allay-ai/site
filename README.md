@@ -36,7 +36,7 @@ React 19 and TypeScript, routes on `react-router-dom`, styles in LESS CSS module
 | `pnpm test` | The Worker's tests, on Node's own test runner |
 | `pnpm content` | Fetches the wikis again without building |
 | `pnpm worker:dev` | The built site and the Worker on `http://localhost:8787`, as Cloudflare runs them |
-| `pnpm og`, `pnpm icons` | Redraw the link preview and the PNG icons from `tools/og.html` and `tools/icons.html` |
+| `pnpm og`, `pnpm icons` | Redraw the link preview from `tools/og.html`, and the PNG icons and the logo from `public/icon-512.png` (a copy of allay-ai/.github's `media/icon-512.png`; ImageMagick) |
 
 ## The wiki
 

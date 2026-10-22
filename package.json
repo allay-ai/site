@@ -19,7 +19,7 @@
     "worker:dev": "npx --yes wrangler@4.151.3 dev",
     "deploy": "npx --yes wrangler@4.151.3 deploy",
     "og": "npx --yes playwright@1.64.1 screenshot --channel chrome --viewport-size \"1200, 630\" tools/og.html public/og-image.png",
-    "icons": "npx --yes playwright@1.64.1 screenshot --channel chrome --viewport-size \"64, 64\" tools/icons.html public/favicon.png && npx --yes playwright@1.64.1 screenshot --channel chrome --viewport-size \"180, 180\" tools/icons.html public/apple-touch-icon.png"
+    "icons": "magick public/icon-512.png -resize 64x64 -strip public/favicon.png && magick public/icon-512.png -resize 180x180 -strip public/apple-touch-icon.png && magick public/icon-512.png -resize 160x160 -strip public/logo.png"
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "5.3.0",
