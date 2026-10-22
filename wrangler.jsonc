@@ -8,10 +8,21 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    // Only these paths run the script, which passes them to the backend. Every
-    // page and asset is answered straight from dist/ without it, with the
+    // The script runs for the backend's paths, which it passes on, and for the
+    // pages, to which it adds Spain's legal notice (LEGAL_NOTICE). Assets are
+    // answered straight from dist/ without it. Every response from dist/ gets the
     // headers in public/_headers.
-    "run_worker_first": ["/api/*", "/admin", "/admin/*"],
+    "run_worker_first": [
+      "/*",
+      "!/assets/*",
+      "!/wiki-media/*",
+      "!/*.png",
+      "!/*.js",
+      "!/*.css",
+      "!/*.txt",
+      "!/*.xml",
+      "!/*.json"
+    ],
     // Every page is a prerendered dist/<path>/index.html, served at <path>/;
     // /privacy redirects to /privacy/. Anything else gets the prerendered
     // 404.html with a real 404 status.
@@ -30,6 +41,8 @@
     // No Worker route may cover it, or requests would loop back here.
     "ORIGIN": "https://origin.allay.chat"
   }
+  // Secret, set with `npx wrangler secret put LEGAL_NOTICE`: the one line of
+  // Spain's legal notice (name, NIE, address, email) for visitors from Spain.
   // No "observability": Workers Logs would keep request details of /api/* and
   // /admin, which the privacy policy says we don't. Turn it on for a while to
   // debug, and say so in src/pages/PrivacyPage.tsx if it stays.

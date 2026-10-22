@@ -45,7 +45,8 @@ The source of allay.chat: the front page of Allay (the AI helper for Minecraft s
 
 ## The Worker
 
-- `wrangler.jsonc`: the Worker `allay-site` on the route `allay.chat/*`; `run_worker_first` sends only `/api/*`, `/admin`, and `/admin/*` to the script. Keep that list and `isBackendPath` in `worker/index.ts` the same.
+- `wrangler.jsonc`: the Worker `allay-site` on the route `allay.chat/*`; `run_worker_first` sends every path but the assets to the script. `isBackendPath` in `worker/index.ts` picks the backend's (`/api/*`, `/admin`, `/admin/*`); everything else is a page from `dist/`, to which the Worker adds Spain's legal notice for visitors from Spain.
+- Spain's legal notice (LSSI Art. 10: name, NIE, address, email) lives only in the Worker secret `LEGAL_NOTICE`, never in the repository or `dist/`. With it set, pages vary by `cf-ipcountry` and are `private, no-cache`; without it, nobody sees a notice.
 - It streams requests and answers through without reading them, so the chat's SSE arrives token by token. It strips hop-by-hop headers, sets `X-Forwarded-For` and `X-Real-IP` from `CF-Connecting-IP` (dropping what a client sent), and `X-Forwarded-Host`/`-Proto`. The backend trusts them through its `TRUSTED_PROXIES` and `CLIENT_IP_HEADER` settings.
 - Its own answers: a plain-text `502` when the origin is unreachable or Cloudflare reports 520–530. The plugin retries a bodiless 502–504 (`Retry.kt` in allay-ai/minecraft); never turn that into JSON, or the plugin stops retrying. The backend's own errors pass untouched.
 - `ORIGIN` must not be covered by any Worker route, or requests loop.

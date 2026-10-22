@@ -3,7 +3,13 @@
 
 import assert from 'node:assert/strict'
 import { afterEach, describe, it } from 'node:test'
-import worker, { clientResponse, type Env, isBackendPath, originRequest } from './index.ts'
+import worker, {
+  clientResponse,
+  type Env,
+  isBackendPath,
+  originRequest,
+  withLegalNotice,
+} from './index.ts'
 
 const origin = 'https://origin.allay.chat'
 
@@ -195,5 +201,55 @@ describe('fetch', () => {
     const second = await reader.read()
     assert.equal(decoder.decode(second.value), 'event: text\ndata: "lo"\n\n')
     assert.equal((await reader.read()).done, true)
+  })
+})
+
+describe('withLegalNotice', () => {
+  const page = () =>
+    new Response('<html><body><div id="root">page</div></body></html>', {
+      headers: { 'content-type': 'text/html; charset=utf-8', etag: '"abc"' },
+    })
+  const from = (country: string) =>
+    new Request('https://allay.chat/privacy/', { headers: { 'cf-ipcountry': country } })
+  const withNotice = { ...env(), LEGAL_NOTICE: 'Name <Surname>, NIE X0000000X, Street 1, Madrid' }
+
+  it('adds the escaped line at the end of the page for visitors from Spain', async () => {
+    const response = await withLegalNotice(page(), from('ES'), withNotice)
+    const html = await response.text()
+    assert.match(
+      html,
+      /<\/div><p class="legal-notice" lang="es">Name &lt;Surname&gt;, NIE X0000000X, Street 1, Madrid<\/p><\/body>/,
+    )
+    assert.equal(response.headers.get('cache-control'), 'private, no-cache')
+    assert.equal(response.headers.get('vary'), 'cf-ipcountry')
+    assert.equal(response.headers.get('etag'), null)
+  })
+
+  it('leaves the page alone for other countries, but keeps it out of shared caches', async () => {
+    const response = await withLegalNotice(page(), from('FR'), withNotice)
+    assert.doesNotMatch(await response.text(), /legal-notice/)
+    assert.equal(response.headers.get('vary'), 'cf-ipcountry')
+    assert.equal(response.headers.get('cache-control'), 'private, no-cache')
+  })
+
+  it('shows nothing and changes nothing without the secret', async () => {
+    const original = page()
+    const response = await withLegalNotice(original, from('ES'), env())
+    assert.equal(response, original)
+    assert.doesNotMatch(await response.text(), /legal-notice/)
+  })
+
+  it('never touches what isn\u2019t a page', async () => {
+    const script = new Response('x', { headers: { 'content-type': 'text/javascript' } })
+    assert.equal(await withLegalNotice(script, from('ES'), withNotice), script)
+  })
+
+  it('adds it to pages the Worker serves from the assets', async () => {
+    const pages = {
+      ...withNotice,
+      ASSETS: { fetch: async () => page() },
+    }
+    const response = await worker.fetch(from('ES'), pages)
+    assert.match(await response.text(), /legal-notice/)
   })
 })

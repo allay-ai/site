@@ -1,9 +1,11 @@
-// The Worker in front of allay.chat. Every page and asset is dist/, answered by
-// Cloudflare without running this script. wrangler.jsonc sends only the
-// backend's paths here (run_worker_first): the plugin's API, Telegram's webhook,
-// and the admin panel. They go to the origin, the Allay backend behind a
-// Cloudflare Tunnel, as they came: method, headers, body, and the answer as a
-// stream, so the chat's server-sent events reach the plugin token by token.
+// The Worker in front of allay.chat. Assets (scripts, styles, pictures) are dist/,
+// answered by Cloudflare without running this script. wrangler.jsonc sends the
+// pages here too (run_worker_first), only to add Spain's legal notice for
+// visitors from Spain (withLegalNotice), and the backend's paths: the plugin's
+// API, Telegram's webhook, and the admin panel. Those go to the origin, the Allay
+// backend behind a Cloudflare Tunnel, as they came: method, headers, body, and
+// the answer as a stream, so the chat's server-sent events reach the plugin
+// token by token.
 
 // The few binding members this file uses. Written out rather than pulled from
 // @cloudflare/workers-types, which would drag the Workers globals into the
@@ -12,6 +14,12 @@ export interface Env {
   ASSETS: { fetch(request: Request): Promise<Response> }
   /** The backend's address, like https://origin.allay.chat; no trailing slash, no path. */
   ORIGIN: string
+  /**
+   * One line for visitors from Spain: the provider's name, tax id, address, and
+   * email, as Spain's LSSI (Art. 10) asks. A Worker secret, never in the repository
+   * or the built pages; without it nobody sees a notice.
+   */
+  LEGAL_NOTICE?: string
 }
 
 /** Paths that belong to the backend; wrangler.jsonc's run_worker_first lists the same. */
@@ -130,11 +138,49 @@ function isCloudflareOriginError(response: Response): boolean {
   )
 }
 
+const escapeHtml = (text: string) =>
+  text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+
+/** The country Cloudflare saw the visitor in. */
+function countryOf(request: Request): string | undefined {
+  const cf = (request as Request & { cf?: { country?: string } }).cf
+  return cf?.country ?? request.headers.get('cf-ipcountry') ?? undefined
+}
+
+/**
+ * Adds LEGAL_NOTICE as the last line of an HTML page for visitors from Spain. The
+ * line sits outside React's root, so hydration never touches it and nothing
+ * flashes. With a notice set, every page varies by country and stays out of
+ * shared caches, so one country's page never reaches another.
+ */
+export async function withLegalNotice(
+  response: Response,
+  request: Request,
+  env: Env,
+): Promise<Response> {
+  const notice = env.LEGAL_NOTICE?.trim()
+  if (!notice || !response.headers.get('content-type')?.includes('text/html')) return response
+  const headers = new Headers(response.headers)
+  const vary = headers.get('vary')
+  headers.set('vary', vary ? `${vary}, cf-ipcountry` : 'cf-ipcountry')
+  headers.set('cache-control', 'private, no-cache')
+  // Without a validator the browser can't reuse a page made for another country.
+  headers.delete('etag')
+  headers.delete('last-modified')
+  const init = { status: response.status, statusText: response.statusText, headers }
+  if (countryOf(request) !== 'ES') return new Response(response.body, init)
+  const html = await response.text()
+  const line = `<p class="legal-notice" lang="es">${escapeHtml(notice)}</p>`
+  const end = html.lastIndexOf('</body>')
+  headers.delete('content-length')
+  return new Response(end === -1 ? html + line : html.slice(0, end) + line + html.slice(end), init)
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url)
     if (!isBackendPath(url.pathname)) {
-      return env.ASSETS.fetch(request)
+      return withLegalNotice(await env.ASSETS.fetch(request), request, env)
     }
     const origin = env.ORIGIN.replace(/\/+$/, '')
     let response: Response
