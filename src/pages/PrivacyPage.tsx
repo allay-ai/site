@@ -325,9 +325,10 @@ const sections: LegalSection[] = [
             the encrypted tunnel to our server. Requests to allay.chat pass through it.
           </li>
           <li>
-            <strong>Cloudflare R2</strong>, Cloudflare’s storage, in Western Europe: our backups,
-            encrypted before they leave our server. Cloudflare keeps them as a processor under its
-            own guarantees: its{' '}
+            <strong>Cloudflare R2</strong>, Cloudflare’s storage: our backups, encrypted before they
+            leave our server. We ask Cloudflare to keep them in Western Europe; that is a location
+            hint, not a promise of where they are or of which law applies. Cloudflare keeps them as
+            a processor under its own guarantees: its{' '}
             <a href="https://www.cloudflare.com/cloudflare-customer-dpa/">
               data processing addendum
             </a>{' '}
@@ -505,7 +506,7 @@ const sections: LegalSection[] = [
         </li>
         <li>
           Backups are encrypted with AES-256 by restic before they leave our server, stored with
-          Cloudflare R2 in Western Europe, and kept up to 12 months.
+          Cloudflare R2 (asked to keep them in Western Europe), and kept up to 12 months.
         </li>
         <li>
           The database takes no connections from the internet, except ours with a client
