@@ -153,7 +153,9 @@ const sections: LegalSection[] = [
           <li>
             The question, and the answers of the game tools Allay asks for: the inventory, health,
             surroundings, goals. Other players appear only as the asker’s locator bar shows them: a
-            name, a distance, and a direction.
+            name, a distance, and a direction. The name of a player who hasn’t agreed to Allay’s
+            notice never reaches us or the AI provider: it shows as “Player 1”, “Player 2”, and so
+            on.
           </li>
           <li>
             The server’s name, address, game version, and a random id the plugin makes for it, and
