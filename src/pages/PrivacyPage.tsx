@@ -42,12 +42,12 @@ const sections: LegalSection[] = [
           </thead>
           <tbody>
             <tr>
-              <td>A player’s conversation with Allay</td>
+              <td>A player’s conversation with Allay, encrypted</td>
               <td>To answer follow-up questions</td>
-              <td>{retention.sessionHours} hours after the last question</td>
+              <td>{retention.sessionDays} days after the last question</td>
             </tr>
             <tr>
-              <td>Facts Allay remembers about a player</td>
+              <td>Facts and places Allay remembers about a player, encrypted</td>
               <td>To answer with what the player told it before</td>
               <td>
                 Until the player deletes them, or {retention.memoryDays} days after their last
@@ -55,9 +55,24 @@ const sections: LegalSection[] = [
               </td>
             </tr>
             <tr>
-              <td>A player’s agreement to Allay’s notice: which version, and when</td>
+              <td>A player’s deaths, goals, time zone, and Allay settings, encrypted</td>
+              <td>“When did I die?”, goals that last, answers in the player’s time</td>
+              <td>{retention.memoryDays} days after the player’s last question</td>
+            </tr>
+            <tr>
+              <td>
+                A player’s agreement to Allay’s notice: which version, a hash of its text, and when
+              </td>
               <td>To show the player agreed before Allay answered</td>
-              <td>Until the player withdraws it or their data is erased</td>
+              <td>
+                Until the player withdraws it or is erased, or {retention.runsDays} days after their
+                last question
+              </td>
+            </tr>
+            <tr>
+              <td>A player’s name, UUID, and operator status on each server</td>
+              <td>The admin panel, unless the player turns on full privacy</td>
+              <td>{retention.runsDays} days after the last question</td>
             </tr>
             <tr>
               <td>Statistics of each answer, numbers only, under a pseudonym</td>
@@ -65,14 +80,24 @@ const sections: LegalSection[] = [
               <td>{retention.runsDays} days; daily totals without any player kept</td>
             </tr>
             <tr>
-              <td>Full traces of a tenth of answers</td>
-              <td>Finding and fixing errors</td>
+              <td>Traces of answers, encrypted</td>
+              <td>Analysing and fixing errors</td>
               <td>{retention.traceDays} days</td>
+            </tr>
+            <tr>
+              <td>Servers: name, address, software, and the address they connect from</td>
+              <td>Showing operators and us which server asks</td>
+              <td>{retention.runsDays} days after the server’s last question</td>
             </tr>
             <tr>
               <td>Licenses, payments, and the payer’s Telegram user id</td>
               <td>Subscriptions, refunds, accounting</td>
               <td>While the license exists, then as Spanish law requires (six years)</td>
+            </tr>
+            <tr>
+              <td>Backups of all of the above, encrypted</td>
+              <td>Recovering from a failure</td>
+              <td>Up to 12 months, then gone by themselves</td>
             </tr>
             <tr>
               <td>Visits to this website</td>
@@ -120,14 +145,18 @@ const sections: LegalSection[] = [
         </p>
         <h3>What a question sends us</h3>
         <ul>
-          <li>The player’s Minecraft UUID and name, their language, and their time zone.</li>
           <li>
-            The question, and the answers of the game tools Allay asks for: the inventory, health,
-            surroundings, coordinates, notes, goals. Other players appear only as the asker’s
-            locator bar shows them: a name, a distance, and a direction.
+            The player’s Minecraft UUID and name, whether they are an operator, their language,
+            their time zone, and where they stand: coordinates, dimension, and world.
           </li>
           <li>
-            The server’s name and a random id the plugin makes for it, and the plugin’s version.
+            The question, and the answers of the game tools Allay asks for: the inventory, health,
+            surroundings, goals. Other players appear only as the asker’s locator bar shows them: a
+            name, a distance, and a direction.
+          </li>
+          <li>
+            The server’s name, address, game version, and a random id the plugin makes for it, and
+            the plugin’s version. We see the address the server connects from.
           </li>
           <li>
             For a public question (<code>/askall</code>), the question and the answer, which every
@@ -138,23 +167,41 @@ const sections: LegalSection[] = [
         <ul>
           <li>
             <strong>The session.</strong> Whole exchanges, tool results included, so a follow-up
-            question makes sense. It ends {retention.sessionHours} hours after the player’s last
+            question makes sense. It ends {retention.sessionDays} days after the player’s last
             question. Long sessions fold into a short summary. A server’s thread of public questions
             and each automation agent’s thread end {retention.publicThreadHours} hours after their
             last use.
           </li>
           <li>
-            <strong>The lasting memory.</strong> Up to {retention.memoryFacts} short facts per
-            player, which Allay saves when it learns something useful and says so. They stay until
-            the player deletes them with <code>/allay forget</code> or asks us to, and go by
-            themselves {retention.memoryDays} days after the player’s last question.
+            <strong>The lasting memory.</strong> Up to {retention.memoryFacts} short facts and
+            places per player, which Allay saves when it learns something useful or when the player
+            asks it to note a place, and says so. A place keeps its coordinates, dimension, and
+            world. They stay until the player deletes them with <code>/allay forget</code> or asks
+            us to, and go by themselves {retention.memoryDays} days after the player’s last
+            question.
           </li>
           <li>
-            <strong>The agreement.</strong> Since Allay 6.1 the plugin shows each player a short
-            notice before their first question: what it sends, where we keep it, and that AI
-            providers write the answers. Allay answers only once the player agrees. We keep which
-            version of the notice they agreed to and when, for the server’s operator, until the
-            player withdraws it with <code>/allay privacy withdraw</code> or their data is erased.
+            <strong>Deaths, goals, and settings.</strong> The player’s last deaths (when, where,
+            what killed them, what dropped), their goals, their time zone, and their Allay settings,
+            so Allay can answer “when did I die?” and keep goals across restarts. Since Allay 6.7
+            they live with us, not on the game server, and go {retention.memoryDays} days after the
+            player’s last question.
+          </li>
+          <li>
+            <strong>The agreement.</strong> The plugin shows each player a short notice before their
+            first question: what it sends, where we keep it, and that AI providers write the
+            answers. Allay answers only once the player agrees. We keep which version of the notice
+            they agreed to, a SHA-256 hash of its text and of this policy’s revision, and when. When
+            either changes, the player sees what changed and is asked again before Allay answers.
+            The agreement stays until the player withdraws it with{' '}
+            <code>/allay privacy withdraw</code>, until their data is erased, or{' '}
+            {retention.runsDays} days after their last question.
+          </li>
+          <li>
+            <strong>The name.</strong> The player’s name, UUID, and operator status on each server,
+            so the admin panel can name them. A player who turns on full privacy (
+            <code>/allay privacy full on</code>) appears there under a pseudonym only. Kept{' '}
+            {retention.runsDays} days after the last question.
           </li>
           <li>
             <strong>Statistics.</strong> One record per answer with numbers only: when, the model,
@@ -164,24 +211,38 @@ const sections: LegalSection[] = [
             in them stay.
           </li>
           <li>
-            <strong>Traces.</strong> For {retention.traceShare * 100}% of answers, picked at random,
-            a full record of the run: the prompts, the model’s output, and each tool call with its
-            arguments and result. They help us find and fix errors and are deleted after{' '}
+            <strong>Traces.</strong> A record of how an answer was made: the prompts, the model’s
+            output, and each tool call with its arguments and result. We use them to analyse how
+            Allay answers and to find and fix errors, and they are deleted after{' '}
             {retention.traceDays} days. Keys are removed before a trace is saved.
           </li>
         </ul>
+        <h3>Who can read it</h3>
         <p>
-          Each server’s data is kept apart: the same Minecraft account on two servers is two
-          players, and no server reaches another’s. Nobody sees what players asked or what Allay
-          answered in our admin panel, whatever their role: it shows numbers and the shape of a run
-          only. The backend’s logs carry no player’s name, id, question, or answer.
+          Everything a player said or Allay wrote about them, the session, memories and places,
+          deaths, goals, settings, and traces, is encrypted before it reaches our database (see
+          “Security”). Each server’s data is kept apart: the same Minecraft account on two servers
+          is two players, and no server reaches another’s. The backend’s logs carry no player’s
+          name, id, question, or answer.
+        </p>
+        <p>
+          Our admin panel shows numbers and the shape of a run. To look into a problem that a player
+          or a server operator reported, the operator of allay.chat, and no other role, may decrypt
+          the trace and the session of that one answer. Each such look is written to the audit log
+          with the answer and the player’s pseudonym, and the audit log is kept{' '}
+          {retention.auditDays} days. We don’t read conversations for any other reason.
+        </p>
+        <p>
+          AI providers may keep a prompt in their cache for a short time under their own terms, so
+          the next step of the same answer comes faster.
         </p>
         <h3>Why</h3>
         <p>
           To answer a question, we follow the server operator’s instructions under the data
-          processing agreement (Art. 28 GDPR). Statistics, limits, and traces serve our legitimate
-          interests in billing correctly, preventing abuse, and keeping the service working (Art.
-          6(1)(f) GDPR).
+          processing agreement (Art. 28 GDPR). Statistics, limits, traces, and the audit log serve
+          our legitimate interests in billing correctly, preventing abuse, and keeping the service
+          working (Art. 6(1)(f) GDPR). The agreement before the first question is the record that
+          the player was told and agreed (Art. 7(1) GDPR).
         </p>
       </>
     ),
@@ -197,7 +258,8 @@ const sections: LegalSection[] = [
           secret itself), the server’s name, the plan, its budget, and what was spent. When you
           claim it in @AllayChatBot, we store your Telegram user id, the chat id, and your language,
           so the bot can talk to you and send renewals. For each payment we store Telegram’s charge
-          id, the plan, the number of Stars, the date, whether it renews, and any refund.
+          id, the plan, the number of Stars, the date, whether it renews, and any refund. For the
+          Infinity plan, paid outside Telegram, we keep the amount, the date, and how it was paid.
         </p>
         <p>
           You pay inside Telegram. We never see card details; Telegram, and Apple or Google when
@@ -215,12 +277,19 @@ const sections: LegalSection[] = [
           terms. Since Allay 6.0, such a server also gets a free license that tells us which server
           asks; it holds no payment data until someone pays.
         </p>
+        <h3>Your server</h3>
+        <p>
+          For each server we keep its name, MOTD, the address and port players join, its software
+          and versions, the plugin’s version, and the address it connects to us from, so you and we
+          can tell servers apart in the admin panel. A server’s record goes {retention.runsDays}{' '}
+          days after its last question.
+        </p>
         <h3>Addresses</h3>
         <p>
           The backend uses the IP address a request comes from to limit how many licenses and
           sign-in attempts one address may make. It keeps those counts in memory only. Our admin
-          panel’s audit log records which staff account changed what, from which address, for 365
-          days.
+          panel’s audit log records which staff account changed or looked at what, from which
+          address, for {retention.auditDays} days.
         </p>
       </>
     ),
@@ -238,7 +307,8 @@ const sections: LegalSection[] = [
           </li>
           <li>
             <strong>Cloudflare, Inc.</strong>, USA: the website, DNS, protection from attacks, and
-            the encrypted tunnel to our server. Requests to allay.chat pass through it.
+            the encrypted tunnel to our server. Requests to allay.chat pass through it. Cloudflare
+            R2 also stores our backups, encrypted before they leave our server.
           </li>
           <li>
             <strong>OpenRouter, Inc.</strong>, USA: forwards each answer’s context (the question,
@@ -282,6 +352,11 @@ const sections: LegalSection[] = [
             <code>/allay privacy erase</code> erases all of it (Allay 6.0 and newer).
           </li>
           <li>
+            <code>/allay privacy export</code> gives a link to everything we keep about them, as a
+            JSON file. The link works for {retention.exportHours} hours, and whoever has it can
+            download the file, so don’t share it (Allay 6.7 and newer).
+          </li>
+          <li>
             <code>/allay privacy withdraw</code> takes back their agreement to Allay’s notice, and
             Allay stops answering them (Allay 6.1 and newer).
           </li>
@@ -295,15 +370,49 @@ const sections: LegalSection[] = [
         </ul>
         <p>
           A server’s admins can export or erase a player’s data for them with{' '}
-          <code>/allay privacy export</code> and <code>/allay privacy erase</code>.
+          <code>/allay privacy export</code> and <code>/allay privacy erase</code>; the export link
+          then goes to the admin who asked, to hand to the player.
         </p>
         <p>
           For anything else, such as a copy of everything we keep about you, write to{' '}
           <a href="mailto:personal@mairwunnx.com">personal@mairwunnx.com</a> with your Minecraft
           name or UUID, or your Telegram user id. We may ask you to prove the account is yours. On
-          erasure, your memories, sessions, agents’ threads, and the traces of your questions go,
-          and your statistics lose even their pseudonym.
+          erasure, your memories and places, deaths, goals, settings, sessions, agents’ threads,
+          agreement, name, and the traces of your questions go, and your statistics lose even their
+          pseudonym. Copies in our encrypted backups disappear as the backups age out, within 12
+          months; we never restore erased data from them except to recover from a failure, and then
+          erase it again.
         </p>
+      </>
+    ),
+  },
+  {
+    id: 'usa',
+    title: 'If you live in the United States',
+    body: (
+      <>
+        <p>
+          US state privacy laws, such as California’s CCPA as amended by the CPRA, give you rights
+          over personal information. In their terms, we collect identifiers (a Minecraft UUID and
+          name, a Telegram user id, the address a server connects from), what a player asks and what
+          Allay reads in the game for them, and records of payments, for the purposes and as long as
+          this page says.
+        </p>
+        <ul>
+          <li>
+            We don’t sell personal information, and we don’t share it for cross-context behavioral
+            advertising. We show no ads and use no analytics.
+          </li>
+          <li>
+            We don’t use sensitive personal information to infer anything about anyone. A player’s
+            position in the game is a game coordinate, not a real-world location.
+          </li>
+          <li>
+            You may ask what we hold about you, have it corrected or deleted, and get a copy, as
+            “Your rights” describes, yourself or through an agent you authorize. We answer within 45
+            days and treat you no differently for asking.
+          </li>
+        </ul>
       </>
     ),
   },
@@ -335,14 +444,29 @@ const sections: LegalSection[] = [
     title: 'Security',
     body: (
       <ul>
-        <li>All traffic to allay.chat is encrypted on its way.</li>
+        <li>All traffic to allay.chat is encrypted on its way (TLS).</li>
         <li>
-          Secrets saved in the admin panel are encrypted at rest; license secrets are stored only as
-          hashes.
+          What players said and what Allay keeps about them is encrypted at rest with AES-256-GCM: a
+          fresh random 96-bit nonce for every value and a 128-bit tag, so a changed value is
+          refused, not read. The key is derived with HMAC-SHA256 from a 256-bit key that the backend
+          holds apart from the database, so a copy of the database alone reveals nothing.
+        </li>
+        <li>
+          Backups are encrypted with AES-256 by restic before they leave our server, and kept up to
+          12 months.
+        </li>
+        <li>
+          The database takes no connections from the internet, except ours with a client
+          certificate, and the backend reaches it with an account limited to its own data.
+        </li>
+        <li>
+          Secrets saved in the admin panel are encrypted the same way; license secrets and admin
+          sessions are stored only as hashes, and admin passwords with Argon2id.
         </li>
         <li>Statistics use pseudonyms; traces are kept for {retention.traceDays} days only.</li>
         <li>
-          Only our own staff have admin accounts, and the panel never shows what players asked.
+          Only our own staff have admin accounts. Only the operator of allay.chat may decrypt a
+          conversation, one answer at a time, and every such look is logged.
         </li>
       </ul>
     ),
@@ -353,8 +477,10 @@ const sections: LegalSection[] = [
     body: (
       <p>
         When the backend starts storing something new or keeps it longer, this page changes first,
-        and the date at the top moves. For a change that matters to paying servers, we also tell
-        them through @AllayChatBot.
+        and the date at the top moves. Each change gets a new revision (now{' '}
+        {retention.policyRevision}); players who agreed to an older one are told what changed and
+        asked again before Allay answers them. For a change that matters to paying servers, we also
+        tell them through @AllayChatBot.
       </p>
     ),
   },
@@ -364,12 +490,12 @@ export function PrivacyPage() {
   return (
     <LegalPage
       title="Privacy policy"
-      updated="Last updated: 20 October 2026"
+      updated="Last updated: 23 October 2026"
       intro={
         <p>
-          Allay keeps as little as it can, for as short as it can. This page says what that means
-          for visitors of this site, for players on servers that use allay.chat, and for server
-          operators who pay.
+          Allay keeps only what it needs to answer and to keep working, encrypts what players say,
+          and deletes it on a schedule. This page says what that means for visitors of this site,
+          for players on servers that use allay.chat, and for server operators who pay.
         </p>
       }
       sections={sections}
