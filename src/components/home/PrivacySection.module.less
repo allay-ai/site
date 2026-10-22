@@ -1,0 +1,66 @@
+@import (reference) '../../styles/tokens.less';
+
+.laws {
+  display: flex;
+  flex-wrap: wrap;
+  gap: @space-2;
+  margin: 0 0 @space-4;
+  padding: 0;
+  list-style: none;
+}
+
+.law {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid @color-border-strong;
+  border-radius: 999px;
+  background: @color-panel;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.lawIcon {
+  width: 16px;
+  height: 16px;
+  color: @color-accent-text;
+}
+
+.list {
+  display: grid;
+  gap: @space-3;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @media @screen-sm {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media @screen-lg {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.item {
+  padding: @space-4;
+  border: 1px solid @color-border;
+  border-left: 3px solid @color-accent;
+  border-radius: @radius-md;
+  background: @color-panel;
+}
+
+.title {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.body {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.more {
+  margin: @space-4 0 0;
+}

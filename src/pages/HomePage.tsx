@@ -6,6 +6,7 @@ import { Hero } from '../components/home/Hero.tsx'
 import { InstallSection } from '../components/home/InstallSection.tsx'
 import { MemorySection } from '../components/home/MemorySection.tsx'
 import { PricingSection } from '../components/home/PricingSection.tsx'
+import { PrivacySection } from '../components/home/PrivacySection.tsx'
 import { SafetySection } from '../components/home/SafetySection.tsx'
 import { SelfHostSection } from '../components/home/SelfHostSection.tsx'
 import { copies } from '../i18n/index.ts'
@@ -20,6 +21,7 @@ export function HomePage({ locale }: { locale: Locale }) {
       <AskSection ask={copy.ask} />
       <MemorySection memory={copy.memory} languages={copy.languages} />
       <SafetySection safety={copy.safety} />
+      <PrivacySection privacy={copy.privacy} />
       <InstallSection copy={copy} />
       <PricingSection copy={copy} locale={locale} />
       <SelfHostSection copy={copy} />

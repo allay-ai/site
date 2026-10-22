@@ -24,6 +24,7 @@ export type IconName =
   | 'terminal'
   | 'chart'
   | 'key'
+  | 'lock'
 
 export type Feature = {
   icon: IconName
@@ -117,6 +118,15 @@ export type Copy = {
     title: string
     lead: string
     items: { title: string; body: ReactNode }[]
+  }
+  privacy: {
+    kicker: string
+    title: string
+    lead: ReactNode
+    /** The laws, as short badges over the list. */
+    laws: string[]
+    items: { title: string; body: ReactNode }[]
+    more: ReactNode
   }
   install: {
     kicker: string

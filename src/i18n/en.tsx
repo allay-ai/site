@@ -61,7 +61,12 @@ export const en: Copy = {
     ),
     primary: 'Add Allay to your server',
     secondary: 'Read the manual',
-    facts: ['Spigot and Paper 26.3', 'Free with your own key', 'Open source, MIT'],
+    facts: [
+      'Spigot and Paper 26.3',
+      'Free with your own key',
+      'EU and US privacy law friendly',
+      'Open source, MIT',
+    ],
   },
   demo: {
     label: 'An example of Allay answering in the game chat',
@@ -278,6 +283,54 @@ export const en: Copy = {
         body: 'What players say is stored encrypted, and the admin panel shows numbers, not conversations. Only an owner can open one answer, with a reason, and every look is logged. Keys and licenses never reach a log.',
       },
     ],
+  },
+  privacy: {
+    kicker: 'Privacy and the law',
+    title: 'EU and US privacy law friendly',
+    lead: (
+      <>
+        allay.chat follows the GDPR, Spain’s LOPDGDD, COPPA, and the CCPA/CPRA. Here is what it does
+        with players’ data.
+      </>
+    ),
+    laws: ['GDPR', 'LOPDGDD', 'CCPA/CPRA', 'COPPA'],
+    items: [
+      {
+        title: 'Stored in the EU',
+        body: 'On servers in Helsinki, Finland. Encrypted nightly backups sit with Cloudflare R2 for up to 12 months.',
+      },
+      {
+        title: 'Sealed with AES-256-GCM',
+        body: 'Conversations, memories and places, deaths, settings and goals, and records of questions are encrypted at rest.',
+      },
+      {
+        title: 'Kept only as long as needed',
+        body: `A conversation ${retention.sessionDays} days; memories, places, deaths, and settings a year after the player’s last question; records of questions ${retention.traceDays} days; numbers and the players directory 2 years.`,
+      },
+      {
+        title: 'Age and agreement first',
+        body: 'Before the first question a player says their age, which must reach their country’s age of consent, and agrees to a short notice. Below that age, Allay answers nothing and sends nothing.',
+      },
+      {
+        title: 'Players control their data',
+        body: (
+          <>
+            <code>/allay privacy</code> shows what’s kept, gives a 24-hour download link, and erases
+            it. Withdrawing the agreement erases what it covered.
+          </>
+        ),
+      },
+      {
+        title: 'No training on questions',
+        body: 'Every question goes through OpenRouter in the USA, only to AI providers that don’t collect it for training. A player who didn’t agree reaches the AI only as “Player 1”.',
+      },
+    ],
+    more: (
+      <>
+        The <Link to="/privacy/">privacy policy</Link> has every detail, with{' '}
+        <Link to="/privacy/#usa">a section for US residents</Link>.
+      </>
+    ),
   },
   install: {
     kicker: 'Install',

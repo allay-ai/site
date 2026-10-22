@@ -26,6 +26,7 @@ const paths: Record<IconName, string> = {
   terminal: 'M3.5 5h17v14h-17Z M7 9.5l3 2.5-3 2.5 M12.5 15h4.5',
   chart: 'M4 4v16h16 M8 16v-4 M12 16V8 M16 16v-6',
   key: 'M8.5 10.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z M11.3 11.7 19.5 3.5 M16.5 6.5l2.5 2.5 M14.5 8.5l2 2',
+  lock: 'M6 10.5h12v10H6Z M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3 M12 14.5v2.5',
 }
 
 export function FeatureIcon({ name, className }: { name: IconName; className?: string }) {
