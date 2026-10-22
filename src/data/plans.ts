@@ -23,13 +23,6 @@ export const plans: Plan[] = [
   { id: 'year', stars: 10_000, days: 365, budget: 6, refillsMonthly: true, renews: false },
 ]
 
-/**
- * Infinity, mostly for servers we host ourselves: PLAN_INFINITY_* in the backend.
- * Not sold in Stars, since one Telegram invoice holds at most 10 000 Stars; an
- * owner grants it in the admin panel after a payment agreed by email or Telegram.
- */
-export const infinity = { priceUsd: 1990, days: 366, budget: 1000 } as const
-
 /** What a server with its own key may ask of allay.chat. */
 export const byokLimits = { perMinute: 20, perDay: 2000, concurrent: 4 } as const
 

@@ -11,12 +11,6 @@ export function count(value: number, locale: FormatLocale): string {
   return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, groupSeparator[locale])
 }
 
-/** Whole US dollars for big sums: $1,990 in English, 1 990 $ in Russian. */
-export function usdWhole(amount: number, locale: FormatLocale): string {
-  const number = count(Math.round(amount), locale)
-  return locale === 'en' ? `$${number}` : `${number} $`
-}
-
 /** US dollars with cents: $0.75 in English, 0,75 $ in Russian. */
 export function usd(amount: number, locale: FormatLocale): string {
   const number = amount.toFixed(2).replace('.', decimalSeparator[locale])

@@ -258,8 +258,7 @@ const sections: LegalSection[] = [
           secret itself), the server’s name, the plan, its budget, and what was spent. When you
           claim it in @AllayChatBot, we store your Telegram user id, the chat id, and your language,
           so the bot can talk to you and send renewals. For each payment we store Telegram’s charge
-          id, the plan, the number of Stars, the date, whether it renews, and any refund. For the
-          Infinity plan, paid outside Telegram, we keep the amount, the date, and how it was paid.
+          id, the plan, the number of Stars, the date, whether it renews, and any refund.
         </p>
         <p>
           You pay inside Telegram. We never see card details; Telegram, and Apple or Google when

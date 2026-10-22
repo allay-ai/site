@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { byokLimits, infinity, retention } from '../data/plans.ts'
+import { byokLimits, retention } from '../data/plans.ts'
 import { links } from '../data/site.ts'
-import { count, usdWhole } from './format.ts'
+import { count } from './format.ts'
 import type { Copy } from './types.ts'
 
 export const ru: Copy = {
@@ -322,11 +322,12 @@ export const ru: Copy = {
         </>,
       ],
       cta: 'Открыть @AllayChatBot',
-      infinity: {
-        name: 'Infinity',
-        price: `${usdWhole(infinity.priceUsd, 'ru')} в год, по запросу`,
-        detail: `${infinity.days} дней, ${usdWhole(infinity.budget, 'ru')} на стоимость модели. Больше, чем вмещает один счёт в Telegram: напишите в @AllayChatBot или на personal@mairwunnx.com.`,
-      },
+      more: (
+        <>
+          Нужно больше? <a href="mailto:personal@mairwunnx.com">Напишите нам</a> — обсудим лимиты
+          выше.
+        </>
+      ),
     },
     self: {
       name: 'Свой бэкенд',

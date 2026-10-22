@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { byokLimits, infinity, retention } from '../data/plans.ts'
+import { byokLimits, retention } from '../data/plans.ts'
 import { links } from '../data/site.ts'
-import { count, usdWhole } from './format.ts'
+import { count } from './format.ts'
 import type { Copy } from './types.ts'
 
 export const en: Copy = {
@@ -317,11 +317,11 @@ export const en: Copy = {
         </>,
       ],
       cta: 'Open @AllayChatBot',
-      infinity: {
-        name: 'Infinity',
-        price: `${usdWhole(infinity.priceUsd, 'en')} a year, on request`,
-        detail: `${infinity.days} days, ${usdWhole(infinity.budget, 'en')} of model costs. Too big for one Telegram invoice: write to @AllayChatBot or personal@mairwunnx.com.`,
-      },
+      more: (
+        <>
+          Need more? <a href="mailto:personal@mairwunnx.com">Contact us</a> for higher limits.
+        </>
+      ),
     },
     self: {
       name: 'Self-hosted',
