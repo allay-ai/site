@@ -3,7 +3,7 @@
 // writes the result where Cloudflare's asset handling looks for it:
 //
 //   /                 dist/index.html
-//   /ru/              dist/ru/index.html
+//   /ru/, /es/        dist/ru/index.html, dist/es/index.html
 //   /wiki/plugin/faq/ dist/wiki/plugin/faq/index.html
 //   anything else     dist/404.html   (served with a 404 status)
 //

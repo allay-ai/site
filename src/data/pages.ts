@@ -85,6 +85,9 @@ export function pageFor(pathname: string): PageMeta {
   return pages.find((page) => page.path === path) ?? notFoundPage
 }
 
+/** Open Graph wants a language with a country. */
+const ogLocales: Record<string, string> = { en: 'en_US', ru: 'ru_RU', es: 'es_ES' }
+
 function escapeAttribute(value: string): string {
   return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
 }
@@ -121,7 +124,7 @@ export function headTags(page: PageMeta): string {
     `<meta data-route-head name="description" content="${description}" />`,
     `<meta data-route-head property="og:title" content="${title}" />`,
     `<meta data-route-head property="og:description" content="${description}" />`,
-    `<meta data-route-head property="og:locale" content="${page.lang === 'ru' ? 'ru_RU' : 'en_US'}" />`,
+    `<meta data-route-head property="og:locale" content="${ogLocales[page.lang] ?? 'en_US'}" />`,
   ]
   if (page.noindex) {
     tags.push('<meta data-route-head name="robots" content="noindex" />')

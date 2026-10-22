@@ -5,7 +5,7 @@
 // (the Copy type keeps it complete), and register it in src/i18n/index.ts.
 // src/data/pages.ts then gives it a route, a head, and hreflang links.
 
-export const locales = ['en', 'ru'] as const
+export const locales = ['en', 'ru', 'es'] as const
 
 export type Locale = (typeof locales)[number]
 
@@ -15,6 +15,7 @@ export const defaultLocale: Locale = 'en'
 export const localeNames: Record<Locale, string> = {
   en: 'English',
   ru: 'Русский',
+  es: 'Español',
 }
 
 export function homePath(locale: Locale): string {

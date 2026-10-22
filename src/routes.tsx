@@ -22,6 +22,7 @@ async function wikiLoader({ request }: LoaderFunctionArgs) {
 const pageRoutes: RouteObject[] = [
   { path: '/', element: <HomePage locale="en" /> },
   { path: '/ru', element: <HomePage locale="ru" /> },
+  { path: '/es', element: <HomePage locale="es" /> },
   { path: '/privacy', element: <PrivacyPage /> },
   { path: '/terms', element: <TermsPage /> },
   { id: wikiRouteId, path: '/wiki/*', loader: wikiLoader, element: <WikiPage /> },
