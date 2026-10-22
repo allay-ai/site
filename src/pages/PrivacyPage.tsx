@@ -83,7 +83,7 @@ const sections: LegalSection[] = [
             <tr>
               <td>Traces of answers, encrypted</td>
               <td>Analysing and fixing errors</td>
-              <td>{retention.traceDays} days</td>
+              <td>{retention.traceDays} days in the database; in backups up to 12 months</td>
             </tr>
             <tr>
               <td>Servers: name, address, software, and the address they connect from</td>
@@ -223,23 +223,27 @@ const sections: LegalSection[] = [
           <li>
             <strong>Traces.</strong> A record of how an answer was made: the prompts, the model’s
             output, and each tool call with its arguments and result. We use them to analyse how
-            Allay answers and to find and fix errors, and they are deleted after{' '}
-            {retention.traceDays} days. Keys are removed before a trace is saved.
+            Allay answers and to find and fix errors. They leave the database after{' '}
+            {retention.traceDays} days and, like everything else, stay in our encrypted backups up
+            to 12 months. Keys are removed before a trace is saved.
           </li>
         </ul>
         <h3>Who can read it</h3>
         <p>
           Everything a player said or Allay wrote about them, the session, memories and places,
           deaths, goals, settings, and traces, is encrypted before it reaches our database (see
-          “Security”). Each server’s data is kept apart: the same Minecraft account on two servers
-          is two players, and no server reaches another’s. The backend’s logs carry no player’s
-          name, id, question, or answer.
+          “Security”). Not encrypted, because the backend looks them up: the directory of players
+          (name, UUID, operator status), statistics, agreement records, and the audit log. Each
+          server’s data is kept apart: the same Minecraft account on two servers is two players, and
+          no server reaches another’s. The backend’s logs carry no player’s name, id, question, or
+          answer.
         </p>
         <p>
           Our admin panel shows numbers and the shape of a run. To look into a problem that a player
-          or a server operator reported, the operator of allay.chat, and no other role, may decrypt
-          the trace and the session of that one answer. Each such look is written to the audit log
-          with the answer and the player’s pseudonym, and the audit log is kept{' '}
+          or a server operator reported, an owner account of allay.chat, held only by the controller
+          named above, may decrypt that one answer. Other roles can’t, and neither can the
+          automation account our scripts use. Each look needs a reason and is written to the audit
+          log with the reason, the answer, and the player’s pseudonym; the audit log is kept{' '}
           {retention.auditDays} days. We don’t read conversations for any other reason.
         </p>
         <p>
@@ -495,7 +499,9 @@ const sections: LegalSection[] = [
           What players said and what Allay keeps about them is encrypted at rest with AES-256-GCM: a
           fresh random 96-bit nonce for every value and a 128-bit tag, so a changed value is
           refused, not read. The key is derived with HMAC-SHA256 from a 256-bit key that the backend
-          holds apart from the database, so a copy of the database alone reveals nothing.
+          holds apart from the database, so a copy of the database alone doesn’t reveal those texts.
+          The players directory, statistics, agreement records, and the audit log are not encrypted
+          at rest.
         </li>
         <li>
           Backups are encrypted with AES-256 by restic before they leave our server, stored with
@@ -515,8 +521,9 @@ const sections: LegalSection[] = [
           {retention.traceDays} days.
         </li>
         <li>
-          Only our own staff have admin accounts. Only the operator of allay.chat may decrypt a
-          conversation, one answer at a time, and every such look is logged.
+          Only our own staff have admin accounts. Only an owner account, never the automation
+          account, may decrypt a conversation, one answer at a time, with a reason, and every such
+          look is logged.
         </li>
       </ul>
     ),
