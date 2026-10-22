@@ -197,8 +197,11 @@ const sections: LegalSection[] = [
             version of the notice they agreed to, a SHA-256 hash of its text and of this policy’s
             revision, the age group they picked, and when. When the notice or this policy changes,
             the player sees what changed and is asked again before Allay answers. The agreement
-            stays until the player withdraws it with <code>/allay privacy withdraw</code>, until
-            their data is erased, or {retention.runsDays} days after their last question.
+            stays until their data is erased or {retention.runsDays} days after their last question.
+            When the player withdraws it with <code>/allay privacy withdraw</code>, what it covered
+            goes at once: memories and places, deaths, settings and goals, and the conversation.
+            Statistics stay under the pseudonym, and we keep the record that they agreed and then
+            withdrew, as proof.
           </li>
           <li>
             <strong>The name.</strong> The player’s name, UUID, and operator status on each server,
@@ -368,8 +371,9 @@ const sections: LegalSection[] = [
             download the file, so don’t share it (Allay 6.7 and newer).
           </li>
           <li>
-            <code>/allay privacy withdraw</code> takes back their agreement to Allay’s notice, and
-            Allay stops answering them (Allay 6.1 and newer).
+            <code>/allay privacy withdraw</code> takes back their agreement to Allay’s notice: Allay
+            stops answering them, and their memories and places, deaths, settings and goals, and
+            conversation are erased (Allay 6.7 and newer).
           </li>
           <li>
             <code>/allay memory</code> lists what Allay remembers, and <code>/allay forget</code>{' '}
