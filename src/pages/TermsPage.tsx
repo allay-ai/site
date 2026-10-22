@@ -210,36 +210,106 @@ const sections: LegalSection[] = [
   },
   {
     id: 'processing',
-    title: 'Processing your players’ data',
+    title: 'Data processing agreement',
     body: (
       <>
         <p>
-          When your server uses allay.chat, we process your players’ data on your behalf to answer
-          their questions. This section is our data processing agreement under Art. 28 GDPR:
+          This section is our data processing agreement with you under Art. 28(3) GDPR. For your
+          players’ data it comes before the rest of these terms.
         </p>
+        <h3>Roles</h3>
+        <p>
+          For answering your players you are the controller and we are your processor. For our own
+          statistics, limits, traces, and audit log we are a controller ourselves, as the{' '}
+          <Link to="/privacy/">privacy policy</Link> says.
+        </p>
+        <h3>Subject matter, duration, nature, and purpose</h3>
         <ul>
           <li>
-            We process players’ data only to answer them, as the plugin and your settings ask, and
-            as the <Link to="/privacy/">privacy policy</Link> describes, including how long each
-            kind stays.
-          </li>
-          <li>Everyone at allay.chat who can reach the data is bound to confidentiality.</li>
-          <li>
-            We protect the data with the measures listed under “Security” in the privacy policy.
+            Subject matter: the hosted Allay backend answering your players’ questions in the game.
           </li>
           <li>
-            The sub-processors are the ones listed there. We announce a new one through this page at
-            least 30 days ahead, and you may object or stop using the service.
+            Duration: while your server uses allay.chat, and after that only for the periods in the
+            privacy policy.
           </li>
           <li>
-            We help you answer your players’ requests to see or erase their data, and tell you
-            without delay about a breach that touches them.
+            Nature: we receive what the plugin sends, store it encrypted, have an AI model write the
+            answer through OpenRouter, send the answer back, and keep what lets Allay remember,
+            export, and erase.
           </li>
           <li>
-            When you stop using the service, the data goes within the periods in the privacy policy.
-            On request we give you the information you need to check all this.
+            Purpose: answering questions, remembering what a player asked Allay to remember, and
+            giving players their data or erasing it.
           </li>
         </ul>
+        <h3>Data and data subjects</h3>
+        <ul>
+          <li>
+            Data subjects: the players of your server who use Allay. Other players appear only as
+            “Player 1”, “Player 2”, and so on, unless they agreed to Allay’s notice themselves.
+          </li>
+          <li>
+            Data: Minecraft UUID and name, operator status, language, time zone, position in the
+            game, questions and answers, what the game tools read for the player, memories and
+            places, deaths, goals, settings, the age group and the agreement to Allay’s notice, and
+            pseudonymised statistics. No special categories are asked for; a player who writes such
+            data into a question does so on their own.
+          </li>
+        </ul>
+        <h3>Your instructions</h3>
+        <p>
+          We process players’ data only on your documented instructions: these terms, the plugin’s
+          configuration, and your settings. That includes transferring it to the USA through
+          OpenRouter, as the privacy policy describes. If a law requires us to process it otherwise,
+          we tell you first unless that law forbids it. If we think an instruction breaks data
+          protection law, we tell you.
+        </p>
+        <h3>Confidentiality and security</h3>
+        <p>
+          Everyone at allay.chat who can reach the data is bound to confidentiality. We take the
+          measures listed under “Security” in the privacy policy (Art. 32 GDPR): encryption on the
+          way and at rest, a database closed to the internet, separate accounts with the least
+          access they need, logged decryption by an owner account only, and encrypted backups.
+        </p>
+        <h3>Sub-processors</h3>
+        <p>
+          You allow us to use the sub-processors listed under “Who else processes data” in the
+          privacy policy: Hetzner, Cloudflare (with R2), OpenRouter and the model providers it
+          routes to, Perplexity, and mc-heads.net. Each is bound by a contract or terms with data
+          protection duties at least as strict as these, and we remain responsible to you for them
+          (Art. 28(4) GDPR). We announce a new or replaced sub-processor on that page at least 30
+          days ahead, and to paying servers through @AllayChatBot. You may object within that time;
+          if we can’t meet your objection, you may stop using the service.
+        </p>
+        <h3>Help we give you</h3>
+        <ul>
+          <li>
+            Players’ requests: players can see, export, and erase their data themselves with{' '}
+            <code>/allay privacy</code>; for anything else we answer within 30 days of your request.
+          </li>
+          <li>
+            Security, breaches, and assessments (Art. 32–36 GDPR): we give you the information you
+            need for your own assessments and for consulting an authority.
+          </li>
+          <li>
+            Breaches: we tell you without undue delay after we learn of a breach that touches your
+            players’ data, at the latest within 48 hours, with what we know then and the rest as we
+            learn it.
+          </li>
+        </ul>
+        <h3>When you stop</h3>
+        <p>
+          At your choice, we delete your players’ data or give it back first: each player’s data
+          with <code>/allay privacy export</code>, or all of your server’s data on request by email.
+          We then delete it within 30 days. Copies in our encrypted backups go as the backups age
+          out, within 12 months. We keep only what a law requires us to keep.
+        </p>
+        <h3>Information and audits</h3>
+        <p>
+          On request we give you the information that shows we keep this agreement. You, or an
+          auditor bound to confidentiality whom you choose, may audit us once a year, or after a
+          breach, with 30 days’ notice and at your own cost; we take part in good faith.
+        </p>
       </>
     ),
   },
@@ -276,7 +346,7 @@ export function TermsPage() {
   return (
     <LegalPage
       title="Terms of service"
-      updated="Last updated: 20 October 2026"
+      updated="Last updated: 23 October 2026"
       intro={
         <p>
           These terms are for server operators who connect a Minecraft server to allay.chat, with
