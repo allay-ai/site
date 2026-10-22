@@ -45,6 +45,15 @@ export function SunIcon({ className }: IconProps) {
   )
 }
 
+export function MonitorIcon({ className }: IconProps) {
+  return (
+    <Icon className={className}>
+      <rect x="3" y="4.5" width="18" height="12" rx="2" />
+      <path d="M8.5 20h7M12 16.5V20" />
+    </Icon>
+  )
+}
+
 export function MoonIcon({ className }: IconProps) {
   return (
     <Icon className={className}>

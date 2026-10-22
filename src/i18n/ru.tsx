@@ -23,8 +23,11 @@ export const ru: Copy = {
     },
     menu: 'Меню',
     closeMenu: 'Закрыть меню',
-    themeToLight: 'Включить светлую тему',
-    themeToDark: 'Включить тёмную тему',
+    theme: {
+      system: 'Тема: как в системе. Включить светлую',
+      light: 'Тема: светлая. Включить тёмную',
+      dark: 'Тема: тёмная. Следовать системе',
+    },
     language: 'Язык',
     github: 'Allay на GitHub',
     copy: 'Копировать',

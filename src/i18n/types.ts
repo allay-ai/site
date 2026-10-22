@@ -40,8 +40,8 @@ export type Copy = {
     nav: { features: string; pricing: string; install: string; faq: string; wiki: string }
     menu: string
     closeMenu: string
-    themeToLight: string
-    themeToDark: string
+    /** The theme button's label in each state: what it is now and what a click picks. */
+    theme: { system: string; light: string; dark: string }
     language: string
     github: string
     copy: string

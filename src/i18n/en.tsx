@@ -17,8 +17,11 @@ export const en: Copy = {
     nav: { features: 'Features', pricing: 'Pricing', install: 'Install', faq: 'FAQ', wiki: 'Wiki' },
     menu: 'Menu',
     closeMenu: 'Close menu',
-    themeToLight: 'Switch to the light theme',
-    themeToDark: 'Switch to the dark theme',
+    theme: {
+      system: 'Theme: system. Switch to light',
+      light: 'Theme: light. Switch to dark',
+      dark: 'Theme: dark. Follow the system',
+    },
     language: 'Language',
     github: 'Allay on GitHub',
     copy: 'Copy',

@@ -70,7 +70,7 @@ export function Header({ locale }: { locale: Locale }) {
         </nav>
 
         <div className={styles.actions}>
-          <ThemeToggle toLight={ui.themeToLight} toDark={ui.themeToDark} />
+          <ThemeToggle labels={ui.theme} />
           <a className={styles.github} href={links.organization} aria-label={ui.github}>
             <GitHubIcon className={styles.githubIcon} />
           </a>

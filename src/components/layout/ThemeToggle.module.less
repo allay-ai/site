@@ -26,26 +26,27 @@
   display: block;
 }
 
+.whenLight,
 .whenDark {
   display: none;
 }
 
-.dark() {
+:global(:root[data-theme='light']) {
+  .whenSystem {
+    display: none;
+  }
+
   .whenLight {
+    display: block;
+  }
+}
+
+:global(:root[data-theme='dark']) {
+  .whenSystem {
     display: none;
   }
 
   .whenDark {
     display: block;
   }
-}
-
-@media (prefers-color-scheme: dark) {
-  :global(:root:not([data-theme='light'])) {
-    .dark();
-  }
-}
-
-:global(:root[data-theme='dark']) {
-  .dark();
 }

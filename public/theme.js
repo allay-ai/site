@@ -1,5 +1,5 @@
 // The theme a visitor picked with the toggle, before anything paints. Without a
-// choice the page follows the system through prefers-color-scheme.
+// choice (the toggle's “system”) the page follows prefers-color-scheme, live.
 try {
   const theme = localStorage.getItem('theme')
   if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme
