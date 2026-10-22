@@ -191,9 +191,10 @@ const sections: LegalSection[] = [
             <strong>The agreement.</strong> The plugin shows each player a short notice before their
             first question: what it sends, where we keep it, and that AI providers write the
             answers. Allay answers only once the player agrees. We keep which version of the notice
-            they agreed to, a SHA-256 hash of its text and of this policy’s revision, and when. When
-            either changes, the player sees what changed and is asked again before Allay answers.
-            The agreement stays until the player withdraws it with{' '}
+            they agreed to, a SHA-256 hash of its text and of this policy’s revision, and when,
+            plus, for players in the United States, their answer to the age question (see
+            “Children”). When either changes, the player sees what changed and is asked again before
+            Allay answers. The agreement stays until the player withdraws it with{' '}
             <code>/allay privacy withdraw</code>, until their data is erased, or{' '}
             {retention.runsDays} days after their last question.
           </li>
@@ -440,11 +441,32 @@ const sections: LegalSection[] = [
     id: 'children',
     title: 'Children',
     body: (
-      <p>
-        Many Minecraft players are young. Allay collects the same little from everyone and asks no
-        one for an email, a real name, or a birthday. Paying for a subscription takes an adult, or a
-        young person with a parent’s permission where the law asks for it.
-      </p>
+      <>
+        <p>
+          Allay isn’t directed at children under 13. Many Minecraft players are young, so it
+          collects the same little from everyone and asks no one for an email, a real name, or a
+          birthday.
+        </p>
+        <p>
+          <strong>Players in the United States (COPPA).</strong> When a player’s connection comes
+          from the United States, the plugin asks them once, before their first question, whether
+          they were born on or before the date 13 years ago, with Yes and No buttons. The plugin
+          tells the country from the connection with a database on the game server; the address
+          never reaches us. On “No”, Allay doesn’t answer them and we keep nothing about them. On
+          “Yes”, we keep the answer with their agreement to Allay’s notice.
+        </p>
+        <p>
+          <strong>Players in the European Union.</strong> Where a player is under the age at which
+          their country lets them agree alone (between 13 and 16), the server operator who connects
+          Allay to their server is responsible for what their law requires, such as a parent’s
+          consent.
+        </p>
+        <p>
+          Paying for a subscription takes an adult, or a young person with a parent’s permission
+          where the law asks for it. If you believe we hold data about a child under 13 in the
+          United States, write to us and we’ll erase it.
+        </p>
+      </>
     ),
   },
   {
