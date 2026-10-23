@@ -9,6 +9,7 @@ import { PricingSection } from '../components/home/PricingSection.tsx'
 import { PrivacySection } from '../components/home/PrivacySection.tsx'
 import { SafetySection } from '../components/home/SafetySection.tsx'
 import { SelfHostSection } from '../components/home/SelfHostSection.tsx'
+import { ShotsSection } from '../components/home/ShotsSection.tsx'
 import { copies } from '../i18n/index.ts'
 import { homePath, type Locale } from '../i18n/locales.ts'
 
@@ -18,6 +19,7 @@ export function HomePage({ locale }: { locale: Locale }) {
     <div lang={copy.htmlLang}>
       <Hero copy={copy} home={homePath(locale)} />
       <Features features={copy.features} />
+      <ShotsSection shots={copy.shots} locale={locale} />
       <AskSection ask={copy.ask} />
       <MemorySection memory={copy.memory} languages={copy.languages} />
       <SafetySection safety={copy.safety} />

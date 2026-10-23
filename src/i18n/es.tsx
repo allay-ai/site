@@ -196,6 +196,43 @@ export const es: Copy = {
       },
     ],
   },
+  shots: {
+    kicker: 'En el juego',
+    title: 'Lo que ven tus jugadores',
+    lead: 'Capturas reales de un servidor con Allay: el estado en vivo mientras trabaja, respuestas con botones dentro del texto y las ventanas propias del juego para la memoria y la privacidad.',
+    status: {
+      label:
+        'Allay responde: el estado sobre la barra rápida, las herramientas que usa y la respuesta',
+      caption:
+        'Mientras Allay trabaja, la línea sobre la barra rápida dice qué hace, y cada herramienta que usa deja una línea en el chat.',
+    },
+    items: [
+      {
+        file: 'answer',
+        caption:
+          'Los botones van dentro de la respuesta: la receta, el camino a la aldea, coordenadas para copiar, una nota, la siguiente pregunta.',
+        alt: 'Respuesta de Allay en el chat con los botones Receta, Camino, Copiar, Recordar y Sí en el texto',
+      },
+      {
+        file: 'say',
+        caption:
+          'Pide a Allay que escriba a los demás por ti. No sale nada hasta que pulsas «Enviar».',
+        alt: 'Allay propone un mensaje educado con un botón Enviar, y el mensaje aparece en el chat a nombre del jugador',
+      },
+      {
+        file: 'memory',
+        caption:
+          'Lo que Allay recuerda, en una ventana: abre un recuerdo para encontrar su lugar u olvidarlo.',
+        alt: 'La ventana de memoria con cinco recuerdos y botones para añadir uno u olvidarlos todos',
+      },
+      {
+        file: 'consent',
+        caption:
+          'Antes de la primera pregunta, cada jugador lee qué envía y guarda Allay, y da su consentimiento.',
+        alt: 'La ventana con el aviso de datos de Allay y los botones Acepto, No, gracias y Política de privacidad',
+      },
+    ],
+  },
   ask: {
     kicker: 'Cómo preguntar',
     title: 'Tres comandos y un modo chat',

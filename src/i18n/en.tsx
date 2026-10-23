@@ -190,6 +190,40 @@ export const en: Copy = {
       },
     ],
   },
+  shots: {
+    kicker: 'In the game',
+    title: 'What your players see',
+    lead: 'Real screenshots from a server with Allay: the live status while it works, answers with buttons right in the text, and the game’s own windows for memory and the data notice.',
+    status: {
+      label: 'Allay answers: the status above the hotbar, the tools it uses, then the answer',
+      caption:
+        'While Allay works, the line above the hotbar says what it’s doing, and every tool it uses leaves a line in chat.',
+    },
+    items: [
+      {
+        file: 'answer',
+        caption:
+          'Buttons sit right in the answer: the recipe, the way to the village, coordinates to copy, a note, the next question.',
+        alt: 'Allay’s answer in chat with Recipe, Way, Copy, Remember, and Yes buttons in the text',
+      },
+      {
+        file: 'say',
+        caption: 'Ask Allay to write to the others for you. Nothing goes out until you press Send.',
+        alt: 'Allay offers a polite message with a Send button, and the message appears in chat from the player',
+      },
+      {
+        file: 'memory',
+        caption: 'What Allay remembers, in a window: open a memory to find its place or forget it.',
+        alt: 'The memory window with five memories and buttons to add one or forget them all',
+      },
+      {
+        file: 'consent',
+        caption:
+          'Before the first question, every player reads what Allay sends and keeps, and agrees.',
+        alt: 'The window with Allay’s data notice and the I agree, No thanks, and Privacy policy buttons',
+      },
+    ],
+  },
   ask: {
     kicker: 'How to ask',
     title: 'Three commands and a chat mode',

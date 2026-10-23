@@ -46,6 +46,9 @@ export type Question = { question: string; answer: ReactNode }
  * language file fills all of it, so a missing text is a type error rather than
  * an English line on a Russian page.
  */
+/** The stills in public/shots/<locale>/, without .webp. */
+export type ShotFile = 'answer' | 'say' | 'memory' | 'consent'
+
 export type Copy = {
   /** For <html lang> and Intl. */
   htmlLang: string
@@ -90,6 +93,14 @@ export type Copy = {
     command: string
     status: string
     lines: ChatLine[]
+  }
+  /** Screenshots from the game: the live status as a video, then stills; files live in public/shots/<locale>/. */
+  shots: {
+    kicker: string
+    title: string
+    lead: string
+    status: { label: string; caption: string }
+    items: { file: ShotFile; caption: string; alt: string }[]
   }
   features: {
     kicker: string
