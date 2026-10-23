@@ -5,8 +5,10 @@
 
 export type PlanId = 'week' | 'month' | 'year'
 
-export type Plan = {
-  id: PlanId
+export type SoloPlanId = 'solo_week' | 'solo_month' | 'solo_year'
+
+export type Plan<Id extends string = PlanId> = {
+  id: Id
   stars: number
   days: number
   /** US dollars of model costs per budget window. */
@@ -21,6 +23,21 @@ export const plans: Plan[] = [
   { id: 'week', stars: 150, days: 7, budget: 0.75, refillsMonthly: false, renews: false },
   { id: 'month', stars: 500, days: 30, budget: 3, refillsMonthly: false, renews: true },
   { id: 'year', stars: 10_000, days: 365, budget: 6, refillsMonthly: true, renews: false },
+]
+
+/**
+ * Solo plans, for one player in their own game: Allay as a Fabric or NeoForge mod
+ * in singleplayer, on a LAN world they host, or on a server without Allay. The
+ * backend has them since Allay Server 6.12 behind SOLO_PLANS, which stays off
+ * until the mods ship, and their prices are drafts. Nothing on the site shows
+ * them while `soloOnSale` is false; turn it on with the backend's switch.
+ */
+export const soloOnSale = false
+
+export const soloPlans: Plan<SoloPlanId>[] = [
+  { id: 'solo_week', stars: 50, days: 7, budget: 0.25, refillsMonthly: false, renews: false },
+  { id: 'solo_month', stars: 150, days: 30, budget: 1, refillsMonthly: false, renews: true },
+  { id: 'solo_year', stars: 3000, days: 365, budget: 2, refillsMonthly: true, renews: false },
 ]
 
 /** What a server with its own key may ask of allay.chat. */

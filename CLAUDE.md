@@ -14,8 +14,8 @@ The source of allay.chat: the front page of Allay (the AI helper for Minecraft s
 |---|---|
 | `src/i18n/` | Every text of the front page and the header and footer: `en.tsx`, `ru.tsx`, `es.tsx`, the `Copy` type that keeps them complete, and `locales.ts` |
 | `src/data/pages.ts` | Every route's head: title, description, canonical, hreflang, and the sitemap's list |
-| `src/data/plans.ts` | Prices, budgets, BYOK limits, and retention: copies of the backend's defaults |
-| `src/data/site.ts` | Every outside address, and the stores (Modrinth, Hangar) once they exist |
+| `src/data/plans.ts` | Prices, budgets, BYOK limits, and retention: copies of the backend's defaults. Solo plans wait there unshown while `soloOnSale` is false, as the backend's `SOLO_PLANS` |
+| `src/data/site.ts` | Every outside address, Allay's builds by platform (the Fabric and NeoForge mods once they ship), and the stores (Modrinth, Hangar) once they exist |
 | `src/components/home/` | The front page's sections; `ChatDemo` draws the game chat as the plugin does |
 | `src/pages/` | The routes: `HomePage`, `WikiPage`, `PrivacyPage`, `TermsPage`, `NotFoundPage`, `ErrorPage` |
 | `src/wiki/content.ts` | The rendered wiki: the index, and each page's HTML as its own chunk |

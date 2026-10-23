@@ -19,6 +19,19 @@ export const links = {
 } as const
 
 /**
+ * Allay's builds by platform, as the family names them: the plugin for Bukkit,
+ * Spigot, Paper, and their forks (`spigot`), and the mods (`fabric`,
+ * `neoforge`), which don't exist yet. A mod's jar will be
+ * `allay-<platform>.jar` on the latest release; fill it in once one ships, and
+ * the install section can offer it.
+ */
+export const builds: Record<'spigot' | 'fabric' | 'neoforge', string | null> = {
+  spigot: links.pluginLatestJar,
+  fabric: null,
+  neoforge: null,
+}
+
+/**
  * Stores besides GitHub. Neither the Modrinth project `allay-ai` nor the Hangar
  * project `AllayAI` exists yet (checked 2026-10-20); fill in the address once
  * one does, and the install section lists it.
