@@ -29,7 +29,7 @@ export const plans: Plan[] = [
  * Solo plans, for one player in their own game: Allay as a Fabric or NeoForge mod
  * in singleplayer, on a LAN world they host, or on a server without Allay. The
  * backend has them since Allay Server 6.12 behind SOLO_PLANS, which stays off
- * until the mods ship, and their prices are drafts. Nothing on the site shows
+ * until the mods ship. Nothing on the site shows
  * them while `soloOnSale` is false; turn it on with the backend's switch.
  */
 export const soloOnSale = false
