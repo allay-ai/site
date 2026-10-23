@@ -64,6 +64,9 @@ console.log(`wrote dist/sitemap.xml with ${urls.length} pages`)
 
 const wiki = JSON.parse(await readFile(`${root}src/generated/wiki/index.json`, 'utf8'))
 const version = Object.fromEntries(wiki.books.map((book) => [book.repo, book.sha]))
+// The plugin's release too: the hourly check rebuilds when a new one ships, so its mods show up.
+const releases = JSON.parse(await readFile(`${root}src/generated/releases.json`, 'utf8'))
+version['allay-ai/minecraft release'] = releases.plugin
 await writeFile(`${dist}wiki-version.json`, `${JSON.stringify(version, null, 2)}\n`)
 
 await rm(bundle, { recursive: true, force: true })

@@ -1,5 +1,7 @@
 // Every outside address the site links to, in one place.
 
+import releases from '../generated/releases.json'
+
 export const origin = 'https://allay.chat'
 
 export const links = {
@@ -18,18 +20,28 @@ export const links = {
   issues: 'https://github.com/allay-ai/site/issues',
 } as const
 
+export type Platform = 'spigot' | 'fabric' | 'neoforge'
+
 /**
  * Allay's builds by platform, as the family names them: the plugin for Bukkit,
  * Spigot, Paper, and their forks (`spigot`), and the mods (`fabric`,
- * `neoforge`), which don't exist yet. A mod's jar will be
- * `allay-<platform>.jar` on the latest release; fill it in once one ships, and
- * the install section can offer it.
+ * `neoforge`). A mod's jar is `allay-<platform>.jar` on the latest release;
+ * until a release carries it (`src/generated/releases.json`, from the build),
+ * it's null and the page says nothing about that mod.
  */
-export const builds: Record<'spigot' | 'fabric' | 'neoforge', string | null> = {
+const latestJar = (platform: Platform) =>
+  `https://github.com/allay-ai/minecraft/releases/latest/download/allay-${platform}.jar`
+const released = (platform: Platform) =>
+  (releases.pluginAssets as string[]).includes(`allay-${platform}.jar`) ? latestJar(platform) : null
+
+export const builds: Record<Platform, string | null> = {
   spigot: links.pluginLatestJar,
-  fabric: null,
-  neoforge: null,
+  fabric: released('fabric'),
+  neoforge: released('neoforge'),
 }
+
+/** Whether both mods are out, so the texts can name Fabric and NeoForge next to Spigot and Paper. */
+export const modsShipped = builds.fabric !== null && builds.neoforge !== null
 
 /**
  * Stores besides GitHub. Neither the Modrinth project `allay-ai` nor the Hangar

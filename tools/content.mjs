@@ -406,7 +406,8 @@ const snippets = {
 }
 await writeFile(`${outDir}snippets.json`, `${JSON.stringify(snippets, null, 2)}\n`)
 
-// The newest releases, for the version next to the download button. A failed lookup keeps
+// The newest releases, for the version next to the download button, and the plugin's jars, so
+// the page offers a mod's download only once a release carries it. A failed lookup keeps
 // what the last build found, and without that the page links to the release
 // list instead of naming a version.
 async function latest(repo) {
@@ -418,8 +419,9 @@ async function latest(repo) {
       headers,
     })
     if (!response.ok) throw new Error(`HTTP ${response.status}`)
-    const { tag_name: tag } = await response.json()
-    return typeof tag === 'string' ? tag.replace(/^v/, '') : null
+    const { tag_name: tag, assets } = await response.json()
+    if (typeof tag !== 'string') return null
+    return { version: tag.replace(/^v/, ''), assets: (assets ?? []).map((asset) => asset.name) }
   } catch (error) {
     console.warn(`releases: ${repo} lookup failed (${error.message})`)
     return null
@@ -428,9 +430,12 @@ async function latest(repo) {
 
 const releasesFile = `${outDir}releases.json`
 const previous = existsSync(releasesFile) ? JSON.parse(await readFile(releasesFile, 'utf8')) : {}
+const plugin = await latest('allay-ai/minecraft')
+const server = await latest('allay-ai/server')
 const releases = {
-  plugin: (await latest('allay-ai/minecraft')) ?? previous.plugin ?? null,
-  server: (await latest('allay-ai/server')) ?? previous.server ?? null,
+  plugin: plugin?.version ?? previous.plugin ?? null,
+  pluginAssets: plugin?.assets ?? previous.pluginAssets ?? [],
+  server: server?.version ?? previous.server ?? null,
 }
 await writeFile(releasesFile, `${JSON.stringify(releases, null, 2)}\n`)
 console.log(

@@ -37,6 +37,11 @@ jobs:
             echo "$repo: wiki $head, live $built"
             if [ "$head" != "$built" ]; then changed=true; fi
           done
+          # A new plugin release may carry the mods' jars, which the install section offers.
+          release=$(curl -fsS https://api.github.com/repos/allay-ai/minecraft/releases/latest | jq -r '.tag_name // ""' | sed 's/^v//')
+          built=$(echo "$live" | jq -r '.["allay-ai/minecraft release"] // ""')
+          echo "allay-ai/minecraft: release $release, live $built"
+          if [ -n "$release" ] && [ "$release" != "$built" ]; then changed=true; fi
           echo "changed=$changed" >> "$GITHUB_OUTPUT"
 
   build:
