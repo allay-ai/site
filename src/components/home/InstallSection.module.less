@@ -76,6 +76,11 @@
   &:hover {
     background: var(--button-bg-hover);
   }
+
+  // One button per build: the plugin, then the mods once a release carries them.
+  & + & {
+    margin-top: @space-2;
+  }
 }
 
 .buttonIcon {

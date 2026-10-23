@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { byokLimits, retention } from '../data/plans.ts'
-import { links } from '../data/site.ts'
+import { links, modsShipped } from '../data/site.ts'
 import { count } from './format.ts'
 import type { Copy } from './types.ts'
 
@@ -8,8 +8,9 @@ export const ru: Copy = {
   htmlLang: 'ru',
   meta: {
     title: 'Allay — ИИ-помощник для вашего сервера Minecraft',
-    description:
-      'Игрок пишет /ask, а Allay отвечает по его настоящей игре: инвентарь, сундуки, рецепты, плагины сервера. Для Spigot и Paper, на нашем бэкенде или на своём.',
+    description: modsShipped
+      ? 'Игрок пишет /ask, а Allay отвечает по его настоящей игре: инвентарь, сундуки, рецепты, плагины сервера. Для Spigot, Paper, Fabric и NeoForge, на нашем бэкенде или на своём.'
+      : 'Игрок пишет /ask, а Allay отвечает по его настоящей игре: инвентарь, сундуки, рецепты, плагины сервера. Для Spigot и Paper, на нашем бэкенде или на своём.',
   },
   ui: {
     skipToContent: 'К содержимому',
@@ -52,7 +53,9 @@ export const ru: Copy = {
     },
   },
   hero: {
-    eyebrow: 'ИИ-помощник для серверов Spigot и Paper',
+    eyebrow: modsShipped
+      ? 'ИИ-помощник для серверов и миров Minecraft'
+      : 'ИИ-помощник для серверов Spigot и Paper',
     title: (
       <>
         Спросите свой мир <em>{'о\u00a0чём угодно'}</em>
@@ -68,7 +71,7 @@ export const ru: Copy = {
     primary: 'Поставить Allay на сервер',
     secondary: 'Открыть руководство',
     facts: [
-      'Spigot и Paper 26.3',
+      modsShipped ? 'Spigot, Paper, Fabric, NeoForge 26.3' : 'Spigot и Paper 26.3',
       'Бесплатно со своим ключом',
       'Соблюдает законы о данных ЕС и США',
       'Открытый код, MIT',
@@ -386,7 +389,17 @@ export const ru: Copy = {
         title: 'Положите jar',
         body: (
           <>
-            Скопируйте <code>allay-spigot.jar</code> в <code>plugins/</code> и перезапустите сервер.
+            {modsShipped ? (
+              <>
+                Скопируйте <code>allay-spigot.jar</code> в <code>plugins/</code> на Spigot или Paper
+                либо jar мода в <code>mods/</code> на Fabric или NeoForge и перезапустите сервер.
+              </>
+            ) : (
+              <>
+                Скопируйте <code>allay-spigot.jar</code> в <code>plugins/</code> и перезапустите
+                сервер.
+              </>
+            )}
           </>
         ),
       },
@@ -409,7 +422,11 @@ export const ru: Copy = {
         ),
       },
     ],
-    download: 'Скачать allay-spigot.jar',
+    download: {
+      spigot: 'Скачать allay-spigot.jar',
+      fabric: 'Скачать allay-fabric.jar',
+      neoforge: 'Скачать allay-neoforge.jar',
+    },
     latest: 'Последний релиз: {version}',
     allReleases: 'Все релизы',
     dockerTitle: 'Сервер в itzg/minecraft-server?',
@@ -427,9 +444,17 @@ export const ru: Copy = {
     ),
     requirementsTitle: 'Что нужно',
     requirements: [
-      'Spigot или Paper 26.3 либо их форк, например Purpur',
-      'Java 25',
-      'По желанию: GriefPrevention, PlaceholderAPI, Plan',
+      ...(modsShipped
+        ? [
+            'Spigot или Paper 26.3 либо их форк, например Purpur; Fabric 26.3 с Fabric API или NeoForge 26.3',
+            'Java 25',
+            'По желанию: GriefPrevention, PlaceholderAPI, Plan; в модах — Flan, Open Parties and Claims, LuckPerms',
+          ]
+        : [
+            'Spigot или Paper 26.3 либо их форк, например Purpur',
+            'Java 25',
+            'По желанию: GriefPrevention, PlaceholderAPI, Plan',
+          ]),
     ],
   },
   pricing: {
@@ -530,6 +555,15 @@ export const ru: Copy = {
         answer:
           'На обоих и на их форках: плагин собран на Spigot API. Опыт из печей агентов достаётся игроку только на Paper, на Spigot он остаётся в печи.',
       },
+      ...(modsShipped
+        ? [
+            {
+              question: 'Allay работает на Fabric, NeoForge или в одиночной игре?',
+              answer:
+                'Да. У модов для Fabric и NeoForge 26.3 все инструменты плагина, и они работают на выделенном сервере или в вашем одиночном мире, где лицензию можно привязать без читов. Игрокам, которые заходят на сервер с Allay, ничего ставить не нужно.',
+            },
+          ]
+        : []),
       {
         question: 'Может ли обычный игрок получить предметы через Allay?',
         answer: (

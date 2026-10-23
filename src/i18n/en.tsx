@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { byokLimits, retention } from '../data/plans.ts'
-import { links } from '../data/site.ts'
+import { links, modsShipped } from '../data/site.ts'
 import { count } from './format.ts'
 import type { Copy } from './types.ts'
 
@@ -8,8 +8,9 @@ export const en: Copy = {
   htmlLang: 'en',
   meta: {
     title: 'Allay – an AI helper for your Minecraft server',
-    description:
-      'Players type /ask, and Allay answers from their real game: inventory, chests, recipes, the server’s plugins. For Spigot and Paper, hosted or self-hosted.',
+    description: modsShipped
+      ? 'Players type /ask, and Allay answers from their real game: inventory, chests, recipes, the server’s plugins. For Spigot, Paper, Fabric, and NeoForge, hosted or self-hosted.'
+      : 'Players type /ask, and Allay answers from their real game: inventory, chests, recipes, the server’s plugins. For Spigot and Paper, hosted or self-hosted.',
   },
   ui: {
     skipToContent: 'Skip to content',
@@ -46,7 +47,9 @@ export const en: Copy = {
     },
   },
   hero: {
-    eyebrow: 'AI helper for Spigot and Paper servers',
+    eyebrow: modsShipped
+      ? 'AI helper for Minecraft servers and worlds'
+      : 'AI helper for Spigot and Paper servers',
     title: (
       <>
         Ask your world <em>anything</em>
@@ -62,7 +65,7 @@ export const en: Copy = {
     primary: 'Add Allay to your server',
     secondary: 'Read the manual',
     facts: [
-      'Spigot and Paper 26.3',
+      modsShipped ? 'Spigot, Paper, Fabric, NeoForge 26.3' : 'Spigot and Paper 26.3',
       'Free with your own key',
       'EU and US privacy law friendly',
       'Open source, MIT',
@@ -380,7 +383,16 @@ export const en: Copy = {
         title: 'Drop in the jar',
         body: (
           <>
-            Put <code>allay-spigot.jar</code> into <code>plugins/</code> and restart the server.
+            {modsShipped ? (
+              <>
+                Put <code>allay-spigot.jar</code> into <code>plugins/</code> on Spigot or Paper, or
+                the mod’s jar into <code>mods/</code> on Fabric or NeoForge, and restart the server.
+              </>
+            ) : (
+              <>
+                Put <code>allay-spigot.jar</code> into <code>plugins/</code> and restart the server.
+              </>
+            )}
           </>
         ),
       },
@@ -403,7 +415,11 @@ export const en: Copy = {
         ),
       },
     ],
-    download: 'Download allay-spigot.jar',
+    download: {
+      spigot: 'Download allay-spigot.jar',
+      fabric: 'Download allay-fabric.jar',
+      neoforge: 'Download allay-neoforge.jar',
+    },
     latest: 'Latest release: {version}',
     allReleases: 'All releases',
     dockerTitle: 'Running itzg/minecraft-server?',
@@ -421,9 +437,17 @@ export const en: Copy = {
     ),
     requirementsTitle: 'You need',
     requirements: [
-      'Spigot or Paper 26.3, or a fork like Purpur',
-      'Java 25',
-      'Optional: GriefPrevention, PlaceholderAPI, Plan',
+      ...(modsShipped
+        ? [
+            'Spigot or Paper 26.3, or a fork like Purpur; Fabric 26.3 with Fabric API; or NeoForge 26.3',
+            'Java 25',
+            'Optional: GriefPrevention, PlaceholderAPI, Plan; in the mods, Flan, Open Parties and Claims, LuckPerms',
+          ]
+        : [
+            'Spigot or Paper 26.3, or a fork like Purpur',
+            'Java 25',
+            'Optional: GriefPrevention, PlaceholderAPI, Plan',
+          ]),
     ],
   },
   pricing: {
@@ -523,6 +547,15 @@ export const en: Copy = {
         answer:
           'Both, and their forks. It builds against the Spigot API. Furnace experience from agents goes to the player only on Paper; on Spigot it stays in the furnace.',
       },
+      ...(modsShipped
+        ? [
+            {
+              question: 'Does Allay run on Fabric, NeoForge, or in singleplayer?',
+              answer:
+                'Yes. The mods for Fabric and NeoForge 26.3 have every tool the plugin has and run on a dedicated server or in your own singleplayer world, where you link a license without cheats. Players joining a server with Allay need nothing in their game.',
+            },
+          ]
+        : []),
       {
         question: 'Can a regular player get items through Allay?',
         answer: (

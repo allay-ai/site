@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import type { PlanId } from '../data/plans.ts'
+import type { Platform } from '../data/site.ts'
 
 /** A feature card's picture; components/home/FeatureIcon.tsx draws each. */
 export type IconName =
@@ -144,7 +145,8 @@ export type Copy = {
     title: string
     lead: ReactNode
     steps: { title: string; body: ReactNode }[]
-    download: string
+    /** The download button for each build the latest release carries. */
+    download: Record<Platform, string>
     /** With {version}. */
     latest: string
     allReleases: string

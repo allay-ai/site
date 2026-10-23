@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { byokLimits, retention } from '../data/plans.ts'
-import { links } from '../data/site.ts'
+import { links, modsShipped } from '../data/site.ts'
 import { count } from './format.ts'
 import type { Copy } from './types.ts'
 
@@ -8,8 +8,9 @@ export const es: Copy = {
   htmlLang: 'es',
   meta: {
     title: 'Allay: un asistente con IA para tu servidor de Minecraft',
-    description:
-      'Un jugador escribe /ask y Allay responde según su partida real: inventario, cofres, recetas, los plugins del servidor. Para Spigot y Paper, alojado o propio.',
+    description: modsShipped
+      ? 'Un jugador escribe /ask y Allay responde según su partida real: inventario, cofres, recetas, los plugins del servidor. Para Spigot, Paper, Fabric y NeoForge, alojado o propio.'
+      : 'Un jugador escribe /ask y Allay responde según su partida real: inventario, cofres, recetas, los plugins del servidor. Para Spigot y Paper, alojado o propio.',
   },
   ui: {
     skipToContent: 'Saltar al contenido',
@@ -52,7 +53,9 @@ export const es: Copy = {
     },
   },
   hero: {
-    eyebrow: 'Asistente con IA para servidores Spigot y Paper',
+    eyebrow: modsShipped
+      ? 'Asistente con IA para servidores y mundos de Minecraft'
+      : 'Asistente con IA para servidores Spigot y Paper',
     title: (
       <>
         Pregúntale a tu mundo <em>lo que sea</em>
@@ -68,7 +71,7 @@ export const es: Copy = {
     primary: 'Añadir Allay a tu servidor',
     secondary: 'Leer el manual',
     facts: [
-      'Spigot y Paper 26.3',
+      modsShipped ? 'Spigot, Paper, Fabric, NeoForge 26.3' : 'Spigot y Paper 26.3',
       'Gratis con tu propia clave',
       'Respeta las leyes de privacidad de la UE y EE. UU.',
       'Código abierto, MIT',
@@ -392,7 +395,16 @@ export const es: Copy = {
         title: 'Copia el jar',
         body: (
           <>
-            Pon <code>allay-spigot.jar</code> en <code>plugins/</code> y reinicia el servidor.
+            {modsShipped ? (
+              <>
+                Pon <code>allay-spigot.jar</code> en <code>plugins/</code> en Spigot o Paper, o el
+                jar del mod en <code>mods/</code> en Fabric o NeoForge, y reinicia el servidor.
+              </>
+            ) : (
+              <>
+                Pon <code>allay-spigot.jar</code> en <code>plugins/</code> y reinicia el servidor.
+              </>
+            )}
           </>
         ),
       },
@@ -415,7 +427,11 @@ export const es: Copy = {
         ),
       },
     ],
-    download: 'Descargar allay-spigot.jar',
+    download: {
+      spigot: 'Descargar allay-spigot.jar',
+      fabric: 'Descargar allay-fabric.jar',
+      neoforge: 'Descargar allay-neoforge.jar',
+    },
     latest: 'Última versión: {version}',
     allReleases: 'Todas las versiones',
     dockerTitle: '¿Usas itzg/minecraft-server?',
@@ -433,9 +449,17 @@ export const es: Copy = {
     ),
     requirementsTitle: 'Necesitas',
     requirements: [
-      'Spigot o Paper 26.3, o un fork como Purpur',
-      'Java 25',
-      'Opcional: GriefPrevention, PlaceholderAPI, Plan',
+      ...(modsShipped
+        ? [
+            'Spigot o Paper 26.3, o un fork como Purpur; Fabric 26.3 con Fabric API; o NeoForge 26.3',
+            'Java 25',
+            'Opcional: GriefPrevention, PlaceholderAPI, Plan; en los mods, Flan, Open Parties and Claims, LuckPerms',
+          ]
+        : [
+            'Spigot o Paper 26.3, o un fork como Purpur',
+            'Java 25',
+            'Opcional: GriefPrevention, PlaceholderAPI, Plan',
+          ]),
     ],
   },
   pricing: {
@@ -536,6 +560,15 @@ export const es: Copy = {
         answer:
           'En los dos y en sus forks: se compila con la API de Spigot. La experiencia de los hornos de los agentes llega al jugador solo en Paper; en Spigot se queda en el horno.',
       },
+      ...(modsShipped
+        ? [
+            {
+              question: '¿Allay funciona en Fabric, NeoForge o en un mundo individual?',
+              answer:
+                'Sí. Los mods para Fabric y NeoForge 26.3 tienen todas las herramientas del plugin y funcionan en un servidor dedicado o en tu propio mundo individual, donde vinculas una licencia sin trucos. Quien entra a un servidor con Allay no necesita instalar nada.',
+            },
+          ]
+        : []),
       {
         question: '¿Puede un jugador normal conseguir objetos con Allay?',
         answer: (

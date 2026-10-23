@@ -1,4 +1,4 @@
-import { links, stores } from '../../data/site.ts'
+import { builds, links, type Platform, stores } from '../../data/site.ts'
 import releases from '../../generated/releases.json'
 import snippets from '../../generated/snippets.json'
 import { fill } from '../../i18n/index.ts'
@@ -31,10 +31,15 @@ export function InstallSection({ copy }: { copy: Copy }) {
 
       <div className={styles.grid}>
         <div className={styles.download}>
-          <a className={styles.button} href={links.pluginLatestJar}>
-            <DownloadIcon className={styles.buttonIcon} />
-            {install.download}
-          </a>
+          {(Object.entries(builds) as [Platform, string | null][]).map(
+            ([platform, href]) =>
+              href && (
+                <a key={platform} className={styles.button} href={href}>
+                  <DownloadIcon className={styles.buttonIcon} />
+                  {install.download[platform]}
+                </a>
+              ),
+          )}
           <p className={styles.version}>
             {releases.plugin ? (
               <a href={`${links.pluginReleases}/tag/v${releases.plugin}`}>
