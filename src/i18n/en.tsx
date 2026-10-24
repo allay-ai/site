@@ -400,8 +400,9 @@ export const en: Copy = {
         title: 'Pick who pays',
         body: (
           <>
-            As an operator, run <code>/allay link</code> for a subscription, or put your own
-            OpenRouter key into <code>provider.byok</code> and run <code>/allay reload</code>.
+            As an operator, or in your own world, run <code>/allay link</code> for a subscription,
+            or put your own OpenRouter key into <code>provider.byok</code> and run{' '}
+            <code>/allay reload</code>.
           </>
         ),
       },
@@ -416,16 +417,17 @@ export const en: Copy = {
       },
     ],
     download: {
-      spigot: 'Download allay-spigot.jar',
-      fabric: 'Download allay-fabric.jar',
-      neoforge: 'Download allay-neoforge.jar',
+      spigot: 'Download for Paper and Spigot',
+      fabric: 'Download for Fabric',
+      neoforge: 'Download for NeoForge',
     },
     latest: 'Latest release: {version}',
     allReleases: 'All releases',
     dockerTitle: 'Running itzg/minecraft-server?',
     dockerLead: (
       <>
-        Give <code>PLUGINS</code> the jar’s address, and the container fetches Allay itself.
+        Give <code>PLUGINS</code>, or <code>MODS</code> for a mod, the jar’s address on allay.chat,
+        and the container fetches Allay itself.
       </>
     ),
     storesTitle: 'Where to get it',
@@ -476,7 +478,7 @@ export const en: Copy = {
       budgetMonthly: '{budget} of model costs every 30 days',
       steps: [
         <>
-          Run <code>/allay link</code> as an operator
+          Run <code>/allay link</code> as an operator or in your own world
         </>,
         <>
           Pay in <a href={links.bot}>@AllayChatBot</a> on Telegram
@@ -527,7 +529,7 @@ export const en: Copy = {
         its own, and run <code>docker compose up -d</code>.
       </>,
       <>
-        Point <code>server.url</code> in the plugin’s <code>config.yml</code> at your backend, give{' '}
+        Point <code>server.url</code> in Allay’s <code>config.yml</code> at your backend, give{' '}
         <code>server.token</code> the same <code>PLUGIN_TOKEN</code>, and run{' '}
         <code>/allay reload</code>.
       </>,
@@ -605,7 +607,7 @@ export const en: Copy = {
       {
         question: 'Is Allay on Modrinth or Hangar?',
         answer:
-          'Not yet. GitHub releases are the one source for now, and itzg/minecraft-server can fetch the jar from there.',
+          'Not yet. GitHub releases are the one source for now. itzg/minecraft-server takes the jar from allay.chat/download/, which hands over the same file, as the install section shows.',
       },
       {
         question: 'Do players have to agree first?',
