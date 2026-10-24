@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { byokLimits, retention } from '../data/plans.ts'
+import { byokLimits, retention, soloReleaseDays } from '../data/plans.ts'
 import { links, modsShipped } from '../data/site.ts'
 import { count } from './format.ts'
 import type { Copy } from './types.ts'
@@ -519,6 +519,19 @@ export const es: Copy = {
       ],
       cta: 'Montarlo tú mismo',
     },
+    solo: {
+      name: 'Solo',
+      from: 'desde',
+      tagline: 'Para el mod en tu propio mundo: un jugador, menos límite y menos precio.',
+      points: [
+        'Un mundo individual, o un mundo LAN que abres tú, con Allay para Fabric o NeoForge',
+        <>
+          Ejecuta <code>/allay link</code> en tu mundo; no necesitas trucos
+        </>,
+        `Responde solo a ti. Quien paga puede pasarla a otro jugador en @AllayChatBot una vez cada ${soloReleaseDays} días`,
+      ],
+      cta: 'Abrir @AllayChatBot',
+    },
     howTitle: 'Cómo funciona el límite de la suscripción',
     how: [
       'El límite es dinero, no un número de preguntas: lo que de verdad cuestan las preguntas de tu servidor en el proveedor, contando el modelo, las búsquedas en internet y los resúmenes de las conversaciones largas.',
@@ -567,7 +580,7 @@ export const es: Copy = {
             {
               question: '¿Allay funciona en Fabric, NeoForge o en un mundo individual?',
               answer:
-                'Sí. Los mods para Fabric y NeoForge 26.3 tienen todas las herramientas del plugin y funcionan en un servidor dedicado o en tu propio mundo individual, donde vinculas una licencia sin trucos. Quien entra a un servidor con Allay no necesita instalar nada.',
+                'Sí. Los mods para Fabric y NeoForge 26.3 tienen todas las herramientas del plugin y funcionan en un servidor dedicado o en tu propio mundo individual, donde vinculas una licencia sin trucos. Un plan Solo, solo para ti, cuesta menos que el de un servidor. Quien entra a un servidor con Allay no necesita instalar nada.',
             },
           ]
         : []),

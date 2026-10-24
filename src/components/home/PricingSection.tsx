@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { plans } from '../../data/plans.ts'
+import { type Plan, type PlanId, plans, soloOnSale, soloPlans } from '../../data/plans.ts'
 import { links } from '../../data/site.ts'
 import { count, usd } from '../../i18n/format.ts'
 import { fill } from '../../i18n/index.ts'
@@ -9,6 +9,39 @@ import { StarIcon } from '../shared/icons.tsx'
 import styles from './PricingSection.module.less'
 import { Section } from './Section.tsx'
 
+// One plan's line: its name and price in Stars, how long it lasts, and its budget.
+function PlanItem({
+  plan,
+  name,
+  copy,
+  locale,
+}: {
+  plan: Plan<string>
+  name: string
+  copy: Copy['pricing']['hosted']
+  locale: Locale
+}) {
+  return (
+    <li className={styles.plan}>
+      <div className={styles.planHead}>
+        <span className={styles.planName}>{name}</span>
+        <span className={styles.stars}>
+          {count(plan.stars, locale)}
+          <StarIcon className={styles.star} />
+          <span className="visually-hidden">Telegram Stars</span>
+        </span>
+      </div>
+      <p className={styles.planDetail}>
+        {fill(copy.period, { days: plan.days })}
+        {plan.renews && `, ${copy.renews}`}
+        <br />
+        {fill(plan.refillsMonthly ? copy.budgetMonthly : copy.budget, {
+          budget: usd(plan.budget, locale),
+        })}
+      </p>
+    </li>
+  )
+}
 export function PricingSection({ copy, locale }: { copy: Copy; locale: Locale }) {
   const { pricing } = copy
   const home = locale === 'en' ? '/' : `/${locale}/`
@@ -46,27 +79,13 @@ export function PricingSection({ copy, locale }: { copy: Copy; locale: Locale })
           <p className={styles.tagline}>{pricing.hosted.tagline}</p>
           <ul className={styles.plans}>
             {plans.map((plan) => (
-              <li key={plan.id} className={styles.plan}>
-                <div className={styles.planHead}>
-                  <span className={styles.planName}>{pricing.hosted.plans[plan.id]}</span>
-                  <span className={styles.stars}>
-                    {count(plan.stars, locale)}
-                    <StarIcon className={styles.star} />
-                    <span className="visually-hidden">Telegram Stars</span>
-                  </span>
-                </div>
-                <p className={styles.planDetail}>
-                  {fill(pricing.hosted.period, { days: plan.days })}
-                  {plan.renews && `, ${pricing.hosted.renews}`}
-                  <br />
-                  {fill(
-                    plan.refillsMonthly ? pricing.hosted.budgetMonthly : pricing.hosted.budget,
-                    {
-                      budget: usd(plan.budget, locale),
-                    },
-                  )}
-                </p>
-              </li>
+              <PlanItem
+                key={plan.id}
+                plan={plan}
+                name={pricing.hosted.plans[plan.id]}
+                copy={pricing.hosted}
+                locale={locale}
+              />
             ))}
           </ul>
           <p className={styles.more}>{pricing.hosted.more}</p>
@@ -98,6 +117,43 @@ export function PricingSection({ copy, locale }: { copy: Copy; locale: Locale })
           </Link>
         </article>
       </div>
+
+      {soloOnSale && (
+        <article className={`${styles.card} ${styles.solo}`} aria-labelledby="plan-solo">
+          <div className={styles.soloIntro}>
+            <h3 id="plan-solo" className={styles.name}>
+              {pricing.solo.name}
+            </h3>
+            <p className={styles.price}>
+              <span className={styles.from}>{pricing.solo.from}</span>
+              {count(Math.min(...soloPlans.map((plan) => plan.stars)), locale)}
+              <StarIcon className={styles.priceStar} />
+              <span className="visually-hidden">Telegram Stars</span>
+            </p>
+            <p className={styles.tagline}>{pricing.solo.tagline}</p>
+            <ul className={styles.points}>
+              {pricing.solo.points.map((point, index) => (
+                // biome-ignore lint/suspicious/noArrayIndexKey: a fixed list of texts
+                <li key={index}>{point}</li>
+              ))}
+            </ul>
+            <a className={styles.cta} href={links.bot}>
+              {pricing.solo.cta}
+            </a>
+          </div>
+          <ul className={`${styles.plans} ${styles.soloPlans}`}>
+            {soloPlans.map((plan) => (
+              <PlanItem
+                key={plan.id}
+                plan={plan}
+                name={pricing.hosted.plans[plan.id.replace('solo_', '') as PlanId]}
+                copy={pricing.hosted}
+                locale={locale}
+              />
+            ))}
+          </ul>
+        </article>
+      )}
 
       <div className={styles.how}>
         <h3 className={styles.howTitle}>{pricing.howTitle}</h3>

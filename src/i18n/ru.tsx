@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { byokLimits, retention } from '../data/plans.ts'
+import { byokLimits, retention, soloReleaseDays } from '../data/plans.ts'
 import { links, modsShipped } from '../data/site.ts'
 import { count } from './format.ts'
 import type { Copy } from './types.ts'
@@ -514,6 +514,19 @@ export const ru: Copy = {
       ],
       cta: 'Поднять у себя',
     },
+    solo: {
+      name: 'Solo',
+      from: 'от',
+      tagline: 'Для мода в вашем мире: один игрок, лимит меньше, цена тоже.',
+      points: [
+        'Одиночный мир или мир, открытый по LAN, с Allay для Fabric или NeoForge',
+        <>
+          Выполните <code>/allay link</code> в своём мире, читы не нужны
+        </>,
+        `Отвечает только вам. Тот, кто платит, может передать лицензию другому игроку в @AllayChatBot раз в ${soloReleaseDays} дней`,
+      ],
+      cta: 'Открыть @AllayChatBot',
+    },
     howTitle: 'Как устроен лимит подписки',
     how: [
       'Лимит — это деньги, а не число вопросов: сколько вопросы вашего сервера на самом деле стоят у провайдера, включая модель, поиск в интернете и сводки длинных разговоров.',
@@ -562,7 +575,7 @@ export const ru: Copy = {
             {
               question: 'Allay работает на Fabric, NeoForge или в одиночной игре?',
               answer:
-                'Да. У модов для Fabric и NeoForge 26.3 все инструменты плагина, и они работают на выделенном сервере или в вашем одиночном мире, где лицензию можно привязать без читов. Игрокам, которые заходят на сервер с Allay, ничего ставить не нужно.',
+                'Да. У модов для Fabric и NeoForge 26.3 все инструменты плагина, и они работают на выделенном сервере или в вашем одиночном мире, где лицензию можно привязать без читов. Тариф Solo, только для вас, дешевле серверного. Игрокам, которые заходят на сервер с Allay, ничего ставить не нужно.',
             },
           ]
         : []),

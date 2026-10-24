@@ -193,6 +193,32 @@
   }
 }
 
+// Solo spans the row under the three cards: what it is beside its plans.
+.solo {
+  display: grid;
+  gap: @space-4;
+  margin-top: @space-4;
+
+  @media @screen-md {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .cta {
+    margin-top: 0;
+  }
+}
+
+.soloIntro {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.soloPlans {
+  margin: 0;
+}
+
 .how {
   margin-top: @space-5;
   padding: @space-4;

@@ -181,6 +181,8 @@ export type Copy = {
       cta: string
     }
     self: { name: string; price: string; tagline: string; points: ReactNode[]; cta: string }
+    /** Solo plans for the mod in one player's own world; their periods and budgets use hosted's texts. */
+    solo: { name: string; from: string; tagline: string; points: ReactNode[]; cta: string }
     howTitle: string
     how: ReactNode[]
   }

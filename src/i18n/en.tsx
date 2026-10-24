@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { byokLimits, retention } from '../data/plans.ts'
+import { byokLimits, retention, soloReleaseDays } from '../data/plans.ts'
 import { links, modsShipped } from '../data/site.ts'
 import { count } from './format.ts'
 import type { Copy } from './types.ts'
@@ -506,6 +506,19 @@ export const en: Copy = {
       ],
       cta: 'Host it yourself',
     },
+    solo: {
+      name: 'Solo',
+      from: 'from',
+      tagline: 'For the mod in your own world: one player, a smaller limit, a smaller price.',
+      points: [
+        'A singleplayer world, or a LAN world you host, with Allay for Fabric or NeoForge',
+        <>
+          Run <code>/allay link</code> in your world; you need no cheats
+        </>,
+        `It answers you alone. Its payer can hand it to another player in @AllayChatBot once every ${soloReleaseDays} days`,
+      ],
+      cta: 'Open @AllayChatBot',
+    },
     howTitle: 'How the subscription’s limit works',
     how: [
       'The limit is money, not a number of questions: what your server’s questions really cost at the provider, counting the model, web searches, and the summaries of long conversations.',
@@ -554,7 +567,7 @@ export const en: Copy = {
             {
               question: 'Does Allay run on Fabric, NeoForge, or in singleplayer?',
               answer:
-                'Yes. The mods for Fabric and NeoForge 26.3 have every tool the plugin has and run on a dedicated server or in your own singleplayer world, where you link a license without cheats. Players joining a server with Allay need nothing in their game.',
+                'Yes. The mods for Fabric and NeoForge 26.3 have every tool the plugin has and run on a dedicated server or in your own singleplayer world, where you link a license without cheats. A Solo plan, for you alone, costs less than a server’s. Players joining a server with Allay need nothing in their game.',
             },
           ]
         : []),
