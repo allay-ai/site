@@ -21,7 +21,7 @@ The source of allay.chat: the front page of Allay (the AI helper for Minecraft s
 | `src/wiki/content.ts` | The rendered wiki: the index, and each page's HTML as its own chunk |
 | `tools/content.mjs` | Fetches both wikis into `.content/`, renders them into `src/generated/`, takes the front page's compose files from the wikis, and asks GitHub for the newest releases |
 | `tools/prerender.mjs` | Writes `dist/<path>/index.html` for every page, `404.html`, `sitemap.xml`, and `wiki-version.json` |
-| `worker/index.ts` | Passes `/api/*`, `/admin`, `/admin/*` to `ORIGIN`; tests in `worker/index.test.ts` |
+| `worker/index.ts` | Passes `/api/*`, `/admin`, `/admin/*` to `ORIGIN`, and serves `/download/allay-<platform>[-X.Y.Z].jar` from the GitHub release itself, since itzg's downloader refuses GitHub's redirect (itzg/mc-image-helper#913); tests in `worker/index.test.ts` |
 | `public/_headers` | CSP, HSTS, and the other security headers of every static file |
 
 ## Rules that keep it working
