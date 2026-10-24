@@ -8,6 +8,7 @@ import worker, {
   type Env,
   isBackendPath,
   originRequest,
+  releaseAsset,
   withLegalNotice,
 } from './index.ts'
 
@@ -62,6 +63,78 @@ describe('isBackendPath', () => {
     for (const path of ['/', '/wiki/', '/apis', '/administration', '/ru/', '/assets/x.js']) {
       assert.equal(isBackendPath(path), false, path)
     }
+  })
+})
+
+describe('releaseAsset', () => {
+  it('maps the latest jar and a pinned one to GitHub', () => {
+    assert.equal(
+      releaseAsset('/download/allay-fabric.jar'),
+      'https://github.com/allay-ai/minecraft/releases/latest/download/allay-fabric.jar',
+    )
+    assert.equal(
+      releaseAsset('/download/allay-spigot-6.11.0.jar'),
+      'https://github.com/allay-ai/minecraft/releases/download/v6.11.0/allay-spigot-6.11.0.jar',
+    )
+  })
+
+  it('takes nothing else', () => {
+    for (const path of [
+      '/download/',
+      '/download/allay-forge.jar',
+      '/download/../x.jar',
+      '/download/allay-spigot.jar/x',
+    ]) {
+      assert.equal(releaseAsset(path), null, path)
+    }
+  })
+})
+
+describe('download', () => {
+  it('follows GitHub itself and answers with the jar and small headers', async () => {
+    const seen = stubOrigin(
+      () =>
+        new Response('jar bytes', {
+          headers: { 'content-length': '9', 'set-cookie': 'logged_in=no' },
+        }),
+    )
+    const response = await worker.fetch(
+      new Request('https://allay.chat/download/allay-neoforge.jar'),
+      env(),
+    )
+    assert.equal(response.status, 200)
+    assert.equal(await response.text(), 'jar bytes')
+    assert.equal(response.headers.get('content-type'), 'application/java-archive')
+    assert.equal(
+      response.headers.get('content-disposition'),
+      'attachment; filename="allay-neoforge.jar"',
+    )
+    assert.equal(response.headers.get('content-length'), '9')
+    assert.equal(response.headers.get('set-cookie'), null)
+    assert.equal(
+      seen[0].url,
+      'https://github.com/allay-ai/minecraft/releases/latest/download/allay-neoforge.jar',
+    )
+    assert.equal(seen[0].redirect, 'follow')
+  })
+
+  it('says 404 for a version GitHub doesn’t have', async () => {
+    stubOrigin(() => new Response('Not Found', { status: 404 }))
+    const response = await worker.fetch(
+      new Request('https://allay.chat/download/allay-spigot-1.0.0.jar'),
+      env(),
+    )
+    assert.equal(response.status, 404)
+    assert.equal(response.headers.get('cache-control'), 'no-store')
+  })
+
+  it('refuses anything but GET and HEAD', async () => {
+    stubOrigin(() => new Response('jar'))
+    const response = await worker.fetch(
+      new Request('https://allay.chat/download/allay-spigot.jar', { method: 'POST' }),
+      env(),
+    )
+    assert.equal(response.status, 405)
   })
 })
 

@@ -1,8 +1,9 @@
 // The Worker in front of allay.chat. Assets (scripts, styles, pictures) are dist/,
 // answered by Cloudflare without running this script. wrangler.jsonc sends the
 // pages here too (run_worker_first), only to add Spain's legal notice for
-// visitors from Spain (withLegalNotice), and the backend's paths: the plugin's
-// API, Telegram's webhook, and the admin panel. Those go to the origin, the Allay
+// visitors from Spain (withLegalNotice), the jars under /download/ (download),
+// and the backend's paths: the plugin's API, Telegram's webhook, and the admin
+// panel. Those go to the origin, the Allay
 // backend behind a Cloudflare Tunnel, as they came: method, headers, body, and
 // the answer as a stream, so the chat's server-sent events reach the plugin
 // token by token.
@@ -176,9 +177,69 @@ export async function withLegalNotice(
   return new Response(end === -1 ? html + line : html.slice(0, end) + line + html.slice(end), init)
 }
 
+// The plugin's and the mods' jars, as allay.chat/download/allay-<platform>.jar
+// for the latest release and allay-<platform>-X.Y.Z.jar for one version. GitHub
+// answers its own download links with a redirect whose headers outgrow what
+// itzg/minecraft-server's downloader accepts (itzg/mc-image-helper#913), so the
+// Worker follows it and hands the jar over itself, with small headers.
+const releases = 'https://github.com/allay-ai/minecraft/releases'
+const jarPath = /^\/download\/(allay-(?:spigot|fabric|neoforge)(?:-(\d+\.\d+\.\d+))?\.jar)$/
+
+/** The GitHub address of a jar under /download/, or null for any other path. */
+export function releaseAsset(pathname: string): string | null {
+  const match = pathname.match(jarPath)
+  if (!match) return null
+  const [, name, version] = match
+  return version
+    ? `${releases}/download/v${version}/${name}`
+    : `${releases}/latest/download/${name}`
+}
+
+/** The jar from GitHub, cached at the edge: a version for a day, the latest for five minutes. */
+export async function download(request: Request, asset: string): Promise<Response> {
+  const name = asset.slice(asset.lastIndexOf('/') + 1)
+  if (request.method !== 'GET' && request.method !== 'HEAD') {
+    return new Response('Only GET and HEAD.', { status: 405, headers: { allow: 'GET, HEAD' } })
+  }
+  const pinned = !asset.includes('/latest/')
+  const ttl = pinned ? 86_400 : 300
+  let response: Response
+  try {
+    const init = {
+      method: request.method,
+      redirect: 'follow',
+      cf: { cacheEverything: true, cacheTtl: ttl },
+    }
+    response = await fetch(new Request(asset, init as RequestInit))
+  } catch {
+    response = new Response(null, { status: 502 })
+  }
+  if (!response.ok) {
+    const status = response.status === 404 ? 404 : 502
+    const text =
+      status === 404
+        ? `No ${name} in Allay's releases.`
+        : 'GitHub is unreachable. Try again in a minute.'
+    return new Response(text, {
+      status,
+      headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store' },
+    })
+  }
+  const headers = new Headers({
+    'content-type': 'application/java-archive',
+    'content-disposition': `attachment; filename="${name}"`,
+    'cache-control': `public, max-age=${ttl}`,
+  })
+  const length = response.headers.get('content-length')
+  if (length) headers.set('content-length', length)
+  return new Response(request.method === 'HEAD' ? null : response.body, { status: 200, headers })
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url)
+    const asset = releaseAsset(url.pathname)
+    if (asset) return download(request, asset)
     if (!isBackendPath(url.pathname)) {
       return withLegalNotice(await env.ASSETS.fetch(request), request, env)
     }
