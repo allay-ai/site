@@ -67,3 +67,72 @@
 :global(:root[data-theme='dark']) {
   .darkString();
 }
+
+// CodeTabs: the files sit in the head like an editor's tabs, the open one joined to the code.
+.tabbed {
+  position: relative;
+}
+
+.tabsHead {
+  padding: 0;
+  align-items: stretch;
+  background: @color-panel-alt;
+}
+
+.tabsFile {
+  align-self: center;
+  padding-right: 14px;
+
+  @media (max-width: 479px) {
+    display: none;
+  }
+}
+
+// The copy button sits in the code's corner, so the tabs keep the whole head.
+.tabsCopy {
+  position: absolute;
+  top: 44px;
+  right: 8px;
+}
+
+.tabs {
+  display: flex;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: -1px;
+  padding: 9px 14px;
+  border: 0;
+  border-right: 1px solid @color-border;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  color: @color-text-faint;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+
+  // Three names fit a phone without their logos.
+  @media (max-width: 479px) {
+    padding: 9px 12px;
+
+    & > span {
+      display: none;
+    }
+  }
+  cursor: pointer;
+
+  &:hover {
+    color: @color-text;
+  }
+
+  &[aria-selected='true'] {
+    border-bottom-color: @color-code-bg;
+    background: @color-code-bg;
+    color: @color-text;
+  }
+}

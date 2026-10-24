@@ -62,16 +62,14 @@
 .button {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  min-height: 52px;
-  padding: 0 20px;
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px 16px 8px 12px;
   border-radius: @radius-md;
   background: var(--button-bg);
   color: @color-on-accent;
   font-weight: 650;
   text-decoration: none;
-  text-align: center;
 
   &:hover {
     background: var(--button-bg-hover);
@@ -81,6 +79,21 @@
   & + & {
     margin-top: @space-2;
   }
+}
+
+.buttonText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.buttonFile {
+  font-family: @font-mono;
+  font-size: 0.78rem;
+  font-weight: 500;
+  opacity: 0.8;
 }
 
 .buttonIcon {

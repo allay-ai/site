@@ -387,12 +387,16 @@ for (const problem of problems) console.warn(`wiki: ${problem}`)
 
 // The compose files the front page shows, taken from the wikis so they change
 // when the manual does: a new backend version, a new required variable.
-function firstYaml(bookId, pageName) {
+// A page's first yaml block, or with `containing` the first that has that text.
+function firstYaml(bookId, pageName, containing = '') {
   const page = read
     .find(({ book }) => book.id === bookId)
     .pages.find((candidate) => candidate.name === pageName)
-  const block = page?.markdown.match(/```ya?ml\n([\s\S]*?)\n\s*```/)
-  if (!block) throw new Error(`wiki ${bookId}/${pageName} has no yaml block for the front page`)
+  const block = [...(page?.markdown.matchAll(/```ya?ml\n([\s\S]*?)\n\s*```/g) ?? [])].find(
+    (match) => match[1].includes(containing),
+  )
+  if (!block)
+    throw new Error(`wiki ${bookId}/${pageName} has no yaml block ${containing} for the front page`)
   // A block inside a list item is indented with it; take the indent off.
   const lines = block[1].split('\n')
   const indent = Math.min(
@@ -402,7 +406,12 @@ function firstYaml(bookId, pageName) {
 }
 const snippets = {
   selfHostCompose: firstYaml('server', 'Self-hosting-with-Docker'),
-  pluginCompose: firstYaml('plugin', 'Installation'),
+  // One compose file per build, as the install section's tabs show them.
+  pluginCompose: {
+    spigot: firstYaml('plugin', 'Installation', 'TYPE: PAPER'),
+    fabric: firstYaml('plugin', 'Installation', 'TYPE: FABRIC'),
+    neoforge: firstYaml('plugin', 'Installation', 'TYPE: NEOFORGE'),
+  },
 }
 await writeFile(`${outDir}snippets.json`, `${JSON.stringify(snippets, null, 2)}\n`)
 

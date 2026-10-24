@@ -3,13 +3,24 @@ import releases from '../../generated/releases.json'
 import snippets from '../../generated/snippets.json'
 import { fill } from '../../i18n/index.ts'
 import type { Copy } from '../../i18n/types.ts'
-import { CodeBlock } from '../shared/CodeBlock.tsx'
+import { CodeTabs } from '../shared/CodeTabs.tsx'
 import { DownloadIcon } from '../shared/icons.tsx'
+import { LoaderLogo } from '../shared/LoaderLogo.tsx'
 import styles from './InstallSection.module.less'
 import { Section } from './Section.tsx'
 
+// The loaders' names on the compose tabs; the plugin's file starts a Paper server.
+const loaderNames: Record<Platform, string> = {
+  spigot: 'Paper',
+  fabric: 'Fabric',
+  neoforge: 'NeoForge',
+}
+
 export function InstallSection({ copy }: { copy: Copy }) {
   const { install, ui } = copy
+  const shipped = (Object.entries(builds) as [Platform, string | null][]).filter(
+    (entry): entry is [Platform, string] => entry[1] !== null,
+  )
   const extraStores = [
     stores.modrinth && { name: 'Modrinth', href: stores.modrinth },
     stores.hangar && { name: 'Hangar', href: stores.hangar },
@@ -31,15 +42,16 @@ export function InstallSection({ copy }: { copy: Copy }) {
 
       <div className={styles.grid}>
         <div className={styles.download}>
-          {(Object.entries(builds) as [Platform, string | null][]).map(
-            ([platform, href]) =>
-              href && (
-                <a key={platform} className={styles.button} href={href}>
-                  <DownloadIcon className={styles.buttonIcon} />
-                  {install.download[platform]}
-                </a>
-              ),
-          )}
+          {shipped.map(([platform, href]) => (
+            <a key={platform} className={styles.button} href={href}>
+              <LoaderLogo platform={platform} />
+              <span className={styles.buttonText}>
+                <span className={styles.buttonLabel}>{install.download[platform]}</span>
+                <span className={styles.buttonFile}>allay-{platform}.jar</span>
+              </span>
+              <DownloadIcon className={styles.buttonIcon} />
+            </a>
+          ))}
           <p className={styles.version}>
             {releases.plugin ? (
               <a href={`${links.pluginReleases}/tag/v${releases.plugin}`}>
@@ -75,10 +87,14 @@ export function InstallSection({ copy }: { copy: Copy }) {
         <div className={styles.docker}>
           <h3 className={styles.dockerTitle}>{install.dockerTitle}</h3>
           <p>{install.dockerLead}</p>
-          <CodeBlock
-            code={snippets.pluginCompose}
-            language="yaml"
-            title="compose.yaml"
+          <CodeTabs
+            tabs={shipped.map(([platform]) => ({
+              id: platform,
+              label: loaderNames[platform],
+              icon: <LoaderLogo platform={platform} size="sm" />,
+              code: snippets.pluginCompose[platform],
+            }))}
+            file="compose.yaml"
             copyLabel={ui.copy}
             copiedLabel={ui.copied}
           />

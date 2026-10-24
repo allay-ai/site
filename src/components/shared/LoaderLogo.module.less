@@ -1,0 +1,35 @@
+@import (reference) '../../styles/tokens.less';
+
+.tile {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  // The logos are drawn for a light background, in either theme.
+  background: #fff;
+}
+
+.md {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+
+  .image {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.sm {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+
+  .image {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.image {
+  object-fit: contain;
+}

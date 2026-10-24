@@ -13,7 +13,7 @@ type CodeBlockProps = {
 // Just enough YAML colouring for the snippets on the front page: comments,
 // keys, and quoted strings. The wiki's code blocks are highlighted at build time
 // by Prism instead (tools/content.mjs), so the page ships no highlighter.
-function highlightYaml(code: string): ReactNode[] {
+export function highlightYaml(code: string): ReactNode[] {
   return code.split('\n').map((line, index) => {
     const parts: ReactNode[] = []
     const comment = line.match(/^(.*?)(\s#.*|^#.*)$/)

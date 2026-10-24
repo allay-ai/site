@@ -145,7 +145,7 @@ export type Copy = {
     title: string
     lead: ReactNode
     steps: { title: string; body: ReactNode }[]
-    /** The download button for each build the latest release carries. */
+    /** The download button for each build the latest release carries, named by its loaders. */
     download: Record<Platform, string>
     /** With {version}. */
     latest: string
