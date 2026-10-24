@@ -1,8 +1,18 @@
 import { Link } from 'react-router-dom'
-import { byokLimits, retention, soloReleaseDays } from '../data/plans.ts'
+import {
+  byokLimits,
+  plans,
+  retention,
+  soloOnSale,
+  soloPlans,
+  soloReleaseDays,
+} from '../data/plans.ts'
 import { links, modsShipped } from '../data/site.ts'
 import { count } from './format.ts'
 import type { Copy } from './types.ts'
+
+/** The lowest price among some plans, in Stars. */
+const cheapest = (list: { stars: number }[]) => Math.min(...list.map((plan) => plan.stars))
 
 export const es: Copy = {
   htmlLang: 'es',
@@ -571,86 +581,82 @@ export const es: Copy = {
     title: 'Lo que preguntan los dueños de servidores',
     items: [
       {
-        question: '¿Allay funciona en Spigot o solo en Paper?',
-        answer:
-          'En los dos y en sus forks: se compila con la API de Spigot. La experiencia de los hornos de los agentes llega al jugador solo en Paper; en Spigot se queda en el horno.',
+        question: '¿Dónde funciona Allay?',
+        answer: modsShipped
+          ? 'Como plugin en Spigot, Paper y sus forks, y como mod en Fabric y NeoForge 26.3, en un servidor dedicado o en tu propio mundo. Quien entra al servidor no necesita instalar nada.'
+          : 'Como plugin en Spigot, Paper y sus forks. Quien entra al servidor no necesita instalar nada.',
       },
-      ...(modsShipped
-        ? [
-            {
-              question: '¿Allay funciona en Fabric, NeoForge o en un mundo individual?',
-              answer:
-                'Sí. Los mods para Fabric y NeoForge 26.3 tienen todas las herramientas del plugin y funcionan en un servidor dedicado o en tu propio mundo individual, donde vinculas una licencia sin trucos. Un plan Solo, solo para ti, cuesta menos que el de un servidor. Quien entra a un servidor con Allay no necesita instalar nada.',
-            },
-          ]
-        : []),
       {
-        question: '¿Puede un jugador normal conseguir objetos con Allay?',
+        question: '¿Cuánto cuesta?',
         answer: (
           <>
-            No. Las herramientas que dan objetos o cambian el mundo son solo para operadores, y el
-            plugin lo comprueba tres veces. Los agentes solo mueven las cosas del propio jugador y
-            fabrican con ingredientes reales. La única excepción es{' '}
-            <strong>[Coger el libro]</strong>: un libro escrito con la respuesta larga de Allay, una
-            vez.
+            Nada en allay.chat con tu propia clave de IA. La suscripción para un servidor empieza en{' '}
+            {cheapest(plans)} ⭐ a la semana
+            {soloOnSale && (
+              <>, y Solo, para el mod en tu propio mundo, en {cheapest(soloPlans)} ⭐</>
+            )}
+            . Tu propio backend es gratis. Mira los <Link to="/es/#pricing">precios</Link>.
           </>
         ),
       },
       {
-        question: '¿Qué sabe Allay de los demás jugadores?',
+        question: '¿Necesito mi propia clave de IA?',
         answer:
-          'Solo lo que muestra la barra de localización de quien pregunta: un nombre, una distancia y una dirección. Quien se esconde de la barra agachándose, con una calabaza o con invisibilidad se esconde también de Allay.',
+          'No. La suscripción funciona con la clave y el modelo de allay.chat. Con tu propia clave de OpenRouter u otra API compatible con OpenAI, pagas a su proveedor y eliges cualquier modelo que sepa usar herramientas.',
       },
       {
-        question: '¿Qué guarda allay.chat de los jugadores?',
+        question: '¿Se puede hacer trampa con él?',
         answer: (
           <>
-            Una sesión durante {retention.sessionDays} días tras la última pregunta; hasta{' '}
-            {retention.memoryFacts} datos y lugares, muertes y ajustes hasta que el jugador los
-            borre o pase un año sin preguntar; estadísticas solo con números bajo un seudónimo
-            durante {retention.runsDays} días; y trazas de las respuestas durante{' '}
-            {retention.traceDays} días, para encontrar fallos. Todo lo que dijo un jugador se guarda
-            cifrado. La <Link to="/privacy/">política de privacidad</Link> (en inglés) tiene los
-            detalles. En el juego, <code>/allay privacy</code> le muestra lo mismo al jugador y lo
-            borra si lo pide.
+            No. Las herramientas que dan objetos o cambian el mundo son solo para operadores, y se
+            comprueba tres veces. Los agentes solo mueven las cosas del propio jugador y fabrican
+            con ingredientes reales. El único regalo es <strong>[Tomar el libro]</strong>: un libro
+            escrito con la respuesta larga de Allay, una vez.
           </>
         ),
       },
       {
-        question: '¿Qué modelo responde?',
+        question: '¿Puede Allay delatar dónde están otros jugadores?',
         answer:
-          'Con suscripción, el modelo que elige allay.chat, que el plugin no puede cambiar. Con tu propia clave o tu propio backend, cualquier modelo que sepa llamar a herramientas; un servidor puede incluso dar a cada grupo de jugadores su propio modelo.',
+          'Solo lo que ya muestra la barra de localización de quien pregunta: un nombre, una distancia y una dirección. Quien se esconde de la barra, agachado, con una calabaza o invisible, se esconde también de Allay.',
+      },
+      {
+        question: '¿Qué pasa con los datos de mis jugadores?',
+        answer: (
+          <>
+            En allay.chat, antes de la primera pregunta, Allay muestra a cada jugador qué envía y
+            qué guarda, le pregunta la edad y espera un sí. Después guarda la sesión{' '}
+            {retention.sessionDays} días y hasta {retention.memoryFacts} datos y lugares, todo
+            cifrado, hasta que el jugador lo borre con <code>/allay privacy</code>. La{' '}
+            <Link to="/privacy/">política de privacidad</Link> (en inglés) tiene los detalles.
+          </>
+        ),
       },
       {
         question: '¿Puedo limitar lo que gastan los jugadores?',
         answer: (
           <>
-            Sí. La cuota del plugin fija un presupuesto mensual y lo reparte de forma justa entre
-            los grupos que das con permisos. Consulta{' '}
+            Sí. Un presupuesto mensual se reparte de forma justa entre los grupos de jugadores que
+            das con permisos. Mira{' '}
             <Link to="/wiki/plugin/paying-for-the-model/#limits-per-player">Limits per player</Link>{' '}
             (en inglés).
           </>
         ),
       },
       {
-        question: '¿Está Allay en Modrinth o Hangar?',
-        answer:
-          'Todavía no. Por ahora la única fuente son las versiones de GitHub. itzg/minecraft-server toma el jar de allay.chat/download/, que entrega el mismo archivo, como muestra la sección de instalación.',
-      },
-      {
-        question: '¿Los jugadores tienen que aceptar primero?',
-        answer:
-          'En allay.chat, sí. Antes de la primera pregunta, Allay muestra a cada jugador qué envía y qué guarda, le pregunta la edad y espera un sí. Hasta entonces, nada sobre él llega al backend y Allay no le responde.',
-      },
-      {
-        question: '¿Están seguras mi clave y mi licencia?',
+        question: '¿Puedo alojarlo todo yo mismo?',
         answer: (
           <>
-            Ninguna llega nunca a un registro ni al chat, y <code>/allay status</code> muestra la
-            clave enmascarada. La licencia vive en <code>license.key</code>, aparte de{' '}
-            <code>config.yml</code>, así que puedes compartir tu configuración cuando pidas ayuda.
+            Sí. Allay Server es de código abierto y funciona en Docker junto a Minecraft, sin pagos
+            ni límites, y nada pasa por allay.chat. Mira{' '}
+            <Link to="/es/#self-hosting">tu propio backend</Link>.
           </>
         ),
+      },
+      {
+        question: '¿Qué idiomas habla?',
+        answer:
+          'Allay responde en el idioma de la pregunta. Sus botones, ventanas y mensajes vienen en inglés, ruso, español, portugués y alemán, según el país o el idioma del juego del jugador, o con /allay language.',
       },
     ],
   },

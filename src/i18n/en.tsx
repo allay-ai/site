@@ -1,8 +1,18 @@
 import { Link } from 'react-router-dom'
-import { byokLimits, retention, soloReleaseDays } from '../data/plans.ts'
+import {
+  byokLimits,
+  plans,
+  retention,
+  soloOnSale,
+  soloPlans,
+  soloReleaseDays,
+} from '../data/plans.ts'
 import { links, modsShipped } from '../data/site.ts'
 import { count } from './format.ts'
 import type { Copy } from './types.ts'
+
+/** The lowest price among some plans, in Stars. */
+const cheapest = (list: { stars: number }[]) => Math.min(...list.map((plan) => plan.stars))
 
 export const en: Copy = {
   htmlLang: 'en',
@@ -558,84 +568,81 @@ export const en: Copy = {
     title: 'Questions server owners ask',
     items: [
       {
-        question: 'Does Allay run on Spigot, or only on Paper?',
-        answer:
-          'Both, and their forks. It builds against the Spigot API. Furnace experience from agents goes to the player only on Paper; on Spigot it stays in the furnace.',
+        question: 'Where does Allay run?',
+        answer: modsShipped
+          ? 'On Spigot, Paper, and their forks as a plugin, and on Fabric and NeoForge 26.3 as a mod, on a dedicated server or in your own world. Players who join need nothing in their game.'
+          : 'On Spigot, Paper, and their forks, as a plugin. Players who join need nothing in their game.',
       },
-      ...(modsShipped
-        ? [
-            {
-              question: 'Does Allay run on Fabric, NeoForge, or in singleplayer?',
-              answer:
-                'Yes. The mods for Fabric and NeoForge 26.3 have every tool the plugin has and run on a dedicated server or in your own singleplayer world, where you link a license without cheats. A Solo plan, for you alone, costs less than a server’s. Players joining a server with Allay need nothing in their game.',
-            },
-          ]
-        : []),
       {
-        question: 'Can a regular player get items through Allay?',
+        question: 'What does it cost?',
         answer: (
           <>
-            No. Tools that give items or change the world go to operators only, and the plugin
-            checks three times. Agents only move a player’s own things and craft from real
-            ingredients. The one exception is <strong>[Take the book]</strong>: a written book with
-            Allay’s own long answer, once.
+            Nothing on allay.chat with your own AI key. A subscription for a server starts at{' '}
+            {cheapest(plans)} ⭐ a week
+            {soloOnSale && (
+              <>, and Solo, for the mod in your own world, at {cheapest(soloPlans)} ⭐</>
+            )}
+            . Your own backend is free. See <Link to="/#pricing">pricing</Link>.
           </>
         ),
       },
       {
-        question: 'What does Allay know about other players?',
+        question: 'Do I need my own AI key?',
         answer:
-          'Only what the asker’s locator bar shows: a name, a distance, and a direction. Whoever hides from the bar by crouching, a pumpkin, or invisibility hides from Allay too.',
+          'No. A subscription runs on allay.chat’s key and model. With a key of your own from OpenRouter or another OpenAI-compatible API, you pay its provider and pick any model that can call tools.',
       },
       {
-        question: 'What does allay.chat keep about players?',
+        question: 'Can players cheat with it?',
         answer: (
           <>
-            A session for {retention.sessionDays} days after the last question; up to{' '}
-            {retention.memoryFacts} facts and places, deaths, and settings until the player erases
-            them or stops asking for a year; numbers-only statistics under a pseudonym for{' '}
-            {retention.runsDays} days; and traces of answers for {retention.traceDays} days, to find
-            faults. Everything a player said is encrypted at rest. The{' '}
-            <Link to="/privacy/">privacy policy</Link> has the details. In the game,{' '}
-            <code>/allay privacy</code> shows a player the same and erases it on request.
+            No. Tools that give items or change the world are for operators only, checked three
+            times. Agents only move a player’s own things and craft from real ingredients. The one
+            gift is <strong>[Take the book]</strong>: a written book with Allay’s long answer, once.
           </>
         ),
       },
       {
-        question: 'Which model answers?',
+        question: 'Can Allay give away where other players are?',
         answer:
-          'On a subscription, the model allay.chat picks, which the plugin can’t change. With your own key or your own backend, any model that can call tools; a server can even give each player tier its own model.',
+          'Only what the asker’s locator bar already shows: a name, a distance, and a direction. Whoever hides from the bar, crouching, under a pumpkin, or invisible, hides from Allay too.',
+      },
+      {
+        question: 'What happens to my players’ data?',
+        answer: (
+          <>
+            On allay.chat, before a first question, Allay shows each player what it sends and keeps,
+            asks their age, and waits for a yes. It then keeps a session for {retention.sessionDays}{' '}
+            days and up to {retention.memoryFacts} facts and places, all encrypted, until the player
+            erases them with <code>/allay privacy</code>. The{' '}
+            <Link to="/privacy/">privacy policy</Link> has the details.
+          </>
+        ),
       },
       {
         question: 'Can I cap what players spend?',
         answer: (
           <>
-            Yes. The plugin’s quota sets a monthly budget and splits it fairly by tiers you give
-            with permissions. See{' '}
+            Yes. A monthly budget splits fairly between the player tiers you give with permissions.
+            See{' '}
             <Link to="/wiki/plugin/paying-for-the-model/#limits-per-player">limits per player</Link>
             .
           </>
         ),
       },
       {
-        question: 'Is Allay on Modrinth or Hangar?',
-        answer:
-          'Not yet. GitHub releases are the one source for now. itzg/minecraft-server takes the jar from allay.chat/download/, which hands over the same file, as the install section shows.',
-      },
-      {
-        question: 'Do players have to agree first?',
-        answer:
-          'On allay.chat, yes. Before a first question, Allay shows each player what it sends and keeps, asks their age, and waits for a yes. Until then, nothing about them reaches the backend, and Allay doesn’t answer them.',
-      },
-      {
-        question: 'Is my key or license safe?',
+        question: 'Can I host everything myself?',
         answer: (
           <>
-            Neither ever reaches a log or the chat, and <code>/allay status</code> shows a key
-            masked. The license lives in <code>license.key</code>, apart from{' '}
-            <code>config.yml</code>, so you can share your config when asking for help.
+            Yes. Allay Server is open source and runs in Docker next to Minecraft, with no billing
+            and no limits, and nothing passes through allay.chat. See{' '}
+            <Link to="/#self-hosting">self-hosting</Link>.
           </>
         ),
+      },
+      {
+        question: 'Which languages does it speak?',
+        answer:
+          'Allay answers in the language of the question. Its buttons, windows, and messages come in English, Russian, Spanish, Portuguese, and German, picked by the player’s country or game language, or with /allay language.',
       },
     ],
   },
