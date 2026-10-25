@@ -44,11 +44,12 @@ export const builds: Record<Platform, string | null> = {
 export const modsShipped = builds.fabric !== null && builds.neoforge !== null
 
 /**
- * Stores besides GitHub. Neither the Modrinth project `allay-ai` nor the Hangar
- * project `AllayAI` exists yet (checked 2026-10-20); fill in the address once
- * one does, and the install section lists it.
+ * Stores besides GitHub; the install section lists each that has an address. Hangar
+ * has the plugin since 6.18.1. The Modrinth project `allay-ai` exists too, but stays
+ * hidden while Modrinth reviews it (sent 2026-10-25): fill in
+ * `https://modrinth.com/project/allay-ai` once it's public.
  */
 export const stores: { modrinth: string | null; hangar: string | null } = {
   modrinth: null,
-  hangar: null,
+  hangar: 'https://hangar.papermc.io/MairwunNx/AllayAI',
 }
