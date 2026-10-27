@@ -10,33 +10,49 @@
 
 .route {
   display: grid;
-  gap: @space-1 @space-4;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'name price'
+    'line line';
+  gap: @space-2 @space-4;
+  align-items: center;
   padding: @space-4 0;
   border-bottom: 1px solid @color-border;
   scroll-margin-top: 96px;
 
+  // On a wide screen every row centres its parts on one line: name, price, what it means.
   @media @screen-md {
     grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 6fr);
-    align-items: baseline;
+    grid-template-areas: 'name price line';
     gap: @space-5;
+    min-height: 112px;
   }
 }
 
 .routeName {
+  grid-area: name;
   margin: 0;
   font-size: 1.35rem;
 }
 
+// The price: “from” in a column of its own, right-aligned to the figure, so the
+// figures and “Free” all start on one vertical line.
 .routePrice {
-  position: relative;
+  grid-area: price;
+  display: grid;
+  grid-template-columns: 4.5rem auto;
+  align-items: baseline;
+  justify-content: start;
   margin: 0;
-  font-family: @font-pixel;
-  font-size: 24px;
-  line-height: 1.2;
-  color: @color-text;
+
+  @media (max-width: 859px) {
+    grid-template-columns: auto auto;
+    gap: @space-2;
+  }
 }
 
 .routeLine {
+  grid-area: line;
   margin: 0;
   max-width: 60ch;
 
@@ -47,17 +63,28 @@
 
 // “from” hangs to the left of the figure, so every price starts where “Free” does.
 .from {
-  margin-right: @space-2;
+  justify-self: end;
+  padding-right: @space-2;
   font-family: @font-body;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 700;
+  line-height: 1;
   color: @color-text-faint;
 
-  @media @screen-md {
-    position: absolute;
-    right: 100%;
-    bottom: 0.2em;
+  &:empty {
+    padding: 0;
   }
+
+  @media (max-width: 859px) {
+    padding-right: 0;
+  }
+}
+
+.figure {
+  font-family: @font-pixel;
+  font-size: 24px;
+  line-height: 1;
+  color: @color-text;
 }
 
 .stars {
@@ -112,6 +139,11 @@
   p {
     color: @color-mc-lore;
   }
+
+  // Links in the window keep the chat's aqua, readable on its grey in both themes.
+  a {
+    color: @color-chat-command;
+  }
 }
 
 .wellTitle {
@@ -137,13 +169,14 @@
     'name stars'
     'detail detail';
   gap: @space-1 @space-3;
+  align-items: baseline;
   padding: @space-3 0;
   border-top: 1px solid @color-mc-rule;
 
+  // Fixed tracks, the same in every row, so the three columns line up down the window.
   @media @screen-sm {
-    grid-template-columns: minmax(0, 2fr) minmax(0, 5fr) auto;
+    grid-template-columns: 5.5rem minmax(0, 1fr) 8.5rem;
     grid-template-areas: 'name detail stars';
-    align-items: baseline;
   }
 
   .stars {
@@ -196,17 +229,12 @@
   min-width: 0;
 }
 
-// The quiet press surface: the same edge and hard shadow as the downloads, unfilled.
 .cta {
   .mc-button();
   min-height: 48px;
   padding: 0 @space-4;
 }
 
-.more {
-  margin: @space-3 0 0;
-  font-size: 0.95rem;
-}
 
 .how {
   display: grid;

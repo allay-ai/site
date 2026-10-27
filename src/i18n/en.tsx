@@ -83,38 +83,54 @@ export const en: Copy = {
         ask: 'which of my swords is better?',
         title: 'Answers from the real game',
         body: 'Allay reads the inventory, the block under the crosshair, statistics, and advancements instead of guessing.',
+        answer:
+          'The diamond one with Sharpness V: 10 damage a hit, against 8 for your netherite sword without enchantments.',
       },
       {
         ask: 'how do I set a home here?',
         title: 'It knows this server',
         body: 'Mods’ items, data packs’ recipes, the plugins that really run, and the commands you may use here.',
+        answer: 'Stand where you want it and run /sethome. EssentialsX gives it on this server.',
+        buttons: ['/sethome'],
       },
       {
         ask: 'where did I put my redstone?',
         title: 'It finds your things and lights them up',
         body: 'It counts an item in chests up to 32 blocks around, and the chests that hold it glow for you alone.',
+        answer:
+          '2 stacks sit in the chest left of your furnace, and 14 more in the barrel under the stairs. I lit them up.',
+        buttons: ['The way'],
       },
       {
         ask: 'take me back to where I died',
         title: 'The way to anything',
         body: 'The compass and a particle trail lead to a death point, a village, or a friend on the locator bar.',
+        answer:
+          'You died 230 blocks north-east, at -120 64 410. The compass points there, and the trail leads the way.',
       },
       {
         ask: 'smelt all my raw gold evenly',
         title: 'Agents do the chores',
         body: 'They sort chests, smelt, brew in rounds, and craft at a real table while you play.',
+        answer:
+          'An agent took it: 24 raw gold into 3 furnaces, 8 each, with exactly 3 coal. I’ll tell you when it’s done.',
       },
       {
         ask: 'why doesn’t my door open?',
         title: 'Redstone, debugged',
         body: 'Allay reads the machine you look at, and red marks show where the fault is.',
+        answer: 'The dust runs past the door instead of into it. I marked the block in red.',
       },
       {
         ask: 'remember there’s an arrow trader here',
         title: 'It remembers you and your places',
         body: `Up to ${retention.memoryFacts} memories per player, places kept by dimension, all of it encrypted. /allay memory lists them.`,
+        answer: 'Remembered: an arrow trader at -212 71 348.',
+        buttons: ['The way'],
       },
     ],
+    example: 'Examples. Real answers depend on the player’s game.',
+    speaker: 'Allay',
     more: (
       <>
         There’s more: a tidy inventory, buttons and windows, the anvil planned, ghost torches for
@@ -363,7 +379,8 @@ export const en: Copy = {
     cta: 'Open @AllayChatBot',
     more: (
       <>
-        Need more? <a href="mailto:personal@mairwunnx.com">Contact us</a> for higher limits.
+        Need higher limits? Write to <a href={links.authorEmail}>personal@mairwunnx.com</a> or to{' '}
+        <a href={links.authorTelegram}>@mairwunnx</a> on Telegram.
       </>
     ),
     how: [

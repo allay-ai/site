@@ -8,6 +8,9 @@ export type Moment = {
   ask: string
   title: string
   body: ReactNode
+  /** An example of what Allay says back, and the buttons under it, as the chat shows them. */
+  answer: string
+  buttons?: string[]
 }
 
 export type Question = { question: string; answer: ReactNode }
@@ -65,6 +68,10 @@ export type Copy = {
     title: string
     lead: string
     moments: Moment[]
+    /** Under the chat: that the answers are examples. */
+    example: string
+    /** Who says the answer in chat. */
+    speaker: string
     /** One sentence naming the rest, with a link to the wiki's full list. */
     more: ReactNode
   }

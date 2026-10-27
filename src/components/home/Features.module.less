@@ -1,64 +1,105 @@
 @import (reference) '../../styles/tokens.less';
 
-// Rows parted by hairlines: on the left the question as the game's chat input
-// shows it, on the right what Allay does with it.
-.moments {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top: @rule-bar solid @color-border;
-}
-
-.moment {
+// A switcher: the moments as the game's buttons on the left, the chosen one in
+// the game's window on the right.
+.switcher {
   display: grid;
-  gap: @space-3;
-  padding: @space-4 0;
-  border-bottom: 1px solid @color-border;
+  gap: @space-4;
 
-  @media @screen-md {
+  @media @screen-lg {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: @space-6;
-    align-items: center;
-    padding: @space-5 0;
+    gap: @space-5;
+    align-items: start;
   }
 }
 
-.ask {
-  justify-self: start;
-  max-width: 100%;
-  margin: 0;
-  // The game's chat line: its see-through grey, white letters with their shadow.
-  padding: @space-1 @space-2;
-  border-radius: 0;
-  background: @color-chat-line;
-  color: @color-chat-ink;
-  text-shadow: 2px 2px 0 @color-mc-shadow;
+.list {
+  display: grid;
+  gap: @space-1;
+  min-width: 0;
+}
+
+.choice {
+  .mc-button();
+  width: 100%;
+
+  &[aria-selected='true'] {
+    .mc-button-chosen();
+  }
+}
+
+.panel {
+  min-width: 0;
+}
+
+// The game's window holding its chat: Allay's answer in the chat's colours, and
+// under it the input line where the player typed.
+.window {
+  .mc-window();
+  display: grid;
+  gap: @space-3;
+  min-height: 220px;
+  align-content: end;
+  padding: @space-2;
   font-family: @font-pixel;
   font-size: 16px;
   line-height: 1.5;
-  overflow-wrap: break-word;
+  text-shadow: 2px 2px 0 @color-mc-shadow;
 
   @media @screen-lg {
     font-size: 20px;
+    min-height: 260px;
   }
+}
+
+.chat {
+  margin: 0;
+  padding: @space-1 @space-2;
+  background: @color-chat-line;
+  color: @color-mc-text;
+  overflow-wrap: break-word;
+}
+
+.mark,
+.speaker {
+  color: @color-chat-command;
+}
+
+.arrow {
+  color: @color-mc-lore;
+}
+
+// The answer's buttons in the chat's green, as the plugin writes them.
+.button {
+  color: @color-mc-green;
+}
+
+// widget/text_field.png: the game's black field with its grey edge, border 1 at 2×.
+.input {
+  margin: 0;
+  padding: @space-1 @space-2;
+  border: 2px solid transparent;
+  border-image: url('/mc/text_field.png') 1 fill / 2px stretch;
+  image-rendering: pixelated;
+  color: @color-mc-text;
+  overflow-wrap: break-word;
 }
 
 .command {
   color: @color-chat-command;
 }
 
-.text {
-  min-width: 0;
-}
-
-.title {
-  margin-bottom: @space-1;
-  font-size: 1.35rem;
-}
-
 .body {
-  margin: 0;
   max-width: 60ch;
+  margin: @space-3 0 0;
+  font-size: 1.05rem;
+  color: @color-text;
+}
+
+.example {
+  margin: @space-1 0 0;
+  font-size: 0.9rem;
+  color: @color-text-faint;
 }
 
 .more {

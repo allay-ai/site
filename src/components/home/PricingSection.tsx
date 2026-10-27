@@ -22,16 +22,21 @@ function Stars({ stars, locale }: { stars: number; locale: Locale }) {
   )
 }
 
-/** One way to pay: its name, its price, and what it means. */
+/**
+ * One way to pay: its name, its price, and what it means. A price “from” some
+ * Stars takes the word in a column of its own, so every figure starts on one line.
+ */
 function Route({
   id,
   name,
+  from,
   price,
   line,
   action,
 }: {
   id?: string
   name: string
+  from?: string
   price: ReactNode
   line: ReactNode
   action?: ReactNode
@@ -39,7 +44,10 @@ function Route({
   return (
     <li id={id} className={styles.route}>
       <h3 className={styles.routeName}>{name}</h3>
-      <p className={styles.routePrice}>{price}</p>
+      <p className={styles.routePrice}>
+        <span className={styles.from}>{from}</span>
+        <span className={styles.figure}>{price}</span>
+      </p>
       <p className={styles.routeLine}>
         {line} {action}
       </p>
@@ -92,22 +100,22 @@ const cheapest = (list: { stars: number }[]) => Math.min(...list.map((plan) => p
 export function PricingSection({ copy, locale }: { copy: Copy; locale: Locale }) {
   const { pricing } = copy
   const { routes } = pricing
-  const from = (stars: number) => (
-    <>
-      <span className={styles.from}>{pricing.from}</span>
-      <Stars stars={stars} locale={locale} />
-    </>
-  )
 
   return (
     <Section id="pricing" title={pricing.title} lead={pricing.lead}>
       <ul className={styles.routes}>
         <Route name={routes.byok.name} price={routes.byok.price} line={routes.byok.line} />
-        <Route name={routes.hosted.name} price={from(cheapest(plans))} line={routes.hosted.line} />
+        <Route
+          name={routes.hosted.name}
+          from={pricing.from}
+          price={<Stars stars={cheapest(plans)} locale={locale} />}
+          line={routes.hosted.line}
+        />
         {soloOnSale && (
           <Route
             name={routes.solo.name}
-            price={from(cheapest(soloPlans))}
+            from={pricing.from}
+            price={<Stars stars={cheapest(soloPlans)} locale={locale} />}
             line={routes.solo.line}
           />
         )}
@@ -121,7 +129,9 @@ export function PricingSection({ copy, locale }: { copy: Copy; locale: Locale })
       </ul>
 
       <div className={`${styles.wells} ${soloOnSale ? '' : styles.single}`}>
-        <PlanList title={pricing.serverTitle} list={plans} copy={pricing} locale={locale} />
+        <PlanList title={pricing.serverTitle} list={plans} copy={pricing} locale={locale}>
+          <p className={styles.note}>{pricing.more}</p>
+        </PlanList>
         {soloOnSale && (
           <PlanList title={pricing.soloTitle} list={soloPlans} copy={pricing} locale={locale}>
             <p className={styles.note}>{pricing.soloNote}</p>
@@ -140,7 +150,6 @@ export function PricingSection({ copy, locale }: { copy: Copy; locale: Locale })
           <a className={styles.cta} href={links.bot}>
             {pricing.cta}
           </a>
-          <p className={styles.more}>{pricing.more}</p>
         </div>
       </div>
 

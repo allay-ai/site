@@ -22,6 +22,11 @@ export function InstallSection({ copy }: { copy: Copy }) {
   const extraStores = [
     stores.modrinth && { name: 'Modrinth', href: stores.modrinth },
     stores.hangar && { name: 'Hangar', href: stores.hangar },
+    stores.curseforgePlugin && { name: 'CurseForge (Paper)', href: stores.curseforgePlugin },
+    stores.curseforgeMods && {
+      name: 'CurseForge (Fabric, NeoForge)',
+      href: stores.curseforgeMods,
+    },
   ].filter((store): store is { name: string; href: string } => Boolean(store))
 
   return (

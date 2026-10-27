@@ -90,38 +90,55 @@ export const es: Copy = {
         ask: '¿cuál de mis espadas es mejor?',
         title: 'Respuestas desde la partida real',
         body: 'Allay lee el inventario, el bloque al que apuntas, las estadísticas y los logros en vez de adivinar.',
+        answer:
+          'La de diamante con Filo V: 10 de daño por golpe, contra 8 de tu espada de netherita sin encantar.',
       },
       {
         ask: '¿cómo pongo una casa aquí?',
         title: 'Conoce este servidor',
         body: 'Los objetos de los mods, las recetas de los data packs, los plugins que de verdad tiene y los comandos que puedes usar aquí.',
+        answer: 'Ponte donde la quieras y ejecuta /sethome. En este servidor lo da EssentialsX.',
+        buttons: ['/sethome'],
       },
       {
         ask: '¿dónde dejé mi redstone?',
         title: 'Encuentra tus cosas y las ilumina',
         body: 'Cuenta un objeto en los cofres a menos de 32 bloques, y los cofres que lo guardan brillan solo para ti.',
+        answer:
+          'Hay 2 stacks en el cofre a la izquierda de tu horno y 14 más en el barril bajo la escalera. Te los he iluminado.',
+        buttons: ['El camino'],
       },
       {
         ask: 'llévame a donde morí',
         title: 'El camino a cualquier sitio',
         body: 'La brújula y un rastro de partículas te llevan al punto donde moriste, a una aldea o a un amigo de la barra de localización.',
+        answer:
+          'Moriste a 230 bloques al noreste, en -120 64 410. La brújula apunta allí y el rastro te guía.',
       },
       {
         ask: 'funde todo mi oro en bruto por igual',
         title: 'Agentes que hacen las tareas',
         body: 'Ordenan cofres, funden, preparan pociones por tandas y fabrican en una mesa de verdad mientras juegas.',
+        answer:
+          'Un agente se encarga: 24 de oro en bruto en 3 hornos, 8 en cada uno, con 3 de carbón justos. Te aviso al terminar.',
       },
       {
         ask: '¿por qué no se abre mi puerta?',
         title: 'Redstone depurada',
         body: 'Allay lee la máquina que miras, y unas marcas rojas muestran dónde está el fallo.',
+        answer:
+          'El polvo pasa junto a la puerta en vez de entrar en ella. He marcado el bloque en rojo.',
       },
       {
         ask: 'recuerda que aquí hay un aldeano que vende flechas',
         title: 'Te recuerda a ti y tus lugares',
         body: `Hasta ${retention.memoryFacts} recuerdos por jugador, lugares guardados por dimensión, todo cifrado. /allay memory los muestra.`,
+        answer: 'Recordado: un aldeano que vende flechas en -212 71 348.',
+        buttons: ['El camino'],
       },
     ],
+    example: 'Son ejemplos. Las respuestas reales dependen de la partida del jugador.',
+    speaker: 'Allay',
     more: (
       <>
         Y hay más: un inventario ordenado, botones y ventanas, el yunque planificado, antorchas
@@ -376,8 +393,9 @@ export const es: Copy = {
     cta: 'Abrir @AllayChatBot',
     more: (
       <>
-        ¿Necesitas más? <a href="mailto:personal@mairwunnx.com">Escríbenos</a> para límites más
-        altos.
+        ¿Necesitas límites más altos? Escribe a{' '}
+        <a href={links.authorEmail}>personal@mairwunnx.com</a> o a{' '}
+        <a href={links.authorTelegram}>@mairwunnx</a> en Telegram.
       </>
     ),
     how: [

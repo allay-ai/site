@@ -63,7 +63,7 @@
 
   .pre {
     .mc-window();
-    margin-top: -4px;
+    margin-top: 0;
     padding: @space-3 @space-3 @space-2;
     color: @color-mc-text;
     // The window is dark in both themes, so the code takes the night's colours.
@@ -98,7 +98,7 @@
 .tabsCopy {
   position: absolute;
   z-index: 2;
-  top: 52px;
+  top: 64px;
   right: 12px;
 }
 
@@ -106,22 +106,61 @@
   display: flex;
   gap: @space-1;
   min-width: 0;
+  // Room under the tabs for the open one to reach over the window's edge.
+  padding-bottom: 12px;
+  margin-bottom: -12px;
   overflow-x: auto;
 }
 
+// Each tab is the window's own texture without its bottom edge, so tab and window
+// share one frame. The closed ones sit a shade darker; the open one reaches down
+// over the window's top edge and becomes part of it.
 .tab {
-  .mc-tab();
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   gap: @space-2;
-  min-height: 40px;
-  padding: 0 @space-3;
+  min-height: 44px;
+  padding: @space-2 @space-4 @space-1 calc(@space-4 + 0.25em);
+  border: 0;
+  background: none;
+  color: @color-mc-lore;
+  font-family: @font-pixel;
+  font-size: 12px;
+  text-shadow: 1.5px 1.5px 0 @color-mc-shadow;
   white-space: nowrap;
   cursor: pointer;
 
+  @media @screen-sm {
+    font-size: 16px;
+    text-shadow: 2px 2px 0 @color-mc-shadow;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border: 12px solid transparent;
+    border-bottom-width: 0;
+    border-image: url('/mc/window.png') 6 6 0 6 fill / 12px 12px 0 12px repeat;
+    image-rendering: pixelated;
+    filter: brightness(0.72);
+    pointer-events: none;
+  }
+
+  &:hover {
+    color: @color-mc-text;
+
+    &::before {
+      filter: brightness(0.86);
+    }
+  }
+
   // Three names fit a phone without their logos.
   @media (max-width: 479px) {
-    padding: 0 @space-2;
+    padding-inline: @space-3;
 
     & > span {
       display: none;
@@ -129,10 +168,11 @@
   }
 
   &[aria-selected='true'] {
-    border-image-source: url('/mc/tab_selected.png');
-    background: @color-mc-panel;
-    background-clip: padding-box;
     color: @color-mc-text;
-    min-height: 44px;
+
+    &::before {
+      bottom: -12px;
+      filter: none;
+    }
   }
 }

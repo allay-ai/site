@@ -17,6 +17,8 @@ export const links = {
   openRouter: 'https://openrouter.ai',
   moonlands: 'https://minecraft.mairwunnx.com',
   author: 'https://github.com/MairwunNx',
+  authorTelegram: 'https://t.me/mairwunnx',
+  authorEmail: 'mailto:personal@mairwunnx.com',
   issues: 'https://github.com/allay-ai/site/issues',
 } as const
 
@@ -45,11 +47,19 @@ export const modsShipped = builds.fabric !== null && builds.neoforge !== null
 
 /**
  * Stores besides GitHub; the install section lists each that has an address. Hangar
- * has the plugin since 6.18.1. The Modrinth project `allay-ai` exists too, but stays
+ * has the plugin since 6.18.1; CurseForge has two projects, the plugin for Paper and
+ * the mods for Fabric and NeoForge (allay-ai/minecraft's README links both). The Modrinth project `allay-ai` exists too, but stays
  * hidden while Modrinth reviews it (sent 2026-10-25): fill in
  * `https://modrinth.com/project/allay-ai` once it's public.
  */
-export const stores: { modrinth: string | null; hangar: string | null } = {
+export const stores: {
+  modrinth: string | null
+  hangar: string | null
+  curseforgePlugin: string | null
+  curseforgeMods: string | null
+} = {
   modrinth: null,
   hangar: 'https://hangar.papermc.io/MairwunNx/AllayAI',
+  curseforgePlugin: 'https://www.curseforge.com/projects/1766142',
+  curseforgeMods: 'https://www.curseforge.com/projects/1766195',
 }
