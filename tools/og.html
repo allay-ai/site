@@ -1,7 +1,9 @@
 <!doctype html>
 <!-- The link preview card, 1200×630. `pnpm og` screenshots it into
      public/og-image.png; edit this file, never the PNG. Fonts come from
-     node_modules and src/assets/fonts, so run `pnpm install` first. -->
+     node_modules and src/assets/fonts, the game's textures from public/mc/,
+     so run `pnpm install` first. It follows the site: the mark's night navy,
+     the game's font, and Allay answering in the game's own window. -->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -16,6 +18,16 @@
         src: url('../src/assets/fonts/minecraft.woff2') format('woff2');
         font-weight: 400;
       }
+      :root {
+        --paper: oklch(17% 0.035 268);
+        --ink: oklch(95% 0.012 250);
+        --ink-2: oklch(86% 0.02 250);
+        --aqua: oklch(84% 0.13 205);
+        --lore: oklch(76% 0.004 250);
+        --green: oklch(85% 0.2 145);
+        --shadow: oklch(32% 0.004 250);
+        --chat: oklch(46% 0.004 260 / 0.5);
+      }
       html,
       body {
         margin: 0;
@@ -26,88 +38,103 @@
       body {
         position: relative;
         font-family: 'Onest', sans-serif;
-        color: #e7eff9;
-        background:
-          radial-gradient(ellipse 600px 420px at 12% 8%, rgba(64, 160, 255, 0.35), transparent 70%),
-          radial-gradient(ellipse 520px 420px at 95% 95%, rgba(130, 100, 255, 0.35), transparent 70%),
-          #070d18;
+        color: var(--ink);
+        background: var(--paper);
       }
       .mark {
         position: absolute;
-        left: 80px;
-        top: 70px;
-        width: 108px;
-        height: 108px;
-        border-radius: 24px;
+        left: 72px;
+        top: 64px;
+        width: 96px;
+        height: 96px;
+        border-radius: 20px;
       }
+      .wordmark {
+        position: absolute;
+        left: 188px;
+        top: 96px;
+        font-family: 'Minecraft', monospace;
+        font-size: 32px;
+      }
+      /* The game's letters at multiples of 4 px, so their pixels stay whole. */
       h1 {
         position: absolute;
-        left: 80px;
-        top: 210px;
+        left: 72px;
+        top: 216px;
         margin: 0;
-        font-size: 78px;
-        line-height: 1;
-        letter-spacing: -2.5px;
-        font-weight: 750;
-      }
-      h1 em {
-        font-style: normal;
-        background: linear-gradient(100deg, #5bbcff, #a993ff);
-        -webkit-background-clip: text;
-        color: transparent;
+        font-family: 'Minecraft', monospace;
+        font-weight: 400;
+        font-size: 48px;
+        line-height: 1.15;
       }
       p {
         position: absolute;
-        left: 80px;
-        top: 400px;
-        width: 580px;
+        left: 72px;
+        top: 360px;
+        width: 520px;
         margin: 0;
-        font-size: 30px;
-        line-height: 1.35;
-        color: #a5b5ca;
+        font-size: 28px;
+        line-height: 1.4;
+        color: var(--ink-2);
+      }
+      code {
+        font-family: 'Minecraft', monospace;
+        font-size: 24px;
+        color: var(--aqua);
       }
       .domain {
         position: absolute;
-        left: 80px;
+        left: 72px;
         bottom: 56px;
-        font-size: 26px;
-        font-weight: 600;
-        color: #7cc9ff;
+        font-family: 'Minecraft', monospace;
+        font-size: 24px;
+        color: var(--aqua);
+      }
+      /* popup/background.png, border 6 at 2×: the game's window. */
+      .window {
+        position: absolute;
+        right: 56px;
+        top: 214px;
+        width: 448px;
+        display: grid;
+        gap: 16px;
+        padding: 8px;
+        border: 12px solid transparent;
+        border-image: url('../public/mc/window.png') 6 fill / 12px repeat;
+        image-rendering: pixelated;
+        font-family: 'Minecraft', monospace;
+        font-size: 20px;
+        line-height: 1.5;
+        color: var(--ink);
+        text-shadow: 2px 2px 0 var(--shadow);
       }
       .chat {
-        position: absolute;
-        right: 64px;
-        top: 150px;
-        width: 440px;
-        padding: 20px 22px;
-        background: rgba(0, 0, 0, 0.55);
-        border: 2px solid rgba(255, 255, 255, 0.08);
-        border-radius: 18px;
-        font-family: 'Minecraft', monospace;
-        /* Multiples of 4 px keep the font's pixels whole. */
-        font-size: 20px;
-        line-height: 1.45;
-        color: #fff;
+        padding: 4px 8px;
+        background: var(--chat);
       }
-      .gray { color: #aaa; }
-      .dark { color: #9a9a9a; }
-      .aqua { color: #55ffff; }
-      .aqua-dark { color: #00aaaa; }
-      .green { color: #55ff55; text-decoration: underline; }
-      .cmd { margin-top: 14px; padding: 6px 10px; background: rgba(0, 0, 0, 0.5); }
+      .aqua { color: var(--aqua); }
+      .lore { color: var(--lore); }
+      .green { color: var(--green); }
+      /* widget/text_field.png, border 1 at 2×: the chat's input line. */
+      .input {
+        padding: 4px 8px;
+        border: 2px solid transparent;
+        border-image: url('../public/mc/text_field.png') 1 fill / 2px stretch;
+      }
     </style>
   </head>
   <body>
     <img class="mark" src="../public/icon-512.png" alt="" />
-    <h1>Ask your world<br /><em>anything</em></h1>
-    <p>An AI helper in your Minecraft server’s chat that looks into the player’s real game.</p>
+    <div class="wordmark">Allay AI</div>
+    <h1>Ask your world<br />anything</h1>
+    <p>Type <code>/ask</code>, and Allay reads your real Minecraft game before it answers.</p>
     <div class="domain">allay.chat</div>
-    <div class="chat">
-      <div class="gray">⏺ Searching for redstone</div>
-      <div class="dark">&nbsp;&nbsp;⎿ 3 chests within 32 blocks</div>
-      <div><span class="aqua-dark">✦ </span><span class="aqua">Allay</span> <span class="dark">»</span> 2 stacks sit in the chest left of your furnace. I lit it up for you.</div>
-      <div><span class="green">[The way]</span></div>
-      <div class="cmd">/ask where did I put my redstone?</div>
+    <div class="window">
+      <div class="chat">
+        <span class="aqua">✦ Allay</span><span class="lore"> » </span>2 stacks sit in the chest left of your furnace, and 14 more in the barrel under the stairs. I lit them up.
+        <span class="green">[The way]</span>
+      </div>
+      <div class="input"><span class="aqua">/ask</span> where did I put my redstone?</div>
     </div>
   </body>
 </html>
