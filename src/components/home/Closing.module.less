@@ -1,10 +1,14 @@
 @import (reference) '../../styles/tokens.less';
 
+// The one field of the lead ink on the page, edge to edge: the real server where
+// Allay runs, and the way in.
 .wrap {
-  padding: 0 @gutter @space-6;
+  padding: @space-6 @gutter;
+  background: @color-accent;
+  color: @color-on-accent;
 
   @media @screen-md {
-    padding-bottom: @space-7;
+    padding: @space-7 @gutter-wide;
   }
 }
 
@@ -14,24 +18,17 @@
   display: grid;
   gap: @space-4;
   align-items: center;
-  padding: @space-5 @space-4;
-  border-radius: @radius-xl;
-  color: #fff;
-  background:
-    radial-gradient(ellipse 60% 90% at 0% 0%, rgba(140, 220, 255, 0.45), transparent 60%),
-    linear-gradient(120deg, #0b5fae 0%, #3a4fd6 55%, #6a3fe0 100%);
-  box-shadow: 0 30px 80px -40px rgba(40, 60, 200, 0.8);
 
   @media @screen-md {
     grid-template-columns: auto minmax(0, 1fr) auto;
-    padding: @space-5;
     gap: @space-5;
   }
 }
 
 .mark {
-  width: 72px;
-  height: 72px;
+  width: 96px;
+  height: 96px;
+  border: @rule-bar solid @color-on-accent;
 }
 
 .text {
@@ -39,41 +36,56 @@
 }
 
 .title {
-  color: #fff;
-  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.2rem);
   margin-bottom: @space-2;
+  font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.5rem);
+  color: @color-on-accent;
 }
 
 .body {
-  color: rgba(255, 255, 255, 0.86);
-  margin-bottom: @space-2;
+  margin: 0 0 @space-3;
+  max-width: 56ch;
+  color: @color-on-accent;
 }
 
 .address {
   margin: 0;
 
   code {
-    background: rgba(255, 255, 255, 0.14) !important;
-    border-color: rgba(255, 255, 255, 0.25) !important;
-    color: #fff;
+    padding: @space-1 @space-2;
+    border-radius: @radius-sm;
+    background: @color-chat-bg;
+    color: @color-chat-ink;
+    font-family: @font-pixel;
+    font-size: 16px;
   }
 }
 
 .cta {
+  justify-self: start;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  padding: 0 24px;
-  border-radius: 999px;
-  background: #fff;
-  color: #0b3f7a;
+  min-height: 52px;
+  padding: 0 @space-4;
+  border: @rule-bar solid @color-on-accent;
+  border-radius: @radius-md;
+  background: @color-chat-bg;
+  color: @color-chat-ink;
   font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
-  justify-self: start;
+  margin-right: 4px;
+  box-shadow: 4px 4px 0 var(--color-accent-ink);
+  transition: transform @dur-micro @ease-out;
 
   &:hover {
-    background: #e8f3ff;
+    transform: translate(-1px, -1px);
+  }
+
+  &:active {
+    transform: translate(3px, 3px);
+  }
+
+  &:focus-visible {
+    outline-color: @color-on-accent;
   }
 }

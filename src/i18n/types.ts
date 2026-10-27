@@ -2,43 +2,13 @@ import type { ReactNode } from 'react'
 import type { PlanId } from '../data/plans.ts'
 import type { Platform } from '../data/site.ts'
 
-/** A feature card's picture; components/home/FeatureIcon.tsx draws each. */
-export type IconName =
-  | 'eye'
-  | 'search'
-  | 'trail'
-  | 'agent'
-  | 'grid'
-  | 'window'
-  | 'redstone'
-  | 'note'
-  | 'globe'
-  | 'brain'
-  | 'shield'
-  | 'calc'
-  | 'hammer'
-  | 'cube'
-  | 'bulb'
-  | 'sprout'
-  | 'flag'
-  | 'chat'
-  | 'terminal'
-  | 'chart'
-  | 'key'
-  | 'lock'
-
-export type Feature = {
-  icon: IconName
+/** One of the moments the front page leads with: the question a player types, then what Allay does. */
+export type Moment = {
+  /** As the player would type it after /ask. */
+  ask: string
   title: string
   body: ReactNode
-  /** A killer feature's example question, shown as the player would type it. */
-  ask?: string
 }
-
-export type ChatLine =
-  | { kind: 'tool'; label: string; result: string }
-  | { kind: 'answer'; text: string }
-  | { kind: 'buttons'; labels: string[] }
 
 export type Question = { question: string; answer: ReactNode }
 
@@ -81,39 +51,28 @@ export type Copy = {
     }
   }
   hero: {
-    eyebrow: string
     title: ReactNode
     lead: ReactNode
-    primary: string
-    secondary: string
-    facts: string[]
+    /** Under the downloads; with {version}. */
+    platforms: string
+    manual: string
   }
-  demo: {
-    label: string
-    caption: string
-    command: string
-    status: string
-    lines: ChatLine[]
-  }
-  /** Screenshots from the game: the live status as a video, then stills; files live in public/shots/<locale>/. */
-  shots: {
-    kicker: string
+  /** The looping capture of Allay at work, in the hero. */
+  video: { label: string; caption: string; pause: string; play: string }
+  features: {
     title: string
     lead: string
-    status: { label: string; caption: string }
+    moments: Moment[]
+    /** One sentence naming the rest, with a link to the wiki's full list. */
+    more: ReactNode
+  }
+  /** Screenshots from the game; files live in public/shots/<locale>/. */
+  shots: {
+    title: string
+    lead: string
     items: { file: ShotFile; caption: string; alt: string }[]
   }
-  features: {
-    kicker: string
-    title: string
-    lead: string
-    killerTitle: string
-    killer: Feature[]
-    otherTitle: string
-    other: Feature[]
-  }
   ask: {
-    kicker: string
     title: string
     lead: ReactNode
     commands: { command: string; what: ReactNode }[]
@@ -123,25 +82,14 @@ export type Copy = {
     youWrite: string
     itGoes: string
   }
-  memory: { kicker: string; title: string; items: { title: string; body: ReactNode }[] }
-  languages: { kicker: string; title: string; lead: ReactNode; names: string[]; note: ReactNode }
-  safety: {
-    kicker: string
-    title: string
-    lead: string
-    items: { title: string; body: ReactNode }[]
-  }
+  /** What keeps play fair and data safe, beside the consent and memory windows. */
   privacy: {
-    kicker: string
     title: string
     lead: ReactNode
-    /** The laws, as short badges over the list. */
-    laws: string[]
     items: { title: string; body: ReactNode }[]
     more: ReactNode
   }
   install: {
-    kicker: string
     title: string
     lead: ReactNode
     steps: { title: string; body: ReactNode }[]
@@ -158,41 +106,34 @@ export type Copy = {
     requirements: ReactNode[]
   }
   pricing: {
-    kicker: string
     title: string
     lead: string
-    byok: { name: string; price: string; tagline: string; points: ReactNode[] }
-    hosted: {
-      name: string
-      /** Before the cheapest plan's price in Stars. */
-      from: string
-      tagline: string
-      plans: Record<PlanId, string>
-      /** With {days}. */
-      period: string
-      renews: string
-      /** With {budget}. */
-      budget: string
-      /** With {budget}. */
-      budgetMonthly: string
-      /** Under the plans: where to ask for higher limits. */
-      more: ReactNode
-      steps: ReactNode[]
-      cta: string
+    /** The four ways to pay, one row each. */
+    routes: {
+      byok: { name: string; price: string; line: ReactNode }
+      hosted: { name: string; line: ReactNode }
+      solo: { name: string; line: ReactNode }
+      self: { name: string; price: string; line: ReactNode; cta: string }
     }
-    self: { name: string; price: string; tagline: string; points: ReactNode[]; cta: string }
-    /** Solo plans for the mod in one player's own world; their periods and budgets use hosted's texts. */
-    solo: { name: string; from: string; tagline: string; points: ReactNode[]; cta: string }
-    howTitle: string
+    /** Before the cheapest plan's price in Stars. */
+    from: string
+    serverTitle: string
+    soloTitle: string
+    plans: Record<PlanId, string>
+    /** With {days}. */
+    period: string
+    renews: string
+    /** With {budget}. */
+    budget: string
+    /** With {budget}. */
+    budgetMonthly: string
+    soloNote: ReactNode
+    steps: ReactNode[]
+    cta: string
+    /** Where to ask for higher limits. */
+    more: ReactNode
     how: ReactNode[]
   }
-  selfHost: {
-    kicker: string
-    title: string
-    lead: ReactNode
-    steps: ReactNode[]
-    more: string
-  }
-  faq: { kicker: string; title: string; items: Question[] }
+  faq: { title: string; items: Question[] }
   closing: { title: string; body: ReactNode; cta: string; address: string }
 }

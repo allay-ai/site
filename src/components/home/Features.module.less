@@ -1,135 +1,71 @@
 @import (reference) '../../styles/tokens.less';
 
-.groupTitle {
-  margin: 0 0 @space-3;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: @color-text-faint;
-
-  & + ul + & {
-    margin-top: @space-5;
-  }
-}
-
-.killer {
-  display: grid;
-  gap: @space-3;
+// Rows parted by hairlines: on the left the question as the game's chat input
+// shows it, on the right what Allay does with it.
+.moments {
   margin: 0;
   padding: 0;
   list-style: none;
+  border-top: @rule-bar solid @color-border;
+}
 
-  @media @screen-sm {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.moment {
+  display: grid;
+  gap: @space-3;
+  padding: @space-4 0;
+  border-bottom: 1px solid @color-border;
+
+  @media @screen-md {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: @space-6;
+    align-items: center;
+    padding: @space-5 0;
   }
+}
+
+.ask {
+  justify-self: start;
+  max-width: 100%;
+  margin: 0;
+  padding: @space-2 @space-3;
+  border-radius: @radius-sm;
+  border: @rule-bar solid @color-border;
+  background: @color-chat-bg;
+  color: @color-chat-ink;
+  font-family: @font-pixel;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-wrap: break-word;
 
   @media @screen-lg {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    font-size: 20px;
   }
-}
-
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding: @space-4;
-  border: 1px solid @color-border;
-  border-radius: @radius-lg;
-  background:
-    radial-gradient(ellipse 90% 60% at 0% 0%, @color-accent-soft, transparent 70%),
-    @color-panel;
-  box-shadow: @shadow-panel;
-  transition:
-    border-color 0.2s,
-    transform 0.2s;
-
-  &:hover {
-    border-color: @color-border-strong;
-    transform: translateY(-2px);
-  }
-}
-
-.icon {
-  display: inline-grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  margin-bottom: @space-3;
-  border-radius: @radius-md;
-  background: @color-accent-soft;
-  color: @color-accent-text;
-}
-
-.svg {
-  width: 24px;
-  height: 24px;
-}
-
-.title {
-  font-size: 1.2rem;
-  margin-bottom: @space-2;
-}
-
-.body {
-  margin: 0 0 @space-3;
-  font-size: 0.97rem;
-}
-
-// The question as the game's chat input shows it, in the game's font.
-.ask {
-  margin: auto 0 0;
-  padding: 6px 10px;
-  border-radius: @radius-sm;
-  background: @color-code-bg;
-  color: @color-text;
-  font-family: @font-pixel;
-  font-size: 12px;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
 }
 
 .command {
-  color: @color-accent-text;
+  color: @color-chat-command;
 }
 
-.other {
-  display: grid;
-  gap: @space-4 @space-5;
+.text {
+  min-width: 0;
+}
+
+.title {
+  margin-bottom: @space-1;
+  font-size: 1.35rem;
+}
+
+.body {
   margin: 0;
-  padding: 0;
-  list-style: none;
+  max-width: 60ch;
+}
 
-  @media @screen-sm {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.more {
+  max-width: 65ch;
+  margin: @space-5 0 0;
+
+  a {
+    font-weight: 700;
+    white-space: nowrap;
   }
-
-  @media @screen-lg {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.item {
-  display: grid;
-  grid-template-columns: 24px minmax(0, 1fr);
-  gap: @space-3;
-  align-items: start;
-}
-
-.itemIcon {
-  width: 24px;
-  height: 24px;
-  margin-top: 2px;
-  color: @color-accent-text;
-}
-
-.itemTitle {
-  font-size: 1.05rem;
-  margin-bottom: 4px;
-}
-
-.itemBody {
-  margin: 0;
-  font-size: 0.95rem;
-  color: @color-text-muted;
 }

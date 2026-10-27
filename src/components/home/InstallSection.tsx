@@ -1,4 +1,4 @@
-import { builds, links, type Platform, stores } from '../../data/site.ts'
+import { links, type Platform, stores } from '../../data/site.ts'
 import releases from '../../generated/releases.json'
 import snippets from '../../generated/snippets.json'
 import { fill } from '../../i18n/index.ts'
@@ -6,6 +6,7 @@ import type { Copy } from '../../i18n/types.ts'
 import { CodeTabs } from '../shared/CodeTabs.tsx'
 import { DownloadIcon } from '../shared/icons.tsx'
 import { LoaderLogo } from '../shared/LoaderLogo.tsx'
+import { shippedBuilds } from './Hero.tsx'
 import styles from './InstallSection.module.less'
 import { Section } from './Section.tsx'
 
@@ -18,22 +19,17 @@ const loaderNames: Record<Platform, string> = {
 
 export function InstallSection({ copy }: { copy: Copy }) {
   const { install, ui } = copy
-  const shipped = (Object.entries(builds) as [Platform, string | null][]).filter(
-    (entry): entry is [Platform, string] => entry[1] !== null,
-  )
+  const shipped = shippedBuilds
   const extraStores = [
     stores.modrinth && { name: 'Modrinth', href: stores.modrinth },
     stores.hangar && { name: 'Hangar', href: stores.hangar },
   ].filter((store): store is { name: string; href: string } => Boolean(store))
 
   return (
-    <Section id="install" kicker={install.kicker} title={install.title} lead={install.lead}>
+    <Section id="install" title={install.title} lead={install.lead} tone="band">
       <ol className={styles.steps}>
-        {install.steps.map((step, index) => (
+        {install.steps.map((step) => (
           <li key={step.title} className={styles.step}>
-            <span className={styles.number} aria-hidden="true">
-              {index + 1}
-            </span>
             <h3 className={styles.stepTitle}>{step.title}</h3>
             <p className={styles.stepBody}>{step.body}</p>
           </li>

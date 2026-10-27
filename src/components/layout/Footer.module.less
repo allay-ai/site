@@ -1,88 +1,70 @@
 @import (reference) '../../styles/tokens.less';
 
 .footer {
-  border-top: 1px solid @color-border;
+  border-top: @rule-bar solid @color-border;
   background: @color-bg-elevated;
-  padding: @space-5 @gutter @space-4;
+  padding: @space-6 @gutter @space-5;
+
+  @media @screen-md {
+    padding-inline: @gutter-wide;
+  }
 }
 
 .inner {
   max-width: @content-width;
   margin: 0 auto;
-  display: grid;
-  gap: @space-5;
 }
 
 .brandLink {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  font-size: 1.1rem;
+  gap: @space-2;
+  margin-bottom: @space-3;
   color: @color-text;
   text-decoration: none;
-  margin-bottom: @space-2;
+  border-radius: @radius-sm;
+}
+
+.wordmark {
+  font-family: @font-pixel;
+  font-size: 20px;
+  line-height: 1;
 }
 
 .mark {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
 }
 
-.small {
-  font-size: 0.9rem;
-  margin: 0;
+.credit {
+  margin-bottom: @space-3;
 }
 
-.columns {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: @space-4;
-}
-
-.column {
+.links {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 0;
+  flex-wrap: wrap;
+  gap: @space-2 @space-4;
+  margin: 0 0 @space-5;
+  padding: 0;
+  list-style: none;
 
   a {
-    color: @color-text-muted;
-    text-decoration: none;
-    font-size: 0.95rem;
-    overflow-wrap: anywhere;
+    display: inline-block;
+    padding: @space-1 0;
+    color: @color-text;
+    font-weight: 700;
+    text-decoration-color: @color-border-strong;
 
     &:hover {
-      color: @color-text;
-      text-decoration: underline;
+      text-decoration-color: @color-answer;
     }
   }
 }
 
-.heading {
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: @color-text-faint;
-  margin: 0 0 4px;
-}
-
 .disclaimer {
-  max-width: @content-width;
-  margin: @space-5 auto 0;
+  margin: 0;
   padding-top: @space-3;
   border-top: 1px solid @color-border;
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   color: @color-text-faint;
-}
-
-@media @screen-md {
-  .inner {
-    grid-template-columns: 1fr 2fr;
-  }
-
-  .columns {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
 }

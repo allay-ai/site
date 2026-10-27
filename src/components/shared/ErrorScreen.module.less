@@ -8,10 +8,8 @@
 }
 
 .kicker {
-  font-family: @font-mono;
-  font-size: 0.8rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-family: @font-pixel;
+  font-size: 16px;
   color: @color-accent-text;
   margin-bottom: @space-2;
 }
@@ -36,31 +34,36 @@
   display: inline-flex;
   align-items: center;
   gap: @space-2;
-  padding: 12px 22px;
+  min-height: 48px;
+  padding: 0 @space-4;
   border-radius: @radius-md;
-  border: 1px solid @color-border-strong;
+  border: @rule-bar solid @color-text;
   background: @color-panel;
   color: @color-text;
   text-decoration: none;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
+  box-shadow: @shadow-press;
   transition:
-    transform 0.15s ease,
-    border-color 0.15s ease,
-    background 0.15s ease;
+    transform @dur-micro @ease-out,
+    box-shadow @dur-micro @ease-out;
 
   &:hover {
     text-decoration: none;
-    transform: translateY(-1px);
-    border-color: @color-accent;
+    transform: translate(-1px, -1px);
+    box-shadow: @shadow-press-hover;
     color: @color-text;
+  }
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: @shadow-press-down;
   }
 }
 
 .primary {
-  background: var(--button-bg);
-  border-color: transparent;
+  background: @color-accent;
   color: @color-on-accent;
 
   &:hover {

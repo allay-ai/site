@@ -63,162 +63,76 @@ export const es: Copy = {
     },
   },
   hero: {
-    eyebrow: modsShipped
-      ? 'Asistente con IA para servidores y mundos de Minecraft'
-      : 'Asistente con IA para servidores Spigot y Paper',
-    title: (
-      <>
-        Pregúntale a tu mundo <em>lo que sea</em>
-      </>
-    ),
+    title: 'Pregúntale a tu mundo lo que sea',
     lead: (
       <>
-        Allay vive en el chat de tu servidor. Un jugador escribe <code>/ask</code> y Allay mira su
-        partida real (el inventario, el bloque al que apunta, los cofres de alrededor, las recetas y
-        los plugins de este servidor) antes de responder.
+        Escribe <code>/ask</code> y Allay mira tu partida real antes de responder.
       </>
     ),
-    primary: 'Añadir Allay a tu servidor',
-    secondary: 'Leer el manual',
-    facts: [
-      modsShipped ? 'Spigot, Paper, Fabric, NeoForge 26.3' : 'Spigot y Paper 26.3',
-      'Gratis con tu propia clave',
-      'Respeta las leyes de privacidad de la UE y EE. UU.',
-      'Código abierto, MIT',
-    ],
+    platforms: 'Allay {version} para Minecraft 26.3, en un servidor o en tu propio mundo.',
+    manual: 'Leer el manual',
   },
-  demo: {
-    label: 'Un ejemplo de Allay respondiendo en el chat del juego',
-    caption: 'Es un ejemplo. Las respuestas reales dependen de la partida del jugador.',
-    command: '/ask ¿dónde dejé mi redstone?',
-    status: '⠹ Revoloteando sobre los cofres… (3s · ↑ 2184 · ↓ 61 tokens)',
-    lines: [
-      { kind: 'tool', label: 'Buscando redstone', result: '3 cofres a menos de 32 bloques' },
-      { kind: 'tool', label: 'Marcando bloques', result: '3 cofres iluminados 30 segundos' },
-      {
-        kind: 'answer',
-        text: 'Hay 2 stacks en el cofre a la izquierda de tu horno, 6 bloques al norte, y 14 más en el barril bajo la escalera. Te los he iluminado.',
-      },
-      { kind: 'buttons', labels: ['El camino', 'Receta: repetidor'] },
-    ],
+  video: {
+    label:
+      'Allay responde: el estado sobre la barra rápida, las herramientas que usa y la respuesta',
+    caption:
+      'Mientras Allay trabaja, la línea sobre la barra rápida dice qué hace, y cada herramienta que usa deja una línea en el chat.',
+    pause: 'Pausa',
+    play: 'Reproducir',
   },
   features: {
-    kicker: 'Qué reciben los jugadores',
     title: 'Mira antes de responder',
     lead: 'Allay lee el juego con herramientas que ejecuta el plugin, así que sus respuestas encajan con este jugador, este mundo y este servidor.',
-    killerTitle: 'Lo más potente',
-    killer: [
+    moments: [
       {
-        icon: 'eye',
-        title: 'Respuestas desde la partida real',
-        body: 'Allay lee el inventario, el bloque al que apuntas, las estadísticas y los logros, las recetas y reglas de este servidor y los plugins que de verdad tiene instalados, en vez de adivinar.',
         ask: '¿cuál de mis espadas es mejor?',
+        title: 'Respuestas desde la partida real',
+        body: 'Allay lee el inventario, el bloque al que apuntas, las estadísticas y los logros en vez de adivinar.',
       },
       {
-        icon: 'search',
-        title: 'Encuentra tus cosas y las ilumina',
-        body: 'Cuenta un objeto en el inventario, el cofre de ender y los cofres a menos de 32 bloques, también dentro de cajas de shulker y bolsas. Los cofres que lo guardan brillan a través de las paredes, con su contenido escrito encima, y solo los ves tú.',
+        ask: '¿cómo pongo una casa aquí?',
+        title: 'Conoce este servidor',
+        body: 'Los objetos de los mods, las recetas de los data packs, los plugins que de verdad tiene y los comandos que puedes usar aquí.',
+      },
+      {
         ask: '¿dónde dejé mi redstone?',
+        title: 'Encuentra tus cosas y las ilumina',
+        body: 'Cuenta un objeto en los cofres a menos de 32 bloques, y los cofres que lo guardan brillan solo para ti.',
       },
       {
-        icon: 'trail',
-        title: 'El camino a cualquier sitio',
-        body: 'La brújula y un rastro de partículas te llevan al punto donde moriste, a una aldea, a un bosque de cerezos, a un lugar que Allay recuerda o a un amigo de la barra de localización, siguiéndolo mientras corre. Hay una docena de rastros, de llamas a corazones.',
         ask: 'llévame a donde morí',
+        title: 'El camino a cualquier sitio',
+        body: 'La brújula y un rastro de partículas te llevan al punto donde moriste, a una aldea o a un amigo de la barra de localización.',
       },
       {
-        icon: 'agent',
-        title: 'Agentes que hacen las tareas',
-        body: 'Ordenan cofres, guardan tu botín, te traen 64 de hierro de los cofres de alrededor, funden por igual con el combustible justo, preparan pociones por tandas y fabrican en una mesa de verdad, incluida la netherita. Trabajan mientras juegas, pasan pasos a agentes ayudantes y te informan.',
         ask: 'funde todo mi oro en bruto por igual',
+        title: 'Agentes que hacen las tareas',
+        body: 'Ordenan cofres, funden, preparan pociones por tandas y fabrican en una mesa de verdad mientras juegas.',
       },
       {
-        icon: 'redstone',
-        title: 'Redstone depurada',
-        body: 'Allay lee la máquina que miras: la potencia del polvo, los retrasos de los repetidores, comparadores, pistones y antorchas. Las reglas del juego señalan el fallo, como una antorcha fundida o un pistón atascado, y unas marcas rojas muestran dónde.',
         ask: '¿por qué no se abre mi puerta?',
+        title: 'Redstone depurada',
+        body: 'Allay lee la máquina que miras, y unas marcas rojas muestran dónde está el fallo.',
       },
       {
-        icon: 'brain',
-        title: 'Te recuerda a ti y tus lugares',
-        body: `Hasta ${retention.memoryFacts} recuerdos por jugador: datos, cómo le gustan las respuestas y lugares, guardados por dimensión y encontrados del más cercano al más lejano. La conversación se guarda ${retention.sessionDays} días, así que una pregunta de seguimiento no necesita volver a mirar. Todo cifrado.`,
         ask: 'recuerda que aquí hay un aldeano que vende flechas',
+        title: 'Te recuerda a ti y tus lugares',
+        body: `Hasta ${retention.memoryFacts} recuerdos por jugador, lugares guardados por dimensión, todo cifrado. /allay memory los muestra.`,
       },
     ],
-    otherTitle: 'Y mucho más',
-    other: [
-      {
-        icon: 'grid',
-        title: 'Un inventario ordenado',
-        body: '«La espada primero, la comida en la última fila». Los stacks se juntan, los huecos fijados reciben el mejor objeto, los cofres entienden las mismas palabras y [Devolver] lo deshace durante 5 minutos.',
-      },
-      {
-        icon: 'window',
-        title: 'Botones y ventanas',
-        body: 'Recetas, cada paso de una poción, encantamientos y tratos con aldeanos, a un clic bajo la respuesta.',
-      },
-      {
-        icon: 'hammer',
-        title: 'El yunque, planificado',
-        body: 'El orden más barato para tus libros y objetos, con los niveles por adelantado. Di que sí y un agente lo hace y le pone nombre al objeto.',
-      },
-      {
-        icon: 'bulb',
-        title: 'Sin rincones oscuros',
-        body: '«¿Dónde pongo antorchas?» coloca antorchas fantasma brillantes en cada sitio donde podrían aparecer monstruos.',
-      },
-      {
-        icon: 'cube',
-        title: 'Planos de construcciones',
-        body: 'Experimental: una construcción de hasta 20×15×20 en bloques fantasma, capa a capa. Un bloque equivocado se vuelve rojo y dice cuál va ahí.',
-      },
-      {
-        icon: 'sprout',
-        title: 'Revisión de granjas',
-        body: 'Cultivos por fase, tierra de cultivo, animales y generadores a tu alrededor, de un vistazo.',
-      },
-      {
-        icon: 'flag',
-        title: 'Objetivos y recordatorios',
-        body: 'Hasta 5 objetivos como barras en lo alto de la pantalla, recordatorios de 1 a 120 minutos y un aviso que todos los de cerca ven y oyen.',
-      },
-      {
-        icon: 'chat',
-        title: 'Modo chat y /askall',
-        body: 'Habla con Allay sin comandos, o pregunta delante de todos para que tus amigos puedan seguir la conversación.',
-      },
-      {
-        icon: 'terminal',
-        title: 'Comandos con palabras',
-        body: '/askx convierte una petición en comandos y los ejecuta en tu nombre. Por defecto, solo para operadores, igual que las herramientas que dan objetos o teletransportan.',
-      },
-      {
-        icon: 'calc',
-        title: 'Datos frescos, cálculos exactos',
-        body: 'Búsqueda en internet cuando una pregunta lo necesita, y cálculos con 64 cifras significativas: stacks, coordenadas del Nether, experiencia.',
-      },
-      {
-        icon: 'chart',
-        title: 'Allay Room',
-        body: 'Un panel de administración con todos los ajustes, cuentas con roles, preguntas, costes, modelos, herramientas y los jugadores más activos. Nunca lo que alguien preguntó.',
-      },
-      {
-        icon: 'key',
-        title: 'Paga como quieras',
-        body: 'Tu propia clave, gratis en allay.chat; una suscripción con Telegram Stars; o tu propio backend sin límites.',
-      },
-    ],
+    more: (
+      <>
+        Y hay más: un inventario ordenado, botones y ventanas, el yunque planificado, antorchas
+        fantasma para los rincones oscuros, planos de construcciones, revisión de granjas, objetivos
+        y recordatorios, búsqueda en internet y cálculos exactos, cinco idiomas y Allay Room, el
+        panel de administración.{' '}
+        <Link to="/wiki/plugin/what-allay-can-do/">Todo lo que sabe hacer Allay (en inglés)</Link>
+      </>
+    ),
   },
   shots: {
-    kicker: 'En el juego',
     title: 'Lo que ven tus jugadores',
-    lead: 'Capturas reales de un servidor con Allay: el estado en vivo mientras trabaja, respuestas con botones dentro del texto y las ventanas propias del juego para la memoria y la privacidad.',
-    status: {
-      label:
-        'Allay responde: el estado sobre la barra rápida, las herramientas que usa y la respuesta',
-      caption:
-        'Mientras Allay trabaja, la línea sobre la barra rápida dice qué hace, y cada herramienta que usa deja una línea en el chat.',
-    },
+    lead: 'Capturas reales de un servidor con Allay.',
     items: [
       {
         file: 'answer',
@@ -247,14 +161,8 @@ export const es: Copy = {
     ],
   },
   ask: {
-    kicker: 'Cómo preguntar',
     title: 'Tres comandos y un modo chat',
-    lead: (
-      <>
-        Allay responde en el idioma de la pregunta. Mientras trabaja, la barra de acción muestra qué
-        está haciendo, y aparece una línea en el chat por cada herramienta que usa.
-      </>
-    ),
+    lead: 'Allay responde en el idioma de la pregunta.',
     commands: [
       {
         command: '/ask <pregunta>',
@@ -285,103 +193,43 @@ export const es: Copy = {
     youWrite: 'Escribes',
     itGoes: 'Va',
   },
-  memory: {
-    kicker: 'Memoria',
-    title: 'Recuerda lo que importa',
-    items: [
-      {
-        title: 'Una conversación con contexto',
-        body: `La sesión de cada jugador guarda los intercambios completos, con los resultados de las herramientas, durante ${retention.sessionDays} días tras la última pregunta. «¿Y cuántos había en ese cofre?» no necesita volver a mirar.`,
-      },
-      {
-        title: 'Datos que perduran',
-        body: `Hasta ${retention.memoryFacts} datos breves y lugares por jugador: dónde está la base, qué construye, cómo le gustan las respuestas. Allay los guarda solo, lo avisa y los mantiene cifrados.`,
-      },
-      {
-        title: 'Decide el jugador',
-        body: (
-          <>
-            <code>/allay memory</code> muestra los datos, <code>/allay forget</code> los borra y{' '}
-            <code>/allay new</code> empieza la conversación de nuevo.
-          </>
-        ),
-      },
-    ],
-  },
-  languages: {
-    kicker: 'Idiomas',
-    title: 'Cada jugador lee en su idioma',
+  privacy: {
+    title: 'Ayuda, nunca trampa',
     lead: (
       <>
-        Los textos del plugin vienen en cinco idiomas, elegidos por el país de la IP del jugador y
-        luego por el idioma del juego. <code>/allay language</code> elige uno a mano.
+        Allay ve lo que podría ver el jugador que pregunta. allay.chat cumple el RGPD, la LOPDGDD
+        española, la COPPA y la CCPA/CPRA.
       </>
     ),
-    names: ['English', 'Русский', 'Español', 'Português', 'Deutsch'],
-    note: 'La base de países está en tu servidor: ninguna dirección sale de él para la consulta. Allay responde en el idioma en que se hizo la pregunta.',
-  },
-  safety: {
-    kicker: 'Justo por diseño',
-    title: 'Ayuda, nunca trampa',
-    lead: 'Allay ve lo que podría ver el jugador que pregunta y no da a los jugadores normales nada que no se hayan ganado.',
     items: [
       {
         title: 'Solo las cosas de quien pregunta',
-        body: 'Las herramientas del juego ven al jugador que preguntó y el mundo a su alrededor. Los demás jugadores aparecen solo como los muestra la barra de localización: un nombre, una distancia, una dirección.',
+        body: 'Los demás jugadores aparecen solo como los muestra la barra de localización: un nombre, una distancia, una dirección.',
       },
       {
         title: 'Sin objetos para jugadores normales',
-        body: 'Las herramientas que dan objetos, teletransportan o cambian el tiempo son solo para operadores, y el plugin lo comprueba tres veces.',
+        body: 'Las herramientas que dan objetos o teletransportan son solo para operadores, y el plugin lo comprueba tres veces.',
       },
       {
         title: 'Respeta protecciones e invisibilidad',
-        body: 'Allay abre solo los contenedores que el jugador podría abrir, respeta las protecciones de GriefPrevention y nunca delata a un jugador oculto con vanish.',
-      },
-      {
-        title: 'Privado por defecto',
-        body: 'Lo que dicen los jugadores se guarda cifrado, y el panel de administración muestra números, no conversaciones. Solo un propietario puede abrir una respuesta, con un motivo, y cada vistazo queda registrado. Las claves y las licencias nunca llegan a un registro.',
-      },
-    ],
-  },
-  privacy: {
-    kicker: 'Privacidad y ley',
-    title: 'Respeta las leyes de privacidad de la UE y EE. UU.',
-    lead: (
-      <>
-        allay.chat cumple el RGPD, la LOPDGDD española, la COPPA y la CCPA/CPRA. Esto es lo que hace
-        con los datos de los jugadores.
-      </>
-    ),
-    laws: ['RGPD', 'LOPDGDD', 'CCPA/CPRA', 'COPPA'],
-    items: [
-      {
-        title: 'Guardado en la UE',
-        body: 'En servidores de Helsinki, Finlandia. Las copias nocturnas, cifradas, se guardan en Cloudflare R2 hasta 12 meses.',
-      },
-      {
-        title: 'Sellado con AES-256-GCM',
-        body: 'Las conversaciones, los recuerdos y lugares, las muertes, los ajustes y objetivos y los registros de preguntas se guardan cifrados.',
-      },
-      {
-        title: 'Solo el tiempo necesario',
-        body: `Una conversación, ${retention.sessionDays} días; recuerdos, lugares, muertes y ajustes, un año tras la última pregunta del jugador; registros de preguntas, ${retention.traceDays} días; los números y el directorio de jugadores, 2 años.`,
+        body: 'Allay abre solo los contenedores que el jugador podría abrir y nunca delata a un jugador oculto con vanish.',
       },
       {
         title: 'Primero la edad y el consentimiento',
-        body: 'Antes de la primera pregunta, el jugador dice su edad, que debe llegar a la edad de consentimiento de su país, y acepta un aviso breve. Por debajo de esa edad, Allay no responde nada ni envía nada.',
+        body: 'Por debajo de la edad de consentimiento de su país, Allay no responde nada ni envía nada.',
+      },
+      {
+        title: 'Guardado en la UE, sellado',
+        body: 'En servidores de Helsinki, Finlandia. Las conversaciones y los recuerdos van sellados con AES-256-GCM.',
       },
       {
         title: 'El jugador controla sus datos',
         body: (
           <>
             <code>/allay privacy</code> muestra lo que se guarda, da un enlace de descarga de 24
-            horas y lo borra. Retirar el consentimiento borra lo que cubría.
+            horas y lo borra.
           </>
         ),
-      },
-      {
-        title: 'Sin entrenar con las preguntas',
-        body: 'Cada pregunta pasa por OpenRouter, en EE. UU., solo hacia proveedores de IA que no la recogen para entrenar. Un jugador que no aceptó llega a la IA solo como «Jugador 1».',
       },
     ],
     more: (
@@ -392,8 +240,7 @@ export const es: Copy = {
     ),
   },
   install: {
-    kicker: 'Instalar',
-    title: 'Funcionando en tres pasos',
+    title: 'Tres pasos hasta la primera respuesta',
     lead: (
       <>
         El plugin habla con el backend alojado en <code>allay.chat</code> desde el primer momento.
@@ -475,109 +322,68 @@ export const es: Copy = {
     ],
   },
   pricing: {
-    kicker: 'Precios',
     title: 'Pagas el modelo y nada más',
     lead: 'Cada respuesta cuesta dinero en el proveedor del modelo. Tu servidor elige quién paga.',
-    byok: {
-      name: 'Tu propia clave',
-      price: 'Gratis',
-      tagline: 'En allay.chat, con la factura de tu proveedor.',
-      points: [
-        'Una clave de OpenRouter o de cualquier API compatible con OpenAI, que pagas directamente al proveedor',
-        `Hasta ${byokLimits.perMinute} preguntas por minuto, ${count(byokLimits.perDay, 'es')} al día y ${byokLimits.concurrent} a la vez por servidor`,
-        'El modelo debe saber llamar a herramientas',
-        'La clave se usa en cada respuesta y nunca se guarda ni se registra',
-      ],
+    routes: {
+      byok: {
+        name: 'Tu propia clave',
+        price: 'Gratis',
+        line: (
+          <>
+            En allay.chat, con una clave de <a href={links.openRouter}>OpenRouter</a> o de cualquier
+            API compatible con OpenAI: hasta {byokLimits.perMinute} preguntas por minuto,{' '}
+            {count(byokLimits.perDay, 'es')} al día y {byokLimits.concurrent} a la vez.
+          </>
+        ),
+      },
+      hosted: {
+        name: 'Suscripción',
+        line: 'Nuestra clave y nuestros modelos, pagados con Telegram Stars.',
+      },
+      solo: {
+        name: 'Solo',
+        line: 'Para el mod en tu propio mundo: un jugador, menos límite y menos precio.',
+      },
+      self: {
+        name: 'En tu servidor',
+        price: 'Gratis',
+        line: 'Allay Server con Docker junto a Minecraft: tu clave, sin licencia, sin límites.',
+        cta: 'Montarlo tú mismo',
+      },
     },
-    hosted: {
-      name: 'Suscripción',
-      from: 'desde',
-      tagline: 'Nuestra clave y nuestros modelos, pagados con Telegram Stars.',
-      plans: { week: 'Semana', month: 'Mes', year: 'Año' },
-      period: '{days} días',
-      renews: 'se renueva sola',
-      budget: '{budget} en costes del modelo',
-      budgetMonthly: '{budget} en costes del modelo cada 30 días',
-      steps: [
-        <>
-          Ejecuta <code>/allay link</code> como operador o en tu propio mundo
-        </>,
-        <>
-          Paga en <a href={links.bot}>@AllayChatBot</a> en Telegram
-        </>,
-        <>
-          Mira el plan y su límite en <code>/allay status</code>
-        </>,
-      ],
-      cta: 'Abrir @AllayChatBot',
-      more: (
-        <>
-          ¿Necesitas más? <a href="mailto:personal@mairwunnx.com">Escríbenos</a> para límites más
-          altos.
-        </>
-      ),
-    },
-    self: {
-      name: 'En tu servidor',
-      price: 'Gratis',
-      tagline: 'Tu backend, tu clave, sin límites.',
-      points: [
-        'Allay Server con Docker junto a Minecraft',
-        'Cada jugador pregunta con tu propia clave',
-        'Sin licencia, sin suscripción, sin límites por servidor',
-        'Tu propio panel de administración con estadísticas',
-      ],
-      cta: 'Montarlo tú mismo',
-    },
-    solo: {
-      name: 'Solo',
-      from: 'desde',
-      tagline: 'Para el mod en tu propio mundo: un jugador, menos límite y menos precio.',
-      points: [
-        'Un mundo individual, o un mundo LAN que abres tú, con Allay para Fabric o NeoForge',
-        <>
-          Ejecuta <code>/allay link</code> en tu mundo; no necesitas trucos
-        </>,
-        `Responde solo a ti. Quien paga puede pasarla a otro jugador en @AllayChatBot una vez cada ${soloReleaseDays} días`,
-      ],
-      cta: 'Abrir @AllayChatBot',
-    },
-    howTitle: 'Cómo funciona el límite de la suscripción',
-    how: [
-      'El límite es dinero, no un número de preguntas: lo que de verdad cuestan las preguntas de tu servidor en el proveedor, contando el modelo, las búsquedas en internet y los resúmenes de las conversaciones largas.',
-      'Una pregunta típica con el modelo por defecto cuesta entre 0,001 y 0,003 $, según las búsquedas y la longitud de la conversación. Los agentes dan varios pasos, así que cuestan más.',
-      'Los operadores ven el límite en /allay status como un porcentaje y reciben un aviso al pasar del 80 % y del 100 %. Los jugadores solo saben que se ha agotado.',
-      'Un pago durante un periodo suma su límite al momento y mueve la fecha de fin. No hay prueba gratuita: un servidor paga antes de su primera pregunta alojada.',
-    ],
-  },
-  selfHost: {
-    kicker: 'En tu servidor',
-    title: 'Monta tu propio backend',
-    lead: (
-      <>
-        Allay Server es de código abierto y llega como una sola imagen de Docker. Con{' '}
-        <code>SELFHOSTED=1</code>, el cobro se apaga y cada pregunta va con tu clave.
-      </>
-    ),
+    from: 'desde',
+    serverTitle: 'Para un servidor',
+    soloTitle: 'Solo, para tu propio mundo',
+    plans: { week: 'Semana', month: 'Mes', year: 'Año' },
+    period: '{days} días',
+    renews: 'se renueva sola',
+    budget: '{budget} en costes del modelo',
+    budgetMonthly: '{budget} en costes del modelo cada 30 días',
+    soloNote: `Un mundo individual o LAN con el mod para Fabric o NeoForge, sin trucos. Responde solo a ti; quien paga puede pasarla a otro jugador una vez cada ${soloReleaseDays} días.`,
     steps: [
       <>
-        Guarda esto como <code>compose.yaml</code>, da a cada <code>change-me</code> un valor
-        aleatorio distinto y ejecuta <code>docker compose up -d</code>.
+        Ejecuta <code>/allay link</code> como operador o en tu propio mundo
       </>,
       <>
-        Apunta <code>server.url</code> del <code>config.yml</code> de Allay a tu backend, pon en{' '}
-        <code>server.token</code> el mismo <code>PLUGIN_TOKEN</code> y ejecuta{' '}
-        <code>/allay reload</code>.
+        Paga en <a href={links.bot}>@AllayChatBot</a> en Telegram
       </>,
       <>
-        Ejecuta <code>/allay init</code> para obtener un enlace de un solo uso al panel de
-        administración y pega allí tu clave de OpenRouter.
+        Mira el plan y su límite en <code>/allay status</code>
       </>,
     ],
-    more: 'La guía completa: proxies, contraseñas, actualizaciones (en inglés)',
+    cta: 'Abrir @AllayChatBot',
+    more: (
+      <>
+        ¿Necesitas más? <a href="mailto:personal@mairwunnx.com">Escríbenos</a> para límites más
+        altos.
+      </>
+    ),
+    how: [
+      'El límite es dinero, no un número de preguntas: lo que de verdad cuestan las preguntas de tu servidor en el proveedor.',
+      'Una pregunta típica con el modelo por defecto cuesta entre 0,001 y 0,003 $. No hay prueba gratuita.',
+    ],
   },
   faq: {
-    kicker: 'Preguntas',
     title: 'Lo que preguntan los dueños de servidores',
     items: [
       {

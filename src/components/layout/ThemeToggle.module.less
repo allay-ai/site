@@ -5,18 +5,22 @@
   place-items: center;
   width: 40px;
   height: 40px;
-  border: 1px solid @color-border;
-  border-radius: 999px;
+  border: @rule-bar solid @color-border;
+  border-radius: @radius-sm;
   background: @color-panel;
   color: @color-text-muted;
   cursor: pointer;
   transition:
-    color 0.15s,
-    border-color 0.15s;
+    color @dur-micro @ease-out,
+    border-color @dur-micro @ease-out;
 
   &:hover {
     color: @color-text;
     border-color: @color-border-strong;
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 }
 

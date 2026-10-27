@@ -4,13 +4,19 @@
   padding: @space-6 @gutter;
 
   @media @screen-md {
-    padding: @space-7 @gutter;
+    padding: @space-7 @gutter-wide;
   }
 }
 
-.tinted {
+// A change of paper, edge to edge, with the heavy rule the header uses.
+.band {
+  padding-block: @space-6;
   background: @color-bg-elevated;
-  border-block: 1px solid @color-border;
+  border-block: @rule-bar solid @color-border;
+
+  @media @screen-md {
+    padding-block: @space-8;
+  }
 }
 
 .inner {
@@ -19,25 +25,53 @@
 }
 
 .header {
-  max-width: 720px;
   margin-bottom: @space-5;
+
+  @media @screen-md {
+    margin-bottom: @space-6;
+  }
 }
 
-.kicker {
-  margin: 0 0 @space-2;
-  font-size: 0.82rem;
-  font-weight: 650;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: @color-accent-text;
-}
-
+// Section heads speak in the game's letters too, at sizes its pixels stay whole.
 .title {
-  font-size: clamp(1.9rem, 1.2rem + 2.6vw, 2.9rem);
+  max-width: 24ch;
   margin-bottom: @space-3;
+  font-family: @font-pixel;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-size: 32px;
+  line-height: 1.15;
+
+  @media @screen-md {
+    font-size: 40px;
+  }
 }
 
 .lead {
-  font-size: 1.1rem;
+  max-width: 60ch;
   margin: 0;
+  font-size: 1.15rem;
+}
+
+.body {
+  min-width: 0;
+}
+
+.split {
+  @media @screen-md {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: @space-6;
+    align-items: start;
+
+    .title {
+      font-size: 32px;
+    }
+
+    .header {
+      position: sticky;
+      top: 112px;
+      margin-bottom: 0;
+    }
+  }
 }

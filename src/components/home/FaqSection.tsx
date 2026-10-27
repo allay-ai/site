@@ -4,7 +4,7 @@ import { Section } from './Section.tsx'
 
 export function FaqSection({ faq }: { faq: Copy['faq'] }) {
   return (
-    <Section id="faq" kicker={faq.kicker} title={faq.title}>
+    <Section id="faq" title={faq.title} layout="split">
       <div className={styles.list}>
         {faq.items.map((item) => (
           <details key={item.question} className={styles.item}>

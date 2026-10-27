@@ -1,23 +1,23 @@
 import type { Copy } from '../../i18n/types.ts'
 import styles from './AskSection.module.less'
-import { Section } from './Section.tsx'
 
-export function AskSection({ ask }: { ask: Copy['ask'] }) {
+/** How a player asks: the three commands, and where each line goes in chat mode. */
+export function AskBlock({ ask }: { ask: Copy['ask'] }) {
   return (
-    <Section id="ask" kicker={ask.kicker} title={ask.title} lead={ask.lead} tone="tinted">
+    <div id="ask" className={styles.block}>
+      <h3 className={styles.title}>{ask.title}</h3>
+      <p className={styles.lead}>{ask.lead}</p>
       <div className={styles.split}>
         <dl className={styles.commands}>
           {ask.commands.map((item) => (
             <div key={item.command} className={styles.command}>
-              <dt>
-                <code className={styles.code}>{item.command}</code>
-              </dt>
+              <dt className={styles.code}>{item.command}</dt>
               <dd>{item.what}</dd>
             </div>
           ))}
         </dl>
         <div className={styles.chat}>
-          <h3 className={styles.chatTitle}>{ask.chatTitle}</h3>
+          <h4 className={styles.chatTitle}>{ask.chatTitle}</h4>
           <p>{ask.chatLead}</p>
           <table className={styles.table}>
             <thead>
@@ -29,9 +29,7 @@ export function AskSection({ ask }: { ask: Copy['ask'] }) {
             <tbody>
               {ask.prefixes.map((row) => (
                 <tr key={row.input}>
-                  <td>
-                    <code>{row.input}</code>
-                  </td>
+                  <td className={styles.input}>{row.input}</td>
                   <td>{row.goes}</td>
                 </tr>
               ))}
@@ -39,6 +37,6 @@ export function AskSection({ ask }: { ask: Copy['ask'] }) {
           </table>
         </div>
       </div>
-    </Section>
+    </div>
   )
 }

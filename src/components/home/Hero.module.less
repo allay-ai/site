@@ -1,217 +1,202 @@
 @import (reference) '../../styles/tokens.less';
 
+// Counter: the action is the picture. The head and the downloads share the top
+// row; Allay at work in the game runs the full width under them.
 .hero {
-  position: relative;
   padding: @space-5 @gutter @space-6;
-  overflow: hidden;
 
   @media @screen-md {
-    padding: @space-6 @gutter @space-7;
-  }
-}
-
-.glow {
-  position: absolute;
-  inset: -20% -10% auto;
-  height: 120%;
-  background:
-    radial-gradient(ellipse 50% 45% at 20% 20%, var(--glow-a), transparent 70%),
-    radial-gradient(ellipse 45% 40% at 85% 30%, var(--glow-b), transparent 70%);
-  pointer-events: none;
-}
-
-// Allay leaves a trail of little sparkles; these drift up in the background.
-.sparkles span {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: @color-accent;
-  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
-  opacity: 0;
-  animation: drift 7s ease-in-out infinite;
-}
-
-.sparkles {
-  .sparkle-a {
-    left: 6%;
-    top: 70%;
-  }
-
-  .sparkle-b {
-    left: 22%;
-    top: 18%;
-    animation-delay: 1.4s;
-    transform: scale(0.7);
-  }
-
-  .sparkle-c {
-    left: 48%;
-    top: 8%;
-    animation-delay: 2.8s;
-  }
-
-  .sparkle-d {
-    right: 8%;
-    top: 14%;
-    animation-delay: 0.7s;
-    background: @color-violet;
-  }
-
-  .sparkle-e {
-    right: 40%;
-    bottom: 12%;
-    animation-delay: 3.6s;
-  }
-
-  .sparkle-f {
-    right: 4%;
-    bottom: 30%;
-    animation-delay: 5s;
-    background: @color-star;
-  }
-}
-
-@keyframes drift {
-  0% {
-    opacity: 0;
-    translate: 0 10px;
-  }
-  30%,
-  60% {
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 0;
-    translate: 0 -30px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sparkles {
-    display: none;
+    padding: @space-5 @gutter-wide @space-5;
   }
 }
 
 .inner {
-  position: relative;
   max-width: @content-width;
   margin: 0 auto;
   display: grid;
-  gap: @space-5;
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'text'
+    'action'
+    'screen';
+  row-gap: @space-5;
 
-  @media @screen-md {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-    gap: @space-6;
+  @media @screen-lg {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-areas:
+      'text action'
+      'screen screen';
+    column-gap: @space-6;
+    align-items: end;
   }
 }
 
 .text {
+  grid-area: text;
   min-width: 0;
 }
 
-.eyebrow {
-  display: inline-block;
-  margin: 0 0 @space-3;
-  padding: 5px 12px;
-  border: 1px solid @color-border;
-  border-radius: 999px;
-  background: color-mix(in srgb, @color-panel 70%, transparent);
-  color: @color-text-muted;
-  font-size: 0.85rem;
-  font-weight: 550;
-}
-
+// Minecraft's face, at sizes in multiples of 4 px so its pixels stay whole.
 .title {
-  font-size: clamp(2.6rem, 1.4rem + 5.4vw, 4.6rem);
-  line-height: 1.02;
-  letter-spacing: -0.035em;
+  max-width: 14ch;
   margin-bottom: @space-4;
+  font-size: 40px;
+  line-height: 1.1;
 
-  em {
-    font-style: normal;
-    background: linear-gradient(100deg, @color-accent 10%, @color-violet 90%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  @media @screen-sm {
+    font-size: 56px;
+  }
+
+  @media @screen-lg {
+    font-size: 64px;
   }
 }
 
 .lead {
-  font-size: 1.15rem;
-  line-height: 1.6;
-  max-width: 34em;
-  margin-bottom: @space-4;
+  max-width: 32em;
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: @color-text-muted;
 
   @media @screen-md {
-    font-size: 1.22rem;
+    font-size: 1.3rem;
   }
 }
 
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: @space-4;
+.action {
+  grid-area: action;
+  min-width: 0;
 }
 
-.primary,
-.secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 48px;
-  padding: 0 22px;
-  border-radius: 999px;
-  font-weight: 650;
-  text-decoration: none;
-  transition:
-    background 0.15s,
-    transform 0.15s,
-    border-color 0.15s;
-}
-
-.primary {
-  background: var(--button-bg);
-  color: @color-on-accent;
-  box-shadow: 0 10px 30px -12px var(--button-bg);
-
-  &:hover {
-    background: var(--button-bg-hover);
-    transform: translateY(-1px);
-  }
-}
-
-.secondary {
-  border: 1px solid @color-border-strong;
-  color: @color-text;
-  background: color-mix(in srgb, @color-panel 60%, transparent);
-
-  &:hover {
-    border-color: @color-accent;
-  }
-}
-
-.arrow {
-  width: 18px;
-  height: 18px;
-}
-
-.facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 20px;
-  margin: 0;
+.downloads {
+  display: grid;
+  gap: @space-3;
+  margin: 0 0 @space-4;
   padding: 0;
   list-style: none;
-  font-size: 0.92rem;
-  color: @color-text-faint;
+}
 
-  li::before {
-    content: '✓';
-    margin-right: 6px;
-    color: @color-accent-text;
-    font-weight: 700;
+// The press surface: the lead ink, an ink edge, and a hard shadow it moves into
+// when pressed, the way the game's buttons give under the cursor.
+.download {
+  display: flex;
+  align-items: center;
+  gap: @space-3;
+  min-height: 52px;
+  // The shadow's offset, so it ends on the content's edge.
+  margin-right: 5px;
+  padding: 0 @space-3 0 @space-2;
+  border: @rule-bar solid @color-text;
+  border-radius: @radius-md;
+  background: @color-accent;
+  color: @color-on-accent;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: @shadow-press;
+  transition:
+    transform @dur-micro @ease-out,
+    box-shadow @dur-micro @ease-out;
+
+  &:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: @shadow-press-hover;
   }
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: @shadow-press-down;
+  }
+
+  &:focus-visible {
+    outline-offset: 4px;
+  }
+}
+
+.downloadLabel {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.downloadIcon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+
+  // A phone keeps the whole label on one line instead.
+  @media (max-width: 399px) {
+    display: none;
+  }
+}
+
+.platforms {
+  margin: 0;
+  font-size: 0.95rem;
+  color: @color-text-faint;
+}
+
+.screen {
+  grid-area: screen;
+  margin: 0;
+  min-width: 0;
+}
+
+// The capture keeps its own pixels; on a wide screen the frame crops to its lower
+// half, where the chat, the status line, and the hotbar are.
+.frame {
+  position: relative;
+  border: @rule-bar solid @color-border-strong;
+  border-radius: @radius-md;
+  overflow: hidden;
+  background: @color-panel-alt;
+}
+
+.video {
+  width: 100%;
+  height: auto;
+
+  // On a phone the frame crops to the chat, so its letters stay readable.
+  @media (max-width: 1099px) {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: left bottom;
+  }
+
+  @media @screen-lg {
+    height: 340px;
+    object-fit: cover;
+    object-position: left bottom;
+  }
+}
+
+.pause {
+  position: absolute;
+  top: @space-3;
+  right: @space-3;
+  min-height: 44px;
+  padding: 0 @space-3;
+  border: @rule-bar solid @color-text;
+  border-radius: @radius-sm;
+  background: @color-bg-elevated;
+  color: @color-text;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform @dur-micro @ease-out;
+
+  &:hover {
+    background: @color-panel-alt;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.caption {
+  margin-top: @space-3;
+  font-size: 0.9rem;
+  color: @color-text-faint;
+  max-width: 70ch;
 }

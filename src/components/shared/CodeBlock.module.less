@@ -44,28 +44,12 @@
 }
 
 .string {
-  color: #1a8a5a;
+  color: var(--color-code-string);
 }
 
 .comment {
   color: @color-text-faint;
   font-style: italic;
-}
-
-.darkString() {
-  .string {
-    color: #6ee7a8;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :global(:root:not([data-theme='light'])) {
-    .darkString();
-  }
-}
-
-:global(:root[data-theme='dark']) {
-  .darkString();
 }
 
 // CodeTabs: the files sit in the head like an editor's tabs, the open one joined to the code.
@@ -113,7 +97,7 @@
   background: transparent;
   color: @color-text-faint;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   white-space: nowrap;
 
   // Three names fit a phone without their logos.

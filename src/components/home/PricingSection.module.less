@@ -1,248 +1,229 @@
 @import (reference) '../../styles/tokens.less';
 
-.cards {
-  display: grid;
-  gap: @space-3;
-  align-items: stretch;
+// The four ways to pay, as rows on hairlines: name, price, what it means.
+.routes {
+  margin: 0 0 @space-6;
+  padding: 0;
+  list-style: none;
+  border-top: @rule-bar solid @color-border;
+}
 
-  @media @screen-lg {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr);
-    gap: @space-4;
+.route {
+  display: grid;
+  gap: @space-1 @space-4;
+  padding: @space-4 0;
+  border-bottom: 1px solid @color-border;
+  scroll-margin-top: 96px;
+
+  @media @screen-md {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 6fr);
+    align-items: baseline;
+    gap: @space-5;
   }
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  padding: @space-4;
-  border: 1px solid @color-border;
-  border-radius: @radius-xl;
-  background: @color-panel;
-  box-shadow: @shadow-panel;
+.routeName {
+  margin: 0;
+  font-size: 1.35rem;
 }
 
-.featured {
-  border: 2px solid @color-accent;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, @color-accent-soft, transparent 70%),
-    @color-panel;
-  // The thicker border would push the content 1px lower than its neighbors'.
-  padding: calc(@space-4 - 1px);
-}
-
-.name {
-  font-size: 1.3rem;
-  margin-bottom: @space-2;
-}
-
-.price {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 1.2em;
-  margin: 0 0 4px;
+.routePrice {
+  margin: 0;
+  font-family: @font-pixel;
+  font-size: 24px;
   line-height: 1.2;
-  font-size: 2.2rem;
-  font-weight: 750;
-  letter-spacing: -0.03em;
   color: @color-text;
 }
 
-.tagline {
-  margin-bottom: @space-3;
-}
+.routeLine {
+  margin: 0;
+  max-width: 60ch;
 
-.points {
-  margin: 0 0 @space-3;
-  padding: 0;
-  list-style: none;
-  color: @color-text-muted;
-  font-size: 0.95rem;
-
-  li {
-    position: relative;
-    padding-left: 22px;
-  }
-
-  li + li {
-    margin-top: 8px;
-  }
-
-  li::before {
-    content: '';
-    position: absolute;
-    left: 2px;
-    top: 0.55em;
-    width: 8px;
-    height: 8px;
-    border-radius: 2px;
-    background: @color-accent;
-    transform: rotate(45deg);
+  a {
+    font-weight: 700;
   }
 }
 
 .from {
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0;
-  color: @color-text-muted;
-}
-
-.priceStar {
-  width: 0.8em;
-  height: 0.8em;
-  color: @color-star;
-}
-
-// Every card ends in a button on one line with its neighbors'.
-.link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  margin-top: auto;
-  border: 1px solid @color-border-strong;
-  border-radius: 999px;
-  color: @color-text;
-  font-weight: 650;
-  text-decoration: none;
-
-  &:hover {
-    border-color: @color-accent;
-  }
-}
-
-.plans {
-  display: grid;
-  gap: 10px;
-  margin: 0 0 @space-4;
-  padding: 0;
-  list-style: none;
-}
-
-.plan {
-  padding: 12px 16px;
-  border: 1px solid @color-border;
-  border-radius: @radius-md;
-  background: @color-bg-elevated;
-}
-
-.planHead {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: @space-2;
-}
-
-.planName {
+  display: block;
+  font-family: @font-body;
+  font-size: 1rem;
   font-weight: 700;
-  font-size: 1.1rem;
+  color: @color-text-faint;
 }
 
 .stars {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-weight: 750;
-  font-size: 1.25rem;
+  gap: @space-1;
+  font-family: @font-pixel;
   white-space: nowrap;
-}
-
-.more {
-  margin: 0 0 @space-4;
-  font-size: 0.92rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .star {
-  width: 18px;
-  height: 18px;
+  width: 0.8em;
+  height: 0.8em;
   color: @color-star;
 }
 
-.planDetail {
-  margin: 4px 0 0;
-  font-size: 0.92rem;
-}
-
-.steps {
-  margin: 0 0 @space-4;
-  padding-left: 1.3em;
-  color: @color-text-muted;
-  font-size: 0.95rem;
-
-  li + li {
-    margin-top: 6px;
-  }
-}
-
-.cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  margin-top: auto;
-  border-radius: 999px;
-  background: var(--button-bg);
-  color: @color-on-accent;
-  font-weight: 650;
-  text-decoration: none;
-
-  &:hover {
-    background: var(--button-bg-hover);
-  }
-}
-
-// Solo spans the row under the three cards: what it is beside its plans.
-.solo {
+// Two price lists side by side, like two players' columns: a server's plans and Solo's.
+.wells {
   display: grid;
   gap: @space-4;
-  margin-top: @space-4;
-
-  @media @screen-md {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: start;
-  }
-
-  .cta {
-    margin-top: 0;
-  }
-}
-
-.soloIntro {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.soloPlans {
-  margin: 0;
-}
-
-.how {
-  margin-top: @space-5;
-  padding: @space-4;
-  border: 1px dashed @color-border-strong;
-  border-radius: @radius-lg;
-
-  @media @screen-md {
-    padding: @space-4 @space-5;
-  }
-}
-
-.howTitle {
-  font-size: 1.2rem;
-}
-
-.howList {
-  margin: 0;
-  padding-left: 1.2em;
-  color: @color-text-muted;
-  display: grid;
-  gap: 8px;
 
   @media @screen-md {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: @space-5;
+  }
+}
+
+.single {
+  @media @screen-md {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 640px;
+  }
+}
+
+.well {
+  min-width: 0;
+  padding: @space-4;
+  border-radius: @radius-md;
+  background: @color-panel;
+  border-top: 4px solid @color-accent;
+
+  @media @screen-md {
+    padding: @space-5;
+  }
+
+  &:nth-child(2) {
+    border-top-color: @color-answer;
+  }
+}
+
+.wellTitle {
+  font-size: 1.35rem;
+  margin-bottom: @space-3;
+}
+
+.plans {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plan {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'name stars'
+    'detail detail';
+  gap: @space-1 @space-3;
+  padding: @space-3 0;
+  border-top: 1px solid @color-border;
+
+  @media @screen-sm {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 5fr) auto;
+    grid-template-areas: 'name detail stars';
+    align-items: baseline;
+  }
+
+  .stars {
+    grid-area: stars;
+    justify-self: end;
+    font-size: 24px;
+    color: @color-text;
+  }
+}
+
+.planName {
+  grid-area: name;
+  font-weight: 800;
+  color: @color-text;
+}
+
+.planDetail {
+  grid-area: detail;
+  font-size: 0.95rem;
+  color: @color-text-muted;
+}
+
+.note {
+  margin: @space-3 0 0;
+  font-size: 0.95rem;
+}
+
+.pay {
+  display: grid;
+  gap: @space-4;
+  margin-top: @space-5;
+
+  @media @screen-md {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: @space-6;
+    align-items: start;
+  }
+}
+
+.steps {
+  margin: 0;
+  padding-left: @space-4;
+  color: @color-text-muted;
+
+  li + li {
+    margin-top: @space-2;
+  }
+}
+
+.payAction {
+  min-width: 0;
+}
+
+// The quiet press surface: the same edge and hard shadow as the downloads, unfilled.
+.cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 @space-4;
+  border: @rule-bar solid @color-text;
+  border-radius: @radius-md;
+  background: @color-bg-elevated;
+  color: @color-text;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: @shadow-press;
+  transition:
+    transform @dur-micro @ease-out,
+    box-shadow @dur-micro @ease-out;
+
+  &:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: @shadow-press-hover;
+  }
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: @shadow-press-down;
+  }
+}
+
+.more {
+  margin: @space-3 0 0;
+  font-size: 0.95rem;
+}
+
+.how {
+  display: grid;
+  gap: @space-2;
+  margin: @space-5 0 0;
+  padding: @space-4 0 0;
+  list-style: none;
+  border-top: 1px solid @color-border;
+  font-size: 0.95rem;
+  color: @color-text-faint;
+
+  @media @screen-md {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: @space-5;
   }
 }

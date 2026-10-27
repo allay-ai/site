@@ -1,13 +1,13 @@
 @import (reference) '../../styles/tokens.less';
 
+// A slab: a solid bar the width of the screen with a heavy rule under it, like
+// the game's own menus. It stays over the page as you scroll.
 .header {
   position: sticky;
   top: 0;
-  z-index: 20;
-  background: color-mix(in srgb, @color-bg 82%, transparent);
-  backdrop-filter: saturate(1.4) blur(14px);
-  -webkit-backdrop-filter: saturate(1.4) blur(14px);
-  border-bottom: 1px solid color-mix(in srgb, @color-border 70%, transparent);
+  z-index: 300;
+  background: @color-bg-elevated;
+  border-bottom: @rule-bar solid @color-border;
 }
 
 .bar {
@@ -19,23 +19,35 @@
   display: flex;
   align-items: center;
   gap: @space-3;
+
+  @media @screen-md {
+    max-width: (@content-width + 2 * @gutter-wide);
+    padding: 0 @gutter-wide;
+    height: 72px;
+  }
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: @space-2;
   color: @color-text;
   text-decoration: none;
-  font-weight: 700;
-  font-size: 1.15rem;
-  letter-spacing: -0.02em;
   margin-right: auto;
+  border-radius: @radius-sm;
+}
+
+// The wordmark in the game's own letters, at a size its pixels stay whole.
+.name {
+  font-family: @font-pixel;
+  font-size: 20px;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .mark {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   display: block;
 }
 
@@ -49,8 +61,7 @@
   flex-direction: column;
   padding: @space-2 @gutter @space-3;
   background: @color-bg-elevated;
-  border-bottom: 1px solid @color-border;
-  box-shadow: @shadow-panel;
+  border-bottom: @rule-bar solid @color-border;
 }
 
 .navOpen {
@@ -60,9 +71,11 @@
 .link {
   color: @color-text-muted;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 700;
   padding: 12px 4px;
   border-radius: @radius-sm;
+  white-space: nowrap;
+  transition: color @dur-micro @ease-out;
 
   &:hover {
     color: @color-text;
@@ -71,35 +84,45 @@
 
 .linkActive {
   color: @color-text;
+  text-decoration: underline;
+  text-decoration-color: @color-answer;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 
 .languages {
   display: inline-flex;
-  gap: 2px;
-  padding: 3px;
   margin-top: @space-2;
   align-self: flex-start;
-  border: 1px solid @color-border;
-  border-radius: 999px;
+  border: @rule-bar solid @color-border;
+  border-radius: @radius-sm;
 }
 
 .language {
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  display: inline-grid;
+  place-items: center;
+  min-width: 40px;
+  min-height: 36px;
+  padding: 0 @space-2;
+  font-size: 0.85rem;
+  font-weight: 700;
   color: @color-text-faint;
   text-decoration: none;
+  transition: color @dur-micro @ease-out;
 
   &:hover {
     color: @color-text;
   }
 }
 
+// The current language as the game marks a selected slot: filled, in the lead ink.
 .languageActive {
-  background: @color-accent-soft;
-  color: @color-accent-text;
+  background: @color-accent;
+  color: @color-on-accent;
+
+  &:hover {
+    color: @color-on-accent;
+  }
 }
 
 .actions {
@@ -113,8 +136,9 @@
   place-items: center;
   width: 40px;
   height: 40px;
-  border-radius: 999px;
+  border-radius: @radius-sm;
   color: @color-text-muted;
+  transition: color @dur-micro @ease-out;
 
   &:hover {
     color: @color-text;
@@ -129,12 +153,20 @@
 .menuButton {
   display: inline-grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid @color-border;
-  border-radius: 999px;
+  width: 44px;
+  height: 44px;
+  border: @rule-bar solid @color-border-strong;
+  border-radius: @radius-sm;
   background: @color-panel;
   cursor: pointer;
+
+  &:hover {
+    border-color: @color-text-faint;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
 }
 
 .menuIcon {
@@ -152,12 +184,11 @@
     padding: 0;
     background: none;
     border: 0;
-    box-shadow: none;
     margin-right: @space-2;
   }
 
   .link {
-    padding: 8px 12px;
+    padding: 8px 10px;
     font-size: 0.95rem;
   }
 

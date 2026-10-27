@@ -57,161 +57,74 @@ export const en: Copy = {
     },
   },
   hero: {
-    eyebrow: modsShipped
-      ? 'AI helper for Minecraft servers and worlds'
-      : 'AI helper for Spigot and Paper servers',
-    title: (
-      <>
-        Ask your world <em>anything</em>
-      </>
-    ),
+    title: 'Ask your world anything',
     lead: (
       <>
-        Allay lives in your server’s chat. A player types <code>/ask</code>, and Allay looks into
-        their real game—the inventory, the block under the crosshair, the chests around, this
-        server’s recipes and plugins—before it answers.
+        Type <code>/ask</code>, and Allay reads your real game before it answers.
       </>
     ),
-    primary: 'Add Allay to your server',
-    secondary: 'Read the manual',
-    facts: [
-      modsShipped ? 'Spigot, Paper, Fabric, NeoForge 26.3' : 'Spigot and Paper 26.3',
-      'Free with your own key',
-      'EU and US privacy law friendly',
-      'Open source, MIT',
-    ],
+    platforms: 'Allay {version} for Minecraft 26.3, on a server or in your own world.',
+    manual: 'Read the manual',
   },
-  demo: {
-    label: 'An example of Allay answering in the game chat',
-    caption: 'An example. Real answers depend on the player’s game.',
-    command: '/ask where did I put my redstone?',
-    status: '⠹ Fluttering over the chests… (3s · ↑ 2,184 · ↓ 61 tokens)',
-    lines: [
-      { kind: 'tool', label: 'Searching for redstone', result: '3 chests within 32 blocks' },
-      { kind: 'tool', label: 'Marking blocks', result: '3 chests lit up for 30 seconds' },
-      {
-        kind: 'answer',
-        text: '2 stacks sit in the chest left of your furnace, 6 blocks north, and 14 more in the barrel under the stairs. I lit them up for you.',
-      },
-      { kind: 'buttons', labels: ['The way', 'Recipe: repeater'] },
-    ],
+  video: {
+    label: 'Allay answers: the status above the hotbar, the tools it uses, then the answer',
+    caption:
+      'While Allay works, the line above the hotbar says what it’s doing, and every tool it uses leaves a line in chat.',
+    pause: 'Pause',
+    play: 'Play',
   },
   features: {
-    kicker: 'What players get',
     title: 'It looks before it answers',
     lead: 'Allay reads the game through tools the plugin runs, so answers fit this player, this world, and this server.',
-    killerTitle: 'Killer features',
-    killer: [
+    moments: [
       {
-        icon: 'eye',
-        title: 'Answers from the real game',
-        body: 'Allay reads the inventory, the block under the crosshair, statistics, and advancements, this server’s recipes and game rules, and the plugins that really run, instead of guessing.',
         ask: 'which of my swords is better?',
+        title: 'Answers from the real game',
+        body: 'Allay reads the inventory, the block under the crosshair, statistics, and advancements instead of guessing.',
       },
       {
-        icon: 'search',
-        title: 'It finds your things and lights them up',
-        body: 'It counts an item in the inventory, the ender chest, and chests up to 32 blocks around, inside shulker boxes and bundles too. The chests that hold it glow through walls, with what’s inside written over them, for you alone.',
+        ask: 'how do I set a home here?',
+        title: 'It knows this server',
+        body: 'Mods’ items, data packs’ recipes, the plugins that really run, and the commands you may use here.',
+      },
+      {
         ask: 'where did I put my redstone?',
+        title: 'It finds your things and lights them up',
+        body: 'It counts an item in chests up to 32 blocks around, and the chests that hold it glow for you alone.',
       },
       {
-        icon: 'trail',
-        title: 'The way to anything',
-        body: 'The compass and a particle trail lead to a death point, a village, a cherry grove, a place Allay remembers, or a friend on the locator bar, following them as they run. A dozen trail looks, from flames to hearts.',
         ask: 'take me back to where I died',
+        title: 'The way to anything',
+        body: 'The compass and a particle trail lead to a death point, a village, or a friend on the locator bar.',
       },
       {
-        icon: 'agent',
-        title: 'Agents do the chores',
-        body: 'They sort chests, stash your loot, fetch 64 iron from the chests around, smelt evenly with exactly the fuel needed, brew in rounds, and craft at a real table, netherite included. They work while you play, hand steps to helper agents, and report.',
         ask: 'smelt all my raw gold evenly',
+        title: 'Agents do the chores',
+        body: 'They sort chests, smelt, brew in rounds, and craft at a real table while you play.',
       },
       {
-        icon: 'redstone',
-        title: 'Redstone, debugged',
-        body: 'Allay reads the machine you look at: dust power, repeater delays, comparators, pistons, torches. The game’s rules point at the fault, like a burned-out torch or a jammed piston, and red marks show where.',
         ask: 'why doesn’t my door open?',
+        title: 'Redstone, debugged',
+        body: 'Allay reads the machine you look at, and red marks show where the fault is.',
       },
       {
-        icon: 'brain',
-        title: 'It remembers you and your places',
-        body: `Up to ${retention.memoryFacts} memories per player: facts, how they like answers, and places, kept by dimension and found nearest first. The conversation stays for ${retention.sessionDays} days, so a follow-up needs no second look. All of it encrypted.`,
         ask: 'remember there’s an arrow trader here',
+        title: 'It remembers you and your places',
+        body: `Up to ${retention.memoryFacts} memories per player, places kept by dimension, all of it encrypted. /allay memory lists them.`,
       },
     ],
-    otherTitle: 'And much more',
-    other: [
-      {
-        icon: 'grid',
-        title: 'A tidy inventory',
-        body: '“Sword first, food in the last row.” Stacks merge, pinned slots get the best item, chests take the same words, and [Put back] undoes it for 5 minutes.',
-      },
-      {
-        icon: 'window',
-        title: 'Buttons and windows',
-        body: 'Recipes, every brewing step, enchantments, and villager trades, one click under the answer.',
-      },
-      {
-        icon: 'hammer',
-        title: 'The anvil, planned',
-        body: 'The cheapest order for your books and items, with the levels shown first. Say yes, and an agent does it and renames the item.',
-      },
-      {
-        icon: 'bulb',
-        title: 'No dark corners',
-        body: '“Where do I put torches?” puts glowing ghost torches on every spot where mobs could spawn.',
-      },
-      {
-        icon: 'cube',
-        title: 'Drafts of builds',
-        body: 'Experimental: a build up to 20×15×20 as ghost blocks, layer by layer. A wrong block turns red and says what belongs there.',
-      },
-      {
-        icon: 'sprout',
-        title: 'A farm check',
-        body: 'Crops by stage, farmland, animals, and spawners around you, in one look.',
-      },
-      {
-        icon: 'flag',
-        title: 'Goals and reminders',
-        body: 'Up to 5 goals as bars at the top of the screen, reminders from 1 to 120 minutes, and a ping everyone nearby sees and hears.',
-      },
-      {
-        icon: 'chat',
-        title: 'Chat mode and /askall',
-        body: 'Talk to Allay without a command, or ask in front of everyone so friends can follow up.',
-      },
-      {
-        icon: 'terminal',
-        title: 'Commands in words',
-        body: '/askx turns a request into commands and runs them as you. Operators only by default, as are the tools that give items or teleport.',
-      },
-      {
-        icon: 'calc',
-        title: 'Fresh facts, exact math',
-        body: 'Web search when a question needs it, and calculations at 64 significant digits: stacks, Nether coordinates, XP.',
-      },
-      {
-        icon: 'chart',
-        title: 'Allay Room',
-        body: 'An admin panel with every setting, accounts with roles, and questions, cost, models, tools, and the busiest players. Never what anyone asked.',
-      },
-      {
-        icon: 'key',
-        title: 'Pay your way',
-        body: 'Your own key, free on allay.chat; a subscription in Telegram Stars; or your own backend without limits.',
-      },
-    ],
+    more: (
+      <>
+        There’s more: a tidy inventory, buttons and windows, the anvil planned, ghost torches for
+        dark corners, drafts of builds, a farm check, goals and reminders, web search and exact
+        math, five languages, and Allay Room, the admin panel.{' '}
+        <Link to="/wiki/plugin/what-allay-can-do/">Everything Allay can do</Link>
+      </>
+    ),
   },
   shots: {
-    kicker: 'In the game',
     title: 'What your players see',
-    lead: 'Real screenshots from a server with Allay: the live status while it works, answers with buttons right in the text, and the game’s own windows for memory and the data notice.',
-    status: {
-      label: 'Allay answers: the status above the hotbar, the tools it uses, then the answer',
-      caption:
-        'While Allay works, the line above the hotbar says what it’s doing, and every tool it uses leaves a line in chat.',
-    },
+    lead: 'Real screenshots from a server with Allay.',
     items: [
       {
         file: 'answer',
@@ -238,14 +151,8 @@ export const en: Copy = {
     ],
   },
   ask: {
-    kicker: 'How to ask',
     title: 'Three commands and a chat mode',
-    lead: (
-      <>
-        Allay answers in the language of the question. While it works, the action bar shows what
-        it’s doing, and a chat line appears for every tool it uses.
-      </>
-    ),
+    lead: 'Allay answers in the language of the question.',
     commands: [
       { command: '/ask <question>', what: 'A private question: only you see it and the answer.' },
       {
@@ -273,103 +180,43 @@ export const en: Copy = {
     youWrite: 'You write',
     itGoes: 'It goes',
   },
-  memory: {
-    kicker: 'Memory',
-    title: 'It remembers what matters',
-    items: [
-      {
-        title: 'A conversation with context',
-        body: `Each player’s session keeps whole exchanges, tool results included, for ${retention.sessionDays} days after the last question. “And how many were in that chest?” needs no second look.`,
-      },
-      {
-        title: 'Facts that last',
-        body: `Up to ${retention.memoryFacts} short facts and places per player: where the base is, what they’re building, how they like answers. Allay saves them itself, says so, and keeps them encrypted.`,
-      },
-      {
-        title: 'The player decides',
-        body: (
-          <>
-            <code>/allay memory</code> lists the facts, <code>/allay forget</code> erases them, and{' '}
-            <code>/allay new</code> starts the conversation over.
-          </>
-        ),
-      },
-    ],
-  },
-  languages: {
-    kicker: 'Languages',
-    title: 'Every player reads their own language',
+  privacy: {
+    title: 'Helpful, never a cheat',
     lead: (
       <>
-        The plugin’s texts come in five languages, picked by the country of the player’s IP address,
-        then by the game’s language. <code>/allay language</code> picks one by hand.
+        Allay sees what the asking player could see. allay.chat follows the GDPR, Spain’s LOPDGDD,
+        COPPA, and the CCPA/CPRA.
       </>
     ),
-    names: ['English', 'Русский', 'Español', 'Português', 'Deutsch'],
-    note: 'The country database sits on your server: no address goes anywhere for the lookup. Allay answers in whatever language the question was asked.',
-  },
-  safety: {
-    kicker: 'Fair by design',
-    title: 'Helpful, never a cheat',
-    lead: 'Allay sees what the asking player could see, and gives regular players nothing they didn’t earn.',
     items: [
       {
         title: 'Only the asker’s things',
-        body: 'Game tools see the player who asked and the world around them. Other players appear only as the locator bar shows them: a name, a distance, a direction.',
+        body: 'Other players appear only as the locator bar shows them: a name, a distance, a direction.',
       },
       {
         title: 'No items for regular players',
-        body: 'Tools that give items, teleport, or change the weather go to operators only, and the plugin checks three times.',
+        body: 'Tools that give items or teleport go to operators only, and the plugin checks three times.',
       },
       {
         title: 'Claims and vanish respected',
-        body: 'Allay opens only containers the player could open, honors GriefPrevention claims, and never reveals a vanished player.',
-      },
-      {
-        title: 'Private by default',
-        body: 'What players say is stored encrypted, and the admin panel shows numbers, not conversations. Only an owner can open one answer, with a reason, and every look is logged. Keys and licenses never reach a log.',
-      },
-    ],
-  },
-  privacy: {
-    kicker: 'Privacy and the law',
-    title: 'EU and US privacy law friendly',
-    lead: (
-      <>
-        allay.chat follows the GDPR, Spain’s LOPDGDD, COPPA, and the CCPA/CPRA. Here is what it does
-        with players’ data.
-      </>
-    ),
-    laws: ['GDPR', 'LOPDGDD', 'CCPA/CPRA', 'COPPA'],
-    items: [
-      {
-        title: 'Stored in the EU',
-        body: 'On servers in Helsinki, Finland. Encrypted nightly backups sit with Cloudflare R2 for up to 12 months.',
-      },
-      {
-        title: 'Sealed with AES-256-GCM',
-        body: 'Conversations, memories and places, deaths, settings and goals, and records of questions are encrypted at rest.',
-      },
-      {
-        title: 'Kept only as long as needed',
-        body: `A conversation ${retention.sessionDays} days; memories, places, deaths, and settings a year after the player’s last question; records of questions ${retention.traceDays} days; numbers and the players directory 2 years.`,
+        body: 'Allay opens only containers the player could open and never reveals a vanished player.',
       },
       {
         title: 'Age and agreement first',
-        body: 'Before the first question a player says their age, which must reach their country’s age of consent, and agrees to a short notice. Below that age, Allay answers nothing and sends nothing.',
+        body: 'Below their country’s age of consent, Allay answers nothing and sends nothing.',
+      },
+      {
+        title: 'Stored in the EU, sealed',
+        body: 'On servers in Helsinki, Finland. Conversations and memories are sealed with AES-256-GCM.',
       },
       {
         title: 'Players control their data',
         body: (
           <>
             <code>/allay privacy</code> shows what’s kept, gives a 24-hour download link, and erases
-            it. Withdrawing the agreement erases what it covered.
+            it.
           </>
         ),
-      },
-      {
-        title: 'No training on questions',
-        body: 'Every question goes through OpenRouter in the USA, only to AI providers that don’t collect it for training. A player who didn’t agree reaches the AI only as “Player 1”.',
       },
     ],
     more: (
@@ -380,8 +227,7 @@ export const en: Copy = {
     ),
   },
   install: {
-    kicker: 'Install',
-    title: 'Running in three steps',
+    title: 'Three steps to the first answer',
     lead: (
       <>
         The plugin talks to the hosted backend at <code>allay.chat</code> out of the box. You can
@@ -463,108 +309,67 @@ export const en: Copy = {
     ],
   },
   pricing: {
-    kicker: 'Pricing',
     title: 'Pay for the model, nothing else',
     lead: 'Every answer costs money at the model’s provider. Your server picks who pays.',
-    byok: {
-      name: 'Your own key',
-      price: 'Free',
-      tagline: 'On allay.chat, with your provider’s bill.',
-      points: [
-        'A key from OpenRouter or any OpenAI-compatible API, paid to the provider directly',
-        `Up to ${byokLimits.perMinute} questions a minute, ${count(byokLimits.perDay, 'en')} a day, and ${byokLimits.concurrent} at once per server`,
-        'The model must be able to call tools',
-        'The key is used for each run and never stored or logged',
-      ],
+    routes: {
+      byok: {
+        name: 'Your own key',
+        price: 'Free',
+        line: (
+          <>
+            On allay.chat, with a key from <a href={links.openRouter}>OpenRouter</a> or any
+            OpenAI-compatible API: up to {byokLimits.perMinute} questions a minute,{' '}
+            {count(byokLimits.perDay, 'en')} a day, and {byokLimits.concurrent} at once.
+          </>
+        ),
+      },
+      hosted: {
+        name: 'Subscription',
+        line: 'Our key and our models, paid in Telegram Stars.',
+      },
+      solo: {
+        name: 'Solo',
+        line: 'For the mod in your own world: one player, a smaller limit, a smaller price.',
+      },
+      self: {
+        name: 'Self-hosted',
+        price: 'Free',
+        line: 'Allay Server with Docker next to Minecraft: your key, no license, no limits.',
+        cta: 'Host it yourself',
+      },
     },
-    hosted: {
-      name: 'Subscription',
-      from: 'from',
-      tagline: 'Our key and our models, paid in Telegram Stars.',
-      plans: { week: 'Week', month: 'Month', year: 'Year' },
-      period: '{days} days',
-      renews: 'renews by itself',
-      budget: '{budget} of model costs',
-      budgetMonthly: '{budget} of model costs every 30 days',
-      steps: [
-        <>
-          Run <code>/allay link</code> as an operator or in your own world
-        </>,
-        <>
-          Pay in <a href={links.bot}>@AllayChatBot</a> on Telegram
-        </>,
-        <>
-          See the plan and its limit in <code>/allay status</code>
-        </>,
-      ],
-      cta: 'Open @AllayChatBot',
-      more: (
-        <>
-          Need more? <a href="mailto:personal@mairwunnx.com">Contact us</a> for higher limits.
-        </>
-      ),
-    },
-    self: {
-      name: 'Self-hosted',
-      price: 'Free',
-      tagline: 'Your backend, your key, no limits.',
-      points: [
-        'Run Allay Server with Docker next to Minecraft',
-        'Every player asks on your own key',
-        'No license, no subscription, no per-server limits',
-        'Your own admin panel with statistics',
-      ],
-      cta: 'Host it yourself',
-    },
-    solo: {
-      name: 'Solo',
-      from: 'from',
-      tagline: 'For the mod in your own world: one player, a smaller limit, a smaller price.',
-      points: [
-        'A singleplayer world, or a LAN world you host, with Allay for Fabric or NeoForge',
-        <>
-          Run <code>/allay link</code> in your world; you need no cheats
-        </>,
-        `It answers you alone. Its payer can hand it to another player in @AllayChatBot once every ${soloReleaseDays} days`,
-      ],
-      cta: 'Open @AllayChatBot',
-    },
-    howTitle: 'How the subscription’s limit works',
-    how: [
-      'The limit is money, not a number of questions: what your server’s questions really cost at the provider, counting the model, web searches, and the summaries of long conversations.',
-      'A typical question on the default model costs between $0.001 and $0.003, depending on searches and the length of the conversation. Automation agents take several steps, so they cost more.',
-      'Operators see the limit in /allay status as a percentage, and hear when it passes 80% and 100%. Players only hear that it’s used up.',
-      'A payment during a period adds its limit at once and moves the end date. There’s no free trial: a server pays before its first hosted question.',
-    ],
-  },
-  selfHost: {
-    kicker: 'Self-hosting',
-    title: 'Run your own backend',
-    lead: (
-      <>
-        Allay Server is open source and ships as one Docker image. With <code>SELFHOSTED=1</code>,
-        billing is off and every question runs on your key.
-      </>
-    ),
+    from: 'from',
+    serverTitle: 'For a server',
+    soloTitle: 'Solo, for your own world',
+    plans: { week: 'Week', month: 'Month', year: 'Year' },
+    period: '{days} days',
+    renews: 'renews by itself',
+    budget: '{budget} of model costs',
+    budgetMonthly: '{budget} of model costs every 30 days',
+    soloNote: `A singleplayer or LAN world with the Fabric or NeoForge mod, no cheats needed. It answers you alone; its payer can hand it on once every ${soloReleaseDays} days.`,
     steps: [
       <>
-        Save this as <code>compose.yaml</code>, give every <code>change-me</code> a random value of
-        its own, and run <code>docker compose up -d</code>.
+        Run <code>/allay link</code> as an operator or in your own world
       </>,
       <>
-        Point <code>server.url</code> in Allay’s <code>config.yml</code> at your backend, give{' '}
-        <code>server.token</code> the same <code>PLUGIN_TOKEN</code>, and run{' '}
-        <code>/allay reload</code>.
+        Pay in <a href={links.bot}>@AllayChatBot</a> on Telegram
       </>,
       <>
-        Run <code>/allay init</code> for a one-time link to the admin panel, and paste your
-        OpenRouter key there.
+        See the plan and its limit in <code>/allay status</code>
       </>,
     ],
-    more: 'The full guide: proxies, passwords, upgrades',
+    cta: 'Open @AllayChatBot',
+    more: (
+      <>
+        Need more? <a href="mailto:personal@mairwunnx.com">Contact us</a> for higher limits.
+      </>
+    ),
+    how: [
+      'The limit is money, not a number of questions: what your server’s questions really cost at the provider.',
+      'A typical question on the default model costs between $0.001 and $0.003. There’s no free trial.',
+    ],
   },
   faq: {
-    kicker: 'FAQ',
     title: 'Questions server owners ask',
     items: [
       {

@@ -1,45 +1,64 @@
 @import (reference) '../../styles/tokens.less';
 
-.split {
-  display: grid;
-  gap: @space-4;
+.block {
+  margin-top: @space-7;
+  padding-top: @space-5;
+  border-top: @rule-bar solid @color-border;
+}
+
+.title {
+  font-family: @font-pixel;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-size: 24px;
+  margin-bottom: @space-2;
 
   @media @screen-md {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: @space-5;
+    font-size: 28px;
   }
 }
 
+.lead {
+  margin-bottom: @space-5;
+}
+
+.split {
+  display: grid;
+  gap: @space-5;
+
+  @media @screen-md {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    gap: @space-6;
+  }
+}
+
+// The commands as a menu: each in the game's letters over what it does.
 .commands {
   margin: 0;
-  display: grid;
-  gap: @space-3;
 }
 
 .command {
-  padding: @space-3 @space-4;
-  border: 1px solid @color-border;
-  border-left: 3px solid @color-accent;
-  border-radius: @radius-md;
-  background: @color-panel;
+  padding: @space-3 0;
+  border-bottom: 1px solid @color-border;
+
+  &:first-child {
+    padding-top: 0;
+  }
 
   dd {
-    margin: 6px 0 0;
+    margin: @space-1 0 0;
     color: @color-text-muted;
   }
 }
 
 .code {
-  font-size: 0.95rem !important;
-  font-weight: 600;
-  color: @color-text;
+  font-family: @font-pixel;
+  font-size: 20px;
+  line-height: 1.4;
+  color: @color-answer-text;
 }
 
 .chat {
-  padding: @space-4;
-  border: 1px solid @color-border;
-  border-radius: @radius-lg;
-  background: @color-panel;
   min-width: 0;
 }
 
@@ -51,21 +70,18 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.93rem;
 
   th {
     text-align: left;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: @color-text-faint;
-    padding: 0 8px 8px 0;
-    border-bottom: 1px solid @color-border;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: @color-text;
+    padding: 0 @space-3 @space-2 0;
+    border-bottom: @rule-bar solid @color-border;
   }
 
   td {
-    padding: 10px 8px 10px 0;
+    padding: @space-3 @space-3 @space-3 0;
     border-bottom: 1px solid @color-border;
     vertical-align: top;
     color: @color-text-muted;
@@ -74,8 +90,42 @@
   tr:last-child td {
     border-bottom: 0;
   }
+}
 
-  td:first-child {
-    width: 55%;
+// What a player types, as the game's chat input shows it.
+.input {
+  width: 55%;
+  font-family: @font-pixel;
+  font-size: 16px;
+  color: @color-text !important;
+}
+
+// On a phone each row stacks: what you write, then where it goes.
+@media (max-width: 599px) {
+  .table {
+    thead {
+      display: none;
+    }
+
+    tr,
+    td {
+      display: block;
+      width: auto;
+    }
+
+    td {
+      padding: 0;
+      border: 0;
+    }
+
+    tr {
+      padding: @space-3 0;
+      border-bottom: 1px solid @color-border;
+    }
+
+    .input {
+      width: auto;
+      margin-bottom: @space-1;
+    }
   }
 }
