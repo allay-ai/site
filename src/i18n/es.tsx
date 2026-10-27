@@ -61,7 +61,7 @@ export const es: Copy = {
       notMojang:
         'No es un producto oficial de Minecraft. No está aprobado por Mojang ni Microsoft ni asociado con ellos.',
       textures:
-        'Los botones, las ranuras, los recuadros de información y los iconos de objetos son texturas del propio Minecraft, ©\u00a0Mojang Studios.',
+        'Los botones, las pestañas, las ventanas y las ranuras son texturas del propio Minecraft, ©\u00a0Mojang Studios.',
     },
   },
   hero: {
@@ -292,7 +292,7 @@ export const es: Copy = {
       fabric: 'Descargar para Fabric',
       neoforge: 'Descargar para NeoForge',
     },
-    latest: 'Última versión: {version}',
+    latest: 'Última versión: {version}, para Minecraft 26.3',
     allReleases: 'Todas las versiones',
     dockerTitle: '¿Usas itzg/minecraft-server?',
     dockerLead: (

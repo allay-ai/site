@@ -55,7 +55,7 @@ export const en: Copy = {
       notMojang:
         'Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.',
       textures:
-        'The buttons, slots, tooltips, and item icons are Minecraft’s own textures, ©\u00a0Mojang Studios.',
+        'The buttons, tabs, windows, and slots are Minecraft’s own textures, ©\u00a0Mojang Studios.',
     },
   },
   hero: {
@@ -279,7 +279,7 @@ export const en: Copy = {
       fabric: 'Download for Fabric',
       neoforge: 'Download for NeoForge',
     },
-    latest: 'Latest release: {version}',
+    latest: 'Latest release: {version}, for Minecraft 26.3',
     allReleases: 'All releases',
     dockerTitle: 'Running itzg/minecraft-server?',
     dockerLead: (

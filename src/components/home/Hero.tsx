@@ -6,7 +6,6 @@ import releases from '../../generated/releases.json'
 import { fill } from '../../i18n/index.ts'
 import type { Locale } from '../../i18n/locales.ts'
 import type { Copy } from '../../i18n/types.ts'
-import { DownloadIcon } from '../shared/icons.tsx'
 import { LoaderLogo } from '../shared/LoaderLogo.tsx'
 import styles from './Hero.module.less'
 
@@ -99,7 +98,6 @@ export function Hero({ copy, locale }: { copy: Copy; locale: Locale }) {
                 <a className={styles.download} href={href}>
                   <LoaderLogo platform={platform} />
                   <span className={styles.downloadLabel}>{install.download[platform]}</span>
-                  <DownloadIcon className={styles.downloadIcon} />
                 </a>
               </li>
             ))}

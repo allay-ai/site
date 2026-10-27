@@ -6,16 +6,17 @@ import { count, usd } from '../../i18n/format.ts'
 import { fill } from '../../i18n/index.ts'
 import type { Locale } from '../../i18n/locales.ts'
 import type { Copy } from '../../i18n/types.ts'
-import { StarIcon } from '../shared/icons.tsx'
 import styles from './PricingSection.module.less'
 import { Section } from './Section.tsx'
 
-/** A price in Telegram Stars, in the game's letters. */
+/** A price in Telegram Stars, in the game's letters, with Telegram's own star. */
 function Stars({ stars, locale }: { stars: number; locale: Locale }) {
   return (
     <span className={styles.stars}>
       {count(stars, locale)}
-      <StarIcon className={styles.star} />
+      <span className={styles.star} aria-hidden="true">
+        ⭐
+      </span>
       <span className="visually-hidden">Telegram Stars</span>
     </span>
   )

@@ -60,8 +60,7 @@ export const ru: Copy = {
       ),
       notMojang:
         'Не является официальным продуктом Minecraft. Не одобрен Mojang или Microsoft и не связан с ними.',
-      textures:
-        'Кнопки, слоты, подсказки и иконки предметов — текстуры самой Minecraft, ©\u00a0Mojang Studios.',
+      textures: 'Кнопки, вкладки, окна и слоты — текстуры самой Minecraft, ©\u00a0Mojang Studios.',
     },
   },
   hero: {
@@ -286,7 +285,7 @@ export const ru: Copy = {
       fabric: 'Скачать для Fabric',
       neoforge: 'Скачать для NeoForge',
     },
-    latest: 'Последний релиз: {version}',
+    latest: 'Последний релиз: {version}, для Minecraft 26.3',
     allReleases: 'Все релизы',
     dockerTitle: 'Сервер в itzg/minecraft-server?',
     dockerLead: (

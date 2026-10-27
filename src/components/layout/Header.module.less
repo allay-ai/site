@@ -90,38 +90,26 @@
   text-underline-offset: 6px;
 }
 
+// The languages as the game's buttons side by side; the page's own is the chosen one.
 .languages {
   display: inline-flex;
+  gap: @space-1;
   margin-top: @space-2;
   align-self: flex-start;
-  border: @rule-bar solid @color-border;
-  border-radius: @radius-sm;
 }
 
 .language {
-  display: inline-grid;
-  place-items: center;
-  min-width: 40px;
-  min-height: 36px;
-  padding: 0 @space-2;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: @color-text-faint;
-  text-decoration: none;
-  transition: color @dur-micro @ease-out;
-
-  &:hover {
-    color: @color-text;
-  }
+  .mc-button();
+  min-width: 48px;
+  padding-inline: @space-2 calc(@space-2 + 0.125em);
 }
 
 // The current language as the game marks a selected slot: filled, in the lead ink.
 .languageActive {
-  background: @color-accent;
-  color: @color-on-accent;
+  .mc-button-chosen();
 
   &:hover {
-    color: @color-on-accent;
+    .mc-button-chosen();
   }
 }
 
@@ -132,17 +120,7 @@
 }
 
 .github {
-  display: inline-grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: @radius-sm;
-  color: @color-text-muted;
-  transition: color @dur-micro @ease-out;
-
-  &:hover {
-    color: @color-text;
-  }
+  .mc-icon-button();
 }
 
 .githubIcon {
@@ -151,22 +129,7 @@
 }
 
 .menuButton {
-  display: inline-grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border: @rule-bar solid @color-border-strong;
-  border-radius: @radius-sm;
-  background: @color-panel;
-  cursor: pointer;
-
-  &:hover {
-    border-color: @color-text-faint;
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
+  .mc-icon-button();
 }
 
 .menuIcon {
@@ -198,6 +161,6 @@
   }
 
   .menuButton {
-    display: none;
+    display: none !important;
   }
 }

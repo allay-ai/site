@@ -52,71 +52,87 @@
   font-style: italic;
 }
 
-// CodeTabs: the files sit in the head like an editor's tabs, the open one joined to the code.
+// CodeTabs: the files as the game's tabs over the game's window, the open tab
+// joined to the window under it, the code in the window's own inks.
 .tabbed {
   position: relative;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  overflow: visible;
+
+  .pre {
+    .mc-window();
+    margin-top: -4px;
+    padding: @space-3 @space-3 @space-2;
+    color: @color-mc-text;
+    // The window is dark in both themes, so the code takes the night's colours.
+    --color-code-string: oklch(85% 0.17 145);
+    --color-code-number: oklch(82% 0.12 65);
+    --color-code-keyword: oklch(84% 0.13 205);
+    --color-accent-text: oklch(84% 0.13 205);
+    --color-ink-2: oklch(86% 0.004 250);
+    --color-muted: oklch(72% 0.004 250);
+  }
 }
 
 .tabsHead {
+  position: relative;
+  z-index: 1;
   padding: 0;
-  align-items: stretch;
-  background: @color-panel-alt;
+  align-items: flex-end;
+  border-bottom: 0;
+  background: none;
 }
 
 .tabsFile {
   align-self: center;
-  padding-right: 14px;
+  padding-right: @space-1;
 
   @media (max-width: 479px) {
     display: none;
   }
 }
 
-// The copy button sits in the code's corner, so the tabs keep the whole head.
+// The copy button sits in the window's corner, so the tabs keep the whole head.
 .tabsCopy {
   position: absolute;
-  top: 44px;
-  right: 8px;
+  z-index: 2;
+  top: 52px;
+  right: 12px;
 }
 
 .tabs {
   display: flex;
+  gap: @space-1;
   min-width: 0;
   overflow-x: auto;
 }
 
 .tab {
+  .mc-tab();
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  margin-bottom: -1px;
-  padding: 9px 14px;
-  border: 0;
-  border-right: 1px solid @color-border;
-  border-bottom: 1px solid transparent;
-  background: transparent;
-  color: @color-text-faint;
-  font-size: 0.85rem;
-  font-weight: 700;
+  gap: @space-2;
+  min-height: 40px;
+  padding: 0 @space-3;
   white-space: nowrap;
+  cursor: pointer;
 
   // Three names fit a phone without their logos.
   @media (max-width: 479px) {
-    padding: 9px 12px;
+    padding: 0 @space-2;
 
     & > span {
       display: none;
     }
   }
-  cursor: pointer;
-
-  &:hover {
-    color: @color-text;
-  }
 
   &[aria-selected='true'] {
-    border-bottom-color: @color-code-bg;
-    background: @color-code-bg;
-    color: @color-text;
+    border-image-source: url('/mc/tab_selected.png');
+    background: @color-mc-panel;
+    background-clip: padding-box;
+    color: @color-mc-text;
+    min-height: 44px;
   }
 }

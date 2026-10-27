@@ -1,27 +1,7 @@
 @import (reference) '../../styles/tokens.less';
 
 .toggle {
-  display: inline-grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border: @rule-bar solid @color-border;
-  border-radius: @radius-sm;
-  background: @color-panel;
-  color: @color-text-muted;
-  cursor: pointer;
-  transition:
-    color @dur-micro @ease-out,
-    border-color @dur-micro @ease-out;
-
-  &:hover {
-    color: @color-text;
-    border-color: @color-border-strong;
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
+  .mc-icon-button();
 }
 
 .icon {

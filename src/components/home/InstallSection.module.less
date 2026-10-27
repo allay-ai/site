@@ -60,41 +60,32 @@
 // The jars again, as quiet press surfaces: the hero carries the filled ones.
 .button {
   .mc-button();
-  justify-content: flex-start;
   width: 100%;
-  min-height: 52px;
-  padding: 0 @space-2;
-  gap: @space-3;
+  min-height: 48px;
+  padding-inline: 52px;
+
+  @media (max-width: 399px) {
+    padding-inline: @space-2;
+  }
+
+  & > :first-child {
+    position: absolute;
+    left: @space-1;
+    top: 50%;
+    transform: translateY(-50%);
+
+    @media (max-width: 399px) {
+      display: none;
+    }
+  }
 }
 
-.buttonText {
-  display: grid;
-  flex: 1;
-  min-width: 0;
-  line-height: 1.25;
-}
 
 .buttonLabel {
-  font-weight: 700;
   white-space: nowrap;
 }
 
-.buttonFile {
-  font-family: @font-mono;
-  font-size: 0.8rem;
-  font-weight: 400;
-  text-shadow: none;
-}
 
-.buttonIcon {
-  width: 20px;
-  height: 20px;
-  flex: none;
-
-  @media (max-width: 399px) {
-    display: none;
-  }
-}
 
 .version {
   margin: @space-1 0 0;

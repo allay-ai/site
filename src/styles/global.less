@@ -40,6 +40,7 @@
   --font-body: 'Onest Variable', system-ui, sans-serif;
   --font-display: 'Minecraft', 'JetBrains Mono Variable', monospace;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --font-emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
   // The game's chat line looks the same by day and by night.
   --color-chat-bg: oklch(12% 0.03 268);
   --color-chat-ink: oklch(95% 0.012 250);
@@ -47,10 +48,13 @@
   // The game's own widgets keep the game's inks in both themes: white text with
   // its dark drop, yellow under the cursor, grey lore in a tooltip.
   --color-mc-text: oklch(98% 0.004 250);
-  --color-mc-text-hover: oklch(97% 0.1 105);
   --color-mc-shadow: oklch(32% 0.004 250);
   --color-mc-lore: oklch(76% 0.004 250);
-  --color-mc-rule: oklch(36% 0.06 300);
+  --color-mc-rule: oklch(46% 0.004 250);
+  --color-mc-chosen: oklch(97% 0.17 108);
+  --color-mc-chosen-shadow: oklch(32% 0.07 108);
+  // The window's own grey, for what sits flush inside it (the open tab).
+  --color-mc-panel: oklch(30% 0.004 250);
 }
 
 .day() {
@@ -77,6 +81,8 @@
   --color-code-string: oklch(50% 0.15 145);
   --color-code-number: oklch(52% 0.15 50);
   --color-code-keyword: oklch(48% 0.11 232);
+  // The chat's see-through grey, dark enough by day for its white letters.
+  --color-chat-line: oklch(15% 0.004 260 / 0.62);
   --shadow-press: 4px 4px 0 oklch(22% 0.04 268);
   --shadow-press-down: 1px 1px 0 oklch(22% 0.04 268);
   --shadow-press-hover: 5px 5px 0 oklch(22% 0.04 268);
@@ -106,6 +112,7 @@
   --color-code-string: oklch(85% 0.17 145);
   --color-code-number: oklch(82% 0.12 65);
   --color-code-keyword: oklch(84% 0.13 205);
+  --color-chat-line: oklch(46% 0.004 260 / 0.5);
   --shadow-press: 4px 4px 0 oklch(85% 0.2 145);
   --shadow-press-down: 1px 1px 0 oklch(85% 0.2 145);
   --shadow-press-hover: 5px 5px 0 oklch(85% 0.2 145);

@@ -23,34 +23,16 @@
   }
 }
 
-// The item the moment is about, in an inventory slot beside the chat line.
-.line {
-  display: flex;
-  align-items: center;
-  gap: @space-3;
-  min-width: 0;
-}
-
-.slot {
-  .mc-slot();
-}
-
-.item {
-  width: 32px;
-  height: 32px;
-  image-rendering: pixelated;
-}
-
 .ask {
-  min-width: 0;
   justify-self: start;
   max-width: 100%;
   margin: 0;
-  padding: @space-2 @space-3;
-  border-radius: @radius-sm;
-  border: @rule-bar solid @color-border;
-  background: @color-chat-bg;
+  // The game's chat line: its see-through grey, white letters with their shadow.
+  padding: @space-1 @space-2;
+  border-radius: 0;
+  background: @color-chat-line;
   color: @color-chat-ink;
+  text-shadow: 2px 2px 0 @color-mc-shadow;
   font-family: @font-pixel;
   font-size: 16px;
   line-height: 1.5;

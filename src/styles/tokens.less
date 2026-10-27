@@ -25,17 +25,21 @@
 @color-code-bg: var(--color-code-bg);
 @color-tile: var(--color-tile);
 @color-chat-bg: var(--color-chat-bg);
+@color-chat-line: var(--color-chat-line);
 @color-chat-ink: var(--color-chat-ink);
 @color-chat-command: var(--color-chat-command);
 @color-mc-text: var(--color-mc-text);
-@color-mc-text-hover: var(--color-mc-text-hover);
 @color-mc-shadow: var(--color-mc-shadow);
 @color-mc-lore: var(--color-mc-lore);
 @color-mc-rule: var(--color-mc-rule);
+@color-mc-chosen: var(--color-mc-chosen);
+@color-mc-chosen-shadow: var(--color-mc-chosen-shadow);
+@color-mc-panel: var(--color-mc-panel);
 
 @font-body: var(--font-body);
 @font-display: var(--font-display);
 @font-mono: var(--font-mono);
+@font-emoji: var(--font-emoji);
 // Minecraft's own face; its pixels stay whole at sizes in multiples of 4 px.
 @font-pixel: var(--font-display);
 
@@ -73,42 +77,50 @@
 @screen-lg: ~'(min-width: 1100px)';
 
 // Minecraft's own widgets, drawn from the game's textures in public/mc/ (copied
-// from the 26.3 client jar, assets/minecraft/textures/gui/sprites/). Each is a
-// nine-slice as its .mcmeta says, scaled by whole numbers so the pixels stay square.
+// from the 26.3 client jar, assets/minecraft/textures/gui/sprites/), the way
+// minecraft.mairwunnx.com draws them. Each is a nine-slice as its .mcmeta says,
+// at GUI scale 2 (1.5 on a phone), so the pixels stay square; the text on them
+// is the game's font with its drop shadow.
 
-// widget/button.png: 200×20, border 3, at 2×. Under the cursor it swaps to
-// button_highlighted.png and the text turns yellow, as in the game's menus.
+// widget/button.png: 200×20, border 3. Lit under the cursor (button_highlighted),
+// yellow text when it is the chosen one, as the game marks a pressed option.
 .mc-button() {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: @space-2;
-  min-height: 44px;
-  padding: 0 @space-3;
+  min-height: 40px;
+  // The extra font pixel on the left balances the gap the font leaves after each glyph.
+  padding: 0 @space-3 0 calc(@space-3 + 0.125em);
   border: 6px solid transparent;
-  border-image: url('/mc/button.png') 3 fill / 6px stretch;
+  border-image: url('/mc/button.png') 3 fill / 6px repeat;
   border-radius: 0;
   background: none;
   box-shadow: none;
   image-rendering: pixelated;
   color: @color-mc-text;
-  text-shadow: 2px 2px 0 @color-mc-shadow;
-  font-weight: 700;
+  font-family: @font-pixel;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: center;
+  text-shadow: 1.5px 1.5px 0 @color-mc-shadow;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  transition: transform @dur-micro @ease-out;
 
-  &:hover {
-    border-image-source: url('/mc/button_highlighted.png');
-    color: @color-mc-text-hover;
-    transform: none;
-    box-shadow: none;
+  @media @screen-sm {
+    font-size: 16px;
+    text-shadow: 2px 2px 0 @color-mc-shadow;
   }
 
-  &:active {
-    transform: translateY(1px);
-    box-shadow: none;
+  &:hover,
+  &:focus-visible {
+    border-image-source: url('/mc/button_highlighted.png');
+    color: @color-mc-text;
+    text-decoration: none;
   }
 
   &:focus-visible {
@@ -116,38 +128,63 @@
   }
 }
 
-// An item tooltip: tooltip/background.png (border 9) under tooltip/frame.png
-// (border 10), both 100×100 with a transparent margin of 8 px, at 2×. The
-// pseudo-elements reach out by that margin so the drawn edge meets the box.
-.mc-tooltip() {
-  position: relative;
-  isolation: isolate;
-  color: @color-mc-text;
+.mc-button-chosen() {
+  border-image-source: url('/mc/button_highlighted.png');
+  color: @color-mc-chosen;
+  text-shadow: 1.5px 1.5px 0 @color-mc-chosen-shadow;
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    inset: -16px;
-    z-index: -1;
-    border-style: solid;
-    border-color: transparent;
-    image-rendering: pixelated;
-    pointer-events: none;
-  }
-
-  &::before {
-    border-width: 18px;
-    border-image: url('/mc/tooltip_background.png') 9 fill / 18px stretch;
-  }
-
-  &::after {
-    border-width: 20px;
-    border-image: url('/mc/tooltip_frame.png') 10 / 20px stretch;
+  @media @screen-sm {
+    text-shadow: 2px 2px 0 @color-mc-chosen-shadow;
   }
 }
 
-// container/slot.png: 18×18 at 2×, an item of 16×16 at 2× in its middle.
+// A square icon button, the size of the game's small ones; the icon takes the text's shadow.
+.mc-icon-button() {
+  .mc-button();
+  width: 40px;
+  min-height: 40px;
+  padding: 0;
+
+  svg {
+    filter: drop-shadow(2px 2px 0 var(--color-mc-shadow));
+  }
+}
+
+// popup/background.png: 236×34, border 6, the game's dark window with its bevel.
+.mc-window() {
+  border: 12px solid transparent;
+  border-image: url('/mc/window.png') 6 fill / 12px repeat;
+  border-radius: 0;
+  background: none;
+  image-rendering: pixelated;
+  color: @color-mc-text;
+}
+
+// widget/tab*.png: 130×24, borders 2 on the sides and top, open at the bottom.
+.mc-tab() {
+  border: 4px solid transparent;
+  border-bottom-width: 0;
+  border-image: url('/mc/tab.png') 2 2 0 2 fill / 4px 4px 0 4px repeat;
+  border-radius: 0;
+  background: none;
+  image-rendering: pixelated;
+  color: @color-mc-lore;
+  font-family: @font-pixel;
+  font-size: 12px;
+  text-shadow: 1.5px 1.5px 0 @color-mc-shadow;
+
+  @media @screen-sm {
+    font-size: 16px;
+    text-shadow: 2px 2px 0 @color-mc-shadow;
+  }
+
+  &:hover {
+    border-image-source: url('/mc/tab_highlighted.png');
+    color: @color-mc-text;
+  }
+}
+
+// container/slot.png: 18×18 at 2×.
 .mc-slot() {
   display: inline-grid;
   place-items: center;

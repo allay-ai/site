@@ -4,7 +4,6 @@ import snippets from '../../generated/snippets.json'
 import { fill } from '../../i18n/index.ts'
 import type { Copy } from '../../i18n/types.ts'
 import { CodeTabs } from '../shared/CodeTabs.tsx'
-import { DownloadIcon } from '../shared/icons.tsx'
 import { LoaderLogo } from '../shared/LoaderLogo.tsx'
 import { shippedBuilds } from './Hero.tsx'
 import styles from './InstallSection.module.less'
@@ -41,11 +40,7 @@ export function InstallSection({ copy }: { copy: Copy }) {
           {shipped.map(([platform, href]) => (
             <a key={platform} className={styles.button} href={href}>
               <LoaderLogo platform={platform} />
-              <span className={styles.buttonText}>
-                <span className={styles.buttonLabel}>{install.download[platform]}</span>
-                <span className={styles.buttonFile}>allay-{platform}.jar</span>
-              </span>
-              <DownloadIcon className={styles.buttonIcon} />
+              <span className={styles.buttonLabel}>{install.download[platform]}</span>
             </a>
           ))}
           <p className={styles.version}>

@@ -1,22 +1,14 @@
 @import (reference) '../../styles/tokens.less';
 
 .button {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 44px;
-  padding: 0 @space-3;
-  border: 1px solid transparent;
-  border-radius: @radius-sm;
-  background: none;
-  color: @color-text-muted;
-  font-size: 0.8rem;
-  cursor: pointer;
+  .mc-button();
+  min-height: 36px;
+  padding-inline: @space-2 calc(@space-2 + 0.125em);
+  font-size: 12px;
 
-  &:hover {
-    color: @color-text;
-    border-color: @color-border;
-    background: @color-panel;
+  @media @screen-sm {
+    font-size: 12px;
+    text-shadow: 1.5px 1.5px 0 var(--color-mc-shadow);
   }
 }
 

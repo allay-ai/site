@@ -79,31 +79,34 @@
 
 // The press surface: the lead ink, an ink edge, and a hard shadow it moves into
 // when pressed, the way the game's buttons give under the cursor.
+// The game's button: its text centred in the game's letters, the loader's logo
+// at the left edge where the game puts a button's icon.
 .download {
   .mc-button();
-  justify-content: flex-start;
   width: 100%;
-  min-height: 52px;
-  padding: 0 @space-2;
-  gap: @space-3;
+  min-height: 48px;
+  padding-inline: 52px;
+
+  @media (max-width: 399px) {
+    padding-inline: @space-2;
+  }
 }
 
-.downloadLabel {
-  flex: 1;
-  min-width: 0;
-  white-space: nowrap;
-}
+.download > :first-child {
+  position: absolute;
+  left: @space-1;
+  top: 50%;
+  transform: translateY(-50%);
 
-.downloadIcon {
-  width: 20px;
-  height: 20px;
-  flex: none;
-
-  // A phone keeps the whole label on one line instead.
   @media (max-width: 399px) {
     display: none;
   }
 }
+
+.downloadLabel {
+  white-space: nowrap;
+}
+
 
 .platforms {
   margin: 0;
@@ -150,7 +153,6 @@
   position: absolute;
   top: @space-3;
   right: @space-3;
-  font-size: 0.9rem;
 }
 
 .caption {

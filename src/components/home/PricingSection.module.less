@@ -28,6 +28,7 @@
 }
 
 .routePrice {
+  position: relative;
   margin: 0;
   font-family: @font-pixel;
   font-size: 24px;
@@ -44,12 +45,19 @@
   }
 }
 
+// “from” hangs to the left of the figure, so every price starts where “Free” does.
 .from {
-  display: block;
+  margin-right: @space-2;
   font-family: @font-body;
   font-size: 1rem;
   font-weight: 700;
   color: @color-text-faint;
+
+  @media @screen-md {
+    position: absolute;
+    right: 100%;
+    bottom: 0.2em;
+  }
 }
 
 .stars {
@@ -62,16 +70,16 @@
 }
 
 .star {
-  width: 0.8em;
-  height: 0.8em;
-  color: @color-star;
+  font-family: @font-emoji;
+  text-shadow: none;
+  font-size: 0.85em;
+  line-height: 1;
 }
 
 // Two price lists side by side, like two players' columns: a server's plans and Solo's.
 .wells {
   display: grid;
   gap: @space-4;
-  margin-inline: -@space-3;
 
   @media @screen-md {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -86,18 +94,19 @@
 }
 
 // Each price list as the game shows an item's tooltip: its own dark field and frame.
+// Each price list in the game's own window: the dark panel with its bevel.
 .well {
-  .mc-tooltip();
+  .mc-window();
   min-width: 0;
-  margin: @space-3;
-  padding: @space-3 @space-3 @space-2;
+  padding: @space-2 @space-3 @space-1;
 
   @media @screen-md {
-    padding: @space-4 @space-4 @space-3;
+    padding: @space-3 @space-4 @space-2;
   }
 
   .stars {
     color: @color-mc-text;
+    text-shadow: 2px 2px 0 @color-mc-shadow;
   }
 
   p {
@@ -112,6 +121,7 @@
   font-weight: 400;
   letter-spacing: 0;
   color: @color-mc-text;
+  text-shadow: 2px 2px 0 @color-mc-shadow;
 }
 
 .plans {
