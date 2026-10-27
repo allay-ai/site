@@ -7,9 +7,11 @@ import worker, {
   clientResponse,
   type Env,
   isBackendPath,
+  localeRedirect,
   originRequest,
   releaseAsset,
   withLegalNotice,
+  withRange,
 } from './index.ts'
 
 const origin = 'https://origin.allay.chat'
@@ -324,5 +326,102 @@ describe('withLegalNotice', () => {
     }
     const response = await worker.fetch(from('ES'), pages)
     assert.match(await response.text(), /legal-notice/)
+  })
+})
+
+describe('localeRedirect', () => {
+  const visit = (country: string, headers: Record<string, string> = {}, path = '/') =>
+    new Request(`https://allay.chat${path}`, {
+      headers: { 'cf-ipcountry': country, 'sec-fetch-site': 'none', ...headers },
+    })
+
+  it('opens the Russian page for a visitor from Russia', () => {
+    const response = localeRedirect(visit('RU'))
+    assert.equal(response?.status, 302)
+    assert.equal(response?.headers.get('location'), '/ru/')
+    assert.equal(response?.headers.get('cache-control'), 'private, no-store')
+  })
+
+  it('opens the Spanish page for Spain and Latin America, keeping the query', () => {
+    assert.equal(localeRedirect(visit('ES'))?.headers.get('location'), '/es/')
+    assert.equal(
+      localeRedirect(
+        new Request('https://allay.chat/?ref=x', { headers: { 'cf-ipcountry': 'MX' } }),
+      )?.headers.get('location'),
+      '/es/?ref=x',
+    )
+  })
+
+  it('leaves other countries, Ukraine included, on the English page', () => {
+    assert.equal(localeRedirect(visit('US')), null)
+    assert.equal(localeRedirect(visit('UA')), null)
+    assert.equal(localeRedirect(new Request('https://allay.chat/')), null)
+  })
+
+  it('never redirects a move inside the site, or any page but /', () => {
+    assert.equal(localeRedirect(visit('RU', { 'sec-fetch-site': 'same-origin' })), null)
+    assert.equal(localeRedirect(visit('RU', { referer: 'https://allay.chat/ru/' })), null)
+    assert.equal(localeRedirect(visit('RU', {}, '/wiki/')), null)
+    assert.equal(localeRedirect(visit('RU', {}, '/es/')), null)
+  })
+
+  it('runs before the assets in the Worker', async () => {
+    const bindings = env()
+    const response = await worker.fetch(visit('BY'), bindings)
+    assert.equal(response.status, 302)
+    assert.deepEqual(bindings.assetPaths, [])
+  })
+})
+
+describe('withRange', () => {
+  const video = () =>
+    new Response(new Uint8Array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), {
+      headers: { 'content-type': 'video/mp4', 'content-length': '10' },
+    })
+  const asking = (range?: string) =>
+    new Request('https://allay.chat/shots/en/status.mp4', {
+      headers: range ? { range } : {},
+    })
+
+  it('answers a range with 206 and just those bytes', async () => {
+    const response = await withRange(video(), asking('bytes=2-4'))
+    assert.equal(response.status, 206)
+    assert.equal(response.headers.get('content-range'), 'bytes 2-4/10')
+    assert.equal(response.headers.get('content-length'), '3')
+    assert.deepEqual([...new Uint8Array(await response.arrayBuffer())], [2, 3, 4])
+  })
+
+  it('answers open and suffix ranges', async () => {
+    const open = await withRange(video(), asking('bytes=7-'))
+    assert.equal(open.headers.get('content-range'), 'bytes 7-9/10')
+    const suffix = await withRange(video(), asking('bytes=-3'))
+    assert.deepEqual([...new Uint8Array(await suffix.arrayBuffer())], [7, 8, 9])
+  })
+
+  it('answers a HEAD range from the length alone', async () => {
+    const head = new Response(null, {
+      headers: { 'content-type': 'video/mp4', 'content-length': '10' },
+    })
+    const request = new Request('https://allay.chat/shots/en/status.mp4', {
+      method: 'HEAD',
+      headers: { range: 'bytes=0-4' },
+    })
+    const response = await withRange(head, request)
+    assert.equal(response.status, 206)
+    assert.equal(response.headers.get('content-range'), 'bytes 0-4/10')
+  })
+
+  it('refuses a range past the end with 416', async () => {
+    const response = await withRange(video(), asking('bytes=20-30'))
+    assert.equal(response.status, 416)
+    assert.equal(response.headers.get('content-range'), 'bytes */10')
+  })
+
+  it('says it takes ranges on a whole answer, and leaves pages alone', async () => {
+    const whole = await withRange(video(), asking())
+    assert.equal(whole.status, 200)
+    assert.equal(whole.headers.get('accept-ranges'), 'bytes')
+    const page = new Response('x', { headers: { 'content-type': 'text/html' } })
+    assert.equal(await withRange(page, asking('bytes=0-1')), page)
   })
 })

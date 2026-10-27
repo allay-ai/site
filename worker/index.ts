@@ -1,8 +1,9 @@
 // The Worker in front of allay.chat. Assets (scripts, styles, pictures) are dist/,
 // answered by Cloudflare without running this script. wrangler.jsonc sends the
 // pages here too (run_worker_first), only to add Spain's legal notice for
-// visitors from Spain (withLegalNotice), the jars under /download/ (download),
-// and the backend's paths: the plugin's API, Telegram's webhook, and the admin
+// visitors from Spain (withLegalNotice), to open the front page in the visitor's
+// language (localeRedirect), to answer byte ranges of the videos (withRange), the
+// jars under /download/ (download), and the backend's paths: the plugin's API, Telegram's webhook, and the admin
 // panel. Those go to the origin, the Allay
 // backend behind a Cloudflare Tunnel, as they came: method, headers, body, and
 // the answer as a stream, so the chat's server-sent events reach the plugin
@@ -177,6 +178,107 @@ export async function withLegalNotice(
   return new Response(end === -1 ? html + line : html.slice(0, end) + line + html.slice(end), init)
 }
 
+// Where a visitor's country speaks one of the front page's other languages, a
+// visit to / from outside the site (a typed address, a bookmark, a search result)
+// opens that language instead. A move inside the site, the switcher's English
+// included, never redirects. Ukraine is left out on purpose.
+const countryLocales: Record<string, 'ru' | 'es'> = {
+  RU: 'ru',
+  BY: 'ru',
+  KZ: 'ru',
+  KG: 'ru',
+  ES: 'es',
+  MX: 'es',
+  AR: 'es',
+  CO: 'es',
+  CL: 'es',
+  PE: 'es',
+  VE: 'es',
+  EC: 'es',
+  GT: 'es',
+  CU: 'es',
+  BO: 'es',
+  DO: 'es',
+  HN: 'es',
+  PY: 'es',
+  SV: 'es',
+  NI: 'es',
+  CR: 'es',
+  PA: 'es',
+  UY: 'es',
+  PR: 'es',
+  GQ: 'es',
+}
+
+function fromThisSite(request: Request, host: string): boolean {
+  const site = request.headers.get('sec-fetch-site')
+  if (site === 'same-origin' || site === 'same-site') return true
+  const referer = request.headers.get('referer')
+  if (!referer) return false
+  try {
+    return new URL(referer).host === host
+  } catch {
+    return false
+  }
+}
+
+/** A redirect from / to /<locale>/ for a visitor from a country of that language, or null. */
+export function localeRedirect(request: Request): Response | null {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return null
+  const url = new URL(request.url)
+  if (url.pathname !== '/' || fromThisSite(request, url.host)) return null
+  const locale = countryLocales[countryOf(request) ?? '']
+  if (!locale) return null
+  return new Response(null, {
+    status: 302,
+    headers: {
+      location: `/${locale}/${url.search}`,
+      'cache-control': 'private, no-store',
+      vary: 'cf-ipcountry, sec-fetch-site, referer',
+    },
+  })
+}
+
+/**
+ * Answers a byte range of a video. Safari asks for ranges and stops a looping
+ * video at its end when it gets the whole file back instead; the static assets
+ * answer the whole file, so the Worker cuts the range out itself. The videos
+ * are under a megabyte.
+ */
+export async function withRange(response: Response, request: Request): Promise<Response> {
+  const type = response.headers.get('content-type') ?? ''
+  if (response.status !== 200 || !type.startsWith('video/')) return response
+  const headers = new Headers(response.headers)
+  headers.set('accept-ranges', 'bytes')
+  const range = request.headers.get('range')?.match(/^bytes=(\d*)-(\d*)$/)
+  if (!range || (range[1] === '' && range[2] === '')) {
+    return new Response(response.body, { status: 200, headers })
+  }
+  // A HEAD answer carries no body, only the whole file's length.
+  const body = request.method === 'HEAD' ? null : await response.arrayBuffer()
+  const size = body ? body.byteLength : Number(response.headers.get('content-length'))
+  if (!Number.isFinite(size) || size <= 0) return new Response(null, { status: 200, headers })
+  let start: number
+  let end: number
+  if (range[1] === '') {
+    // bytes=-N: the last N bytes.
+    start = Math.max(0, size - Number(range[2]))
+    end = size - 1
+  } else {
+    start = Number(range[1])
+    end = range[2] === '' ? size - 1 : Math.min(Number(range[2]), size - 1)
+  }
+  headers.delete('content-length')
+  if (start >= size || start > end) {
+    headers.set('content-range', `bytes */${size}`)
+    return new Response(null, { status: 416, headers })
+  }
+  headers.set('content-range', `bytes ${start}-${end}/${size}`)
+  headers.set('content-length', String(end - start + 1))
+  const part = body ? body.slice(start, end + 1) : null
+  return new Response(part, { status: 206, headers })
+}
+
 // The plugin's and the mods' jars, as allay.chat/download/allay-<platform>.jar
 // for the latest release and allay-<platform>-X.Y.Z.jar for one version. GitHub
 // answers its own download links with a redirect whose headers outgrow what
@@ -241,7 +343,10 @@ export default {
     const asset = releaseAsset(url.pathname)
     if (asset) return download(request, asset)
     if (!isBackendPath(url.pathname)) {
-      return withLegalNotice(await env.ASSETS.fetch(request), request, env)
+      const redirect = localeRedirect(request)
+      if (redirect) return redirect
+      const response = await withRange(await env.ASSETS.fetch(request), request)
+      return withLegalNotice(response, request, env)
     }
     const origin = env.ORIGIN.replace(/\/+$/, '')
     let response: Response
