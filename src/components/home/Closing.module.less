@@ -12,6 +12,19 @@
   }
 }
 
+// On the aqua field the selection takes the chat's ink instead, so it still shows.
+.wrap ::selection {
+  background: @color-chat-bg;
+  color: @color-chat-ink;
+}
+
+.wrap .cta::selection,
+.wrap .cta ::selection,
+.wrap .address ::selection {
+  background: @color-accent;
+  color: @color-on-accent;
+}
+
 .band {
   max-width: @content-width;
   margin: 0 auto;

@@ -241,9 +241,11 @@ button {
   color: inherit;
 }
 
+// A solid lead-ink selection reads on the paper, the chat lines, and the dark
+// buttons alike; the aqua band picks its own (Closing.module.less).
 ::selection {
-  background: @color-accent-soft;
-  color: @color-text;
+  background: @color-accent;
+  color: @color-on-accent;
 }
 
 // For text that only screen readers need.
