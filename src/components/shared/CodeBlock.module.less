@@ -106,10 +106,8 @@
   display: flex;
   gap: @space-1;
   min-width: 0;
-  // Room under the tabs for the open one to reach over the window's edge.
-  padding-bottom: 12px;
-  margin-bottom: -12px;
-  overflow-x: auto;
+  // No scrolling here: a scroll box would clip the open tab where it reaches
+  // over the window's edge. Three tabs fit; on a phone they drop their logos.
 }
 
 // Each tab is the window's own texture without its bottom edge, so tab and window
@@ -144,7 +142,9 @@
     z-index: -1;
     border: 12px solid transparent;
     border-bottom-width: 0;
-    border-image: url('/mc/window.png') 6 6 0 6 fill / 12px 12px 0 12px repeat;
+    // tab_window.png is window.png without its bottom 6 rows, so the open bottom
+    // shows the window's inside, never its lower bevel.
+    border-image: url('/mc/tab_window.png') 6 6 0 6 fill / 12px 12px 0 12px repeat;
     image-rendering: pixelated;
     filter: brightness(0.72);
     pointer-events: none;
