@@ -128,6 +128,12 @@ const sections: LegalSection[] = [
           legitimate interest in a working, secure website (Art. 6(1)(f) GDPR). We don’t keep
           request logs for the pages ourselves.
         </p>
+        <p>
+          When you open the front page from outside the site, our code at Cloudflare reads the
+          country Cloudflare sees for your address and, where that country speaks Russian or
+          Spanish, opens the page in that language. It uses the country for that one answer and
+          keeps nothing; the language switcher takes you back to English.
+        </p>
       </>
     ),
   },
@@ -552,7 +558,7 @@ export function PrivacyPage() {
   return (
     <LegalPage
       title="Privacy policy"
-      updated="Last updated: 23 October 2026"
+      updated="Last updated: 27 October 2026"
       intro={
         <p>
           Allay keeps only what it needs to answer and to keep working, encrypts what players say,
