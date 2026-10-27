@@ -59,31 +59,12 @@
 
 // The jars again, as quiet press surfaces: the hero carries the filled ones.
 .button {
-  display: flex;
-  align-items: center;
-  gap: @space-3;
+  .mc-button();
+  justify-content: flex-start;
+  width: 100%;
   min-height: 52px;
-  margin-right: 5px;
-  padding: @space-1 @space-3 @space-1 @space-2;
-  border: @rule-bar solid @color-text;
-  border-radius: @radius-md;
-  background: @color-bg;
-  color: @color-text;
-  text-decoration: none;
-  box-shadow: @shadow-press;
-  transition:
-    transform @dur-micro @ease-out,
-    box-shadow @dur-micro @ease-out;
-
-  &:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: @shadow-press-hover;
-  }
-
-  &:active {
-    transform: translate(3px, 3px);
-    box-shadow: @shadow-press-down;
-  }
+  padding: 0 @space-2;
+  gap: @space-3;
 }
 
 .buttonText {
@@ -101,7 +82,8 @@
 .buttonFile {
   font-family: @font-mono;
   font-size: 0.8rem;
-  color: @color-text-faint;
+  font-weight: 400;
+  text-shadow: none;
 }
 
 .buttonIcon {

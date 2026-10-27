@@ -27,6 +27,11 @@
 @color-chat-bg: var(--color-chat-bg);
 @color-chat-ink: var(--color-chat-ink);
 @color-chat-command: var(--color-chat-command);
+@color-mc-text: var(--color-mc-text);
+@color-mc-text-hover: var(--color-mc-text-hover);
+@color-mc-shadow: var(--color-mc-shadow);
+@color-mc-lore: var(--color-mc-lore);
+@color-mc-rule: var(--color-mc-rule);
 
 @font-body: var(--font-body);
 @font-display: var(--font-display);
@@ -66,3 +71,89 @@
 @screen-sm: ~'(min-width: 600px)';
 @screen-md: ~'(min-width: 860px)';
 @screen-lg: ~'(min-width: 1100px)';
+
+// Minecraft's own widgets, drawn from the game's textures in public/mc/ (copied
+// from the 26.3 client jar, assets/minecraft/textures/gui/sprites/). Each is a
+// nine-slice as its .mcmeta says, scaled by whole numbers so the pixels stay square.
+
+// widget/button.png: 200×20, border 3, at 2×. Under the cursor it swaps to
+// button_highlighted.png and the text turns yellow, as in the game's menus.
+.mc-button() {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: @space-2;
+  min-height: 44px;
+  padding: 0 @space-3;
+  border: 6px solid transparent;
+  border-image: url('/mc/button.png') 3 fill / 6px stretch;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  image-rendering: pixelated;
+  color: @color-mc-text;
+  text-shadow: 2px 2px 0 @color-mc-shadow;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform @dur-micro @ease-out;
+
+  &:hover {
+    border-image-source: url('/mc/button_highlighted.png');
+    color: @color-mc-text-hover;
+    transform: none;
+    box-shadow: none;
+  }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    outline-offset: 2px;
+  }
+}
+
+// An item tooltip: tooltip/background.png (border 9) under tooltip/frame.png
+// (border 10), both 100×100 with a transparent margin of 8 px, at 2×. The
+// pseudo-elements reach out by that margin so the drawn edge meets the box.
+.mc-tooltip() {
+  position: relative;
+  isolation: isolate;
+  color: @color-mc-text;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -16px;
+    z-index: -1;
+    border-style: solid;
+    border-color: transparent;
+    image-rendering: pixelated;
+    pointer-events: none;
+  }
+
+  &::before {
+    border-width: 18px;
+    border-image: url('/mc/tooltip_background.png') 9 fill / 18px stretch;
+  }
+
+  &::after {
+    border-width: 20px;
+    border-image: url('/mc/tooltip_frame.png') 10 / 20px stretch;
+  }
+}
+
+// container/slot.png: 18×18 at 2×, an item of 16×16 at 2× in its middle.
+.mc-slot() {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  background: url('/mc/slot.png') 0 0 / 36px 36px no-repeat;
+  image-rendering: pixelated;
+}

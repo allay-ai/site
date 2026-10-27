@@ -31,44 +31,12 @@
 }
 
 .action {
-  display: inline-flex;
-  align-items: center;
-  gap: @space-2;
-  min-height: 48px;
-  padding: 0 @space-4;
-  border-radius: @radius-md;
-  border: @rule-bar solid @color-text;
-  background: @color-panel;
-  color: @color-text;
-  text-decoration: none;
+  .mc-button();
   font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: @shadow-press;
-  transition:
-    transform @dur-micro @ease-out,
-    box-shadow @dur-micro @ease-out;
-
-  &:hover {
-    text-decoration: none;
-    transform: translate(-1px, -1px);
-    box-shadow: @shadow-press-hover;
-    color: @color-text;
-  }
-
-  &:active {
-    transform: translate(3px, 3px);
-    box-shadow: @shadow-press-down;
-  }
 }
 
 .primary {
-  background: @color-accent;
-  color: @color-on-accent;
-
-  &:hover {
-    color: @color-on-accent;
-  }
+  .mc-button();
 }
 
 .details {

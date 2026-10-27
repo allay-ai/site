@@ -23,7 +23,26 @@
   }
 }
 
+// The item the moment is about, in an inventory slot beside the chat line.
+.line {
+  display: flex;
+  align-items: center;
+  gap: @space-3;
+  min-width: 0;
+}
+
+.slot {
+  .mc-slot();
+}
+
+.item {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+
 .ask {
+  min-width: 0;
   justify-self: start;
   max-width: 100%;
   margin: 0;

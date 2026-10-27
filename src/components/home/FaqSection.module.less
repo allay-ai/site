@@ -28,7 +28,7 @@
     display: none;
   }
 
-  // The toggle as a slot in the game's inventory: a square, its sign in the game's letters.
+  // The toggle as a slot of the game's inventory, its sign in the game's letters.
   &::after {
     content: '+';
     position: absolute;
@@ -39,12 +39,12 @@
     margin-top: -18px;
     display: grid;
     place-items: center;
-    border: @rule-bar solid @color-border-strong;
-    border-radius: @radius-sm;
+    .mc-slot();
     font-family: @font-pixel;
     font-size: 20px;
     font-weight: 400;
-    color: @color-text;
+    color: @color-mc-text;
+    text-shadow: 2px 2px 0 @color-mc-shadow;
   }
 
   &:hover {

@@ -60,6 +60,8 @@ export const ru: Copy = {
       ),
       notMojang:
         'Не является официальным продуктом Minecraft. Не одобрен Mojang или Microsoft и не связан с ними.',
+      textures:
+        'Кнопки, слоты, подсказки и иконки предметов — текстуры самой Minecraft, ©\u00a0Mojang Studios.',
     },
   },
   hero: {

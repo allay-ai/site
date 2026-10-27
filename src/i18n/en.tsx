@@ -54,6 +54,8 @@ export const en: Copy = {
       ),
       notMojang:
         'Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.',
+      textures:
+        'The buttons, slots, tooltips, and item icons are Minecraft’s own textures, ©\u00a0Mojang Studios.',
     },
   },
   hero: {

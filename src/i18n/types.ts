@@ -48,6 +48,8 @@ export type Copy = {
       releases: string
       madeBy: ReactNode
       notMojang: string
+      /** Credit for the game's textures the site draws its widgets and icons with. */
+      textures: string
     }
   }
   hero: {

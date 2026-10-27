@@ -80,37 +80,12 @@
 // The press surface: the lead ink, an ink edge, and a hard shadow it moves into
 // when pressed, the way the game's buttons give under the cursor.
 .download {
-  display: flex;
-  align-items: center;
-  gap: @space-3;
+  .mc-button();
+  justify-content: flex-start;
+  width: 100%;
   min-height: 52px;
-  // The shadow's offset, so it ends on the content's edge.
-  margin-right: 5px;
-  padding: 0 @space-3 0 @space-2;
-  border: @rule-bar solid @color-text;
-  border-radius: @radius-md;
-  background: @color-accent;
-  color: @color-on-accent;
-  font-weight: 700;
-  text-decoration: none;
-  box-shadow: @shadow-press;
-  transition:
-    transform @dur-micro @ease-out,
-    box-shadow @dur-micro @ease-out;
-
-  &:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: @shadow-press-hover;
-  }
-
-  &:active {
-    transform: translate(3px, 3px);
-    box-shadow: @shadow-press-down;
-  }
-
-  &:focus-visible {
-    outline-offset: 4px;
-  }
+  padding: 0 @space-2;
+  gap: @space-3;
 }
 
 .downloadLabel {
@@ -171,27 +146,11 @@
 }
 
 .pause {
+  .mc-button();
   position: absolute;
   top: @space-3;
   right: @space-3;
-  min-height: 44px;
-  padding: 0 @space-3;
-  border: @rule-bar solid @color-text;
-  border-radius: @radius-sm;
-  background: @color-bg-elevated;
-  color: @color-text;
-  font-weight: 700;
   font-size: 0.9rem;
-  cursor: pointer;
-  transition: transform @dur-micro @ease-out;
-
-  &:hover {
-    background: @color-panel-alt;
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
 }
 
 .caption {

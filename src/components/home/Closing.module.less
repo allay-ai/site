@@ -50,8 +50,16 @@
 
 .title {
   margin-bottom: @space-2;
-  font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.5rem);
+  font-family: @font-pixel;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-size: 32px;
+  line-height: 1.15;
   color: @color-on-accent;
+
+  @media @screen-md {
+    font-size: 40px;
+  }
 }
 
 .body {
@@ -74,29 +82,10 @@
 }
 
 .cta {
+  .mc-button();
   justify-self: start;
-  display: inline-flex;
-  align-items: center;
   min-height: 52px;
   padding: 0 @space-4;
-  border: @rule-bar solid @color-on-accent;
-  border-radius: @radius-md;
-  background: @color-chat-bg;
-  color: @color-chat-ink;
-  font-weight: 700;
-  text-decoration: none;
-  white-space: nowrap;
-  margin-right: 4px;
-  box-shadow: 4px 4px 0 var(--color-accent-ink);
-  transition: transform @dur-micro @ease-out;
-
-  &:hover {
-    transform: translate(-1px, -1px);
-  }
-
-  &:active {
-    transform: translate(3px, 3px);
-  }
 
   &:focus-visible {
     outline-color: @color-on-accent;

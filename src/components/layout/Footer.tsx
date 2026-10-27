@@ -55,7 +55,9 @@ export function Footer({ locale }: { locale: Locale }) {
             </li>
           </ul>
         </nav>
-        <p className={styles.disclaimer}>{ui.footer.notMojang}</p>
+        <p className={styles.disclaimer}>
+          {ui.footer.notMojang} {ui.footer.textures}
+        </p>
       </div>
     </footer>
   )

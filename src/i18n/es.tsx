@@ -60,6 +60,8 @@ export const es: Copy = {
       ),
       notMojang:
         'No es un producto oficial de Minecraft. No está aprobado por Mojang ni Microsoft ni asociado con ellos.',
+      textures:
+        'Los botones, las ranuras, los recuadros de información y los iconos de objetos son texturas del propio Minecraft, ©\u00a0Mojang Studios.',
     },
   },
   hero: {

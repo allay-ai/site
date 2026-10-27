@@ -71,6 +71,7 @@
 .wells {
   display: grid;
   gap: @space-4;
+  margin-inline: -@space-3;
 
   @media @screen-md {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -84,25 +85,33 @@
   }
 }
 
+// Each price list as the game shows an item's tooltip: its own dark field and frame.
 .well {
+  .mc-tooltip();
   min-width: 0;
-  padding: @space-4;
-  border-radius: @radius-md;
-  background: @color-panel;
-  border-top: 4px solid @color-accent;
+  margin: @space-3;
+  padding: @space-3 @space-3 @space-2;
 
   @media @screen-md {
-    padding: @space-5;
+    padding: @space-4 @space-4 @space-3;
   }
 
-  &:nth-child(2) {
-    border-top-color: @color-answer;
+  .stars {
+    color: @color-mc-text;
+  }
+
+  p {
+    color: @color-mc-lore;
   }
 }
 
 .wellTitle {
-  font-size: 1.35rem;
-  margin-bottom: @space-3;
+  margin-bottom: @space-2;
+  font-family: @font-pixel;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: @color-mc-text;
 }
 
 .plans {
@@ -119,7 +128,7 @@
     'detail detail';
   gap: @space-1 @space-3;
   padding: @space-3 0;
-  border-top: 1px solid @color-border;
+  border-top: 1px solid @color-mc-rule;
 
   @media @screen-sm {
     grid-template-columns: minmax(0, 2fr) minmax(0, 5fr) auto;
@@ -131,20 +140,19 @@
     grid-area: stars;
     justify-self: end;
     font-size: 24px;
-    color: @color-text;
   }
 }
 
 .planName {
   grid-area: name;
   font-weight: 800;
-  color: @color-text;
+  color: @color-mc-text;
 }
 
 .planDetail {
   grid-area: detail;
   font-size: 0.95rem;
-  color: @color-text-muted;
+  color: @color-mc-lore;
 }
 
 .note {
@@ -180,31 +188,9 @@
 
 // The quiet press surface: the same edge and hard shadow as the downloads, unfilled.
 .cta {
-  display: inline-flex;
-  align-items: center;
+  .mc-button();
   min-height: 48px;
   padding: 0 @space-4;
-  border: @rule-bar solid @color-text;
-  border-radius: @radius-md;
-  background: @color-bg-elevated;
-  color: @color-text;
-  font-weight: 700;
-  text-decoration: none;
-  white-space: nowrap;
-  box-shadow: @shadow-press;
-  transition:
-    transform @dur-micro @ease-out,
-    box-shadow @dur-micro @ease-out;
-
-  &:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: @shadow-press-hover;
-  }
-
-  &:active {
-    transform: translate(3px, 3px);
-    box-shadow: @shadow-press-down;
-  }
 }
 
 .more {
