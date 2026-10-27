@@ -174,5 +174,27 @@
       bottom: -12px;
       filter: none;
     }
+
+    // Where the open tab's sides meet the window's top edge, the edge's lines turn
+    // up into the tab's: tab_join_left/right.png, 6×6 corners built from the
+    // window texture's own pixels. The first tab's left side is the window's own.
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -12px;
+      z-index: -1;
+      height: 12px;
+      background:
+        url('/mc/tab_join_left.png') left bottom / 12px 12px no-repeat,
+        url('/mc/tab_join_right.png') right bottom / 12px 12px no-repeat;
+      image-rendering: pixelated;
+      pointer-events: none;
+    }
+
+    &:first-child::after {
+      background: url('/mc/tab_join_right.png') right bottom / 12px 12px no-repeat;
+    }
   }
 }
