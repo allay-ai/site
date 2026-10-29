@@ -133,9 +133,9 @@ export const en: Copy = {
     speaker: 'Allay',
     more: (
       <>
-        There’s more: a tidy inventory, buttons and windows, the anvil planned, ghost torches for
-        dark corners, drafts of builds, a farm check, goals and reminders, web search and exact
-        math, five languages, and Allay Room, the admin panel.{' '}
+        There’s more: a tidy inventory, buttons and windows, the anvil planned, fireworks to your
+        design, drafts of builds, goals and reminders, web search and exact math, five languages,
+        and Allay Room, the admin panel.{' '}
         <Link to="/wiki/plugin/what-allay-can-do/">Everything Allay can do</Link>
       </>
     ),
