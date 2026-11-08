@@ -179,6 +179,18 @@ export const en: Copy = {
           'Ask where something lies, and the chests that hold it glow with a label, even through the ground.',
         alt: 'Three chests by a river glow yellow with labels Diamond ×12, ×14, and ×8',
       },
+      {
+        file: 'recipe',
+        caption:
+          'The Recipe button opens the recipe in the game’s own window, with everything it takes.',
+        alt: 'The recipe window for a beacon: glass, a Nether Star, and obsidian on a crafting table',
+      },
+      {
+        file: 'memory-one',
+        caption:
+          'Each memory opens with its place and tags: show the way, pin it, edit it, or forget it.',
+        alt: 'One memory: the iron farm with its tags, place, distance, and buttons to show the way, pin, edit, or forget it',
+      },
     ],
   },
   ask: {

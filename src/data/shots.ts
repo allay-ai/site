@@ -12,4 +12,6 @@ export const shotSize: Record<ShotFile | 'status', { width: number; height: numb
   consent: { width: 1100, height: 875 },
   trail: { width: 1100, height: 831 },
   chests: { width: 1100, height: 831 },
+  recipe: { width: 1100, height: 990 },
+  'memory-one': { width: 1100, height: 1000 },
 }

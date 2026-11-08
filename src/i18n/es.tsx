@@ -188,6 +188,18 @@ export const es: Copy = {
           'Pregunta dónde está algo y los cofres que lo guardan brillan con una etiqueta, incluso bajo tierra.',
         alt: 'Tres cofres junto a un río brillan en amarillo con las etiquetas Diamante ×12, ×14 y ×8',
       },
+      {
+        file: 'recipe',
+        caption:
+          'El botón Receta abre la receta en la ventana del propio juego, con todo lo que pide.',
+        alt: 'La ventana de receta de un faro: cristal, una estrella del Nether y obsidiana en una mesa de crafteo',
+      },
+      {
+        file: 'memory-one',
+        caption:
+          'Cada recuerdo se abre con su lugar y sus etiquetas: mostrar el camino, fijarlo, editarlo u olvidarlo.',
+        alt: 'Un recuerdo: la granja de hierro con sus etiquetas, lugar, distancia y los botones Mostrar el camino, Fijar, Editar y Olvidar',
+      },
     ],
   },
   ask: {

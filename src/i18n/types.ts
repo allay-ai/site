@@ -21,7 +21,15 @@ export type Question = { question: string; answer: ReactNode }
  * an English line on a Russian page.
  */
 /** The stills in public/shots/<locale>/, without .webp. */
-export type ShotFile = 'answer' | 'say' | 'memory' | 'consent' | 'trail' | 'chests'
+export type ShotFile =
+  | 'answer'
+  | 'say'
+  | 'memory'
+  | 'consent'
+  | 'trail'
+  | 'chests'
+  | 'recipe'
+  | 'memory-one'
 
 export type Copy = {
   /** For <html lang> and Intl. */
