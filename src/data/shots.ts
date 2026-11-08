@@ -8,6 +8,8 @@ export const shotSize: Record<ShotFile | 'status', { width: number; height: numb
   status: { width: 1000, height: 454 },
   answer: { width: 1100, height: 597 },
   say: { width: 1100, height: 597 },
-  memory: { width: 1100, height: 875 },
+  memory: { width: 1100, height: 1050 },
   consent: { width: 1100, height: 875 },
+  trail: { width: 1100, height: 831 },
+  chests: { width: 1100, height: 831 },
 }

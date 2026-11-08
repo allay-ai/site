@@ -42,8 +42,9 @@ export function ShotGrid({
 }
 
 /**
- * Allay in the game, in the page's language: a message to send and the memory
- * window (the hero's video already shows an answer with buttons), then how a
+ * Allay in the game, in the page's language: a message to send, the memory
+ * window, the way to a village, and glowing chests (the hero's video already
+ * shows an answer with buttons), then how a
  * player asks. The plugin's tools/shots/shoot.py takes the
  * stills; public/shots/<locale>/ holds the copies.
  */
@@ -59,7 +60,7 @@ export function ShotsSection({
   return (
     <Section id="screens" title={shots.title} lead={shots.lead} tone="band">
       <div id="memory">
-        <ShotGrid shots={shots} files={['say', 'memory']} locale={locale} />
+        <ShotGrid shots={shots} files={['say', 'memory', 'trail', 'chests']} locale={locale} />
       </div>
       <AskBlock ask={ask} />
     </Section>

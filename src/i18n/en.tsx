@@ -157,14 +157,27 @@ export const en: Copy = {
       },
       {
         file: 'memory',
-        caption: 'What Allay remembers, in a window: open a memory to find its place or forget it.',
-        alt: 'The memory window with five memories and buttons to add one or forget them all',
+        caption:
+          'What Allay remembers, in a window: pinned memories first, places nearest first, tags to filter by.',
+        alt: 'The memory window with tags to filter by, two pinned memories with a star, and places marked by kind',
       },
       {
         file: 'consent',
         caption:
           'Before the first question, every player reads what Allay sends and keeps, and agrees.',
         alt: 'The window with Allay’s data notice and the I agree, No thanks, and Privacy policy buttons',
+      },
+      {
+        file: 'trail',
+        caption:
+          'Ask for the way, and a trail of particles leads there, with an arrow at the top of the screen.',
+        alt: 'A trail of cherry petals runs across a river to a savanna village, and the bar at the top reads Village, 100 blocks',
+      },
+      {
+        file: 'chests',
+        caption:
+          'Ask where something lies, and the chests that hold it glow with a label, even through the ground.',
+        alt: 'Three chests by a river glow yellow with labels Diamond ×12, ×14, and ×8',
       },
     ],
   },

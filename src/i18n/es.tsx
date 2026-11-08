@@ -167,14 +167,26 @@ export const es: Copy = {
       {
         file: 'memory',
         caption:
-          'Lo que Allay recuerda, en una ventana: abre un recuerdo para encontrar su lugar u olvidarlo.',
-        alt: 'La ventana de memoria con cinco recuerdos y botones para añadir uno u olvidarlos todos',
+          'Lo que Allay recuerda, en una ventana: lo fijado arriba, los lugares por distancia, etiquetas para filtrar.',
+        alt: 'La ventana de memoria con etiquetas para filtrar, dos recuerdos fijados con una estrella y lugares marcados por tipo',
       },
       {
         file: 'consent',
         caption:
           'Antes de la primera pregunta, cada jugador lee qué envía y guarda Allay, y da su consentimiento.',
         alt: 'La ventana con el aviso de datos de Allay y los botones Acepto, No, gracias y Política de privacidad',
+      },
+      {
+        file: 'trail',
+        caption:
+          'Pide el camino y un rastro de partículas te lleva hasta allí, con una flecha arriba en la pantalla.',
+        alt: 'Un rastro de pétalos de cerezo cruza un río hacia una aldea de sabana, y la barra de arriba dice Aldea, 100 bloques',
+      },
+      {
+        file: 'chests',
+        caption:
+          'Pregunta dónde está algo y los cofres que lo guardan brillan con una etiqueta, incluso bajo tierra.',
+        alt: 'Tres cofres junto a un río brillan en amarillo con las etiquetas Diamante ×12, ×14 y ×8',
       },
     ],
   },
