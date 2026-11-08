@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { shotSize } from '../../data/shots.ts'
 import { builds, type Platform } from '../../data/site.ts'
@@ -7,6 +6,7 @@ import { fill } from '../../i18n/index.ts'
 import type { Locale } from '../../i18n/locales.ts'
 import type { Copy } from '../../i18n/types.ts'
 import { LoaderLogo } from '../shared/LoaderLogo.tsx'
+import { useLoop } from '../shared/useLoop.ts'
 import styles from './Hero.module.less'
 
 /** The jars the latest release carries, in the order the page names them. */
@@ -16,35 +16,10 @@ export const shippedBuilds = (Object.entries(builds) as [Platform, string | null
 
 /**
  * Allay at work in the game, in the page's language: the plugin's own capture of
- * the status above the hotbar, the tools, and the answer. It plays while it's on
- * screen, holds still for visitors who asked for less motion, and a button
- * pauses it, since it loops past five seconds.
+ * the status above the hotbar, the tools, and the answer, played as [useLoop] says.
  */
 function StatusVideo({ video, locale }: { video: Copy['video']; locale: Locale }) {
-  const ref = useRef<HTMLVideoElement>(null)
-  const [held, setHeld] = useState(false)
-  const [seen, setSeen] = useState(false)
-  const [scripted, setScripted] = useState(false)
-
-  // React leaves `muted` out of the prerendered HTML, so the browser may refuse to
-  // play until the element is muted here. Reduced motion starts it held.
-  useEffect(() => {
-    const element = ref.current
-    if (!element) return
-    element.muted = true
-    setScripted(true)
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) setHeld(true)
-    const observer = new IntersectionObserver(([entry]) => setSeen(entry.isIntersecting))
-    observer.observe(element)
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const element = ref.current
-    if (!element) return
-    if (seen && !held) element.play().catch(() => {})
-    else element.pause()
-  }, [seen, held])
+  const { ref, held, toggle, scripted } = useLoop()
 
   const src = (file: string) => `/shots/${locale}/${file}`
   return (
@@ -64,12 +39,7 @@ function StatusVideo({ video, locale }: { video: Copy['video']; locale: Locale }
           aria-label={video.label}
         />
         {scripted && (
-          <button
-            type="button"
-            className={styles.pause}
-            aria-pressed={held}
-            onClick={() => setHeld((value) => !value)}
-          >
+          <button type="button" className={styles.pause} aria-pressed={held} onClick={toggle}>
             {held ? video.play : video.pause}
           </button>
         )}

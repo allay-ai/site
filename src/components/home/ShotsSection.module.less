@@ -31,6 +31,18 @@
   background: @color-panel-alt;
 }
 
+// A recording's frame: the pause button sits on its corner.
+.frame {
+  position: relative;
+}
+
+.pause {
+  .mc-button();
+  position: absolute;
+  top: @space-3;
+  right: @space-3;
+}
+
 .caption {
   max-width: 60ch;
   margin-top: @space-3;

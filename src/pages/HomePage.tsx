@@ -15,7 +15,7 @@ export function HomePage({ locale }: { locale: Locale }) {
     <div lang={copy.htmlLang}>
       <Hero copy={copy} locale={locale} />
       <Features features={copy.features} />
-      <ShotsSection shots={copy.shots} ask={copy.ask} locale={locale} />
+      <ShotsSection shots={copy.shots} ask={copy.ask} video={copy.video} locale={locale} />
       <PricingSection copy={copy} locale={locale} />
       <InstallSection copy={copy} />
       <PrivacySection privacy={copy.privacy} shots={copy.shots} locale={locale} />
