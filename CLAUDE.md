@@ -6,7 +6,7 @@ The source of allay.chat: the front page of Allay (the AI helper for Minecraft s
 
 - Reply in Russian, address the owner as «вы». Quotes «ёлочки», nested „лапки“, an em dash with spaces « — ».
 - Code, comments, and commit messages are in English. Commits are short imperative one-liners, one change each: “Render wiki tables in their own scroll box”.
-- Text on the site follows the owner's typography. English: curly quotes “…”, apostrophes ’, an em dash without spaces. Russian: «ёлочки», « — », «вы» in lower case. Spanish: «comillas», “inglesas” inside them, «tú», numbers grouped only from five digits (2000, 10 000). Plain active sentences; no “seamless”, “robust”, “leverage”.
+- Text on the site follows the owner's typography. English: curly quotes “…”, apostrophes ’, an en dash with spaces (“text – text”), never an em dash glued to the words or a hyphen as a dash (often a colon, a comma, or a full stop reads better than any dash), and no semicolon between clauses or sentences: a full stop, a comma, or a colon instead (a semicolon only separates list items that already hold commas). Russian: «ёлочки», « — », «вы» in lower case. Spanish: «comillas», “inglesas” inside them, «tú», numbers grouped only from five digits (2000, 10 000). Plain active sentences, no “seamless”, “robust”, “leverage”.
 
 ## How it fits together
 
