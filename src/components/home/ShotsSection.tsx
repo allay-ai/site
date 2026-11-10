@@ -76,6 +76,7 @@ export function ShotGrid({
         return (
           <li key={file} className={styles.item}>
             <figure className={styles.figure}>
+              {wide && item.title && <h3 className={styles.title}>{item.title}</h3>}
               {video && clipSize[file] ? (
                 <ShotClip file={file} alt={item.alt} video={video} locale={locale} />
               ) : (
@@ -89,7 +90,9 @@ export function ShotGrid({
                   decoding="async"
                 />
               )}
-              <figcaption className={styles.caption}>{item.caption}</figcaption>
+              <figcaption className={`${styles.caption} ${wide ? styles.captionWide : ''}`}>
+                {item.caption}
+              </figcaption>
             </figure>
           </li>
         )
@@ -120,7 +123,7 @@ export function ShotsSection({
     <Section id="screens" title={shots.title} lead={shots.lead} tone="band">
       <ShotGrid
         shots={shots}
-        files={['build', 'chests', 'trail', 'say', 'recipe']}
+        files={['trail', 'build', 'chests', 'say', 'recipe']}
         locale={locale}
         video={video}
         wide

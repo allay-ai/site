@@ -12,17 +12,18 @@ type Item = {
   image: string
   width: number
   height: number
+  title?: string
   caption: string
   alt: string
 }
 
 /** The recorded scenes first, the hero's answer among them, then the stills that have no recording. */
 const ORDER: ShotFile[] = [
+  'trail',
   'build',
+  'chests',
   'say',
   'recipe',
-  'trail',
-  'chests',
   'answer',
   'memory',
   'memory-one',
@@ -42,6 +43,7 @@ export function galleryItems(copy: Copy, locale: Locale): Item[] {
         image: clip ? `/shots/${locale}/${file}-end.webp` : `/shots/${locale}/${file}.webp`,
         width: size.width,
         height: size.height,
+        title: item.title,
         caption: item.caption,
         alt: item.alt,
       },
@@ -137,7 +139,10 @@ export function Gallery({ copy, locale }: { copy: Copy; locale: Locale }) {
                     decoding="async"
                   />
                 )}
-                <figcaption className={styles.caption}>{item.caption}</figcaption>
+                <figcaption className={styles.caption}>
+                  {item.title && <strong className={styles.name}>{item.title}</strong>}
+                  {item.caption}
+                </figcaption>
               </figure>
             </li>
           ))}

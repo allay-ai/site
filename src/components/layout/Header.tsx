@@ -72,6 +72,14 @@ export function Header({ locale }: { locale: Locale }) {
                   code === locale && (pathname === home || inGallery) ? 'page' : undefined
                 }
                 title={localeNames[code]}
+                // Remembered for the next visit, as the theme is: public/theme.js reads it before paint.
+                onClick={() => {
+                  try {
+                    localStorage.setItem('locale', code)
+                  } catch {
+                    // Storage can be off; the link still goes there.
+                  }
+                }}
                 aria-label={localeNames[code]}
               >
                 {code.toUpperCase()}

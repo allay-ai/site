@@ -68,16 +68,18 @@
   background: @color-panel-alt;
 }
 
+// The caption in the game's letters, as the chat would show it.
 .caption {
-  max-width: 70ch;
+  max-width: 60ch;
   margin: @space-3 auto 0;
-  font-size: 1.2rem;
-  line-height: 1.5;
+  font-family: @font-pixel;
+  font-size: 18px;
+  line-height: 1.6;
   text-align: center;
   color: @color-text;
 
   @media @screen-md {
-    font-size: 1.35rem;
+    font-size: 22px;
   }
 }
 
@@ -153,4 +155,11 @@
   &:hover {
     opacity: 1;
   }
+}
+
+.name {
+  display: block;
+  margin-bottom: @space-1;
+  font-weight: 400;
+  color: @color-answer-text;
 }

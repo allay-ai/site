@@ -230,6 +230,7 @@ export const en: Copy = {
     ],
     example: 'Examples. Real answers depend on the player’s game.',
     speaker: 'Allay',
+    thinking: 'is thinking…',
     more: (
       <>
         There’s more: a tidy inventory, buttons and windows, the anvil planned, fireworks to your
@@ -251,6 +252,7 @@ export const en: Copy = {
       },
       {
         file: 'say',
+        title: 'A message for the others',
         caption: 'Ask Allay to write to the others for you. Nothing goes out until you press Send.',
         alt: 'Allay offers a polite message with a Send button, and the message appears in chat from the player',
       },
@@ -268,24 +270,28 @@ export const en: Copy = {
       },
       {
         file: 'trail',
+        title: 'The way to a village',
         caption:
           'Ask for the way, and a trail of particles leads there, with an arrow at the top of the screen.',
         alt: 'A trail of cherry petals runs across a river to a savanna village, and the bar at the top reads Village, 100 blocks',
       },
       {
         file: 'chests',
+        title: 'Where your things lie',
         caption:
           'Ask where something lies, and the chests that hold it glow with a label, even through the ground.',
         alt: 'Three chests by a river glow yellow with labels Diamond ×12, ×14, and ×8',
       },
       {
         file: 'build',
+        title: 'A house from your chests',
         caption:
           'Ask for a build in your words, move its preview, see what it takes, and Allay builds it from your chests. Off until the server owner turns it on.',
         alt: 'A medieval house with a tower stands in a savanna; in front of it, the chests whose blocks it was built from',
       },
       {
         file: 'recipe',
+        title: 'A recipe in the game’s window',
         caption:
           'The Recipe button opens the recipe in the game’s own window, with everything it takes.',
         alt: 'The recipe window for a beacon: glass, a Nether Star, and obsidian on a crafting table',

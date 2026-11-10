@@ -37,7 +37,7 @@
   margin-top: @space-2;
 }
 
-.arrow {
+.turn {
   .mc-icon-button();
 
   svg {
@@ -90,6 +90,49 @@
   background: @color-chat-line;
   color: @color-mc-text;
   overflow-wrap: break-word;
+}
+
+// The question the player sent, as the chat keeps a command: grey, over Allay's answer.
+.asked {
+  margin: 0;
+  padding: @space-1 @space-2;
+  color: @color-mc-lore;
+  overflow-wrap: break-word;
+}
+
+.thinking {
+  color: @color-mc-lore;
+  animation: blink 0.9s steps(2, start) infinite;
+}
+
+.answer {
+  animation: arrive 0.18s ease-out;
+}
+
+.caret {
+  color: @color-mc-text;
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thinking,
+  .answer,
+  .caret {
+    animation: none;
+  }
 }
 
 .mark,

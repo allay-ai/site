@@ -234,6 +234,7 @@ export const es: Copy = {
     ],
     example: 'Son ejemplos. Las respuestas reales dependen de la partida del jugador.',
     speaker: 'Allay',
+    thinking: 'está pensando…',
     more: (
       <>
         Y hay más: un inventario ordenado, botones y ventanas, el yunque planificado, fuegos
@@ -256,6 +257,7 @@ export const es: Copy = {
       },
       {
         file: 'say',
+        title: 'Un mensaje para los demás',
         caption:
           'Pide a Allay que escriba a los demás por ti. No sale nada hasta que pulsas «Enviar».',
         alt: 'Allay propone un mensaje educado con un botón Enviar, y el mensaje aparece en el chat a nombre del jugador',
@@ -274,24 +276,28 @@ export const es: Copy = {
       },
       {
         file: 'trail',
+        title: 'El camino a una aldea',
         caption:
           'Pide el camino y un rastro de partículas te lleva hasta allí, con una flecha arriba en la pantalla.',
         alt: 'Un rastro de pétalos de cerezo cruza un río hacia una aldea de sabana, y la barra de arriba dice Aldea, 100 bloques',
       },
       {
         file: 'chests',
+        title: 'Dónde están tus cosas',
         caption:
           'Pregunta dónde está algo y los cofres que lo guardan brillan con una etiqueta, incluso bajo tierra.',
         alt: 'Tres cofres junto a un río brillan en amarillo con las etiquetas Diamante ×12, ×14 y ×8',
       },
       {
         file: 'build',
+        title: 'Una casa con tus cofres',
         caption:
           'Pide una construcción con tus palabras, mueve su vista previa, mira lo que necesita y Allay la construye con tus cofres. Desactivado hasta que el dueño del servidor lo active.',
         alt: 'Una casa medieval con torre en una sabana; delante, los cofres de cuyos bloques se construyó',
       },
       {
         file: 'recipe',
+        title: 'Una receta en la ventana del juego',
         caption:
           'El botón Receta abre la receta en la ventana del propio juego, con todo lo que pide.',
         alt: 'La ventana de receta de un faro: cristal, una estrella del Nether y obsidiana en una mesa de crafteo',

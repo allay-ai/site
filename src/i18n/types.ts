@@ -88,6 +88,8 @@ export type Copy = {
     example: string
     /** Who says the answer in chat. */
     speaker: string
+    /** What the chat shows while Allay thinks, after its name. */
+    thinking: string
     /** One sentence naming the rest, with a link to the wiki's full list. */
     more: ReactNode
     /** The moments come a page at a time: the buttons that turn them and the page they're on, “{page} / {pages}”. */
@@ -97,7 +99,8 @@ export type Copy = {
   shots: {
     title: string
     lead: string
-    items: { file: ShotFile; caption: string; alt: string }[]
+    /** A recorded scene's [title] heads it on the front page and in the gallery. */
+    items: { file: ShotFile; title?: string; caption: string; alt: string }[]
     /** Under the best of them on the front page: the way to the gallery. */
     more: string
   }

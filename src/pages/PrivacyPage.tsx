@@ -119,8 +119,8 @@ const sections: LegalSection[] = [
       <>
         <p>
           The website sets no cookies, runs no analytics, and loads no fonts, scripts, or images
-          from other companies. If you pick a light or dark theme, your browser remembers it in its
-          own storage; it never reaches us.
+          from other companies. If you pick a light or dark theme or a language, your browser
+          remembers it in its own storage; it never reaches us.
         </p>
         <p>
           Cloudflare delivers the pages and protects them from attacks. To do that it processes your
