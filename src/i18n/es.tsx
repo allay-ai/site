@@ -142,8 +142,8 @@ export const es: Copy = {
     more: (
       <>
         Y hay más: un inventario ordenado, botones y ventanas, el yunque planificado, fuegos
-        artificiales a tu gusto, planos de construcciones, objetivos y recordatorios, búsqueda en
-        internet y cálculos exactos, cinco idiomas y Allay Room, el panel de administración.{' '}
+        artificiales a tu gusto, objetivos y recordatorios, búsqueda en internet y cálculos exactos,
+        cinco idiomas y Allay Room, el panel de administración.{' '}
         <Link to="/wiki/plugin/what-allay-can-do/">Todo lo que sabe hacer Allay (en inglés)</Link>
       </>
     ),

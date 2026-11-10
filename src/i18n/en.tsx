@@ -134,9 +134,8 @@ export const en: Copy = {
     more: (
       <>
         There’s more: a tidy inventory, buttons and windows, the anvil planned, fireworks to your
-        design, drafts of builds, goals and reminders, web search and exact math, five languages,
-        and Allay Room, the admin panel.{' '}
-        <Link to="/wiki/plugin/what-allay-can-do/">Everything Allay can do</Link>
+        design, goals and reminders, web search and exact math, five languages, and Allay Room, the
+        admin panel. <Link to="/wiki/plugin/what-allay-can-do/">Everything Allay can do</Link>
       </>
     ),
   },
