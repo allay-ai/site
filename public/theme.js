@@ -18,7 +18,9 @@ try {
     const current = other.includes(parts[1]) ? parts[1] : 'en'
     const rest = (current === 'en' ? parts.slice(1) : parts.slice(2)).join('/')
     if (picked !== current && (rest === '' || rest === 'gallery/')) {
-      location.replace(`${picked === 'en' ? '' : `/${picked}`}/${rest}${location.search}${location.hash}`)
+      location.replace(
+        `${picked === 'en' ? '' : `/${picked}`}/${rest}${location.search}${location.hash}`,
+      )
     }
   }
 } catch {
