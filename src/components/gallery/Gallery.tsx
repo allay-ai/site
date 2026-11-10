@@ -21,6 +21,8 @@ type Item = {
 const ORDER: ShotFile[] = [
   'trail',
   'build',
+  'kitchen',
+  'sort',
   'chests',
   'say',
   'recipe',

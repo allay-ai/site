@@ -31,6 +31,8 @@ export type ShotFile =
   | 'recipe'
   | 'memory-one'
   | 'build'
+  | 'sort'
+  | 'kitchen'
 
 export type Copy = {
   /** For <html lang> and Intl. */

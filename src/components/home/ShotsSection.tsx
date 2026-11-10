@@ -123,7 +123,7 @@ export function ShotsSection({
     <Section id="screens" title={shots.title} lead={shots.lead} tone="band">
       <ShotGrid
         shots={shots}
-        files={['trail', 'build', 'chests', 'say', 'recipe']}
+        files={['trail', 'build', 'kitchen', 'sort', 'chests']}
         locale={locale}
         video={video}
         wide

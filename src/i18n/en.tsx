@@ -302,6 +302,20 @@ export const en: Copy = {
           'Each memory opens with its place and tags: show the way, pin it, edit it, or forget it.',
         alt: 'One memory: the iron farm with its tags, place, distance, and buttons to show the way, pin, edit, or forget it',
       },
+      {
+        file: 'sort',
+        title: 'Chests in order',
+        caption:
+          'Ask to sort the chests around you: Allay shows the plan over them, and on your yes every item moves to its place.',
+        alt: 'Six messy chests, labels over each with its category, then the same chests sorted',
+      },
+      {
+        file: 'kitchen',
+        title: 'Furnaces, smokers, and potions at once',
+        caption:
+          'One request starts agents side by side: the blast furnaces smelt, the smokers cook, the stands brew, then the ingots turn into blocks on the crafting table. The wait is sped up.',
+        alt: 'Chests of raw iron, gold, and beef, a row of blast furnaces, smokers, and brewing stands at work, and the ingots, steaks, blocks, and potions in the inventory',
+      },
     ],
     more: 'See everything in the gallery',
   },

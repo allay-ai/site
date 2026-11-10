@@ -308,6 +308,20 @@ export const es: Copy = {
           'Cada recuerdo se abre con su lugar y sus etiquetas: mostrar el camino, fijarlo, editarlo u olvidarlo.',
         alt: 'Un recuerdo: la granja de hierro con sus etiquetas, lugar, distancia y los botones Mostrar el camino, Fijar, Editar y Olvidar',
       },
+      {
+        file: 'sort',
+        title: 'Cofres en orden',
+        caption:
+          'Pide ordenar los cofres de alrededor: Allay muestra el plan sobre ellos y, con tu sí, cada cosa va a su sitio.',
+        alt: 'Seis cofres revueltos, una etiqueta con su categoría sobre cada uno, y luego los mismos cofres ordenados',
+      },
+      {
+        file: 'kitchen',
+        title: 'Hornos, ahumadores y pociones a la vez',
+        caption:
+          'Una petición pone a trabajar varios agentes a la vez: los altos hornos funden, los ahumadores asan, los soportes preparan pociones y los lingotes se vuelven bloques en la mesa de trabajo. La espera va acelerada.',
+        alt: 'Cofres con hierro, oro y carne en bruto, una fila de altos hornos, ahumadores y soportes de pociones trabajando, y en el inventario lingotes, filetes, bloques y pociones',
+      },
     ],
     more: 'Ver todo en la galería',
   },
