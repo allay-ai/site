@@ -30,6 +30,7 @@ export type ShotFile =
   | 'chests'
   | 'recipe'
   | 'memory-one'
+  | 'build'
 
 export type Copy = {
   /** For <html lang> and Intl. */

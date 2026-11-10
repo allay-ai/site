@@ -189,6 +189,12 @@ export const es: Copy = {
         alt: 'Tres cofres junto a un río brillan en amarillo con las etiquetas Diamante ×12, ×14 y ×8',
       },
       {
+        file: 'build',
+        caption:
+          'Pide una construcción con tus palabras, mueve su vista previa, mira lo que necesita y Allay la construye con tus cofres. Desactivado hasta que el dueño del servidor lo active.',
+        alt: 'Una casa medieval con torre en una sabana; delante, los cofres de cuyos bloques se construyó',
+      },
+      {
         file: 'recipe',
         caption:
           'El botón Receta abre la receta en la ventana del propio juego, con todo lo que pide.',

@@ -117,7 +117,7 @@ export function ShotsSection({
       <div id="memory">
         <ShotGrid
           shots={shots}
-          files={['say', 'memory', 'memory-one', 'recipe', 'trail', 'chests']}
+          files={['say', 'memory', 'memory-one', 'recipe', 'trail', 'chests', 'build']}
           locale={locale}
           video={video}
         />

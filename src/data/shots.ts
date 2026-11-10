@@ -14,6 +14,7 @@ export const shotSize: Record<ShotFile | 'status', { width: number; height: numb
   chests: { width: 1100, height: 830 },
   recipe: { width: 1100, height: 990 },
   'memory-one': { width: 1100, height: 1000 },
+  build: { width: 1100, height: 660 },
 }
 
 /**
@@ -25,4 +26,6 @@ export const clipSize: Partial<Record<ShotFile, { width: number; height: number 
   recipe: { width: 1000, height: 756 },
   trail: { width: 1000, height: 756 },
   chests: { width: 1000, height: 756 },
+  // Recorded by hand in survival, whole and at real speed: a house built from the chests in front.
+  build: { width: 1000, height: 600 },
 }

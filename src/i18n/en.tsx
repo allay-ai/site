@@ -179,6 +179,12 @@ export const en: Copy = {
         alt: 'Three chests by a river glow yellow with labels Diamond ×12, ×14, and ×8',
       },
       {
+        file: 'build',
+        caption:
+          'Ask for a build in your words, move its preview, see what it takes, and Allay builds it from your chests. Off until the server owner turns it on.',
+        alt: 'A medieval house with a tower stands in a savanna; in front of it, the chests whose blocks it was built from',
+      },
+      {
         file: 'recipe',
         caption:
           'The Recipe button opens the recipe in the game’s own window, with everything it takes.',
