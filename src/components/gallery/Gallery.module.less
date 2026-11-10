@@ -1,0 +1,156 @@
+@import (reference) '../../styles/tokens.less';
+
+.gallery {
+  display: grid;
+  gap: @space-4;
+}
+
+// The strip slides under a window as wide as the page; one capture shows at a time.
+.viewport {
+  overflow: hidden;
+
+  &:focus-visible {
+    outline: 2px solid @color-focus;
+    outline-offset: 4px;
+  }
+}
+
+.track {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: transform 0.35s ease;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+// No style attribute under the site's CSP: each place on the strip is a class.
+.place(@i) when (@i < 24) {
+  .at@{i} {
+    transform: translateX(-@i * 100%);
+  }
+  .place(@i + 1);
+}
+.place(0);
+
+.slide {
+  flex: 0 0 100%;
+  min-width: 0;
+
+  &[aria-hidden='true'] {
+    visibility: hidden;
+    transition: visibility 0s 0.35s;
+
+    // Only the caption on show takes room: the longest of all would hold a gap under a short one.
+    .caption {
+      display: none;
+    }
+  }
+}
+
+.figure {
+  margin: 0;
+}
+
+// The capture keeps its own pixels and the window's proportions, whatever it is.
+.media {
+  display: block;
+  width: 100%;
+  height: auto;
+  // One frame for every capture, so the strip keeps its height from one to the next.
+  aspect-ratio: 5 / 3;
+  object-fit: contain;
+  border: @rule-bar solid @color-border-strong;
+  border-radius: @radius-md;
+  background: @color-panel-alt;
+}
+
+.caption {
+  max-width: 70ch;
+  margin: @space-3 auto 0;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  text-align: center;
+  color: @color-text;
+
+  @media @screen-md {
+    font-size: 1.35rem;
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: @space-4;
+}
+
+.arrow {
+  .mc-icon-button();
+  width: 48px;
+  min-height: 48px;
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.back {
+  transform: scaleX(-1);
+}
+
+.forward {
+  display: block;
+}
+
+.position {
+  min-width: 6ch;
+  font-family: @font-pixel;
+  font-size: 20px;
+  text-align: center;
+}
+
+// The thumbnails as the game's slots: the one on show stands out.
+.thumbs {
+  display: flex;
+  gap: @space-2;
+  margin: 0;
+  padding: 0 0 @space-2;
+  list-style: none;
+  overflow-x: auto;
+  justify-content: flex-start;
+
+  @media @screen-md {
+    justify-content: center;
+  }
+}
+
+.thumb {
+  display: block;
+  padding: 0;
+  border: @rule-bar solid @color-border-strong;
+  border-radius: @radius-md;
+  background: @color-panel-alt;
+  cursor: pointer;
+  opacity: 0.65;
+
+  img {
+    display: block;
+    width: 112px;
+    height: 70px;
+    object-fit: cover;
+  }
+
+  &[aria-current='true'] {
+    opacity: 1;
+    border-color: @color-focus;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}

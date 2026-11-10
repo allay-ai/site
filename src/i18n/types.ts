@@ -39,7 +39,14 @@ export type Copy = {
   ui: {
     skipToContent: string
     primaryNav: string
-    nav: { features: string; pricing: string; install: string; faq: string; wiki: string }
+    nav: {
+      features: string
+      pricing: string
+      install: string
+      faq: string
+      media: string
+      wiki: string
+    }
     menu: string
     closeMenu: string
     /** The theme button's label in each state: what it is now and what a click picks. */
@@ -83,12 +90,28 @@ export type Copy = {
     speaker: string
     /** One sentence naming the rest, with a link to the wiki's full list. */
     more: ReactNode
+    /** The moments come a page at a time: the buttons that turn them and the page they're on, “{page} / {pages}”. */
+    pager: { previous: string; next: string; page: string }
   }
   /** Screenshots from the game; files live in public/shots/<locale>/. */
   shots: {
     title: string
     lead: string
     items: { file: ShotFile; caption: string; alt: string }[]
+    /** Under the best of them on the front page: the way to the gallery. */
+    more: string
+  }
+  /** /gallery/: every capture, one at a time, its caption under it. */
+  gallery: {
+    meta: { title: string; description: string }
+    title: string
+    lead: string
+    previous: string
+    next: string
+    /** Where the visitor is, “{index} of {total}”. */
+    position: string
+    /** The thumbnails' list, for screen readers. */
+    all: string
   }
   ask: {
     title: string

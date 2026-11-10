@@ -1,6 +1,7 @@
 import { data, type LoaderFunctionArgs, type RouteObject } from 'react-router-dom'
 import { Layout } from './components/layout/Layout.tsx'
 import { ErrorPage } from './pages/ErrorPage.tsx'
+import { GalleryPage } from './pages/GalleryPage.tsx'
 import { HomePage } from './pages/HomePage.tsx'
 import { NotFoundPage } from './pages/NotFoundPage.tsx'
 import { PrivacyPage } from './pages/PrivacyPage.tsx'
@@ -23,6 +24,9 @@ const pageRoutes: RouteObject[] = [
   { path: '/', element: <HomePage locale="en" /> },
   { path: '/ru', element: <HomePage locale="ru" /> },
   { path: '/es', element: <HomePage locale="es" /> },
+  { path: '/gallery', element: <GalleryPage locale="en" /> },
+  { path: '/ru/gallery', element: <GalleryPage locale="ru" /> },
+  { path: '/es/gallery', element: <GalleryPage locale="es" /> },
   { path: '/privacy', element: <PrivacyPage /> },
   { path: '/terms', element: <TermsPage /> },
   { id: wikiRouteId, path: '/wiki/*', loader: wikiLoader, element: <WikiPage /> },

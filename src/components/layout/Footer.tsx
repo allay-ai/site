@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { links } from '../../data/site.ts'
 import { copies } from '../../i18n/index.ts'
-import { homePath, type Locale } from '../../i18n/locales.ts'
+import { galleryPath, homePath, type Locale } from '../../i18n/locales.ts'
 import { Logo } from '../shared/Logo.tsx'
 import styles from './Footer.module.less'
 
@@ -31,6 +31,9 @@ export function Footer({ locale }: { locale: Locale }) {
             </li>
             <li>
               <Link to={`${home}#faq`}>{ui.nav.faq}</Link>
+            </li>
+            <li>
+              <Link to={galleryPath(locale)}>{ui.nav.media}</Link>
             </li>
             <li>
               <Link to="/wiki/plugin/">{ui.footer.pluginWiki}</Link>

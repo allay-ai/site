@@ -25,7 +25,14 @@ export const en: Copy = {
   ui: {
     skipToContent: 'Skip to content',
     primaryNav: 'Primary',
-    nav: { features: 'Features', pricing: 'Pricing', install: 'Install', faq: 'FAQ', wiki: 'Wiki' },
+    nav: {
+      features: 'Features',
+      pricing: 'Pricing',
+      install: 'Install',
+      faq: 'FAQ',
+      media: 'Media',
+      wiki: 'Wiki',
+    },
     menu: 'Menu',
     closeMenu: 'Close menu',
     theme: {
@@ -128,6 +135,98 @@ export const en: Copy = {
         answer: 'Remembered: an arrow trader at -212 71 348.',
         buttons: ['The way'],
       },
+      {
+        ask: 'find a medieval house with a tower and put it in front of me',
+        title: 'Real builds from your chests',
+        body: 'Builds by their authors from Allay’s catalog: a preview only you see, then a builder takes the blocks from your chests. The server owner turns it on.',
+        answer:
+          'Here’s Medieval House I by b333nja: 32×34×26, 5457 blocks. It stands in front of you.',
+        buttons: ['Turn', 'What it takes', 'Build it'],
+      },
+      {
+        ask: 'how do I craft a beacon?',
+        title: 'Recipes in the game’s window',
+        body: 'This server’s own recipes, mods’ and data packs’ included, open in the game’s crafting window.',
+        answer: 'Five glass, a Nether Star, and three obsidian on a crafting table.',
+        buttons: ['Recipe'],
+      },
+      {
+        ask: 'how do I brew night vision?',
+        title: 'Brewing, step by step',
+        body: 'Ingredients, order, and what extends a potion, with the brewing window to follow.',
+        answer: 'An awkward potion, then a golden carrot. Add redstone, and it lasts 8 minutes.',
+        buttons: ['Brewing'],
+      },
+      {
+        ask: 'who sells Mending near me?',
+        title: 'Villagers around you',
+        body: 'Allay reads the trades of the villagers near you and shows the way to the one you need.',
+        answer: 'A librarian 24 blocks west sells Mending for 32 emeralds.',
+        buttons: ['Way', 'Villagers'],
+      },
+      {
+        ask: 'in what order do I put the books on my sword?',
+        title: 'Anvil plan',
+        body: 'The order that costs the fewest levels, from the books you have.',
+        answer: 'Sharpness V and Looting III first, then Mending: 21 levels in all.',
+        buttons: ['Anvil'],
+      },
+      {
+        ask: 'ask everyone politely for 12 diamonds for me',
+        title: 'Writes to others for you',
+        body: 'Allay drafts the message, and nothing goes out until you press Send.',
+        answer: '“Hi all, could someone lend me 12 diamonds? I’ll pay you back tomorrow.”',
+        buttons: ['Send'],
+      },
+      {
+        ask: 'set a goal: 64 diamonds',
+        title: 'Goals with a boss bar',
+        body: 'A bar on top of the screen counts up as you go, and Allay knows your goals.',
+        answer: 'Goal set: 64 diamonds. You already have 12.',
+      },
+      {
+        ask: 'remind me in 10 minutes to check the furnace',
+        title: 'Reminders',
+        body: 'A sound and a line in chat, in 1 to 120 minutes.',
+        answer: 'I’ll remind you at 14:40.',
+      },
+      {
+        ask: 'is this a slime chunk?',
+        title: 'Knows the chunk you stand in',
+        body: 'Its coordinates, region file, slimes, and how long players spent there.',
+        answer: 'Yes, chunk 9 7 is a slime chunk. Its region file is r.0.0.mca.',
+      },
+      {
+        ask: 'when does night come?',
+        title: 'Sees the world’s time',
+        body: 'The world’s day, the time, and the weather come with every question.',
+        answer: 'In about 6 minutes: it’s 16:30 on day 37, under a clear sky.',
+      },
+      {
+        ask: 'sort my inventory, sword first',
+        title: 'Inventory in order',
+        body: 'Stacks merged and sorted, your pinned slots kept.',
+        answer: 'Sorted: the sword is in the first slot, tools after it, blocks last.',
+      },
+      {
+        ask: 'where’s the nearest village?',
+        title: 'Finds structures and biomes',
+        body: 'Villages, temples, cherry groves: where they are and how far.',
+        answer: 'A plains village 340 blocks north-east, at 212 70 -310.',
+        buttons: ['Way', 'Copy'],
+      },
+      {
+        ask: 'how much XP do I need for level 30?',
+        title: 'Exact numbers',
+        body: 'The game’s formulas and exact calculations, not guesses.',
+        answer: '1395 experience points from level 0.',
+      },
+      {
+        ask: 'is my pickaxe about to break?',
+        title: 'Watches your gear',
+        body: 'Durability of what you hold and wear, and what would keep it.',
+        answer: 'Your diamond pickaxe has 112 of 1561 uses left. Mending would keep it.',
+      },
     ],
     example: 'Examples. Real answers depend on the player’s game.',
     speaker: 'Allay',
@@ -138,10 +237,11 @@ export const en: Copy = {
         admin panel. <Link to="/wiki/plugin/what-allay-can-do/">Everything Allay can do</Link>
       </>
     ),
+    pager: { previous: 'Previous scenarios', next: 'More scenarios', page: '{page} / {pages}' },
   },
   shots: {
-    title: 'What your players see',
-    lead: 'Real screenshots from a server with Allay.',
+    title: 'The best of what players see',
+    lead: 'Real screenshots and videos from servers with Allay.',
     items: [
       {
         file: 'answer',
@@ -197,6 +297,20 @@ export const en: Copy = {
         alt: 'One memory: the iron farm with its tags, place, distance, and buttons to show the way, pin, edit, or forget it',
       },
     ],
+    more: 'See everything in the gallery',
+  },
+  gallery: {
+    meta: {
+      title: 'Screenshots and videos – Allay',
+      description:
+        'Allay in the game: answers, the way to a village, glowing chests, recipes, memory, and a house built from a player’s chests.',
+    },
+    title: 'Media',
+    lead: 'Every screenshot and recording from servers with Allay, one at a time.',
+    previous: 'Previous',
+    next: 'Next',
+    position: '{index} of {total}',
+    all: 'All screenshots and videos',
   },
   ask: {
     title: 'Three commands and a chat mode',

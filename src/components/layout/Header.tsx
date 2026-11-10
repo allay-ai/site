@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { links } from '../../data/site.ts'
 import { copies } from '../../i18n/index.ts'
-import { homePath, type Locale, localeNames, locales } from '../../i18n/locales.ts'
+import { galleryPath, homePath, type Locale, localeNames, locales } from '../../i18n/locales.ts'
 import { CloseIcon, GitHubIcon, MenuIcon } from '../shared/icons.tsx'
 import { Logo } from '../shared/Logo.tsx'
 import styles from './Header.module.less'
@@ -25,6 +25,8 @@ export function Header({ locale }: { locale: Locale }) {
     { href: `${home}#faq`, label: ui.nav.faq },
   ]
   const inWiki = pathname.startsWith('/wiki')
+  const gallery = galleryPath(locale)
+  const inGallery = pathname === gallery
 
   return (
     <header className={styles.header}>
@@ -45,6 +47,13 @@ export function Header({ locale }: { locale: Locale }) {
             </Link>
           ))}
           <Link
+            to={gallery}
+            className={`${styles.link} ${inGallery ? styles.linkActive : ''}`}
+            aria-current={inGallery ? 'page' : undefined}
+          >
+            {ui.nav.media}
+          </Link>
+          <Link
             to="/wiki/"
             className={`${styles.link} ${inWiki ? styles.linkActive : ''}`}
             aria-current={inWiki ? 'page' : undefined}
@@ -55,11 +64,13 @@ export function Header({ locale }: { locale: Locale }) {
             {locales.map((code) => (
               <Link
                 key={code}
-                to={homePath(code)}
+                to={inGallery ? galleryPath(code) : homePath(code)}
                 lang={code}
                 hrefLang={code}
                 className={`${styles.language} ${code === locale ? styles.languageActive : ''}`}
-                aria-current={code === locale && pathname === home ? 'page' : undefined}
+                aria-current={
+                  code === locale && (pathname === home || inGallery) ? 'page' : undefined
+                }
                 title={localeNames[code]}
                 aria-label={localeNames[code]}
               >

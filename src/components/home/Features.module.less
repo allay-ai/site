@@ -28,6 +28,38 @@
   }
 }
 
+// Under the page's buttons: the game's arrows and which page this is.
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: @space-3;
+  margin-top: @space-2;
+}
+
+.arrow {
+  .mc-icon-button();
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.back {
+  transform: scaleX(-1);
+}
+
+.forward {
+  display: block;
+}
+
+.page {
+  font-family: @font-pixel;
+  font-size: 18px;
+  color: @color-text;
+}
+
 .panel {
   min-width: 0;
 }

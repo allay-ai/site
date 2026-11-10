@@ -22,6 +22,11 @@ export function homePath(locale: Locale): string {
   return locale === defaultLocale ? '/' : `/${locale}/`
 }
 
+/** The gallery of every screenshot and recording, in each front page's language. */
+export function galleryPath(locale: Locale): string {
+  return `${homePath(locale)}gallery/`
+}
+
 /** The language a path belongs to: its first segment when that is a known code. */
 export function localeOf(pathname: string): Locale {
   const first = pathname.split('/')[1]

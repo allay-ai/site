@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom'
 import { clipSize, shotSize } from '../../data/shots.ts'
-import type { Locale } from '../../i18n/locales.ts'
+import { galleryPath, type Locale } from '../../i18n/locales.ts'
 import type { Copy, ShotFile } from '../../i18n/types.ts'
 import { useLoop } from '../shared/useLoop.ts'
 import { AskBlock } from './AskSection.tsx'
@@ -58,14 +59,17 @@ export function ShotGrid({
   files,
   locale,
   video,
+  wide = false,
 }: {
   shots: Copy['shots']
   files: ShotFile[]
   locale: Locale
   video?: Copy['video']
+  /** One under another, each as wide as the page; else two side by side in cells of one shape. */
+  wide?: boolean
 }) {
   return (
-    <ul className={styles.grid}>
+    <ul className={`${styles.grid} ${wide ? styles.wide : styles.cells}`}>
       {files.map((file) => {
         const item = shots.items.find((shot) => shot.file === file)
         if (!item) return null
@@ -95,11 +99,11 @@ export function ShotGrid({
 }
 
 /**
- * Allay in the game, in the page's language: a message to send, the memory
- * window and one memory, a recipe, the way to a village, and glowing chests,
- * the scenes recorded whole where they move (the hero's video already shows an
- * answer with buttons), then how a player asks. The plugin's tools/shots/shoot.py
- * takes the stills and the recordings; public/shots/<locale>/ holds the copies.
+ * The best of Allay in the game, in the page's language: every scene recorded whole,
+ * one under another as wide as the page (a house built from a player's chests first),
+ * then the memory window and one memory side by side, the way to the gallery with the
+ * rest, and how a player asks. The plugin's tools/shots/shoot.py takes the stills and
+ * most recordings; public/shots/<locale>/ holds the copies.
  */
 export function ShotsSection({
   shots,
@@ -114,14 +118,21 @@ export function ShotsSection({
 }) {
   return (
     <Section id="screens" title={shots.title} lead={shots.lead} tone="band">
-      <div id="memory">
-        <ShotGrid
-          shots={shots}
-          files={['say', 'memory', 'memory-one', 'recipe', 'trail', 'chests', 'build']}
-          locale={locale}
-          video={video}
-        />
+      <ShotGrid
+        shots={shots}
+        files={['build', 'chests', 'trail', 'say', 'recipe']}
+        locale={locale}
+        video={video}
+        wide
+      />
+      <div id="memory" className={styles.stills}>
+        <ShotGrid shots={shots} files={['memory', 'memory-one']} locale={locale} />
       </div>
+      <p className={styles.more}>
+        <Link to={galleryPath(locale)} className={styles.moreLink}>
+          {shots.more}
+        </Link>
+      </p>
       <AskBlock ask={ask} />
     </Section>
   )

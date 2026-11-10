@@ -8,7 +8,7 @@
 
 import wikiIndex from '../generated/wiki/index.json'
 import { copies } from '../i18n/index.ts'
-import { homePath, type Locale, locales } from '../i18n/locales.ts'
+import { galleryPath, homePath, type Locale, locales } from '../i18n/locales.ts'
 import { origin } from './site.ts'
 
 export { origin }
@@ -33,6 +33,16 @@ const homePages: PageMeta[] = locales.map((locale: Locale) => ({
   description: copies[locale].meta.description,
   lang: copies[locale].htmlLang,
   alternates: homeAlternates,
+}))
+
+const galleryAlternates = locales.map((locale) => ({ lang: locale, path: galleryPath(locale) }))
+
+const galleryPages: PageMeta[] = locales.map((locale: Locale) => ({
+  path: galleryPath(locale),
+  title: copies[locale].gallery.meta.title,
+  description: copies[locale].gallery.meta.description,
+  lang: copies[locale].htmlLang,
+  alternates: galleryAlternates,
 }))
 
 const legalPages: PageMeta[] = [
@@ -64,7 +74,7 @@ const wikiPages: PageMeta[] = wikiIndex.books.flatMap((book) =>
   })),
 )
 
-export const pages: PageMeta[] = [...homePages, ...legalPages, ...wikiPages]
+export const pages: PageMeta[] = [...homePages, ...galleryPages, ...legalPages, ...wikiPages]
 
 export const notFoundPage: PageMeta = {
   path: '/404/',

@@ -6,11 +6,39 @@
   margin: 0;
   padding: 0;
   list-style: none;
+}
 
+// The recordings, one under another, each as wide as the page.
+.wide {
+  gap: @space-6;
+}
+
+// Stills side by side, each in a cell of the same shape, so the rows line up.
+.cells {
   @media @screen-md {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
+    align-items: stretch;
   }
+
+  .media {
+    aspect-ratio: 1100 / 1050;
+    object-fit: contain;
+  }
+}
+
+.stills {
+  margin-top: @space-6;
+}
+
+.more {
+  margin: @space-5 0 0;
+  text-align: center;
+}
+
+.moreLink {
+  .mc-button();
+  min-width: 280px;
+  text-decoration: none;
 }
 
 .item {

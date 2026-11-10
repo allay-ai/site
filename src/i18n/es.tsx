@@ -30,6 +30,7 @@ export const es: Copy = {
       pricing: 'Precios',
       install: 'Instalar',
       faq: 'Preguntas',
+      media: 'Medios',
       wiki: 'Wiki',
     },
     menu: 'Menú',
@@ -136,6 +137,100 @@ export const es: Copy = {
         answer: 'Recordado: un aldeano que vende flechas en -212 71 348.',
         buttons: ['El camino'],
       },
+      {
+        ask: 'busca una casa medieval con torre y ponla delante de mí',
+        title: 'Construcciones reales con tus cofres',
+        body: 'Construcciones de sus autores del catálogo de Allay: una vista previa que solo ves tú, y un constructor toma los bloques de tus cofres. Lo activa el dueño del servidor.',
+        answer:
+          'Aquí tienes Medieval House I de b333nja: 32×34×26, 5457 bloques. Está delante de ti.',
+        buttons: ['Girar', 'Qué necesita', 'Construir'],
+      },
+      {
+        ask: '¿cómo fabrico un faro?',
+        title: 'Recetas en la ventana del juego',
+        body: 'Las recetas de este servidor, también de mods y data packs, se abren en la mesa de trabajo del juego.',
+        answer:
+          'Cinco cristales, una estrella del Nether y tres obsidianas en una mesa de trabajo.',
+        buttons: ['Receta'],
+      },
+      {
+        ask: '¿cómo preparo visión nocturna?',
+        title: 'Pociones paso a paso',
+        body: 'Ingredientes, orden y qué alarga la poción, con la ventana de destilación para seguirla.',
+        answer: 'Primero una poción rara, luego una zanahoria dorada. Con redstone dura 8 minutos.',
+        buttons: ['Destilación'],
+      },
+      {
+        ask: '¿quién vende Reparación cerca?',
+        title: 'Aldeanos a tu alrededor',
+        body: 'Allay lee los tratos de los aldeanos cercanos y te lleva al que necesitas.',
+        answer: 'Un bibliotecario a 24 bloques al oeste vende Reparación por 32 esmeraldas.',
+        buttons: ['Camino', 'Aldeanos'],
+      },
+      {
+        ask: '¿en qué orden pongo los libros en mi espada?',
+        title: 'Plan de yunque',
+        body: 'El orden que cuesta menos niveles, con los libros que tienes.',
+        answer: 'Primero Filo V y Botín III, luego Reparación: 21 niveles en total.',
+        buttons: ['Yunque'],
+      },
+      {
+        ask: 'pide a todos con educación 12 diamantes por mí',
+        title: 'Escribe a otros por ti',
+        body: 'Allay redacta el mensaje, y nada sale hasta que pulsas Enviar.',
+        answer: '«¡Hola a todos! ¿Alguien me presta 12 diamantes? Los devuelvo mañana».',
+        buttons: ['Enviar'],
+      },
+      {
+        ask: 'pon una meta: 64 diamantes',
+        title: 'Metas con barra de jefe',
+        body: 'Una barra arriba cuenta lo que llevas, y Allay recuerda tus metas.',
+        answer: 'Meta puesta: 64 diamantes. Ya tienes 12.',
+      },
+      {
+        ask: 'recuérdame en 10 minutos revisar el horno',
+        title: 'Recordatorios',
+        body: 'Un sonido y una línea en el chat, en 1 a 120 minutos.',
+        answer: 'Te lo recuerdo a las 14:40.',
+      },
+      {
+        ask: '¿esto es un chunk de slimes?',
+        title: 'Conoce el chunk donde estás',
+        body: 'Sus coordenadas, el archivo de región, los slimes y cuánto tiempo pasaron allí los jugadores.',
+        answer: 'Sí, el chunk 9 7 es de slimes. Su archivo de región es r.0.0.mca.',
+      },
+      {
+        ask: '¿cuándo llega la noche?',
+        title: 'Ve la hora del mundo',
+        body: 'El día del mundo, la hora y el tiempo llegan con cada pregunta.',
+        answer: 'En unos 6 minutos: son las 16:30 del día 37, con el cielo despejado.',
+      },
+      {
+        ask: 'ordena mi inventario, la espada primero',
+        title: 'Inventario en orden',
+        body: 'Pilas juntas y ordenadas, tus casillas fijadas en su sitio.',
+        answer:
+          'Listo: la espada en la primera casilla, luego las herramientas, los bloques al final.',
+      },
+      {
+        ask: '¿dónde está la aldea más cercana?',
+        title: 'Encuentra estructuras y biomas',
+        body: 'Aldeas, templos, bosques de cerezos: dónde están y a qué distancia.',
+        answer: 'Una aldea de llanura a 340 bloques al noreste, en 212 70 -310.',
+        buttons: ['Camino', 'Copiar'],
+      },
+      {
+        ask: '¿cuánta experiencia necesito para el nivel 30?',
+        title: 'Números exactos',
+        body: 'Las fórmulas del juego y cálculos exactos, no suposiciones.',
+        answer: '1395 puntos de experiencia desde el nivel 0.',
+      },
+      {
+        ask: '¿se va a romper mi pico?',
+        title: 'Vigila tu equipo',
+        body: 'La durabilidad de lo que llevas en la mano y puesto, y qué la mantendría.',
+        answer: 'A tu pico de diamante le quedan 112 de 1561 usos. Reparación lo mantendría.',
+      },
     ],
     example: 'Son ejemplos. Las respuestas reales dependen de la partida del jugador.',
     speaker: 'Allay',
@@ -147,10 +242,11 @@ export const es: Copy = {
         <Link to="/wiki/plugin/what-allay-can-do/">Todo lo que sabe hacer Allay (en inglés)</Link>
       </>
     ),
+    pager: { previous: 'Escenarios anteriores', next: 'Más escenarios', page: '{page} / {pages}' },
   },
   shots: {
-    title: 'Lo que ven tus jugadores',
-    lead: 'Capturas reales de un servidor con Allay.',
+    title: 'Lo mejor de lo que ven los jugadores',
+    lead: 'Capturas y vídeos reales de servidores con Allay.',
     items: [
       {
         file: 'answer',
@@ -207,6 +303,20 @@ export const es: Copy = {
         alt: 'Un recuerdo: la granja de hierro con sus etiquetas, lugar, distancia y los botones Mostrar el camino, Fijar, Editar y Olvidar',
       },
     ],
+    more: 'Ver todo en la galería',
+  },
+  gallery: {
+    meta: {
+      title: 'Capturas y vídeos – Allay',
+      description:
+        'Allay en el juego: respuestas, el camino a una aldea, cofres que brillan, recetas, memoria y una casa construida con los cofres de un jugador.',
+    },
+    title: 'Medios',
+    lead: 'Cada captura y grabación de servidores con Allay, una a una.',
+    previous: 'Anterior',
+    next: 'Siguiente',
+    position: '{index} de {total}',
+    all: 'Todas las capturas y vídeos',
   },
   ask: {
     title: 'Tres comandos y un modo chat',
