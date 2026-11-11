@@ -182,6 +182,14 @@ export const es: Copy = {
         buttons: ['Enviar'],
       },
       {
+        ask: '¿qué escribió? respóndele que no tengo diamantes',
+        title: 'Lee el chat contigo',
+        body: 'Allay lee las últimas 72 horas del chat tal como las viste: traduce, cuenta quién insultó más y redacta la respuesta en el idioma del otro jugador.',
+        answer:
+          'Notch escribió: «¿Alguien tiene diamantes?». Puedes responder: “Sorry, I’m out of diamonds”.',
+        buttons: ['Responder'],
+      },
+      {
         ask: 'pon una meta: 64 diamantes',
         title: 'Metas con barra de jefe',
         body: 'Una barra arriba cuenta lo que llevas, y Allay recuerda tus metas.',
@@ -254,6 +262,13 @@ export const es: Copy = {
         caption:
           'Los botones van dentro de la respuesta: la receta, el camino a la aldea, coordenadas para copiar, una nota, la siguiente pregunta.',
         alt: 'Respuesta de Allay en el chat con los botones Receta, Camino, Copiar, Recordar y Sí en el texto',
+      },
+      {
+        file: 'chat',
+        title: '¿Qué escribió?',
+        caption:
+          'Allay lee el chat, traduce el mensaje y te propone una respuesta en el idioma del otro jugador. Pulsa «Responder» y sale a tu nombre.',
+        alt: 'Notch escribe en otro idioma, Allay lo traduce y propone una respuesta con un botón Responder, y la respuesta aparece en el chat a nombre del jugador',
       },
       {
         file: 'say',

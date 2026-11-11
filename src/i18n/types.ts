@@ -24,6 +24,7 @@ export type Question = { question: string; answer: ReactNode }
 export type ShotFile =
   | 'answer'
   | 'say'
+  | 'chat'
   | 'memory'
   | 'consent'
   | 'trail'

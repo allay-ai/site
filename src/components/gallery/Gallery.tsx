@@ -24,6 +24,7 @@ const ORDER: ShotFile[] = [
   'kitchen',
   'sort',
   'chests',
+  'chat',
   'say',
   'recipe',
   'answer',

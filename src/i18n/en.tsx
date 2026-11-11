@@ -179,6 +179,14 @@ export const en: Copy = {
         buttons: ['Send'],
       },
       {
+        ask: 'what did he write? reply that I have no diamonds',
+        title: 'Reads the chat with you',
+        body: 'Allay reads the last 72 hours of the chat as you saw it: it translates, counts who swore the most, and drafts a reply in the other player’s language.',
+        answer:
+          'Notch wrote in Spanish: “Anyone got diamonds?” You could reply: “Lo siento, no tengo diamantes”.',
+        buttons: ['Reply'],
+      },
+      {
         ask: 'set a goal: 64 diamonds',
         title: 'Goals with a boss bar',
         body: 'A bar on top of the screen counts up as you go, and Allay knows your goals.',
@@ -249,6 +257,13 @@ export const en: Copy = {
         caption:
           'Buttons sit right in the answer: the recipe, the way to the village, coordinates to copy, a note, the next question.',
         alt: 'Allay’s answer in chat with Recipe, Way, Copy, Remember, and Yes buttons in the text',
+      },
+      {
+        file: 'chat',
+        title: 'What did he write?',
+        caption:
+          'Allay reads the chat, translates the line, and offers a reply in the other player’s language. Press Reply, and it goes out as yours.',
+        alt: 'Notch writes in another language, Allay translates it and offers a reply with a Reply button, and the reply appears in chat from the player',
       },
       {
         file: 'say',

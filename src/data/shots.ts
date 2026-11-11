@@ -8,6 +8,7 @@ export const shotSize: Record<ShotFile | 'status', { width: number; height: numb
   status: { width: 1000, height: 454 },
   answer: { width: 1100, height: 597 },
   say: { width: 1100, height: 597 },
+  chat: { width: 1100, height: 597 },
   memory: { width: 1100, height: 1050 },
   consent: { width: 1100, height: 875 },
   trail: { width: 1100, height: 830 },
@@ -25,6 +26,7 @@ export const shotSize: Record<ShotFile | 'status', { width: number; height: numb
  */
 export const clipSize: Partial<Record<ShotFile, { width: number; height: number }>> = {
   say: { width: 1000, height: 454 },
+  chat: { width: 1000, height: 454 },
   recipe: { width: 1000, height: 756 },
   trail: { width: 1000, height: 756 },
   chests: { width: 1000, height: 756 },
