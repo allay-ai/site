@@ -52,6 +52,8 @@ export const byokLimits = { perMinute: 20, perDay: 2000, concurrent: 4 } as cons
 export const retention = {
   sessionDays: 30,
   publicThreadHours: 2,
+  /** A server's chat for chat_history (Allay Server 6.34). */
+  chatHours: 72,
   agentThreadHours: 2,
   /** Facts and saved places together, per player (MEMORY_MAX). */
   memoryFacts: 200,

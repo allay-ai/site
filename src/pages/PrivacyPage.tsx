@@ -210,6 +210,19 @@ const sections: LegalSection[] = [
             withdrew, as proof.
           </li>
           <li>
+            <strong>The server’s chat.</strong> While the server’s operator keeps Allay’s chat
+            history on (Allay 6.38 and later), the plugin sends us the server’s chat: public lines,
+            lines a chat plugin showed only to the players near (with who saw them), and private
+            messages between two players, each with the sender’s name and UUID and the addressee’s.
+            This includes players who never asked Allay anything: the chat shows their names to
+            everyone on the server anyway. Allay reads it back only for a player who asks about it
+            (“what did he write?”), and only what that player saw or wrote: the public chat, the
+            local lines shown to them, and their own private messages, never anyone else’s. Each
+            line goes {retention.chatHours} hours after it was written, or at once when the server’s
+            operator resets the history. An erasure removes the lines the player wrote, and a
+            player’s copy holds them.
+          </li>
+          <li>
             <strong>The name.</strong> The player’s name, UUID, and operator status on each server,
             so the admin panel can name them. A player who turns on full privacy (
             <code>/allay privacy full on</code>) appears there under a pseudonym only. Kept{' '}
@@ -235,12 +248,12 @@ const sections: LegalSection[] = [
         <h3>Who can read it</h3>
         <p>
           Everything a player said or Allay wrote about them, the session, memories and places,
-          deaths, goals, settings, and traces, is encrypted before it reaches our database (see
-          “Security”). Not encrypted, because the backend looks them up: the directory of players
-          (name, UUID, operator status), statistics, agreement records, and the audit log. Each
-          server’s data is kept apart: the same Minecraft account on two servers is two players, and
-          no server reaches another’s. The backend’s logs carry no player’s name, id, question, or
-          answer.
+          deaths, goals, settings, the server’s chat, and traces, is encrypted before it reaches our
+          database (see “Security”). Not encrypted, because the backend looks them up: the directory
+          of players (name, UUID, operator status), statistics, agreement records, and the audit
+          log. Each server’s data is kept apart: the same Minecraft account on two servers is two
+          players, and no server reaches another’s. The backend’s logs carry no player’s name, id,
+          question, or answer.
         </p>
         <p>
           Our admin panel shows numbers and the shape of a run. To look into a problem that a player
@@ -261,8 +274,10 @@ const sections: LegalSection[] = [
           To answer a question, we follow the server operator’s instructions under the data
           processing agreement (Art. 28 GDPR). Statistics, limits, traces, and the audit log serve
           our legitimate interests in billing correctly, preventing abuse, and keeping the service
-          working (Art. 6(1)(f) GDPR). The agreement before the first question is the record that
-          the player was told and agreed (Art. 7(1) GDPR).
+          working (Art. 6(1)(f) GDPR). The server’s chat is kept on the server operator’s
+          instructions as well. The plugin’s <code>/allay privacy</code> tells players it’s kept.
+          The agreement before the first question is the record that the player was told and agreed
+          (Art. 7(1) GDPR).
         </p>
       </>
     ),
@@ -558,7 +573,7 @@ export function PrivacyPage() {
   return (
     <LegalPage
       title="Privacy policy"
-      updated="Last updated: 27 October 2026"
+      updated="Last updated: 11 November 2026"
       intro={
         <p>
           Allay keeps only what it needs to answer and to keep working, encrypts what players say,
